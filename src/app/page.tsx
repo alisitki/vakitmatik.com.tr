@@ -14,7 +14,6 @@ import {
   mobileAppSteps,
   navItems,
   productItems,
-  useCaseItems,
 } from "@/data/landing";
 
 export default function Home() {
@@ -25,7 +24,7 @@ export default function Home() {
         <HeroSection highlights={heroHighlights} />
         <ProductShowcaseSection items={productItems} />
         <MobileAppSection steps={mobileAppSteps} />
-        <UseCasesSection items={useCaseItems} />
+        <UseCasesSection />
         <FaqSection items={faqItems} />
         <ContactSection items={contactItems} />
       </main>

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Vakitmatik",
   },
   description:
-    "Vakitmatik için hazırlanan tek sayfa motion-first lansman deneyimi: ürün özellikleri, kullanım senaryoları ve iletişim bilgileri modern bir akışta.",
+    "Vakitmatik için hazırlanan tek sayfa motion-first lansman deneyimi: ürün özellikleri, akıllı camiler ve iletişim bilgileri modern bir akışta.",
   keywords: [
     "vakitmatik",
     "namaz vakti paneli",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vakitmatik | Motion-First Vakit Paneli",
     description:
-      "Vakitmatik ürün özellikleri, kullanım alanları ve iletişim bilgileri tek sayfada.",
+      "Vakitmatik ürün özellikleri, akıllı camiler ve iletişim bilgileri tek sayfada.",
     images: ["/images/og-vakitmatik.svg"],
   },
   robots: {

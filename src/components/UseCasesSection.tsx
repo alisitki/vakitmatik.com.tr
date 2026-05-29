@@ -1,29 +1,15 @@
-import { Reveal } from "@/components/motion/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
-import type { UseCaseItem } from "@/types/landing";
 
-type UseCasesSectionProps = {
-  items: UseCaseItem[];
-};
-
-export function UseCasesSection({ items }: UseCasesSectionProps) {
+export function UseCasesSection() {
   return (
-    <section id="kullanim-alanlari" className="section-space">
-      <div className="container-shell space-y-10">
-        <SectionIntro
-          eyebrow="Kullanım alanları"
-          title="Farklı mekanlarda aynı güvenli bilgi akışı"
-          description="Tek panel yaklaşımı ile farklı ölçeklerde tutarlı bir kullanıcı deneyimi sunar."
-        />
-
-        <div className="usecase-grid">
-          {items.map((item, index) => (
-            <Reveal key={item.title} className="usecase-card" delay={0.08 + index * 0.05}>
-              <p className="badge-soft">{item.tag}</p>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </Reveal>
-          ))}
+    <section id="akilli-camiler" className="section-space smart-mosques-section">
+      <div className="container-shell">
+        <div className="smart-mosques-content smart-mosques-panel">
+          <SectionIntro
+            eyebrow="AKILLI CAMİLER"
+            title="Caminiz için akıllı ve pratik çözümler"
+            description="Ezan, ışıklandırma, ısıtma ve bilgilendirme sistemleri caminizin ihtiyacına göre birlikte planlanabilir."
+          />
         </div>
       </div>
     </section>

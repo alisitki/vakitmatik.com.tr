@@ -13,7 +13,7 @@ export const navItems: NavItem[] = [
   { href: "#urun", label: "Giriş" },
   { href: "#urun-deneyimi", label: "Ürünler" },
   { href: "#mobil-uygulama", label: "Mobil Uygulama" },
-  { href: "#kullanim-alanlari", label: "Kullanım Alanları" },
+  { href: "#akilli-camiler", label: "Akıllı Camiler" },
   { href: "#sss", label: "SSS" },
   { href: "#iletisim", label: "İletişim" },
 ];
@@ -416,24 +416,28 @@ export const productItems: ProductItem[] = [
 
 export const useCaseItems: UseCaseItem[] = [
   {
-    tag: "Cami",
-    title: "Cemaat için düzenli yönlendirme",
-    description: "Vakit bilgisinin tek noktada toplanmasıyla toplu takip kolaylaşır.",
+    tag: "EZAN SİSTEMİ",
+    title: "Vakitlere uygun otomatik ezan",
+    description:
+      "Ezan ve anons sistemleri caminizin kullanımına göre ayarlanabilir.",
   },
   {
-    tag: "Kurum",
-    title: "İbadet alanlarında standart akış",
-    description: "Ofis ve kampüslerde tutarlı bilgi ekranı deneyimi oluşturur.",
+    tag: "IŞIKLANDIRMA",
+    title: "Daha kolay aydınlatma kontrolü",
+    description:
+      "Cami içi ve dışı ışıklar belirlenen saatlere göre çalıştırılabilir.",
   },
   {
-    tag: "Eğitim",
-    title: "Yoğun alanlarda hızlı okuma",
-    description: "Öğrenci yoğun mekanlarda görünürlüğü öncelikleyen düzen sunar.",
+    tag: "ISITMA KONTROLÜ",
+    title: "Halı ısıtma için pratik yönetim",
+    description:
+      "Isıtma sistemi ihtiyaç olan zamanlarda otomatik olarak devreye alınabilir.",
   },
   {
-    tag: "Sosyal",
-    title: "Ortak alanlarda net bilgilendirme",
-    description: "Karmaşık bilgilendirme yerine sade ve anlaşılır panel akışı sağlar.",
+    tag: "TEK MERKEZDEN YÖNETİM",
+    title: "Tüm sistemler birlikte çalışır",
+    description:
+      "Vakitmatik, ezan, ışık ve ısıtma sistemleri tek yapı altında planlanabilir.",
   },
 ];
 
@@ -463,8 +467,8 @@ export const faqItems: FaqItem[] = [
 export const contactItems: ContactItem[] = [
   {
     label: "Telefon",
-    value: "+90 (312) 000 00 00",
-    href: "tel:+903120000000",
+    value: "+90 533 382 75 33",
+    href: "tel:+905333827533",
     note: "Hafta içi 09:00 - 18:00",
   },
   {
@@ -475,7 +479,7 @@ export const contactItems: ContactItem[] = [
   },
   {
     label: "Adres",
-    value: "Ankara / Türkiye",
+    value: "Kocaeli / Türkiye",
     note: "Satış ve teknik destek noktası",
   },
 ];

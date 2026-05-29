@@ -21,10 +21,10 @@ export function Navbar({ items }: NavbarProps) {
         <div className="site-nav">
           <a href="#urun" className="site-brand">
             <Image
-              src="/images/vakitmatik-logo.png"
+              src="/images/vakitmatik-logo2.png"
               alt="Vakitmatik"
-              width={720}
-              height={87}
+              width={810}
+              height={113}
               className="site-brand-logo"
               style={logoStyle}
               priority

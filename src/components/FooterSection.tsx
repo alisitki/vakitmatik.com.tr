@@ -12,8 +12,7 @@ export function FooterSection({ items }: FooterSectionProps) {
       <div className="container-shell">
         <div className="site-footer">
           <div className="site-footer-head">
-            <p>© {year} Vakitmatik. Tüm hakları saklıdır.</p>
-            <p>vakitmatik.com.tr tek sayfa lansman deneyimi</p>
+            <p>© {year} Reksan Reklem &amp; Elektronik . Tüm hakları saklıdır.</p>
           </div>
 
           <nav aria-label="Alt menü">
