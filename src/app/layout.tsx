@@ -32,11 +32,11 @@ try {
 export const metadata: Metadata = {
   metadataBase: new URL("https://vakitmatik.com.tr"),
   title: {
-    default: "Vakitmatik | Motion-First Vakit Paneli",
+    default: "Vakitmatik | Cami Saatleri",
     template: "%s | Vakitmatik",
   },
   description:
-    "Vakitmatik için hazırlanan tek sayfa motion-first lansman deneyimi: ürün özellikleri, akıllı cami projeleri ve iletişim bilgileri modern bir akışta.",
+    "Vakitmatik ürün özellikleri, akıllı cami projeleri ve iletişim bilgileri tek sayfada.",
   keywords: [
     "vakitmatik",
     "namaz vakti paneli",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Vakitmatik | Motion-First Vakit Paneli",
+    title: "Vakitmatik | Cami Saatleri",
     description:
       "Vakitmatik ürününü antigravity tarzı modern bir tek sayfa deneyimde keşfedin.",
     url: "https://vakitmatik.com.tr",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vakitmatik | Motion-First Vakit Paneli",
+    title: "Vakitmatik | Cami Saatleri",
     description:
       "Vakitmatik ürün özellikleri, akıllı cami projeleri ve iletişim bilgileri tek sayfada.",
     images: ["/images/og-vakitmatik.svg"],
