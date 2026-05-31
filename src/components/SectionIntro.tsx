@@ -1,17 +1,18 @@
 import { Reveal } from "@/components/motion/Reveal";
+import type { ReactNode } from "react";
 
 type SectionIntroProps = {
-  eyebrow: string;
-  title: string;
-  description: string;
+  eyebrow?: string;
+  title: ReactNode;
+  description?: string;
 };
 
 export function SectionIntro({ eyebrow, title, description }: SectionIntroProps) {
   return (
     <Reveal className="section-intro" delay={0.05}>
-      <p className="eyebrow">{eyebrow}</p>
+      {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
       <h2>{title}</h2>
-      <p>{description}</p>
+      {description ? <p>{description}</p> : null}
     </Reveal>
   );
 }

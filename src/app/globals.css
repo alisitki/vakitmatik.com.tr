@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --bg-main: #ffffff;
   --bg-soft: #fafafa;
   --surface: #ffffff;
@@ -30,6 +31,30 @@
   --shadow-glow-blue: 0 0 120px 40px rgba(66, 133, 244, 0.08);
   --shadow-glow-warm: 0 0 120px 40px rgba(251, 188, 4, 0.06);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-main: #090a0c;
+  --bg-soft: #0e1014;
+  --surface: #14161b;
+  --surface-soft: #1a1d24;
+  --surface-glass: rgba(20, 22, 27, 0.78);
+  --surface-dark: #08090c;
+  --surface-dark-soft: #121419;
+  --ink-strong: #f8fafc;
+  --ink: #edf0f4;
+  --ink-muted: #aeb6c2;
+  --ink-on-dark: #ffffff;
+  --ink-muted-on-dark: #b7bec8;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-soft: rgba(255, 255, 255, 0.07);
+  --line-dark: rgba(255, 255, 255, 0.14);
+  --brand-soft: rgba(66, 133, 244, 0.18);
+  --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.34);
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.28);
+  --shadow-glow-blue: 0 0 120px 40px rgba(66, 133, 244, 0.11);
+  --shadow-glow-warm: 0 0 120px 40px rgba(251, 188, 4, 0.08);
 }
 
 *,
@@ -171,9 +196,9 @@ section {
 }
 
 .site-nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   border: 0;
   border-radius: 0;
@@ -187,6 +212,9 @@ section {
 .site-brand {
   display: inline-flex;
   align-items: center;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
   flex: 0 0 auto;
   height: 36px;
   padding: 0.18rem 0.3rem;
@@ -211,13 +239,18 @@ section {
 }
 
 .site-nav-scroll {
-  max-width: 72%;
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
 }
 
 .site-nav-list {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.2rem;
   list-style: none;
   margin: 0;
@@ -246,6 +279,56 @@ section {
   background: var(--surface-soft);
   color: var(--ink-strong);
   outline: none;
+}
+
+.site-nav-actions {
+  display: inline-flex;
+  align-items: center;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  flex: 0 0 auto;
+}
+
+.site-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.88rem;
+  height: 1.88rem;
+  border: 1px solid rgba(13, 15, 20, 0.9);
+  border-radius: 999px;
+  background: #0d0f14;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.14);
+  transition:
+    background-color 220ms var(--ease-smooth),
+    border-color 220ms var(--ease-smooth),
+    box-shadow 220ms var(--ease-smooth),
+    color 220ms var(--ease-smooth),
+    transform 220ms var(--ease-smooth);
+}
+
+.site-theme-toggle:hover,
+.site-theme-toggle:focus-visible {
+  border-color: rgba(13, 15, 20, 1);
+  background: #1a1d24;
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.18);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.site-theme-toggle-icon {
+  width: 1.12rem;
+  height: 1.12rem;
+  flex: 0 0 auto;
 }
 
 /* ==========================================
@@ -411,6 +494,49 @@ section {
 .landing-control-fieldset label {
   display: grid;
   gap: 0.45rem;
+}
+
+.landing-theme-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.landing-theme-option {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  min-height: 2.28rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 650;
+  transition:
+    background-color 180ms var(--ease-smooth),
+    border-color 180ms var(--ease-smooth),
+    color 180ms var(--ease-smooth);
+}
+
+.landing-theme-option:has(input:checked) {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  color: var(--ink-strong);
+}
+
+.landing-theme-option input {
+  width: 0.9rem;
+  height: 0.9rem;
+  accent-color: var(--brand);
+}
+
+.landing-theme-option:focus-within {
+  border-color: var(--brand);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--brand-soft);
 }
 
 .landing-control-row {
@@ -697,6 +823,7 @@ section {
 
 .hero-buttons {
   display: flex;
+  align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
@@ -705,8 +832,15 @@ section {
 
 .hero-buttons .btn-primary,
 .hero-buttons .btn-secondary {
-  flex: 0 0 clamp(10.9rem, 12vw, 12.2rem);
-  inline-size: clamp(10.9rem, 12vw, 12.2rem);
+  flex: 0 0 clamp(11.8rem, 13.2vw, 13.4rem);
+  inline-size: clamp(11.8rem, 13.2vw, 13.4rem);
+  min-height: 3.18rem;
+  border: 1px solid rgba(13, 15, 20, 0.12);
+  background: #ffffff;
+  color: #0d0f14;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  padding-inline: 1.05rem;
+  white-space: nowrap;
 }
 
 .hero-product-accent {
@@ -1246,16 +1380,24 @@ section {
 
 .mobile-app-section {
   position: relative;
-  overflow: clip;
+  padding-block: clamp(4.5rem, 9vw, 8rem);
   background:
     linear-gradient(180deg, #f7f8fa 0%, #ffffff 42%, #f8fafc 100%);
 }
 
+.mobile-app-scroll-panel {
+  min-height: clamp(1040px, 145vh, 1420px);
+  scroll-margin-top: 5.8rem;
+}
+
 .mobile-app-section-shell {
+  position: sticky;
+  top: 5.4rem;
   display: grid;
   grid-template-columns: minmax(18rem, 0.92fr) minmax(0, 1.08fr);
   gap: clamp(2.5rem, 7vw, 6rem);
   align-items: center;
+  min-height: min(78vh, 780px);
 }
 
 .mobile-app-preview {
@@ -1576,6 +1718,11 @@ section {
   display: block;
 }
 
+.product-story-anchor {
+  display: block;
+  scroll-margin-top: 5.8rem;
+}
+
 .product-story-list {
   display: grid;
   gap: clamp(2.5rem, 6vw, 5.5rem);
@@ -1605,7 +1752,7 @@ section {
   overflow: hidden;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 14px;
+  border-radius: 24px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 248, 250, 0.92)),
     var(--surface-soft);
@@ -1627,8 +1774,56 @@ section {
 }
 
 .product-media-image {
+  border-radius: 24px;
   object-fit: contain;
   padding: clamp(0.12rem, 0.5vw, 0.38rem);
+}
+
+.product-media-nav {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(0.55rem, 1.2vw, 0.9rem);
+  pointer-events: none;
+}
+
+.product-media-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid rgba(13, 15, 20, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink-strong);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+  transition:
+    background-color 220ms var(--ease-smooth),
+    border-color 220ms var(--ease-smooth),
+    box-shadow 220ms var(--ease-smooth),
+    color 220ms var(--ease-smooth),
+    transform 220ms var(--ease-smooth);
+}
+
+.product-media-arrow:hover,
+.product-media-arrow:focus-visible {
+  border-color: rgba(13, 15, 20, 0.22);
+  background: #ffffff;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
+  outline: none;
+  transform: translate3d(0, -1px, 0);
+}
+
+.product-media-arrow-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
 }
 
 .product-thumbnail-row {
@@ -1639,7 +1834,7 @@ section {
   overflow-x: auto;
   width: fit-content;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.78);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
   padding: 0.38rem;
@@ -1653,7 +1848,7 @@ section {
   aspect-ratio: 1;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--surface);
   cursor: pointer;
   padding: 0;
@@ -1677,6 +1872,7 @@ section {
 }
 
 .product-thumbnail-image {
+  border-radius: inherit;
   object-fit: cover;
 }
 
@@ -1709,7 +1905,28 @@ section {
   border-block: 1px solid var(--line);
 }
 
+.product-size-options {
+  display: grid;
+  gap: 0.58rem;
+  margin: 0.4rem 0 0;
+  padding-block: 0.92rem;
+  border-block: 1px solid var(--line);
+}
+
+.product-size-option {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.product-size-option + .product-size-option {
+  border-top: 1px solid var(--line);
+  padding-top: 0.58rem;
+}
+
 .product-dimension dt,
+.product-size-option dt,
 .product-spec dt {
   color: var(--ink-muted);
   font-size: 0.72rem;
@@ -1719,6 +1936,7 @@ section {
 }
 
 .product-dimension dd,
+.product-size-option dd,
 .product-spec dd {
   margin: 0;
   color: var(--ink-strong);
@@ -1769,6 +1987,36 @@ section {
   height: 0.38rem;
   border-radius: 999px;
   background: var(--product-accent);
+}
+
+.product-app-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.45rem;
+}
+
+.product-app-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  min-height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--ink-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.48rem 0.76rem;
+  white-space: nowrap;
+}
+
+.product-app-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
 }
 
 .product-actions {
@@ -1852,84 +2100,319 @@ section {
    ========================================== */
 
 .smart-mosques-section {
-  padding-block: clamp(4rem, 8vw, 7rem);
-}
-
-.smart-mosques-panel {
   position: relative;
-  isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: clamp(2rem, 4vw, 3.5rem);
   background:
-    linear-gradient(180deg, rgba(92, 115, 150, 0.22) 0%, rgba(92, 115, 150, 0) 38%),
-    linear-gradient(135deg, #171b23 0%, #101318 52%, #0b0c0f 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    0 34px 90px rgba(0, 0, 0, 0.18);
-  padding: clamp(3rem, 7vw, 5rem) clamp(1.2rem, 4vw, 4.8rem);
-  overflow: hidden;
+    linear-gradient(180deg, #ffffff 0%, #ffffff 58%, #f7f8fa 100%);
+  color: var(--ink);
+  padding-block: clamp(4.5rem, 9vw, 8rem);
 }
 
-.smart-mosques-panel::before {
+.smart-mosques-section::before {
+  display: none;
+}
+
+.smart-mosques-scroll-panel {
+  min-height: clamp(1040px, 145vh, 1420px);
+  scroll-margin-top: 5.8rem;
+}
+
+.smart-mosques-shell {
+  position: sticky;
+  z-index: 1;
+  top: 5.4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(28rem, 1.1fr);
+  gap: clamp(3rem, 7vw, 6rem);
+  align-items: center;
+  min-height: min(78vh, 780px);
+}
+
+.smart-mosques-copy {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.4rem);
+  min-width: 0;
+}
+
+.smart-mosques-copy .section-intro {
+  max-width: 640px;
+}
+
+.smart-mosques-copy .section-intro h2 {
+  color: var(--ink-strong);
+  font-size: clamp(2.45rem, 5vw, 4.65rem);
+  line-height: 1.01;
+  white-space: pre-line;
+}
+
+.smart-mosques-copy .section-intro p:not(.eyebrow) {
+  max-width: 600px;
+  color: var(--ink-muted);
+}
+
+.smart-system-panel {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 520px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(247, 248, 250, 0.78)),
+    var(--surface);
+  box-shadow: var(--shadow-card);
+  padding: 1rem;
+}
+
+.smart-system-card-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.58rem;
+}
+
+.smart-system-card-grid::before {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(90deg, transparent 8%, rgba(255, 255, 255, 0.055) 48%, transparent 88%),
-    linear-gradient(180deg, rgba(66, 133, 244, 0.15) 0%, transparent 54%);
+  top: 1.38rem;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.34), transparent);
   pointer-events: none;
 }
 
-.smart-mosques-panel .section-intro {
-  max-width: 880px;
-  margin-inline: auto;
+.smart-system-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
   justify-items: center;
+  gap: 0.48rem;
+  min-width: 0;
+  color: var(--ink-strong);
+  padding: 0.2rem 0.2rem 0;
+}
+
+.smart-system-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(66, 133, 244, 0.22);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--brand-strong);
+  box-shadow: 0 8px 20px rgba(66, 133, 244, 0.12);
+}
+
+.smart-system-card-icon svg {
+  width: 1.24rem;
+  height: 1.24rem;
+}
+
+.smart-system-card span:last-child {
+  color: var(--ink-muted);
+  font-size: 0.74rem;
+  font-weight: 750;
+  line-height: 1.25;
   text-align: center;
 }
 
-.smart-mosques-panel .eyebrow {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.62);
+.smart-system-platform-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.58rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line-soft);
 }
 
-.smart-mosques-panel .section-intro h2 {
-  color: #f7f8fb;
-  font-size: clamp(2.25rem, 4.8vw, 4rem);
+.smart-system-platform-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  min-height: 2.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink-strong);
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 0.55rem 0.82rem;
 }
 
-.smart-mosques-panel .section-intro p:not(.eyebrow) {
-  color: rgba(255, 255, 255, 0.66);
+.smart-system-platform-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--ink-strong);
 }
 
-.smart-mosques-panel .usecase-grid {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
+.smart-system-platform-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
 }
 
-.smart-mosques-panel .usecase-card {
-  border-color: rgba(255, 255, 255, 0.64);
-  background: #ffffff;
-  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.20);
+.smart-mosques-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.72rem;
 }
 
-.smart-mosques-panel .usecase-card:hover {
-  border-color: #ffffff;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+.smart-mosques-primary-action,
+.smart-mosques-secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.72rem 1rem;
+  transition:
+    background-color 220ms var(--ease-smooth),
+    border-color 220ms var(--ease-smooth),
+    box-shadow 220ms var(--ease-smooth),
+    color 220ms var(--ease-smooth),
+    transform 220ms var(--ease-smooth);
 }
 
-.smart-mosques-panel .badge-soft {
-  border-color: rgba(13, 15, 20, 0.08);
-  background: #f3f4f6;
-  color: #4b5563;
+.smart-mosques-primary-action {
+  border: 1px solid var(--ink-strong);
+  background: var(--ink-strong);
+  color: #ffffff;
 }
 
-.smart-mosques-panel .usecase-card h3 {
-  color: #0d0f14;
+.smart-mosques-secondary-action {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-strong);
 }
 
-.smart-mosques-panel .usecase-card p:not(.badge-soft) {
-  color: #4b5563;
+.smart-mosques-primary-action:hover,
+.smart-mosques-primary-action:focus-visible,
+.smart-mosques-secondary-action:hover,
+.smart-mosques-secondary-action:focus-visible {
+  outline: none;
+  transform: translate3d(0, -1px, 0);
+}
+
+.smart-mosques-primary-action:hover,
+.smart-mosques-primary-action:focus-visible {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+}
+
+.smart-mosques-secondary-action:hover,
+.smart-mosques-secondary-action:focus-visible {
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+.smart-mosques-blueprint {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.smart-mosques-blueprint::before {
+  display: none;
+}
+
+.smart-mosques-core {
+  display: grid;
+  gap: 0.25rem;
+  width: min(26rem, 100%);
+  border-left: 2px solid var(--ink-strong);
+  padding: 0.2rem 0 0.2rem 1.05rem;
+}
+
+.smart-mosques-core span {
+  color: var(--ink-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.smart-mosques-core strong {
+  color: var(--ink-strong);
+  font-family: var(--font-display), "Avenir Next", system-ui, sans-serif;
+  font-size: clamp(1.35rem, 2.6vw, 2.05rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.smart-mosques-module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.smart-mosques-module {
+  min-height: 12rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem;
+  transform: translate3d(0, 0, 0);
+  transition:
+    border-color 260ms var(--ease-smooth),
+    background-color 260ms var(--ease-smooth),
+    transform 260ms var(--ease-smooth);
+}
+
+.smart-mosques-module:hover {
+  border-color: rgba(0, 0, 0, 0.14);
+  box-shadow: var(--shadow-soft);
+  transform: translate3d(0, -2px, 0);
+}
+
+.smart-mosques-module-index {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.smart-mosques-module h3 {
+  margin-top: 1rem;
+  color: var(--ink-strong);
+  font-size: 1.18rem;
+  letter-spacing: 0;
+}
+
+.smart-mosques-module p {
+  margin-top: 0.55rem;
+  color: var(--ink-muted);
+  font-size: 0.93rem;
+  line-height: 1.58;
+}
+
+.smart-mosques-process {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.72rem;
+}
+
+.smart-mosques-process span {
+  display: grid;
+  gap: 0.2rem;
+  min-height: 5.1rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.85rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.smart-mosques-process small {
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
 }
 
 .usecase-grid {
@@ -2090,6 +2573,7 @@ section {
   margin-top: 0.4rem;
   color: var(--ink-muted);
   font-size: 0.88rem;
+  white-space: pre-line;
 }
 
 /* ==========================================
@@ -2164,6 +2648,281 @@ section {
 }
 
 /* ==========================================
+   THEME OVERRIDES
+   ========================================== */
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background: var(--bg-main);
+}
+
+html[data-theme="dark"] .site-nav-wrap {
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(9, 10, 12, 0.92);
+}
+
+html[data-theme="dark"] .site-brand-logo {
+  filter: brightness(0) invert(1) opacity(0.94);
+}
+
+html[data-theme="dark"] .site-nav-pill:hover,
+html[data-theme="dark"] .site-nav-pill:focus-visible {
+  background: var(--surface-soft);
+}
+
+html[data-theme="dark"] .site-theme-toggle {
+  border-color: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
+  color: #0d0f14;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="dark"] .site-theme-toggle:hover,
+html[data-theme="dark"] .site-theme-toggle:focus-visible {
+  border-color: #ffffff;
+  background: #f4f5f7;
+  color: #0d0f14;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.86),
+    0 4px 12px rgba(0, 0, 0, 0.24);
+}
+
+html[data-theme="dark"] .landing-controls-toggle,
+html[data-theme="dark"] .landing-controls-panel {
+  border-color: var(--line);
+  background: rgba(20, 22, 27, 0.92);
+  box-shadow: 0 18px 56px rgba(0, 0, 0, 0.38);
+}
+
+html[data-theme="dark"] .landing-controls-toggle:hover,
+html[data-theme="dark"] .landing-controls-toggle:focus-visible,
+html[data-theme="dark"] .landing-controls-close:hover,
+html[data-theme="dark"] .landing-controls-close:focus-visible {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+html[data-theme="dark"] .hero-readable-copy::before {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(18, 20, 25, var(--hero-readable-card-opacity, 1));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .hero-description {
+  color: rgba(237, 240, 244, 0.88);
+}
+
+html[data-theme="dark"] .hero-highlight-card,
+html[data-theme="dark"] .feature-card,
+html[data-theme="dark"] .usecase-card,
+html[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .contact-card {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+html[data-theme="dark"] .hero-highlight-card:hover,
+html[data-theme="dark"] .feature-card:hover,
+html[data-theme="dark"] .smart-mosques-module:hover,
+html[data-theme="dark"] .usecase-card:hover,
+html[data-theme="dark"] .contact-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme="dark"] .hero-highlight-card p {
+  color: var(--ink-muted);
+}
+
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] .cta-button,
+html[data-theme="dark"] .product-primary-action,
+html[data-theme="dark"] .smart-mosques-primary-action {
+  border: 1px solid var(--brand);
+  background: var(--brand);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .btn-primary:hover,
+html[data-theme="dark"] .btn-primary:focus-visible,
+html[data-theme="dark"] .cta-button:hover,
+html[data-theme="dark"] .cta-button:focus-visible,
+html[data-theme="dark"] .product-primary-action:hover,
+html[data-theme="dark"] .product-primary-action:focus-visible,
+html[data-theme="dark"] .smart-mosques-primary-action:hover,
+html[data-theme="dark"] .smart-mosques-primary-action:focus-visible {
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
+  box-shadow: 0 12px 30px rgba(66, 133, 244, 0.24);
+}
+
+html[data-theme="dark"] .btn-secondary,
+html[data-theme="dark"] .product-secondary-action,
+html[data-theme="dark"] .smart-mosques-secondary-action {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink-strong);
+}
+
+html[data-theme="dark"] .btn-secondary:hover,
+html[data-theme="dark"] .btn-secondary:focus-visible,
+html[data-theme="dark"] .product-secondary-action:hover,
+html[data-theme="dark"] .product-secondary-action:focus-visible,
+html[data-theme="dark"] .smart-mosques-secondary-action:hover,
+html[data-theme="dark"] .smart-mosques-secondary-action:focus-visible {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="dark"] .product-app-badge {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink-strong);
+}
+
+html[data-theme="dark"] .hero-buttons .btn-primary {
+  border-color: rgba(255, 255, 255, 0.76);
+  background: #ffffff;
+  color: #0d0f14;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .hero-buttons .btn-secondary {
+  border-color: rgba(255, 255, 255, 0.76);
+  background: #ffffff;
+  color: #0d0f14;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .hero-buttons .btn-secondary:hover,
+html[data-theme="dark"] .hero-buttons .btn-secondary:focus-visible {
+  border-color: #ffffff;
+  background: #f3f4f6;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.36);
+}
+
+html[data-theme="dark"] .hero-buttons .btn-primary:hover,
+html[data-theme="dark"] .hero-buttons .btn-primary:focus-visible {
+  border-color: #ffffff;
+  background: #f3f4f6;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.36);
+}
+
+html[data-theme="dark"] .cta-panel .cta-button {
+  border-color: #f8fafc;
+  background: #f8fafc;
+  color: #0d0f14;
+}
+
+html[data-theme="dark"] .cta-panel .cta-button:hover,
+html[data-theme="dark"] .cta-panel .cta-button:focus-visible {
+  border-color: #ffffff;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.16);
+}
+
+html[data-theme="dark"] .mobile-app-section,
+html[data-theme="dark"] .product-story-section,
+html[data-theme="dark"] .smart-mosques-section {
+  background:
+    linear-gradient(180deg, #090a0c 0%, #101216 50%, #0b0d10 100%);
+}
+
+html[data-theme="dark"] .mobile-app-platform-row span,
+html[data-theme="dark"] .product-thumbnail-row,
+html[data-theme="dark"] .product-spec {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="dark"] .mobile-app-step-index {
+  border-color: rgba(66, 133, 244, 0.3);
+  background: var(--surface);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+}
+
+html[data-theme="dark"] .product-media-stage {
+  border-color: var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035)),
+    var(--surface-soft);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .product-media-arrow {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(20, 22, 27, 0.78);
+  color: var(--ink-on-dark);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .product-media-arrow:hover,
+html[data-theme="dark"] .product-media-arrow:focus-visible {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="dark"] .product-thumbnail:hover,
+html[data-theme="dark"] .product-thumbnail:focus-visible,
+html[data-theme="dark"] .faq-item[open] {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme="dark"] .smart-mosques-module {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+html[data-theme="dark"] .smart-system-panel {
+  border-color: var(--line);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035)),
+    var(--surface);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .smart-system-card-icon {
+  border-color: rgba(66, 133, 244, 0.34);
+  background: rgba(255, 255, 255, 0.08);
+  color: #8ab4ff;
+}
+
+html[data-theme="dark"] .smart-system-platform-card {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink-strong);
+}
+
+html[data-theme="dark"] .smart-system-platform-icon {
+  color: var(--ink-strong);
+}
+
+html[data-theme="dark"] .faq-item summary::after {
+  background: var(--surface-soft);
+}
+
+html[data-theme="dark"] .faq-item[open] summary::after {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .site-footer {
+  border-color: var(--line);
+  background: var(--surface-glass);
+}
+
+html[data-theme="dark"] .site-footer-links a {
+  border-color: var(--line);
+  background: var(--surface-soft);
+}
+
+html[data-theme="dark"] .site-footer-links a:hover,
+html[data-theme="dark"] .site-footer-links a:focus-visible {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* ==========================================
    RESPONSIVE
    ========================================== */
 
@@ -2219,6 +2978,23 @@ section {
     aspect-ratio: 4 / 5;
   }
 
+  .smart-mosques-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .smart-mosques-copy .section-intro {
+    max-width: 760px;
+  }
+
+  .smart-system-panel {
+    max-width: 760px;
+  }
+
+  .smart-mosques-blueprint {
+    max-width: 780px;
+  }
+
   .contact-grid {
     grid-template-columns: 1fr;
   }
@@ -2243,7 +3019,18 @@ section {
   }
 
   .site-nav-scroll {
-    max-width: 76%;
+    max-width: none;
+  }
+
+  .site-nav {
+    grid-template-columns: auto auto minmax(0, 1fr);
+    gap: 0.45rem;
+    padding-right: 0.2rem;
+  }
+
+  .site-theme-toggle {
+    width: 1.95rem;
+    height: 1.95rem;
   }
 
   .landing-controls {
@@ -2338,17 +3125,48 @@ section {
     grid-template-columns: 1fr;
   }
 
-  .smart-mosques-panel {
-    border-radius: 2rem;
-    padding: 2.7rem 1.1rem;
+  .mobile-app-scroll-panel,
+  .smart-mosques-scroll-panel,
+  .product-story-anchor {
+    min-height: auto;
+    scroll-margin-top: 7rem;
   }
 
-  .smart-mosques-panel .section-intro h2 {
+  .mobile-app-section-shell,
+  .smart-mosques-shell {
+    position: relative;
+    top: auto;
+    min-height: auto;
+  }
+
+  .smart-mosques-copy .section-intro h2 {
     font-size: clamp(2.15rem, 11vw, 3rem);
+  }
+
+  .smart-mosques-module-grid,
+  .smart-mosques-process {
+    grid-template-columns: 1fr;
+  }
+
+  .smart-mosques-blueprint::before {
+    inset: 1.8rem 0.5rem;
+  }
+
+  .smart-mosques-module {
+    min-height: auto;
+    padding: 1.05rem;
+  }
+
+  .smart-mosques-process span {
+    min-height: auto;
   }
 
   .mobile-app-section-shell {
     gap: 2rem;
+  }
+
+  .smart-mosques-shell {
+    gap: 2.4rem;
   }
 
   .mobile-app-preview {
@@ -2426,6 +3244,7 @@ section {
   }
 
   .product-dimension,
+  .product-size-option,
   .product-spec-grid {
     grid-template-columns: 1fr;
   }
@@ -2473,4 +3292,42 @@ section {
     opacity: 1;
     animation: none !important;
   }
+}
+
+.hero-section .hero-buttons > .btn-primary,
+.hero-section .hero-buttons > .btn-secondary {
+  border-color: rgba(13, 15, 20, 0.14) !important;
+  background: #ffffff !important;
+  color: #0d0f14 !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18) !important;
+}
+
+html[data-theme="dark"] .hero-section .hero-buttons > .btn-primary,
+html[data-theme="dark"] .hero-section .hero-buttons > .btn-secondary {
+  border-color: rgba(13, 15, 20, 0.42) !important;
+  background: #ffffff !important;
+  color: #0d0f14 !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(13, 15, 20, 0.08),
+    0 14px 34px rgba(0, 0, 0, 0.28) !important;
+}
+
+.hero-section .hero-buttons > .btn-primary:hover,
+.hero-section .hero-buttons > .btn-primary:focus-visible,
+.hero-section .hero-buttons > .btn-secondary:hover,
+.hero-section .hero-buttons > .btn-secondary:focus-visible {
+  border-color: rgba(13, 15, 20, 0.24) !important;
+  background: #f3f4f6 !important;
+  color: #0d0f14 !important;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.22) !important;
+}
+
+html[data-theme="dark"] .hero-section .hero-buttons > .btn-primary:hover,
+html[data-theme="dark"] .hero-section .hero-buttons > .btn-primary:focus-visible,
+html[data-theme="dark"] .hero-section .hero-buttons > .btn-secondary:hover,
+html[data-theme="dark"] .hero-section .hero-buttons > .btn-secondary:focus-visible {
+  border-color: rgba(13, 15, 20, 0.58) !important;
+  background: #f3f4f6 !important;
+  color: #0d0f14 !important;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34) !important;
 }

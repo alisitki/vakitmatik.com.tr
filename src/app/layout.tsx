@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const sora = Sora({
@@ -14,6 +15,20 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
+const themeInitScript = `
+try {
+  var savedControls = window.localStorage.getItem("vakitmatik-landing-controls-v5");
+  var parsedControls = savedControls ? JSON.parse(savedControls) : null;
+  if (parsedControls && parsedControls.themeMode === "dark") {
+    document.documentElement.dataset.theme = "dark";
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
+} catch (error) {
+  document.documentElement.removeAttribute("data-theme");
+}
+`;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://vakitmatik.com.tr"),
   title: {
@@ -21,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Vakitmatik",
   },
   description:
-    "Vakitmatik için hazırlanan tek sayfa motion-first lansman deneyimi: ürün özellikleri, akıllı camiler ve iletişim bilgileri modern bir akışta.",
+    "Vakitmatik için hazırlanan tek sayfa motion-first lansman deneyimi: ürün özellikleri, akıllı cami projeleri ve iletişim bilgileri modern bir akışta.",
   keywords: [
     "vakitmatik",
     "namaz vakti paneli",
@@ -46,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vakitmatik | Motion-First Vakit Paneli",
     description:
-      "Vakitmatik ürün özellikleri, akıllı camiler ve iletişim bilgileri tek sayfada.",
+      "Vakitmatik ürün özellikleri, akıllı cami projeleri ve iletişim bilgileri tek sayfada.",
     images: ["/images/og-vakitmatik.svg"],
   },
   robots: {
@@ -61,7 +76,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" suppressHydrationWarning>
+      <head>
+        <Script id="vakitmatik-theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
+      </head>
       <body className={`${sora.variable} ${jakarta.variable}`}>{children}</body>
     </html>
   );

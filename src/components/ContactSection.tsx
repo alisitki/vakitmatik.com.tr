@@ -12,8 +12,13 @@ export function ContactSection({ items }: ContactSectionProps) {
       <div className="container-shell space-y-10">
         <SectionIntro
           eyebrow="İletişim"
-          title="Teklif ve ürün bilgisi için bize ulaşın"
-          description="Bu sürümde iletişim alanı yalnızca bilgi gösterimi amaçlıdır."
+          title={
+            <>
+              Tüm sorularınız için,
+              <br />
+              Bize ulaşın.
+            </>
+          }
         />
 
         <ul className="contact-grid">

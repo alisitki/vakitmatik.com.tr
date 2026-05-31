@@ -61,10 +61,18 @@ const HERO_BACKDROP_MODES = [
   { id: "image", label: "Görsel kullan" },
 ] as const;
 const DEFAULT_HERO_BACKDROP_MODE = "image";
+const THEME_MODES = [
+  { id: "light", label: "Açık" },
+  { id: "dark", label: "Koyu" },
+] as const;
+const DEFAULT_THEME_MODE = "light";
 
 type HeroBackdropMode = (typeof HERO_BACKDROP_MODES)[number]["id"];
+type ThemeMode = (typeof THEME_MODES)[number]["id"];
 
 type LandingControlsValue = {
+  themeMode: ThemeMode;
+  setThemeMode: (value: ThemeMode) => void;
   logoScale: number;
   setLogoScale: (value: number) => void;
   heroTextReadability: number;
@@ -116,6 +124,7 @@ type LandingControlsValue = {
 };
 
 type StoredControls = {
+  themeMode?: unknown;
   logoScale?: unknown;
   heroTextReadability?: unknown;
   heroReadableCardLeft?: unknown;
@@ -145,6 +154,7 @@ type StoredControls = {
 };
 
 type LandingControlsState = {
+  themeMode: ThemeMode;
   logoScale: number;
   heroTextReadability: number;
   heroReadableCardLeft: number;
@@ -175,6 +185,7 @@ type LandingControlsState = {
 const LandingControlsContext = createContext<LandingControlsValue | null>(null);
 
 const DEFAULT_CONTROLS: LandingControlsState = {
+  themeMode: DEFAULT_THEME_MODE,
   logoScale: DEFAULT_LOGO_SCALE,
   heroTextReadability: DEFAULT_HERO_TEXT_READABILITY,
   heroReadableCardLeft: DEFAULT_HERO_READABLE_CARD_LEFT,
@@ -230,6 +241,12 @@ function sanitizeHeroBackdropMode(value: unknown): HeroBackdropMode {
     : DEFAULT_HERO_BACKDROP_MODE;
 }
 
+function sanitizeThemeMode(value: unknown): ThemeMode {
+  return THEME_MODES.some((item) => item.id === value)
+    ? (value as ThemeMode)
+    : DEFAULT_THEME_MODE;
+}
+
 function sanitizeBackdropImage(value: unknown, fallback: string) {
   return typeof value === "string" && value.startsWith("/images/")
     ? value
@@ -250,6 +267,7 @@ function readStoredControls() {
     const parsed = JSON.parse(savedControls) as StoredControls;
 
     return {
+      themeMode: sanitizeThemeMode(parsed.themeMode),
       logoScale: sanitizeStoredNumber(
         parsed.logoScale,
         DEFAULT_LOGO_SCALE,
@@ -365,6 +383,7 @@ function readStoredControls() {
 }
 
 function writeStoredControls({
+  themeMode,
   logoScale,
   heroTextReadability,
   heroReadableCardLeft,
@@ -394,6 +413,7 @@ function writeStoredControls({
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify({
+      themeMode,
       logoScale,
       heroTextReadability,
       heroReadableCardLeft,
@@ -431,6 +451,7 @@ function ensureClientStorageRead() {
   controlsState = storedControls
     ? {
         ...controlsState,
+        themeMode: storedControls.themeMode,
         logoScale: storedControls.logoScale,
         heroTextReadability: storedControls.heroTextReadability,
         heroReadableCardLeft: storedControls.heroReadableCardLeft,
@@ -483,6 +504,7 @@ function updateControls(updater: (current: LandingControlsState) => LandingContr
 
   const nextControls = updater(controlsState);
   if (
+    controlsState.themeMode === nextControls.themeMode &&
     controlsState.logoScale === nextControls.logoScale &&
     controlsState.heroTextReadability === nextControls.heroTextReadability &&
     controlsState.heroReadableCardLeft === nextControls.heroReadableCardLeft &&
@@ -523,6 +545,23 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
     getControlsSnapshot,
     getServerControlsSnapshot,
   );
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (controls.themeMode === "dark") {
+      root.dataset.theme = "dark";
+    } else {
+      root.removeAttribute("data-theme");
+    }
+  }, [controls.themeMode]);
+
+  const setThemeMode = useCallback((value: ThemeMode) => {
+    updateControls((current) => ({
+      ...current,
+      themeMode: sanitizeThemeMode(value),
+    }));
+  }, []);
 
   const setLogoScale = useCallback((value: number) => {
     updateControls((current) => ({
@@ -735,6 +774,8 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
 
   const contextValue = useMemo(
     () => ({
+      themeMode: controls.themeMode,
+      setThemeMode,
       logoScale: controls.logoScale,
       setLogoScale,
       heroTextReadability: controls.heroTextReadability,
@@ -785,6 +826,8 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
       heroProductImageId: controls.heroProductImageId,
     }),
     [
+      controls.themeMode,
+      setThemeMode,
       controls.logoScale,
       setLogoScale,
       controls.heroTextReadability,
@@ -839,7 +882,6 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
   return (
     <LandingControlsContext.Provider value={contextValue}>
       {children}
-      <LandingControlsMenu />
     </LandingControlsContext.Provider>
   );
 }
@@ -854,11 +896,13 @@ export function useLandingControls() {
   return context;
 }
 
-function LandingControlsMenu() {
+export function LandingControlsMenu() {
   const {
+    themeMode,
     heroBackdropBrightness,
     heroBackdropContrast,
     heroBackdropSaturation,
+    setThemeMode,
     setHeroBackdropBrightness,
     setHeroBackdropContrast,
     setHeroBackdropSaturation,
@@ -914,6 +958,24 @@ function LandingControlsMenu() {
             x
           </button>
         </div>
+
+        <fieldset className="landing-control-field landing-control-fieldset">
+          <legend>Tema</legend>
+          <div className="landing-theme-options">
+            {THEME_MODES.map((item) => (
+              <label className="landing-theme-option" key={item.id}>
+                <input
+                  checked={themeMode === item.id}
+                  name="themeMode"
+                  type="radio"
+                  value={item.id}
+                  onChange={() => setThemeMode(item.id)}
+                />
+                <span>{item.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
 
         <label className="landing-control-field">
           <span className="landing-control-row">

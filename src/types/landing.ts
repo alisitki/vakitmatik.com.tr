@@ -74,12 +74,19 @@ export type ProductSpec = {
   value: string;
 };
 
+export type ProductSizeOption = {
+  label: string;
+  dimensions: string;
+  digitHeight: string;
+};
+
 export type ProductItem = {
   id: string;
   title: string;
   shortName: string;
   summary: string;
   dimensions: string;
+  sizeOptions?: ProductSizeOption[];
   specs: ProductSpec[];
   features: string[];
   media: ProductMedia[];

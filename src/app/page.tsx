@@ -1,5 +1,4 @@
 import { ContactSection } from "@/components/ContactSection";
-import { FaqSection } from "@/components/FaqSection";
 import { FooterSection } from "@/components/FooterSection";
 import { HeroSection } from "@/components/HeroSection";
 import { LandingControlsProvider } from "@/components/LandingControls";
@@ -9,7 +8,6 @@ import { ProductShowcaseSection } from "@/components/sections/ProductShowcaseSec
 import { UseCasesSection } from "@/components/UseCasesSection";
 import {
   contactItems,
-  faqItems,
   heroHighlights,
   mobileAppSteps,
   navItems,
@@ -25,7 +23,6 @@ export default function Home() {
         <ProductShowcaseSection items={productItems} />
         <MobileAppSection steps={mobileAppSteps} />
         <UseCasesSection />
-        <FaqSection items={faqItems} />
         <ContactSection items={contactItems} />
       </main>
       <FooterSection items={navItems} />

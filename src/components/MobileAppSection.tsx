@@ -11,75 +11,77 @@ export function MobileAppSection({ steps }: MobileAppSectionProps) {
 
   return (
     <section id="mobil-uygulama" className="section-space mobile-app-section">
-      <div className="container-shell mobile-app-section-shell">
-        <Reveal className="mobile-app-preview" distance={ENTRANCE_CONFIG.distance} duration={revealDuration}>
-          <div className="mobile-app-device" aria-label="Vakitmatik mobil uygulama önizlemesi">
-            <span className="mobile-app-device-shadow" aria-hidden="true" />
-            <span className="mobile-app-device-side mobile-app-device-side--left" aria-hidden="true" />
-            <span className="mobile-app-device-side mobile-app-device-side--right" aria-hidden="true" />
-            <div className="mobile-app-device-bezel">
-              <div className="mobile-app-device-screen">
-                <video
-                  aria-label="Vakitmatik mobil uygulama ekran kaydı"
-                  autoPlay
-                  className="mobile-app-device-video"
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  src="/videos/vakitmatik-mobil.mp4"
-                />
-                <span className="mobile-app-device-glare" aria-hidden="true" />
+      <div className="mobile-app-scroll-panel">
+        <div className="container-shell mobile-app-section-shell">
+          <Reveal className="mobile-app-preview" distance={ENTRANCE_CONFIG.distance} duration={revealDuration}>
+            <div className="mobile-app-device" aria-label="Vakitmatik mobil uygulama önizlemesi">
+              <span className="mobile-app-device-shadow" aria-hidden="true" />
+              <span className="mobile-app-device-side mobile-app-device-side--left" aria-hidden="true" />
+              <span className="mobile-app-device-side mobile-app-device-side--right" aria-hidden="true" />
+              <div className="mobile-app-device-bezel">
+                <div className="mobile-app-device-screen">
+                  <video
+                    aria-label="Vakitmatik mobil uygulama ekran kaydı"
+                    autoPlay
+                    className="mobile-app-device-video"
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    src="/videos/vakitmatik-mobil.mp4"
+                  />
+                  <span className="mobile-app-device-glare" aria-hidden="true" />
+                </div>
               </div>
             </div>
-          </div>
-        </Reveal>
-
-        <div className="mobile-app-flow">
-          <Reveal
-            className="section-intro mobile-app-intro"
-            delay={0.05}
-            distance={ENTRANCE_CONFIG.distance}
-            duration={revealDuration}
-          >
-            <h2>Mobil Uygulama</h2>
           </Reveal>
 
-          <Reveal
-            className="mobile-app-platform-row"
-            aria-label="Mobil uygulama platformları"
-            delay={0.12}
-            distance={ENTRANCE_CONFIG.distance}
-            duration={revealDuration}
-          >
-            <span>
-              <AndroidIcon />
-              Android
-            </span>
-            <span>
-              <IosIcon />
-              iOS
-            </span>
-          </Reveal>
+          <div className="mobile-app-flow">
+            <Reveal
+              className="section-intro mobile-app-intro"
+              delay={0.05}
+              distance={ENTRANCE_CONFIG.distance}
+              duration={revealDuration}
+            >
+              <h2>Mobil Uygulama</h2>
+            </Reveal>
 
-          <div className="mobile-app-step-list" aria-label="Mobil uygulama kullanım adımları">
-            {steps.map((step, index) => (
-              <Reveal
-                className="mobile-app-step"
-                delay={0.08 + index * 0.05}
-                distance={ENTRANCE_CONFIG.distance}
-                duration={revealDuration}
-                key={step.title}
-              >
-                <span className="mobile-app-step-index">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </div>
-              </Reveal>
-            ))}
+            <Reveal
+              className="mobile-app-platform-row"
+              aria-label="Mobil uygulama platformları"
+              delay={0.12}
+              distance={ENTRANCE_CONFIG.distance}
+              duration={revealDuration}
+            >
+              <span>
+                <AndroidIcon />
+                Android
+              </span>
+              <span>
+                <IosIcon />
+                iOS
+              </span>
+            </Reveal>
+
+            <div className="mobile-app-step-list" aria-label="Mobil uygulama kullanım adımları">
+              {steps.map((step, index) => (
+                <Reveal
+                  className="mobile-app-step"
+                  delay={0.08 + index * 0.05}
+                  distance={ENTRANCE_CONFIG.distance}
+                  duration={revealDuration}
+                  key={step.title}
+                >
+                  <span className="mobile-app-step-index">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </div>

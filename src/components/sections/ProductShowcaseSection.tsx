@@ -29,14 +29,19 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
   }, []);
 
   return (
-    <section id="urun-deneyimi" className="product-story-section">
+    <section className="product-story-section">
       <div className="container-shell">
         <div className="product-story-layout">
+          <span
+            aria-hidden="true"
+            className="product-story-anchor"
+            id="urun-deneyimi"
+          />
           <div className="product-story-list">
             {items.map((item, index) => {
               const mediaIndex = selectedMedia[item.id] ?? 0;
               const currentMedia = item.media[mediaIndex] ?? item.media[0];
-              const nextItem = items[index + 1] ?? items[0];
+              const nextItem = items[index + 1];
 
               return (
                 <article
@@ -61,6 +66,36 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                           sizes="(max-width: 768px) 92vw, (max-width: 1200px) 58vw, 650px"
                           src={currentMedia.src}
                         />
+                        {item.media.length > 1 ? (
+                          <div className="product-media-nav" aria-label={`${item.title} görsel geçişi`}>
+                            <button
+                              aria-label={`${item.title} önceki görsel`}
+                              className="product-media-arrow product-media-arrow--prev"
+                              onClick={() => {
+                                setSelectedMedia((current) => ({
+                                  ...current,
+                                  [item.id]: (mediaIndex - 1 + item.media.length) % item.media.length,
+                                }));
+                              }}
+                              type="button"
+                            >
+                              <ChevronIcon direction="left" />
+                            </button>
+                            <button
+                              aria-label={`${item.title} sonraki görsel`}
+                              className="product-media-arrow product-media-arrow--next"
+                              onClick={() => {
+                                setSelectedMedia((current) => ({
+                                  ...current,
+                                  [item.id]: (mediaIndex + 1) % item.media.length,
+                                }));
+                              }}
+                              type="button"
+                            >
+                              <ChevronIcon direction="right" />
+                            </button>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
 
@@ -102,10 +137,26 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                         </div>
                       ) : null}
 
-                      <dl className="product-dimension">
-                        <dt>Ebat</dt>
-                        <dd>{item.dimensions}</dd>
-                      </dl>
+                      {item.sizeOptions ? (
+                        <dl
+                          aria-label={`${item.title} boy seçenekleri`}
+                          className="product-size-options"
+                        >
+                          {item.sizeOptions.map((sizeOption) => (
+                            <div className="product-size-option" key={sizeOption.label}>
+                              <dt>{sizeOption.label}</dt>
+                              <dd>
+                                {sizeOption.dimensions} - {sizeOption.digitHeight}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                      ) : (
+                        <dl className="product-dimension">
+                          <dt>Ebat</dt>
+                          <dd>{item.dimensions}</dd>
+                        </dl>
+                      )}
 
                       <dl className="product-spec-grid" aria-label={`${item.title} teknik özellikleri`}>
                         {item.specs.map((spec) => (
@@ -122,22 +173,33 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                         ))}
                       </ul>
 
-                      <div className="product-actions">
-                        <a className="product-primary-action" href="#iletisim">
-                          Teklif Al
-                        </a>
-                        <a className="product-secondary-action" href="#iletisim">
-                          Teknik Bilgi Al
-                        </a>
+                      <div
+                        aria-label={`${item.title} mobil uygulama desteği`}
+                        className="product-app-platforms"
+                      >
+                        <span className="product-app-badge">
+                          <MobileAppIcon />
+                          Mobil Uygulama
+                        </span>
+                        <span className="product-app-badge">
+                          <IosIcon />
+                          iOS
+                        </span>
+                        <span className="product-app-badge">
+                          <AndroidIcon />
+                          Android
+                        </span>
                       </div>
 
-                      <button
-                        className="product-next-link"
-                        onClick={() => scrollToProduct(index + 1 < items.length ? index + 1 : 0)}
-                        type="button"
-                      >
-                        Sonraki ürün: {nextItem.shortName}
-                      </button>
+                      {nextItem ? (
+                        <button
+                          className="product-next-link"
+                          onClick={() => scrollToProduct(index + 1)}
+                          type="button"
+                        >
+                          Sonraki ürün: {nextItem.shortName}
+                        </button>
+                      ) : null}
                     </Reveal>
                   </div>
                 </article>
@@ -147,5 +209,68 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
         </div>
       </div>
     </section>
+  );
+}
+
+function MobileAppIcon() {
+  return (
+    <svg aria-hidden="true" className="product-app-icon" viewBox="0 0 24 24">
+      <rect
+        fill="none"
+        height="17.5"
+        rx="2.8"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        width="10.5"
+        x="6.75"
+        y="3.25"
+      />
+      <path d="M10.2 17.7h3.6" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+      <path d="M10.4 6.3h3.2" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.55" />
+    </svg>
+  );
+}
+
+function IosIcon() {
+  return (
+    <svg aria-hidden="true" className="product-app-icon" viewBox="0 0 24 24">
+      <path
+        d="M15.4 3.2c-.2 1.2-.8 2.2-1.7 2.9-.8.7-1.8 1.1-2.8 1 .1-1.1.7-2.1 1.6-2.8.8-.7 1.9-1.1 2.9-1.1Zm3.2 13.7c-.5 1.1-.8 1.6-1.5 2.6-1 1.4-2.3 3-4 3-1 0-1.3-.6-2.8-.6s-1.8.6-2.8.6c-1.7 0-3-1.5-4-2.9-2.7-3.9-3-8.4-1.3-10.8 1.2-1.7 3-2.7 4.7-2.7 1.2 0 2.3.7 3.4.7 1.1 0 2-.7 3.5-.7 1.4 0 3 .8 4.1 2.1-3.6 2-3 7.2.7 8.7Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function AndroidIcon() {
+  return (
+    <svg aria-hidden="true" className="product-app-icon" viewBox="0 0 24 24">
+      <path
+        d="M7.2 9.5h9.6v6.7c0 .7-.6 1.3-1.3 1.3H15v2.1c0 .5-.4.9-.9.9s-.9-.4-.9-.9v-2.1h-2.4v2.1c0 .5-.4.9-.9.9s-.9-.4-.9-.9v-2.1h-.5c-.7 0-1.3-.6-1.3-1.3V9.5Zm-2.5.2c.5 0 .9.4.9.9v4.3c0 .5-.4.9-.9.9s-.9-.4-.9-.9v-4.3c0-.5.4-.9.9-.9Zm14.6 0c.5 0 .9.4.9.9v4.3c0 .5-.4.9-.9.9s-.9-.4-.9-.9v-4.3c0-.5.4-.9.9-.9ZM8.5 7.9a4.2 4.2 0 0 1 7 0h-7Zm1-4 1.1 1.9m3.9-1.9-1.1 1.9"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.7"
+      />
+      <path d="M10 7.2h.1M13.9 7.2h.1" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function ChevronIcon({ direction }: { direction: "left" | "right" }) {
+  const path = direction === "left" ? "M14.6 6.8 9.4 12l5.2 5.2" : "M9.4 6.8 14.6 12l-5.2 5.2";
+
+  return (
+    <svg aria-hidden="true" className="product-media-arrow-icon" viewBox="0 0 24 24">
+      <path
+        d={path}
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.1"
+      />
+    </svg>
   );
 }

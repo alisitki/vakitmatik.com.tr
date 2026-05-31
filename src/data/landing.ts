@@ -13,8 +13,7 @@ export const navItems: NavItem[] = [
   { href: "#urun", label: "Giriş" },
   { href: "#urun-deneyimi", label: "Ürünler" },
   { href: "#mobil-uygulama", label: "Mobil Uygulama" },
-  { href: "#akilli-camiler", label: "Akıllı Camiler" },
-  { href: "#sss", label: "SSS" },
+  { href: "#akilli-camiler", label: "Akıllı Cami Projeleri" },
   { href: "#iletisim", label: "İletişim" },
 ];
 
@@ -71,18 +70,23 @@ export const productItems: ProductItem[] = [
     title: "Vakitmatik Desen Mavi",
     shortName: "Desen Mavi",
     summary:
-      "Klasik cami mimarisiyle uyumlu mavi desenli yüzey ve yüksek kontrastlı kırmızı LED vakit alanları.",
+      "Klasik cami mimarisiyle uyumlu mavi desenli yüzey ve yüksek kontrastlı kırmızı display rakamlar.",
     dimensions: "57 x 38 cm sınıfı",
+    sizeOptions: [
+      { label: "Büyük Boy Ebat", dimensions: "65 x 92 cm", digitHeight: "6 cm rakamlar" },
+      { label: "Küçük Boy Ebat", dimensions: "50 x 71 cm", digitHeight: "4 cm rakamlar" },
+    ],
     specs: [
       { label: "Gövde", value: "Dekoratif çerçeve" },
-      { label: "Ekran", value: "Kırmızı LED" },
-      { label: "Kullanım", value: "Cami ve mescit" },
+      { label: "Ekran", value: "Kırmızı DISPLAY" },
+      { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
       "Mavi desenli arka yüzey",
-      "Türkçe ve Arapça vakit etiketleri",
-      "Uzaktan okunabilir LED rakamlar",
+      "Türkçe ve Arapça vakit yazıları",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
       "Duvara montaj için hazır gövde",
+      "Hafıza pili",
     ],
     media: [
       {
@@ -99,18 +103,23 @@ export const productItems: ProductItem[] = [
     title: "Vakitmatik Desen Siyah",
     shortName: "Desen Siyah",
     summary:
-      "Siyah zeminli, sade ve güçlü kontrast veren dekoratif pano yapısı; yoğun ışıklı mekanlarda net okuma sağlar.",
+      "Klasik cami mimarisiyle uyumlu siyah desenli yüzey ve yüksek kontrastlı kırmızı display rakamlar.",
     dimensions: "57 x 38 cm sınıfı",
+    sizeOptions: [
+      { label: "Büyük Boy Ebat", dimensions: "65 x 92 cm", digitHeight: "6 cm rakamlar" },
+      { label: "Küçük Boy Ebat", dimensions: "50 x 71 cm", digitHeight: "4 cm rakamlar" },
+    ],
     specs: [
-      { label: "Gövde", value: "Siyah dekor yüzey" },
-      { label: "Ekran", value: "Kırmızı LED" },
-      { label: "Kullanım", value: "Ana namaz vakti panosu" },
+      { label: "Gövde", value: "Dekoratif çerçeve" },
+      { label: "Ekran", value: "Kırmızı DISPLAY" },
+      { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Koyu yüzey üzerinde güçlü LED kontrastı",
-      "Geniş görüş açısına uygun rakam dizilimi",
-      "Günlük vakit akışını tek panelde toplar",
-      "Klasik ve modern iç mekanlara uyum sağlar",
+      "Siyah desenli arka yüzey",
+      "Türkçe ve Arapça vakit yazıları",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
+      "Duvara montaj için hazır gövde",
+      "Hafıza pili",
     ],
     media: [
       {
@@ -123,22 +132,93 @@ export const productItems: ProductItem[] = [
     accent: "#111827",
   },
   {
+    id: "vakitmatik-dikey",
+    title: "Vakitmatik Dikey",
+    shortName: "Dikey",
+    summary:
+      "Klasik cami mimarisiyle uyumlu altın veya siyah yüzey ve yüksek kontrastlı kırmızı display rakamlar.",
+    dimensions: "38 x 57 cm dikey sınıf",
+    sizeOptions: [
+      { label: "Büyük Boy", dimensions: "49 x 75 cm", digitHeight: "6 cm Rakamlar" },
+      { label: "Küçük Boy", dimensions: "40 x 60 cm", digitHeight: "4 cm Rakamlar" },
+    ],
+    specs: [
+      { label: "Gövde", value: "Dekoratif çerçeve" },
+      { label: "Ekran", value: "Kırmızı DISPLAY" },
+      { label: "Kullanım", value: "İç mekan" },
+    ],
+    features: [
+      "Altın veya siyah arka yüzey",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
+      "Duvara montaj için hazır gövde",
+      "Hafıza pili",
+    ],
+    media: [
+      {
+        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altın-1.png",
+        alt: "Altın çerçeveli Vakitmatik dikey namaz vakti panosu",
+        width: 1448,
+        height: 1086,
+      },
+      {
+        src: "/images/vakitmatik-dikey/vakitmatik-dikey-siyah-1.png",
+        alt: "Siyah Vakitmatik dikey namaz vakti panosu",
+        width: 1122,
+        height: 1402,
+      },
+    ],
+    accent: "#fbbc04",
+  },
+  {
+    id: "vakitmatik-yatay",
+    title: "Vakitmatik Yatay",
+    shortName: "Yatay",
+    summary:
+      "Klasik cami mimarisiyle uyumlu altın veya siyah yüzey ve yüksek kontrastlı kırmızı display rakamlar.",
+    dimensions: "57 x 38 cm yatay sınıf",
+    sizeOptions: [
+      { label: "Büyük Boy", dimensions: "80 x 49 cm", digitHeight: "6 cm Rakamlar" },
+      { label: "Küçük Boy", dimensions: "62 x 37 cm", digitHeight: "4 cm Rakamlar" },
+    ],
+    specs: [
+      { label: "Gövde", value: "Dekoratif çerçeve" },
+      { label: "Ekran", value: "Kırmızı DISPLAY" },
+      { label: "Kullanım", value: "İç mekan" },
+    ],
+    features: [
+      "Altın veya siyah arka yüzey",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
+      "Duvara montaj için hazır gövde",
+      "Hafıza pili",
+    ],
+    media: [
+      {
+        src: "/images/vakitmatik-yatay/vakitmatik-yatay-1.png",
+        alt: "Yatay Vakitmatik namaz vakti panosu",
+        width: 1448,
+        height: 1086,
+      },
+    ],
+    accent: "#b45309",
+  },
+  {
     id: "vakitmatik-mesaj",
     title: "Vakitmatik Mesaj",
     shortName: "Mesaj",
     summary:
-      "Vakit bilgisinin yanında duyuru ve yönlendirme mesajlarını da göstermek için tasarlanmış LED mesaj alanı.",
-    dimensions: "57 x 38 cm sınıfı",
+      "Namaz vakitlerinin yanı sıra alt kısımda 3 satır 16 karakter mesaj içeriğini (duyuru,ayet,hadis) sayfa sayfa gösterebilirsiniz.",
+    dimensions: "77 x 67 cm",
     specs: [
-      { label: "Gövde", value: "Kompakt pano" },
-      { label: "Ekran", value: "Vakit + mesaj LED" },
-      { label: "Kullanım", value: "Duyuru destekli alanlar" },
+      { label: "Gövde", value: "Dekoratif çerçeve" },
+      { label: "Ekran", value: "Kırmızı DISPLAY" },
+      { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Vakit ve bilgilendirme alanlarını birlikte sunar",
-      "Kısa duyuru akışları için okunaklı yapı",
-      "Görevli kullanımına uygun sade içerik düzeni",
-      "Toplu kullanım alanlarında görünür mesaj yüzeyi",
+      "Altın sarı yüzey",
+      "3 Satır 16 karakter Mesaj Panosu",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
+      "Duvara montaj için hazır gövde",
+      "Hafıza pili",
     ],
     media: [
       {
@@ -151,96 +231,52 @@ export const productItems: ProductItem[] = [
     accent: "#ea4335",
   },
   {
-    id: "vakitmatik-modul",
-    title: "Vakitmatik Modül",
-    shortName: "Modül",
+    id: "vakitmatik-kayan",
+    title: "Vakitmatik Kayan Yazı",
+    shortName: "Kayan Yazı",
     summary:
-      "Kayan yazı, saat, tarih ve vakit bilgisini modüler LED yüzeyde bir araya getiren geniş pano çözümü.",
-    dimensions: "Proje ölçüsüne göre modüler gövde",
+      "Namaz vakitlerinin yanı sıra alt kısımda kayan yazı mesaj içeriğini (duyuru,ayet,hadis) gösterebilirsiniz.",
+    dimensions: "85 x 65 cm - 6 cm Rakamlar",
     specs: [
-      { label: "Gövde", value: "Yatay modüler panel" },
-      { label: "Ekran", value: "Yeşil veya kırmızı LED" },
-      { label: "Kullanım", value: "Büyük hacimli mekanlar" },
+      { label: "Gövde", value: "Dekoratif çerçeve" },
+      { label: "Ekran", value: "Kırmızı DISPLAY" },
+      { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Geniş metin alanı ile duyuru akışı",
-      "Farklı LED renk seçenekleri",
-      "Uzaktan fark edilen büyük yüzey",
-      "Cami adı ve günlük bilgi düzeni için uygun",
+      "Altın sarı yüzey",
+      "Kayan yazı mesaj panosu",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
+      "Duvara montaj için hazır gövde",
+      "Hafıza pili",
     ],
     media: [
       {
-        src: "/images/vakitmatik-modül/vakitmatik-modül-yesil-1.png",
-        alt: "Yeşil LED modüler Vakitmatik mesaj panosu",
-        width: 1122,
-        height: 1402,
-      },
-      {
-        src: "/images/vakitmatik-modül/vakitmatik-modül-kırmızı-2.png",
-        alt: "Kırmızı LED modüler Vakitmatik mesaj panosu",
-        width: 1448,
-        height: 1086,
-      },
-      {
-        src: "/images/vakitmatik-modül/vakitmatik-modül-kırmızı-1.png",
-        alt: "Dikey kadrajlı kırmızı LED Vakitmatik modül panosu",
+        src: "/images/vakitmatik-kayan/vakitmatik-kayan-1.png",
+        alt: "Kayan yazı alanlı Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
     ],
-    accent: "#34a853",
-  },
-  {
-    id: "vakitmatik-dikey",
-    title: "Vakitmatik Dikey",
-    shortName: "Dikey",
-    summary:
-      "Dar duvar yüzeylerinde vakitleri dikey hiyerarşiyle gösteren, kompakt ve kolay konumlanan pano ailesi.",
-    dimensions: "38 x 57 cm dikey sınıf",
-    specs: [
-      { label: "Gövde", value: "Dikey pano" },
-      { label: "Ekran", value: "Kırmızı LED" },
-      { label: "Kullanım", value: "Dar kolon ve duvarlar" },
-    ],
-    features: [
-      "Dikey yüzeylerde güçlü okunurluk",
-      "Siyah ve altın görünüm seçenekleri",
-      "Günlük vakitleri tek kolonda toplar",
-      "Kısıtlı montaj alanları için uygun",
-    ],
-    media: [
-      {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-siyah-1.png",
-        alt: "Siyah Vakitmatik dikey namaz vakti panosu",
-        width: 1122,
-        height: 1402,
-      },
-      {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altın-1.png",
-        alt: "Altın çerçeveli Vakitmatik dikey namaz vakti panosu",
-        width: 1448,
-        height: 1086,
-      },
-    ],
-    accent: "#fbbc04",
+    accent: "#2563eb",
   },
   {
     id: "vakitmatik-resimli",
     title: "Vakitmatik Resimli",
     shortName: "Resimli",
     summary:
-      "Üst görsel alanı ile dini veya kurumsal görseli vakit bilgileriyle birleştiren zengin pano tasarımı.",
-    dimensions: "57 x 80 cm sınıfı",
+      "Üst arkadan aydınlatmalı görsel alan ile namaz vakitlerini birleştiren zengin pano tasarımı.",
+    dimensions: "65 x 120 cm - 6 cm Rakamlar",
     specs: [
-      { label: "Gövde", value: "Görsel alanlı dikey panel" },
-      { label: "Ekran", value: "Resim + LED vakit" },
-      { label: "Kullanım", value: "Temsil gücü yüksek mekanlar" },
+      { label: "Gövde", value: "Aluminyum" },
+      { label: "Ekran", value: "Dijital Baskı + DISPLAY" },
+      { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Üst bölümde geniş görsel alan",
-      "Vakit bilgisini güçlü LED rakamlarla sunar",
-      "Kurumsal veya dini görsel kimliğe uyarlanabilir",
-      "Büyük duvar yüzeylerinde etkili görünüm",
+      "Üst bölümde geniş görsel alan (Kabe , Kabe Kapısı , Medine)",
+      "Türkçe ve Arapça vakit yazıları",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
+      "Duvara montaj için hazır gövde",
+      "Hafıza pili",
     ],
     media: [
       {
@@ -265,75 +301,108 @@ export const productItems: ProductItem[] = [
     accent: "#0f766e",
   },
   {
-    id: "vakitmatik-kayan",
-    title: "Vakitmatik Kayan",
-    shortName: "Kayan",
+    id: "vakitmatik-led",
+    title: "Vakitmatik LED",
+    shortName: "LED",
     summary:
-      "Kayan yazı alanı ile vakit duyurularını ve kısa bilgilendirmeleri tek gövdede gösteren pratik çözüm.",
-    dimensions: "57 x 38 cm sınıfı",
+      "Büyük camiler için yüksek görünürlük sağlayan Led vakitmatik ailesi.",
+    dimensions: "Modüler LED panel ölçüsü",
+    sizeOptions: [
+      { label: "Ebat Dikey", dimensions: "85 x 145 cm", digitHeight: "10 cm Rakamlar" },
+      { label: "Ebat Yatay", dimensions: "175 x 85 cm", digitHeight: "10 cm Rakamlar" },
+    ],
     specs: [
-      { label: "Gövde", value: "Kayan yazı destekli pano" },
-      { label: "Ekran", value: "LED vakit + mesaj" },
-      { label: "Kullanım", value: "Duyuru ihtiyacı olan mekanlar" },
+      { label: "Gövde", value: "Aluminyum" },
+      { label: "Ekran", value: "Kırmızı veya yeşil LED" },
+      { label: "Kullanım", value: "İç mekan / Dış mekan" },
     ],
     features: [
-      "Kısa metinleri kayan LED alanda gösterir",
-      "Vakit ve mesaj bilgisini aynı yüzeyde toplar",
-      "Görevli duyuruları için kolay takip sağlar",
-      "Kompakt alanlarda görünür bilgilendirme sunar",
+      "Kırmızı ve yeşil LED seçenekleri",
+      "Işıklı vakit yazıları",
+      "Parlak ortamda güçlü görünürlük",
+      "Sıcaklık / Saat dönüşümlü gösterim.",
+      "Duvara montaj için hazır gövde",
+      "Hafıza pili",
     ],
     media: [
       {
-        src: "/images/vakitmatik-kayan/vakitmatik-kayan-1.png",
-        alt: "Kayan yazı alanlı Vakitmatik namaz vakti panosu",
+        src: "/images/vakitmatik-led/vakitmatik-led-yesil-1.png",
+        alt: "Yeşil LED Vakitmatik namaz vakti panosu",
+        width: 1448,
+        height: 1086,
+      },
+      {
+        src: "/images/vakitmatik-led/vakitmatik-led-kırmızı-1.png",
+        alt: "Kırmızı LED Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
-    ],
-    accent: "#2563eb",
-  },
-  {
-    id: "vakitmatik-yatay",
-    title: "Vakitmatik Yatay",
-    shortName: "Yatay",
-    summary:
-      "Geniş duvarlarda vakitleri yatay kompozisyonla gösteren, klasik LED pano formu.",
-    dimensions: "57 x 38 cm yatay sınıf",
-    specs: [
-      { label: "Gövde", value: "Yatay çerçeveli pano" },
-      { label: "Ekran", value: "Kırmızı LED" },
-      { label: "Kullanım", value: "Geniş iç mekan duvarları" },
-    ],
-    features: [
-      "Geniş yüzeyde dengeli vakit yerleşimi",
-      "Tarih, saat ve günlük vakitleri birlikte gösterir",
-      "Klasik çerçeve diliyle mekana uyum sağlar",
-      "Uzaktan hızlı okuma için büyük rakam alanları",
-    ],
-    media: [
       {
-        src: "/images/vakitmatik-yatay/vakitmatik-yatay-1.png",
-        alt: "Yatay Vakitmatik namaz vakti panosu",
+        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kırmızı-1.png",
+        alt: "Yatay kırmızı LED Vakitmatik namaz vakti panosu",
         width: 1448,
         height: 1086,
       },
     ],
-    accent: "#b45309",
+    accent: "#16a34a",
+  },
+  {
+    id: "vakitmatik-modul",
+    title: "Vakitmatik Modül",
+    shortName: "Modül",
+    summary:
+      "Hazır Ayet , Hadis , Esmaül Hüsna , Duyurular , Namaz vakitlerini gösterir. İsteğe göre ölçülerde projelendirilebilir.",
+    dimensions: "130 x 90 cm",
+    specs: [
+      { label: "Gövde", value: "Aluminyum" },
+      { label: "Ekran", value: "Yeşil veya kırmızı LED" },
+      { label: "Kullanım", value: "İç mekan / Dış mekan" },
+    ],
+    features: [
+      "100'er sayfa hazır Ayet, Hadis, Esmaül Hüsna",
+      "100 sayfa mesaj yazılabilir",
+      "Vakitmatik Modu",
+      "Hicri / Miladı takvim",
+      "Kerahat vakti gösterimi",
+      "Parlaklık ayarı",
+      "Sıcaklık Gösterimi",
+    ],
+    media: [
+      {
+        src: "/images/vakitmatik-modül/vakitmatik-modül-kırmızı-1.png",
+        alt: "Dikey kadrajlı kırmızı LED Vakitmatik modül panosu",
+        width: 1122,
+        height: 1402,
+      },
+      {
+        src: "/images/vakitmatik-modül/vakitmatik-modül-yesil-1.png",
+        alt: "Yeşil LED modüler Vakitmatik mesaj panosu",
+        width: 1122,
+        height: 1402,
+      },
+      {
+        src: "/images/vakitmatik-modül/vakitmatik-modül-kırmızı-2.png",
+        alt: "Kırmızı LED modüler Vakitmatik mesaj panosu",
+        width: 1448,
+        height: 1086,
+      },
+    ],
+    accent: "#34a853",
   },
   {
     id: "vakitmatik-lcd",
     title: "Vakitmatik LCD",
     shortName: "LCD",
     summary:
-      "Fotoğraf, grafik ve vakit bilgisini yüksek çözünürlüklü LCD yüzeyde birleştiren modern ekran ailesi.",
+      "Fotoğraf, grafik ve vakit bilgisini yüksek çözünürlüklü 4K LCD yüzeyde birleştiren modern ekran ailesi.",
     dimensions: "100 cm ve üzeri ekran sınıfı",
     specs: [
       { label: "Gövde", value: "LCD ekran paneli" },
-      { label: "Ekran", value: "Görsel + dijital vakit" },
-      { label: "Kullanım", value: "Modern cami ve kurumlar" },
+      { label: "Ekran", value: "4K (Ultra HD)" },
+      { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Yüksek çözünürlüklü görsel anlatım",
+      "4K UHD (Ultra HD) Yüksek çözünürlük",
       "Vakitleri modern arayüzle gösterir",
       "Fotoğraf ve arka plan seçeneklerine uygundur",
       "Geniş formatlı dijital bilgilendirme sağlar",
@@ -372,46 +441,7 @@ export const productItems: ProductItem[] = [
     ],
     accent: "#0369a1",
   },
-  {
-    id: "vakitmatik-led",
-    title: "Vakitmatik LED",
-    shortName: "LED",
-    summary:
-      "Farklı renk ve yön seçenekleriyle yüksek görünürlük sağlayan LED pano ailesi.",
-    dimensions: "Modüler LED panel ölçüsü",
-    specs: [
-      { label: "Gövde", value: "Dikey veya yatay LED panel" },
-      { label: "Ekran", value: "Kırmızı veya yeşil LED" },
-      { label: "Kullanım", value: "Uzak mesafe görünürlük" },
-    ],
-    features: [
-      "Kırmızı ve yeşil LED seçenekleri",
-      "Dikey ve yatay kurulum senaryoları",
-      "Parlak ortamda güçlü görünürlük",
-      "Farklı mekan ölçeklerine uyarlanabilir yapı",
-    ],
-    media: [
-      {
-        src: "/images/vakitmatik-led/vakitmatik-led-yesil-1.png",
-        alt: "Yeşil LED Vakitmatik namaz vakti panosu",
-        width: 1448,
-        height: 1086,
-      },
-      {
-        src: "/images/vakitmatik-led/vakitmatik-led-kırmızı-1.png",
-        alt: "Kırmızı LED Vakitmatik namaz vakti panosu",
-        width: 1122,
-        height: 1402,
-      },
-      {
-        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kırmızı-1.png",
-        alt: "Yatay kırmızı LED Vakitmatik namaz vakti panosu",
-        width: 1448,
-        height: 1086,
-      },
-    ],
-    accent: "#16a34a",
-  },
+
 ];
 
 export const useCaseItems: UseCaseItem[] = [
@@ -469,7 +499,7 @@ export const contactItems: ContactItem[] = [
     label: "Telefon",
     value: "+90 533 382 75 33",
     href: "tel:+905333827533",
-    note: "Hafta içi 09:00 - 18:00",
+    note: "Hafta içi : 08:30 - 18:30\nCumartesi : 08:30 - 12:00",
   },
   {
     label: "E-posta",
