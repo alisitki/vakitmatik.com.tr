@@ -4821,6 +4821,7 @@ html[data-theme="dark"] .hero-proof-card p {
     z-index: 2;
     display: flex;
     justify-content: center;
+    gap: clamp(0.95rem, 4.6vw, 1.35rem);
     width: min(100%, 34rem);
     height: clamp(13rem, 42vw, 20rem);
     margin: clamp(1rem, 4vw, 1.6rem) auto 0;
@@ -4828,7 +4829,7 @@ html[data-theme="dark"] .hero-proof-card p {
   }
 
   .hero-exact-phone-device {
-    margin-right: clamp(-1.15rem, -3.6vw, -0.7rem);
+    margin-right: 0;
     margin-bottom: clamp(0.1rem, 0.8vw, 0.35rem);
   }
 
@@ -4912,6 +4913,8 @@ html[data-theme="dark"] .hero-proof-card p {
 
   .hero-exact-platforms {
     gap: 0.55rem;
+    justify-content: center;
+    width: 100%;
   }
 
   .hero-exact-platforms span {
