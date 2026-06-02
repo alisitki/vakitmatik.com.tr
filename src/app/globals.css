@@ -4050,6 +4050,7 @@ html[data-theme="dark"] .hero-proof-card p {
   --hero-exact-ink: #18130e;
   --hero-exact-muted: rgba(43, 43, 43, 0.74);
   --hero-exact-line: rgba(38, 45, 52, 0.22);
+  --hero-composition-shift-x: clamp(1.25rem, 3vw, 3.5rem);
   position: relative;
   display: block;
   height: max(760px, 100svh);
@@ -4116,6 +4117,7 @@ html[data-theme="dark"] .hero-proof-card p {
   justify-content: space-between;
   gap: clamp(0.8rem, 2vw, 1.4rem);
   min-width: 0;
+  transform: translateX(var(--hero-composition-shift-x));
 }
 
 .hero-exact-brand,
@@ -4228,6 +4230,7 @@ html[data-theme="dark"] .hero-proof-card p {
   min-width: 0;
   max-width: 62rem;
   padding-block: clamp(5.5rem, 10vh, 7.25rem) clamp(8.5rem, 14vh, 12rem);
+  transform: translateX(var(--hero-composition-shift-x));
 }
 
 .hero-exact-copy {
@@ -4370,10 +4373,338 @@ html[data-theme="dark"] .hero-proof-card p {
   color: #8bc34a;
 }
 
+.hero-exact-product-visual {
+  position: absolute;
+  right: calc(clamp(0.6rem, 4.8vw, 5.25rem) - var(--hero-composition-shift-x));
+  bottom: calc(clamp(4.55rem, 6.4vh, 5.8rem) + 5.75rem + clamp(2rem, 3.1vh, 2.5rem));
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: clamp(23rem, 36vw, 40rem);
+  pointer-events: none;
+  animation: heroExactProductIn 920ms var(--ease-smooth) 420ms both;
+}
+
+.hero-exact-product-image {
+  display: block;
+  height: auto;
+  object-fit: contain;
+  filter: saturate(1.04) contrast(1.03) drop-shadow(0 24px 38px rgba(26, 31, 36, 0.14));
+}
+
+.hero-exact-phone-device {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  aspect-ratio: 9.6 / 20;
+  height: clamp(11.25rem, var(--hero-phone-height, 315px), 137.5rem);
+  border-radius: clamp(1.45rem, calc(var(--hero-phone-height, 315px) * 0.074), 10rem);
+  background:
+    linear-gradient(90deg, #111318 0%, #30343d 3%, #08090d 9%, #050609 91%, #2d3139 97%, #08090d 100%),
+    #07080c;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.38),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.82),
+    inset 0 0 26px rgba(255, 255, 255, 0.08),
+    16px 26px 38px rgba(0, 0, 0, 0.28),
+    0 12px 20px rgba(0, 0, 0, 0.2);
+  margin-right: clamp(-2.6rem, -3.1vw, -1.65rem);
+  margin-bottom: clamp(0.25rem, 1.2vw, 1.1rem);
+  padding: clamp(0.24rem, calc(var(--hero-phone-height, 315px) * 0.018), 2.25rem);
+  transform: translate3d(var(--hero-phone-x, 0px), var(--hero-phone-y, 0px), 0);
+}
+
+.hero-exact-phone-device::before {
+  content: "";
+  position: absolute;
+  inset: clamp(0.16rem, calc(var(--hero-phone-height, 315px) * 0.008), 0.72rem);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.72);
+  pointer-events: none;
+}
+
+.hero-exact-phone-device::after {
+  content: "";
+  position: absolute;
+  inset: clamp(0.42rem, calc(var(--hero-phone-height, 315px) * 0.026), 2rem);
+  border-radius: clamp(1.16rem, calc(var(--hero-phone-height, 315px) * 0.061), 8rem);
+  background: linear-gradient(132deg, rgba(255, 255, 255, 0.2), transparent 31%);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.hero-exact-phone-shadow {
+  position: absolute;
+  inset: 7% -9% -4% 8%;
+  z-index: -3;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 58% 56%, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.42) 36%, rgba(0, 0, 0, 0.18) 64%, transparent 78%),
+    linear-gradient(115deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.22) 52%, transparent 76%);
+  filter: blur(13px);
+  transform: translate3d(1rem, 0.9rem, 0) scale(0.98);
+  pointer-events: none;
+}
+
+.hero-exact-phone-bezel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: clamp(1.2rem, calc(var(--hero-phone-height, 315px) * 0.062), 8rem);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 14%),
+    #050609;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 0 clamp(0.1rem, calc(var(--hero-phone-height, 315px) * 0.007), 0.64rem) #050609;
+  padding: clamp(0.1rem, calc(var(--hero-phone-height, 315px) * 0.01), 0.9rem);
+}
+
+.hero-exact-phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: clamp(1rem, calc(var(--hero-phone-height, 315px) * 0.055), 7rem);
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7f8f8 58%, #eef1f2 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.32),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.hero-exact-phone-screen-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-exact-phone-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.08) 15%, transparent 36%),
+    linear-gradient(270deg, rgba(255, 255, 255, 0.12), transparent 18%);
+  opacity: 0.25;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hero-exact-phone-side {
+  position: absolute;
+  z-index: -1;
+  width: clamp(0.12rem, calc(var(--hero-phone-height, 315px) * 0.006), 0.55rem);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #424650, #0a0b0f 22%, #08090d 78%, #4f535e);
+}
+
+.hero-exact-phone-side--left {
+  top: 18%;
+  left: clamp(-0.32rem, calc(var(--hero-phone-height, 315px) * -0.004), -0.08rem);
+  height: 17%;
+  box-shadow: -1px 0 2px rgba(0, 0, 0, 0.18);
+}
+
+.hero-exact-phone-side--right {
+  top: 25%;
+  right: clamp(-0.32rem, calc(var(--hero-phone-height, 315px) * -0.004), -0.08rem);
+  height: 12%;
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.18);
+}
+
+.hero-exact-product-image--board {
+  position: relative;
+  z-index: 1;
+  width: clamp(13.75rem, var(--hero-board-width, 350px), 35rem);
+  max-height: min(62vh, 37rem);
+  transform: translate3d(var(--hero-board-x, 0px), var(--hero-board-y, 0px), 0);
+}
+
+.hero-visual-controls {
+  position: fixed;
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  color: #1b1510;
+  pointer-events: none;
+}
+
+.hero-visual-controls button,
+.hero-visual-controls input {
+  font: inherit;
+}
+
+.hero-visual-controls-panel {
+  width: min(20rem, calc(100vw - 1.5rem));
+  max-height: min(72vh, 38rem);
+  overflow: auto;
+  padding: 0.9rem;
+  border: 1px solid rgba(38, 45, 52, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 54px rgba(26, 31, 36, 0.18);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+  pointer-events: auto;
+}
+
+.hero-visual-controls-panel[hidden] {
+  display: none;
+}
+
+.hero-visual-controls-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero-visual-controls-head strong {
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.hero-visual-controls-toggle,
+.hero-visual-controls-close,
+.hero-visual-controls-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(38, 45, 52, 0.18);
+  background: rgba(255, 255, 255, 0.82);
+  color: #1b1510;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  backdrop-filter: blur(14px) saturate(1.08);
+}
+
+.hero-visual-controls-toggle {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 999px;
+  box-shadow: 0 14px 34px rgba(26, 31, 36, 0.18);
+  pointer-events: auto;
+}
+
+.hero-visual-controls-toggle svg,
+.hero-visual-controls-close svg {
+  display: block;
+  width: 1.24rem;
+  height: 1.24rem;
+}
+
+.hero-visual-controls-close {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+}
+
+.hero-visual-controls-toggle:hover,
+.hero-visual-controls-toggle:focus-visible,
+.hero-visual-controls-close:hover,
+.hero-visual-controls-close:focus-visible,
+.hero-visual-controls-reset:hover,
+.hero-visual-controls-reset:focus-visible {
+  border-color: rgba(38, 45, 52, 0.35);
+  background: #ffffff;
+}
+
+.hero-visual-control-group {
+  margin: 0;
+  padding: 0.72rem 0 0;
+  border: 0;
+  border-top: 1px solid rgba(38, 45, 52, 0.12);
+}
+
+.hero-visual-control-group + .hero-visual-control-group {
+  margin-top: 0.78rem;
+}
+
+.hero-visual-control-group legend {
+  padding: 0 0 0.54rem;
+  color: rgba(28, 20, 12, 0.72);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-visual-control-field {
+  display: grid;
+  gap: 0.36rem;
+  margin-top: 0.56rem;
+}
+
+.hero-visual-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: rgba(28, 20, 12, 0.78);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.hero-visual-control-value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.18rem;
+  color: rgba(28, 20, 12, 0.54);
+  font-variant-numeric: tabular-nums;
+  font-weight: 760;
+}
+
+.hero-visual-control-number {
+  width: 4.35rem;
+  height: 1.75rem;
+  border: 1px solid rgba(38, 45, 52, 0.16);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #1b1510;
+  font-size: 0.76rem;
+  font-weight: 760;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-visual-control-number:focus-visible {
+  outline: 2px solid rgba(28, 20, 12, 0.28);
+  outline-offset: 2px;
+}
+
+.hero-visual-control-field input[type="range"] {
+  width: 100%;
+  accent-color: #1b1510;
+}
+
+.hero-visual-controls-reset {
+  width: 100%;
+  min-height: 2.25rem;
+  margin-top: 0.9rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .hero-exact-highlights {
   position: absolute;
-  left: 0;
+  left: var(--hero-composition-shift-x);
   bottom: clamp(4.55rem, 6.4vh, 5.8rem);
+  z-index: 3;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
@@ -4435,7 +4766,7 @@ html[data-theme="dark"] .hero-proof-card p {
 
 .hero-exact-scroll {
   position: absolute;
-  left: 50%;
+  left: calc(50% + var(--hero-composition-shift-x));
   bottom: 1rem;
   display: inline-flex;
   align-items: center;
@@ -4565,8 +4896,21 @@ html[data-theme="dark"] .hero-proof-card p {
   }
 }
 
+@keyframes heroExactProductIn {
+  from {
+    opacity: 0;
+    transform: translate3d(1.5rem, 0, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 @media (max-width: 900px) {
   .hero-section--exact {
+    --hero-composition-shift-x: 0px;
     height: auto;
     min-height: max(700px, calc(100svh - 18px));
   }
@@ -4610,6 +4954,14 @@ html[data-theme="dark"] .hero-proof-card p {
   .hero-exact-content {
     max-width: 38rem;
     padding-block-start: clamp(4rem, 12vw, 6.5rem);
+  }
+
+  .hero-exact-product-visual {
+    display: none;
+  }
+
+  .hero-visual-controls {
+    display: none;
   }
 
   .hero-exact-copy h1 {

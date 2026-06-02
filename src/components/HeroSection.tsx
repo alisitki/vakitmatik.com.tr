@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 import type { HeroHighlightItem } from "@/types/landing";
 
 type HeroSectionProps = {
@@ -31,7 +33,117 @@ const heroHighlightMeta = {
   },
 } as const;
 
+type HeroVisualControls = {
+  phoneHeight: number;
+  phoneX: number;
+  phoneY: number;
+  boardWidth: number;
+  boardX: number;
+  boardY: number;
+};
+
+type HeroVisualControlKey = keyof HeroVisualControls;
+
+type HeroVisualStyle = CSSProperties & {
+  "--hero-phone-height": string;
+  "--hero-phone-x": string;
+  "--hero-phone-y": string;
+  "--hero-board-width": string;
+  "--hero-board-x": string;
+  "--hero-board-y": string;
+};
+
+const HERO_VISUAL_CONTROLS_KEY = "vakitmatik-hero-visual-controls-v1";
+
+const defaultHeroVisualControls: HeroVisualControls = {
+  phoneHeight: 315,
+  phoneX: 0,
+  phoneY: 0,
+  boardWidth: 350,
+  boardX: 0,
+  boardY: 0,
+};
+
+const heroVisualSliders: Record<
+  HeroVisualControlKey,
+  { label: string; min: number; max: number; step: number; unit: string }
+> = {
+  phoneHeight: { label: "Ebat", min: 180, max: 2200, step: 1, unit: "px" },
+  phoneX: { label: "X", min: -240, max: 240, step: 1, unit: "px" },
+  phoneY: { label: "Y", min: -220, max: 180, step: 1, unit: "px" },
+  boardWidth: { label: "Ebat", min: 220, max: 560, step: 1, unit: "px" },
+  boardX: { label: "X", min: -260, max: 260, step: 1, unit: "px" },
+  boardY: { label: "Y", min: -220, max: 180, step: 1, unit: "px" },
+};
+
+const heroVisualControlGroups: Array<{ title: string; controls: HeroVisualControlKey[] }> = [
+  { title: "Telefon", controls: ["phoneHeight", "phoneX", "phoneY"] },
+  { title: "Mavitek", controls: ["boardWidth", "boardX", "boardY"] },
+];
+
 export function HeroSection({ highlights }: HeroSectionProps) {
+  const [isControlsOpen, setIsControlsOpen] = useState(false);
+  const [isControlsLoaded, setIsControlsLoaded] = useState(false);
+  const [visualControls, setVisualControls] = useState<HeroVisualControls>(defaultHeroVisualControls);
+
+  useEffect(() => {
+    try {
+      const savedControls = window.localStorage.getItem(HERO_VISUAL_CONTROLS_KEY);
+
+      if (savedControls) {
+        setVisualControls(normalizeHeroVisualControls(JSON.parse(savedControls)));
+      }
+    } catch {
+      setVisualControls(defaultHeroVisualControls);
+    } finally {
+      setIsControlsLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isControlsLoaded) {
+      return;
+    }
+
+    window.localStorage.setItem(HERO_VISUAL_CONTROLS_KEY, JSON.stringify(visualControls));
+  }, [isControlsLoaded, visualControls]);
+
+  const visualStyle = useMemo<HeroVisualStyle>(
+    () => ({
+      "--hero-phone-height": `${visualControls.phoneHeight}px`,
+      "--hero-phone-x": `${visualControls.phoneX}px`,
+      "--hero-phone-y": `${visualControls.phoneY}px`,
+      "--hero-board-width": `${visualControls.boardWidth}px`,
+      "--hero-board-x": `${visualControls.boardX}px`,
+      "--hero-board-y": `${visualControls.boardY}px`,
+    }),
+    [visualControls],
+  );
+
+  const phoneVisualStyle = useMemo<CSSProperties>(
+    () => ({
+      height: `${visualControls.phoneHeight}px`,
+      marginBottom: "clamp(0.25rem, 1.2vw, 1.1rem)",
+      marginRight: "clamp(-2.6rem, -3.1vw, -1.65rem)",
+      transform: `translate3d(${visualControls.phoneX}px, ${visualControls.phoneY}px, 0)`,
+      width: `${Math.round(visualControls.phoneHeight * 0.48)}px`,
+    }),
+    [visualControls.phoneHeight, visualControls.phoneX, visualControls.phoneY],
+  );
+
+  const updateVisualControl = (key: HeroVisualControlKey, value: string) => {
+    const nextValue = Number(value);
+
+    setVisualControls((currentControls) => ({
+      ...currentControls,
+      [key]: clampHeroVisualControl(key, nextValue),
+    }));
+  };
+
+  const resetVisualControls = () => {
+    setVisualControls(defaultHeroVisualControls);
+  };
+
   return (
     <section id="urun" className="hero-section hero-section--exact">
       <div className="hero-reference-art" aria-hidden="true" />
@@ -63,7 +175,7 @@ export function HeroSection({ highlights }: HeroSectionProps) {
           <div className="hero-exact-copy">
             <h1>
               <span>Vakitmatik Ayarları</span>
-              <span>Artık Cep Telefonunuzda!</span>
+              <span>Artık Cebinizde!</span>
             </h1>
             <p className="hero-exact-description">
               Güncel namaz vakitlerini bilgisayara ihtiyaç duymadan, birkaç adımda telefonunuzdan
@@ -94,6 +206,124 @@ export function HeroSection({ highlights }: HeroSectionProps) {
           </div>
         </div>
 
+        <div className="hero-exact-product-visual" style={visualStyle}>
+          <div
+            className="mobile-app-device hero-exact-phone-device"
+            aria-label="Vakitmatik mobil uygulama telefon çerçevesi"
+            style={phoneVisualStyle}
+          >
+            <span className="mobile-app-device-shadow hero-exact-phone-shadow" aria-hidden="true" />
+            <span
+              className="mobile-app-device-side mobile-app-device-side--left hero-exact-phone-side hero-exact-phone-side--left"
+              aria-hidden="true"
+            />
+            <span
+              className="mobile-app-device-side mobile-app-device-side--right hero-exact-phone-side hero-exact-phone-side--right"
+              aria-hidden="true"
+            />
+            <div className="mobile-app-device-bezel hero-exact-phone-bezel">
+              <div className="mobile-app-device-screen hero-exact-phone-screen">
+                <Image
+                  src="/images/ekrangor.png"
+                  alt="Vakitmatik mobil uygulama ekran görüntüsü"
+                  width={400}
+                  height={836}
+                  className="hero-exact-phone-screen-image"
+                  priority
+                  sizes="(max-width: 900px) 0px, (max-width: 1280px) 10vw, 165px"
+                  style={{ height: "100%", objectFit: "cover", width: "100%" }}
+                />
+                <span className="mobile-app-device-glare hero-exact-phone-glare" aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+          <Image
+            src="/images/mavitek.png"
+            alt="Mavi Vakitmatik ürün görseli"
+            width={1122}
+            height={1402}
+            className="hero-exact-product-image hero-exact-product-image--board"
+            priority
+            sizes="(max-width: 900px) 0px, (max-width: 1280px) 24vw, 390px"
+          />
+        </div>
+
+        <aside className="hero-visual-controls" aria-label="Hero görsel ayarları">
+          <div
+            className="hero-visual-controls-panel"
+            hidden={!isControlsOpen}
+            id="hero-visual-controls-panel"
+          >
+            <div className="hero-visual-controls-head">
+              <strong>Hero görselleri</strong>
+              <button
+                aria-label="Ayar panelini kapat"
+                className="hero-visual-controls-close"
+                onClick={() => setIsControlsOpen(false)}
+                type="button"
+              >
+                <CloseIcon />
+              </button>
+            </div>
+
+            {heroVisualControlGroups.map((group) => (
+              <fieldset className="hero-visual-control-group" key={group.title}>
+                <legend>{group.title}</legend>
+                {group.controls.map((key) => {
+                  const slider = heroVisualSliders[key];
+
+                  return (
+                    <div className="hero-visual-control-field" key={key}>
+                      <span className="hero-visual-control-row">
+                        <span>{slider.label}</span>
+                        <span className="hero-visual-control-value">
+                          <input
+                            aria-label={`${group.title} ${slider.label} değeri`}
+                            className="hero-visual-control-number"
+                            max={slider.max}
+                            min={slider.min}
+                            onChange={(event) => updateVisualControl(key, event.currentTarget.value)}
+                            step={slider.step}
+                            type="number"
+                            value={visualControls[key]}
+                          />
+                          <span>{slider.unit}</span>
+                        </span>
+                      </span>
+                      <input
+                        aria-label={`${group.title} ${slider.label} slider`}
+                        max={slider.max}
+                        min={slider.min}
+                        onChange={(event) => updateVisualControl(key, event.currentTarget.value)}
+                        onInput={(event) => updateVisualControl(key, event.currentTarget.value)}
+                        step={slider.step}
+                        type="range"
+                        value={visualControls[key]}
+                      />
+                    </div>
+                  );
+                })}
+              </fieldset>
+            ))}
+
+            <button className="hero-visual-controls-reset" onClick={resetVisualControls} type="button">
+              Varsayılan
+            </button>
+          </div>
+
+          <button
+            aria-controls="hero-visual-controls-panel"
+            aria-expanded={isControlsOpen}
+            aria-label={isControlsOpen ? "Hero görsel ayarlarını kapat" : "Hero görsel ayarlarını aç"}
+            className="hero-visual-controls-toggle"
+            onClick={() => setIsControlsOpen((currentState) => !currentState)}
+            title="Hero görsel ayarları"
+            type="button"
+          >
+            <SlidersIcon />
+          </button>
+        </aside>
+
         <div className="hero-exact-highlights" aria-label="Öne çıkan özellikler">
           {highlights.map((item) => {
             const meta = heroHighlightMeta[item.title as keyof typeof heroHighlightMeta];
@@ -115,6 +345,62 @@ export function HeroSection({ highlights }: HeroSectionProps) {
         </a>
       </div>
     </section>
+  );
+}
+
+function normalizeHeroVisualControls(value: unknown): HeroVisualControls {
+  if (!value || typeof value !== "object") {
+    return defaultHeroVisualControls;
+  }
+
+  const controls = value as Partial<Record<HeroVisualControlKey, unknown>>;
+
+  return {
+    phoneHeight: clampHeroVisualControl("phoneHeight", Number(controls.phoneHeight)),
+    phoneX: clampHeroVisualControl("phoneX", Number(controls.phoneX)),
+    phoneY: clampHeroVisualControl("phoneY", Number(controls.phoneY)),
+    boardWidth: clampHeroVisualControl("boardWidth", Number(controls.boardWidth)),
+    boardX: clampHeroVisualControl("boardX", Number(controls.boardX)),
+    boardY: clampHeroVisualControl("boardY", Number(controls.boardY)),
+  };
+}
+
+function clampHeroVisualControl(key: HeroVisualControlKey, value: number) {
+  const slider = heroVisualSliders[key];
+
+  if (!Number.isFinite(value)) {
+    return defaultHeroVisualControls[key];
+  }
+
+  return Math.min(slider.max, Math.max(slider.min, Math.round(value)));
+}
+
+function SlidersIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path
+        d="M4 7h6m4 0h6M4 17h10m4 0h2M10 7a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm4 10a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.9"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path
+        d="m7 7 10 10M17 7 7 17"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+    </svg>
   );
 }
 
