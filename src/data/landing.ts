@@ -10,7 +10,6 @@ import type {
 } from "@/types/landing";
 
 export const navItems: NavItem[] = [
-  { href: "#urun", label: "Giriş" },
   { href: "#urun-deneyimi", label: "Ürünler" },
   { href: "#mobil-uygulama", label: "Mobil Uygulama" },
   { href: "#akilli-camiler", label: "Akıllı Cami Projeleri" },

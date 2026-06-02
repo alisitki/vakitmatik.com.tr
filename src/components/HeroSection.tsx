@@ -8,10 +8,8 @@ type HeroSectionProps = {
 
 const heroNavItems = [
   { href: "#urun-deneyimi", label: "Ürünler" },
-  { href: "#akilli-camiler", label: "Çözümler" },
-  { href: "#mobil-uygulama", label: "Özellikler" },
-  { href: "#iletisim", label: "Destek" },
-  { href: "#akilli-camiler", label: "Hakkımızda" },
+  { href: "#mobil-uygulama", label: "Mobil Uygulama" },
+  { href: "#akilli-camiler", label: "Akıllı Cami Projeleri" },
   { href: "#iletisim", label: "İletişim" },
 ] as const;
 

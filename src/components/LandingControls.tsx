@@ -559,7 +559,7 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
     getControlsSnapshot,
     getServerControlsSnapshot,
   );
-  const [systemThemeMode, setSystemThemeMode] = useState<ResolvedThemeMode>(() => getSystemThemeMode());
+  const [systemThemeMode, setSystemThemeMode] = useState<ResolvedThemeMode>("light");
   const resolvedThemeMode = resolveThemeMode(controls.themeMode, systemThemeMode);
 
   useEffect(() => {
