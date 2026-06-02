@@ -17,7 +17,7 @@ import {
   type HeroProductMode,
 } from "@/config/heroMedia";
 
-const STORAGE_KEY = "vakitmatik-landing-controls-v5";
+const STORAGE_KEY = "vakitmatik-landing-controls-v6";
 
 const DEFAULT_LOGO_SCALE = 77;
 const MIN_LOGO_SCALE = 60;
@@ -62,17 +62,21 @@ const HERO_BACKDROP_MODES = [
 ] as const;
 const DEFAULT_HERO_BACKDROP_MODE = "image";
 const THEME_MODES = [
+  { id: "system", label: "Sistem" },
   { id: "light", label: "Açık" },
   { id: "dark", label: "Koyu" },
 ] as const;
-const DEFAULT_THEME_MODE = "light";
+const DEFAULT_THEME_MODE = "system";
 
 type HeroBackdropMode = (typeof HERO_BACKDROP_MODES)[number]["id"];
 type ThemeMode = (typeof THEME_MODES)[number]["id"];
+type ResolvedThemeMode = Exclude<ThemeMode, "system">;
 
 type LandingControlsValue = {
   themeMode: ThemeMode;
+  resolvedThemeMode: ResolvedThemeMode;
   setThemeMode: (value: ThemeMode) => void;
+  toggleThemeMode: () => void;
   logoScale: number;
   setLogoScale: (value: number) => void;
   heroTextReadability: number;
@@ -245,6 +249,16 @@ function sanitizeThemeMode(value: unknown): ThemeMode {
   return THEME_MODES.some((item) => item.id === value)
     ? (value as ThemeMode)
     : DEFAULT_THEME_MODE;
+}
+
+function getSystemThemeMode(): ResolvedThemeMode {
+  if (typeof window === "undefined" || !window.matchMedia) return "light";
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function resolveThemeMode(themeMode: ThemeMode, systemThemeMode: ResolvedThemeMode): ResolvedThemeMode {
+  return themeMode === "system" ? systemThemeMode : themeMode;
 }
 
 function sanitizeBackdropImage(value: unknown, fallback: string) {
@@ -545,22 +559,51 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
     getControlsSnapshot,
     getServerControlsSnapshot,
   );
+  const [systemThemeMode, setSystemThemeMode] = useState<ResolvedThemeMode>(() => getSystemThemeMode());
+  const resolvedThemeMode = resolveThemeMode(controls.themeMode, systemThemeMode);
+
+  useEffect(() => {
+    if (!window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = () => {
+      setSystemThemeMode(mediaQuery.matches ? "dark" : "light");
+    };
+
+    handleSystemThemeChange();
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleSystemThemeChange);
+    };
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
 
-    if (controls.themeMode === "dark") {
+    if (resolvedThemeMode === "dark") {
       root.dataset.theme = "dark";
     } else {
       root.removeAttribute("data-theme");
     }
-  }, [controls.themeMode]);
+  }, [resolvedThemeMode]);
 
   const setThemeMode = useCallback((value: ThemeMode) => {
     updateControls((current) => ({
       ...current,
       themeMode: sanitizeThemeMode(value),
     }));
+  }, []);
+
+  const toggleThemeMode = useCallback(() => {
+    updateControls((current) => {
+      const currentResolvedThemeMode = resolveThemeMode(current.themeMode, getSystemThemeMode());
+
+      return {
+        ...current,
+        themeMode: currentResolvedThemeMode === "dark" ? "light" : "dark",
+      };
+    });
   }, []);
 
   const setLogoScale = useCallback((value: number) => {
@@ -775,7 +818,9 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
   const contextValue = useMemo(
     () => ({
       themeMode: controls.themeMode,
+      resolvedThemeMode,
       setThemeMode,
+      toggleThemeMode,
       logoScale: controls.logoScale,
       setLogoScale,
       heroTextReadability: controls.heroTextReadability,
@@ -827,7 +872,9 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
     }),
     [
       controls.themeMode,
+      resolvedThemeMode,
       setThemeMode,
+      toggleThemeMode,
       controls.logoScale,
       setLogoScale,
       controls.heroTextReadability,

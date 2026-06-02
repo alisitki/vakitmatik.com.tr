@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import type { CSSProperties } from "react";
 import { useLandingControls } from "@/components/LandingControls";
+import { ThemeLogoToggle } from "@/components/ThemeLogoToggle";
 import type { NavItem } from "@/types/landing";
 
 type NavbarProps = {
@@ -10,8 +10,8 @@ type NavbarProps = {
 };
 
 export function Navbar({ items }: NavbarProps) {
-  const { logoScale, setThemeMode, themeMode } = useLandingControls();
-  const isDarkTheme = themeMode === "dark";
+  const { logoScale, resolvedThemeMode, toggleThemeMode } = useLandingControls();
+  const isDarkTheme = resolvedThemeMode === "dark";
   const logoStyle = {
     "--logo-scale": logoScale / 100,
   } as CSSProperties;
@@ -20,17 +20,11 @@ export function Navbar({ items }: NavbarProps) {
     <header className="site-nav-wrap">
       <div className="container-shell">
         <div className="site-nav">
-          <a href="#urun" className="site-brand">
-            <Image
-              src="/images/vakitmatik-logo2.png"
-              alt="Vakitmatik"
-              width={810}
-              height={113}
-              className="site-brand-logo"
-              style={logoStyle}
-              priority
-            />
-          </a>
+          <ThemeLogoToggle
+            className="site-brand"
+            imageClassName="site-brand-logo"
+            imageStyle={logoStyle}
+          />
 
           <nav aria-label="Bölüm navigasyonu" className="site-nav-scroll">
             <ul className="site-nav-list">
@@ -51,7 +45,7 @@ export function Navbar({ items }: NavbarProps) {
               className="site-theme-toggle"
               title={isDarkTheme ? "Açık tema" : "Koyu tema"}
               type="button"
-              onClick={() => setThemeMode(isDarkTheme ? "light" : "dark")}
+              onClick={toggleThemeMode}
             >
               <ThemeToggleIcon isDarkTheme={isDarkTheme} />
             </button>
