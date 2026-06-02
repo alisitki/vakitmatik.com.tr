@@ -4374,14 +4374,20 @@ html[data-theme="dark"] .hero-proof-card p {
 }
 
 .hero-exact-product-visual {
+  --hero-phone-height: clamp(25rem, 34vw, 36.625rem);
+  --hero-phone-x: clamp(-6.4rem, calc(4.125rem - 8.8vw), -3.6rem);
+  --hero-phone-y: 0px;
+  --hero-board-width: clamp(24rem, 32vw, 28.125rem);
+  --hero-board-x: clamp(-1.5rem, -1.2vw, -0.65rem);
+  --hero-board-y: 0px;
   position: absolute;
-  right: calc(clamp(0.6rem, 4.8vw, 5.25rem) - var(--hero-composition-shift-x));
+  right: calc(clamp(4.25rem, 4.4vw, 5.5rem) - var(--hero-composition-shift-x));
   bottom: calc(clamp(4.55rem, 6.4vh, 5.8rem) + 5.75rem + clamp(2rem, 3.1vh, 2.5rem));
   z-index: 1;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  width: clamp(23rem, 36vw, 40rem);
+  width: clamp(43rem, 57vw, 57rem);
   pointer-events: none;
   animation: heroExactProductIn 920ms var(--ease-smooth) 420ms both;
 }
@@ -4398,7 +4404,8 @@ html[data-theme="dark"] .hero-proof-card p {
   z-index: 2;
   flex: 0 0 auto;
   aspect-ratio: 9.6 / 20;
-  height: clamp(11.25rem, var(--hero-phone-height, 315px), 137.5rem);
+  width: calc(var(--hero-phone-height) * 0.48);
+  height: var(--hero-phone-height);
   border-radius: clamp(1.45rem, calc(var(--hero-phone-height, 315px) * 0.074), 10rem);
   background:
     linear-gradient(90deg, #111318 0%, #30343d 3%, #08090d 9%, #050609 91%, #2d3139 97%, #08090d 100%),
@@ -4522,182 +4529,9 @@ html[data-theme="dark"] .hero-proof-card p {
 .hero-exact-product-image--board {
   position: relative;
   z-index: 1;
-  width: clamp(13.75rem, var(--hero-board-width, 350px), 35rem);
-  max-height: min(62vh, 37rem);
+  width: var(--hero-board-width);
+  max-height: min(68vh, 40rem);
   transform: translate3d(var(--hero-board-x, 0px), var(--hero-board-y, 0px), 0);
-}
-
-.hero-visual-controls {
-  position: fixed;
-  left: clamp(0.75rem, 2vw, 1.25rem);
-  bottom: clamp(0.75rem, 2vw, 1.25rem);
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.65rem;
-  color: #1b1510;
-  pointer-events: none;
-}
-
-.hero-visual-controls button,
-.hero-visual-controls input {
-  font: inherit;
-}
-
-.hero-visual-controls-panel {
-  width: min(20rem, calc(100vw - 1.5rem));
-  max-height: min(72vh, 38rem);
-  overflow: auto;
-  padding: 0.9rem;
-  border: 1px solid rgba(38, 45, 52, 0.18);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 20px 54px rgba(26, 31, 36, 0.18);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
-  pointer-events: auto;
-}
-
-.hero-visual-controls-panel[hidden] {
-  display: none;
-}
-
-.hero-visual-controls-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.hero-visual-controls-head strong {
-  font-size: 0.86rem;
-  font-weight: 800;
-  letter-spacing: 0;
-}
-
-.hero-visual-controls-toggle,
-.hero-visual-controls-close,
-.hero-visual-controls-reset {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(38, 45, 52, 0.18);
-  background: rgba(255, 255, 255, 0.82);
-  color: #1b1510;
-  cursor: pointer;
-  -webkit-backdrop-filter: blur(14px) saturate(1.08);
-  backdrop-filter: blur(14px) saturate(1.08);
-}
-
-.hero-visual-controls-toggle {
-  width: 2.85rem;
-  height: 2.85rem;
-  border-radius: 999px;
-  box-shadow: 0 14px 34px rgba(26, 31, 36, 0.18);
-  pointer-events: auto;
-}
-
-.hero-visual-controls-toggle svg,
-.hero-visual-controls-close svg {
-  display: block;
-  width: 1.24rem;
-  height: 1.24rem;
-}
-
-.hero-visual-controls-close {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-}
-
-.hero-visual-controls-toggle:hover,
-.hero-visual-controls-toggle:focus-visible,
-.hero-visual-controls-close:hover,
-.hero-visual-controls-close:focus-visible,
-.hero-visual-controls-reset:hover,
-.hero-visual-controls-reset:focus-visible {
-  border-color: rgba(38, 45, 52, 0.35);
-  background: #ffffff;
-}
-
-.hero-visual-control-group {
-  margin: 0;
-  padding: 0.72rem 0 0;
-  border: 0;
-  border-top: 1px solid rgba(38, 45, 52, 0.12);
-}
-
-.hero-visual-control-group + .hero-visual-control-group {
-  margin-top: 0.78rem;
-}
-
-.hero-visual-control-group legend {
-  padding: 0 0 0.54rem;
-  color: rgba(28, 20, 12, 0.72);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.hero-visual-control-field {
-  display: grid;
-  gap: 0.36rem;
-  margin-top: 0.56rem;
-}
-
-.hero-visual-control-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  color: rgba(28, 20, 12, 0.78);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.hero-visual-control-value {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.18rem;
-  color: rgba(28, 20, 12, 0.54);
-  font-variant-numeric: tabular-nums;
-  font-weight: 760;
-}
-
-.hero-visual-control-number {
-  width: 4.35rem;
-  height: 1.75rem;
-  border: 1px solid rgba(38, 45, 52, 0.16);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.72);
-  color: #1b1510;
-  font-size: 0.76rem;
-  font-weight: 760;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-.hero-visual-control-number:focus-visible {
-  outline: 2px solid rgba(28, 20, 12, 0.28);
-  outline-offset: 2px;
-}
-
-.hero-visual-control-field input[type="range"] {
-  width: 100%;
-  accent-color: #1b1510;
-}
-
-.hero-visual-controls-reset {
-  width: 100%;
-  min-height: 2.25rem;
-  margin-top: 0.9rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 800;
 }
 
 .hero-exact-highlights {
@@ -4908,6 +4742,22 @@ html[data-theme="dark"] .hero-proof-card p {
   }
 }
 
+@media (min-width: 901px) and (max-width: 1100px) {
+  .hero-exact-product-visual {
+    display: none;
+  }
+
+  .hero-exact-description {
+    max-width: 30rem;
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1250px) {
+  .hero-exact-description {
+    max-width: 30rem;
+  }
+}
+
 @media (max-width: 900px) {
   .hero-section--exact {
     --hero-composition-shift-x: 0px;
@@ -4957,10 +4807,6 @@ html[data-theme="dark"] .hero-proof-card p {
   }
 
   .hero-exact-product-visual {
-    display: none;
-  }
-
-  .hero-visual-controls {
     display: none;
   }
 
