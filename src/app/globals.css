@@ -1802,6 +1802,8 @@ section {
   color: var(--ink-strong);
   cursor: pointer;
   pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
   transition:
     background-color 220ms var(--ease-smooth),
@@ -1827,6 +1829,8 @@ section {
 }
 
 .product-thumbnail-row {
+  position: relative;
+  z-index: 3;
   display: flex;
   flex-wrap: nowrap;
   gap: 0.42rem;
@@ -1852,6 +1856,8 @@ section {
   background: var(--surface);
   cursor: pointer;
   padding: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     border-color 220ms var(--ease-smooth),
     box-shadow 220ms var(--ease-smooth),
@@ -1874,6 +1880,7 @@ section {
 .product-thumbnail-image {
   border-radius: inherit;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .product-copy {

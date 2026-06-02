@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type TouchEvent,
 } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { ENTRANCE_CONFIG } from "@/config/heroMotion";
@@ -22,11 +23,45 @@ function formatIndex(index: number) {
 export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
   const [selectedMedia, setSelectedMedia] = useState<Record<string, number>>({});
   const itemRefs = useRef<Array<HTMLElement | null>>([]);
+  const lastTouchActionRef = useRef(0);
 
   const scrollToProduct = useCallback((index: number) => {
     const node = itemRefs.current[index];
     node?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
+
+  const updateMedia = useCallback(
+    (itemId: string, mediaLength: number, nextIndex: number | ((currentIndex: number) => number)) => {
+      setSelectedMedia((current) => {
+        const currentIndex = current[itemId] ?? 0;
+        const resolvedIndex =
+          typeof nextIndex === "function" ? nextIndex(currentIndex) : nextIndex;
+
+        return {
+          ...current,
+          [itemId]: (resolvedIndex + mediaLength) % mediaLength,
+        };
+      });
+    },
+    [],
+  );
+
+  const runClickAction = useCallback((action: () => void) => {
+    if (performance.now() - lastTouchActionRef.current < 420) {
+      return;
+    }
+
+    action();
+  }, []);
+
+  const runTouchAction = useCallback(
+    (event: TouchEvent<HTMLButtonElement>, action: () => void) => {
+      event.preventDefault();
+      lastTouchActionRef.current = performance.now();
+      action();
+    },
+    [],
+  );
 
   return (
     <section className="product-story-section">
@@ -42,6 +77,8 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
               const mediaIndex = selectedMedia[item.id] ?? 0;
               const currentMedia = item.media[mediaIndex] ?? item.media[0];
               const nextItem = items[index + 1];
+              const showPreviousMedia = () => updateMedia(item.id, item.media.length, (currentIndex) => currentIndex - 1);
+              const showNextMedia = () => updateMedia(item.id, item.media.length, (currentIndex) => currentIndex + 1);
 
               return (
                 <article
@@ -62,6 +99,7 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                           alt={currentMedia.alt}
                           className="product-media-image"
                           fill
+                          key={currentMedia.src}
                           priority={index < 2}
                           sizes="(max-width: 768px) 92vw, (max-width: 1200px) 58vw, 650px"
                           src={currentMedia.src}
@@ -71,12 +109,8 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                             <button
                               aria-label={`${item.title} önceki görsel`}
                               className="product-media-arrow product-media-arrow--prev"
-                              onClick={() => {
-                                setSelectedMedia((current) => ({
-                                  ...current,
-                                  [item.id]: (mediaIndex - 1 + item.media.length) % item.media.length,
-                                }));
-                              }}
+                              onClick={() => runClickAction(showPreviousMedia)}
+                              onTouchEnd={(event) => runTouchAction(event, showPreviousMedia)}
                               type="button"
                             >
                               <ChevronIcon direction="left" />
@@ -84,12 +118,8 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                             <button
                               aria-label={`${item.title} sonraki görsel`}
                               className="product-media-arrow product-media-arrow--next"
-                              onClick={() => {
-                                setSelectedMedia((current) => ({
-                                  ...current,
-                                  [item.id]: (mediaIndex + 1) % item.media.length,
-                                }));
-                              }}
+                              onClick={() => runClickAction(showNextMedia)}
+                              onTouchEnd={(event) => runTouchAction(event, showNextMedia)}
                               type="button"
                             >
                               <ChevronIcon direction="right" />
@@ -117,12 +147,10 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                               aria-pressed={mediaIndex === mediaItemIndex}
                               className="product-thumbnail"
                               key={media.src}
-                              onClick={() => {
-                                setSelectedMedia((current) => ({
-                                  ...current,
-                                  [item.id]: mediaItemIndex,
-                                }));
-                              }}
+                              onClick={() => runClickAction(() => updateMedia(item.id, item.media.length, mediaItemIndex))}
+                              onTouchEnd={(event) =>
+                                runTouchAction(event, () => updateMedia(item.id, item.media.length, mediaItemIndex))
+                              }
                               type="button"
                             >
                               <Image
