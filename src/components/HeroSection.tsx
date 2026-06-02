@@ -53,14 +53,14 @@ type HeroVisualStyle = CSSProperties & {
   "--hero-board-y": string;
 };
 
-const HERO_VISUAL_CONTROLS_KEY = "vakitmatik-hero-visual-controls-v1";
+const HERO_VISUAL_CONTROLS_KEY = "vakitmatik-hero-visual-controls-v2";
 
 const defaultHeroVisualControls: HeroVisualControls = {
-  phoneHeight: 315,
-  phoneX: 0,
+  phoneHeight: 405,
+  phoneX: -96,
   phoneY: 0,
   boardWidth: 350,
-  boardX: 0,
+  boardX: -16,
   boardY: 0,
 };
 
