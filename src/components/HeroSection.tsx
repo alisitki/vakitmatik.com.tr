@@ -115,7 +115,7 @@ export function HeroSection({ highlights }: HeroSectionProps) {
                   height={836}
                   className="hero-exact-phone-screen-image"
                   priority
-                  sizes="(max-width: 900px) 0px, (max-width: 1280px) 10vw, 165px"
+                  sizes="(max-width: 560px) 34vw, (max-width: 900px) 26vw, (max-width: 1280px) 10vw, 165px"
                   style={{ height: "100%", objectFit: "cover", width: "100%" }}
                 />
                 <span className="mobile-app-device-glare hero-exact-phone-glare" aria-hidden="true" />
@@ -129,7 +129,7 @@ export function HeroSection({ highlights }: HeroSectionProps) {
             height={1402}
             className="hero-exact-product-image hero-exact-product-image--board"
             priority
-            sizes="(max-width: 900px) 0px, (max-width: 1280px) 24vw, 390px"
+            sizes="(max-width: 560px) 44vw, (max-width: 900px) 34vw, (max-width: 1280px) 24vw, 390px"
           />
         </div>
 
