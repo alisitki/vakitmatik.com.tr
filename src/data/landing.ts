@@ -369,19 +369,19 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-modül/vakitmatik-modül-kırmızı-1.png",
+        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-1.png",
         alt: "Dikey kadrajlı kırmızı LED Vakitmatik modül panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-modül/vakitmatik-modül-yesil-1.png",
+        src: "/images/vakitmatik-modul/vakitmatik-modul-yesil-1.png",
         alt: "Yeşil LED modüler Vakitmatik mesaj panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-modül/vakitmatik-modül-kırmızı-2.png",
+        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-2.png",
         alt: "Kırmızı LED modüler Vakitmatik mesaj panosu",
         width: 1448,
         height: 1086,
