@@ -23,7 +23,6 @@ export function ThemeLogoToggle({
       aria-label={isDarkTheme ? "Açık temaya geç" : "Koyu temaya geç"}
       aria-pressed={isDarkTheme}
       className={className}
-      title={isDarkTheme ? "Açık tema" : "Koyu tema"}
       type="button"
       onClick={toggleThemeMode}
     >

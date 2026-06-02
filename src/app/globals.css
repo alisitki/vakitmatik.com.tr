@@ -4251,7 +4251,7 @@ html[data-theme="dark"] .hero-proof-card p {
   justify-items: start;
   min-width: 0;
   max-width: 62rem;
-  padding-block: clamp(5.5rem, 10vh, 7.25rem) clamp(8.5rem, 14vh, 12rem);
+  padding-block: clamp(3.75rem, 6.8vh, 5.25rem) clamp(10rem, 16vh, 13.75rem);
   transform: translateX(var(--hero-composition-shift-x));
 }
 
@@ -4285,7 +4285,7 @@ html[data-theme="dark"] .hero-proof-card p {
   color: var(--hero-exact-ink);
   font-size: clamp(3.25rem, 3.52vw, 4.25rem);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.18;
   letter-spacing: 0;
   overflow-wrap: break-word;
   text-shadow: 0 2px 14px rgba(255, 255, 255, 0.48);
@@ -4296,12 +4296,13 @@ html[data-theme="dark"] .hero-proof-card p {
 }
 
 .hero-exact-description {
-  max-width: 42rem;
-  color: var(--hero-exact-muted);
-  font-size: clamp(1.05rem, 1.22vw, 1.32rem);
-  font-weight: 620;
-  line-height: 1.44;
-  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.46);
+  max-width: 40rem;
+  color: rgba(33, 30, 27, 0.68);
+  font-size: clamp(1.02rem, 1.1vw, 1.18rem);
+  font-weight: 560;
+  line-height: 1.58;
+  letter-spacing: 0.002em;
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.4);
 }
 
 .hero-exact-actions,
@@ -4703,7 +4704,7 @@ html[data-theme="dark"] .hero-exact-copy h1 {
 }
 
 html[data-theme="dark"] .hero-exact-description {
-  color: var(--hero-exact-muted);
+  color: rgba(239, 235, 227, 0.72);
   text-shadow: none;
 }
 
