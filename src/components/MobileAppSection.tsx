@@ -1,6 +1,5 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { LazyMobileAppVideo } from "@/components/LazyMobileAppVideo";
-import { ENTRANCE_CONFIG } from "@/config/heroMotion";
 import type { MobileAppStepItem } from "@/types/landing";
 
 type MobileAppSectionProps = {
@@ -8,13 +7,11 @@ type MobileAppSectionProps = {
 };
 
 export function MobileAppSection({ steps }: MobileAppSectionProps) {
-  const revealDuration = ENTRANCE_CONFIG.duration;
-
   return (
     <section id="mobil-uygulama" className="section-space mobile-app-section">
       <div className="mobile-app-scroll-panel">
         <div className="container-shell mobile-app-section-shell">
-          <Reveal className="mobile-app-preview" distance={ENTRANCE_CONFIG.distance} duration={revealDuration}>
+          <Reveal className="mobile-app-preview">
             <div className="mobile-app-device" aria-label="Vakitmatik mobil uygulama önizlemesi">
               <span className="mobile-app-device-shadow" aria-hidden="true" />
               <span className="mobile-app-device-side mobile-app-device-side--left" aria-hidden="true" />
@@ -32,8 +29,6 @@ export function MobileAppSection({ steps }: MobileAppSectionProps) {
             <Reveal
               className="section-intro mobile-app-intro"
               delay={0.05}
-              distance={ENTRANCE_CONFIG.distance}
-              duration={revealDuration}
             >
               <h2>Mobil Uygulama</h2>
             </Reveal>
@@ -42,8 +37,6 @@ export function MobileAppSection({ steps }: MobileAppSectionProps) {
               className="mobile-app-platform-row"
               aria-label="Mobil uygulama platformları"
               delay={0.12}
-              distance={ENTRANCE_CONFIG.distance}
-              duration={revealDuration}
             >
               <span>
                 <AndroidIcon />
@@ -60,8 +53,6 @@ export function MobileAppSection({ steps }: MobileAppSectionProps) {
                 <Reveal
                   className="mobile-app-step"
                   delay={0.08 + index * 0.05}
-                  distance={ENTRANCE_CONFIG.distance}
-                  duration={revealDuration}
                   key={step.title}
                 >
                   <span className="mobile-app-step-index">

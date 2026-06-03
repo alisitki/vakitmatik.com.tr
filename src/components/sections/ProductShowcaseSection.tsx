@@ -9,7 +9,6 @@ import {
   type TouchEvent,
 } from "react";
 import { Reveal } from "@/components/motion/Reveal";
-import { ENTRANCE_CONFIG } from "@/config/heroMotion";
 import type { ProductItem } from "@/types/landing";
 
 type ProductShowcaseSectionProps = {
@@ -133,7 +132,6 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                       className="product-copy"
                       delay={0.05}
                       distance={18}
-                      duration={ENTRANCE_CONFIG.duration}
                       start="top 62%"
                     >
                       <h3>{item.title}</h3>

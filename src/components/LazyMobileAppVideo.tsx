@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const VIDEO_SRC = "/videos/vakitmatik-mobil.mp4";
-const POSTER_SRC = "/images/ekrangor.png";
+const POSTER_SRC = "/images/ekrangor.webp";
 const PLACEHOLDER_SRC = "/images/ekrangor.webp";
 
 export function LazyMobileAppVideo() {

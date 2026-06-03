@@ -18,9 +18,12 @@ const jakarta = Plus_Jakarta_Sans({
 
 const themeInitScript = `
 try {
-  var savedControls = window.localStorage.getItem("vakitmatik-landing-controls-v6");
-  var parsedControls = savedControls ? JSON.parse(savedControls) : null;
-  var themeMode = parsedControls && parsedControls.themeMode;
+  var themeMode = window.localStorage.getItem("vakitmatik-theme-mode");
+  if (!themeMode) {
+    var savedControls = window.localStorage.getItem("vakitmatik-landing-controls-v6");
+    var parsedControls = savedControls ? JSON.parse(savedControls) : null;
+    themeMode = parsedControls && parsedControls.themeMode;
+  }
   var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   if (themeMode === "dark" || (themeMode !== "light" && prefersDark)) {
     document.documentElement.dataset.theme = "dark";

@@ -640,7 +640,7 @@ section {
   left: calc(50% + var(--hero-backdrop-x, 0%));
   width: calc(100vw * var(--hero-backdrop-size, 1));
   aspect-ratio: 2 / 1;
-  background: var(--hero-backdrop-image, url("/images/denemeler/fullhero.webp")) center / contain no-repeat;
+  background: var(--hero-backdrop-image, none) center / contain no-repeat;
   opacity: 0;
   -webkit-filter: var(--hero-backdrop-filter, none);
   filter: var(--hero-backdrop-filter, none);
@@ -3390,8 +3390,7 @@ html[data-theme="dark"] .hero-section .hero-buttons > .btn-secondary:focus-visib
 
 .hero-scene {
   background:
-    linear-gradient(90deg, rgba(0, 13, 20, 0.34), rgba(0, 13, 20, 0.08)),
-    url("/images/denemeler/fullhero.webp") center 47% / cover no-repeat;
+    linear-gradient(90deg, rgba(0, 13, 20, 0.34), rgba(0, 13, 20, 0.08));
   filter: saturate(0.96) contrast(1.08) brightness(0.7);
   transform: scale(1.015);
 }
@@ -4213,6 +4212,27 @@ html[data-theme="dark"] .hero-proof-card p {
   letter-spacing: 0;
   text-shadow: none;
   white-space: nowrap;
+}
+
+html.reveal-motion-ready [data-reveal-state="pending"] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance, 22px), 0);
+}
+
+html.reveal-motion-ready [data-reveal-state="visible"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity var(--reveal-duration, 0.8s) var(--ease-smooth) var(--reveal-delay, 0s),
+    transform var(--reveal-duration, 0.8s) var(--ease-smooth) var(--reveal-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-motion-ready [data-reveal-state] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .hero-exact-menu-link:hover,
