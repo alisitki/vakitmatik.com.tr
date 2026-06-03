@@ -1540,6 +1540,11 @@ section {
   object-fit: cover;
 }
 
+.mobile-app-device-video-shell {
+  width: 100%;
+  height: 100%;
+}
+
 .mobile-app-flow {
   display: grid;
   gap: clamp(1.8rem, 2.4vw, 2.15rem);
@@ -2852,6 +2857,7 @@ html[data-theme="dark"] .product-spec {
 html[data-theme="dark"] .mobile-app-step-index {
   border-color: rgba(66, 133, 244, 0.3);
   background: var(--surface);
+  color: #8ab4f8;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
 }
 
@@ -4398,10 +4404,10 @@ html[data-theme="dark"] .hero-proof-card p {
 
 .hero-exact-product-visual {
   --hero-phone-height: clamp(25rem, 34vw, 36.625rem);
-  --hero-phone-x: clamp(-6.4rem, calc(4.125rem - 8.8vw), -3.6rem);
+  --hero-phone-x: 0px;
   --hero-phone-y: 0px;
   --hero-board-width: clamp(24rem, 32vw, 28.125rem);
-  --hero-board-x: clamp(-1.5rem, -1.2vw, -0.65rem);
+  --hero-board-x: 0px;
   --hero-board-y: 0px;
   position: absolute;
   right: calc(clamp(4.25rem, 4.4vw, 5.5rem) - var(--hero-composition-shift-x));
@@ -4439,7 +4445,7 @@ html[data-theme="dark"] .hero-proof-card p {
     inset 0 0 26px rgba(255, 255, 255, 0.08),
     16px 26px 38px rgba(0, 0, 0, 0.28),
     0 12px 20px rgba(0, 0, 0, 0.2);
-  margin-right: clamp(-2.6rem, -3.1vw, -1.65rem);
+  margin-right: clamp(1.25rem, 2vw, 2rem);
   margin-bottom: clamp(0.25rem, 1.2vw, 1.1rem);
   padding: clamp(0.24rem, calc(var(--hero-phone-height, 315px) * 0.018), 2.25rem);
   transform: translate3d(var(--hero-phone-x, 0px), var(--hero-phone-y, 0px), 0);
@@ -4925,6 +4931,15 @@ html[data-theme="dark"] .hero-exact-scroll span {
   }
 }
 
+@media (min-width: 1101px) and (max-width: 1500px) {
+  .hero-exact-product-visual {
+    --hero-phone-height: clamp(23rem, 31vw, 28rem);
+    --hero-board-width: clamp(21rem, 29vw, 26.25rem);
+    right: calc(clamp(1rem, 2vw, 2rem) - var(--hero-composition-shift-x));
+    width: clamp(37rem, 52vw, 47rem);
+  }
+}
+
 @media (max-width: 900px) {
   .hero-section--exact {
     --hero-composition-shift-x: 0px;
@@ -4979,7 +4994,7 @@ html[data-theme="dark"] .hero-exact-scroll span {
     --hero-phone-height: clamp(12.5rem, 38vw, 19rem);
     --hero-phone-x: 0px;
     --hero-phone-y: 0px;
-    --hero-board-width: clamp(11.25rem, 36vw, 18rem);
+    --hero-board-width: clamp(9.5rem, 32vw, 16rem);
     --hero-board-x: 0px;
     --hero-board-y: 0px;
     position: relative;
@@ -5092,9 +5107,9 @@ html[data-theme="dark"] .hero-exact-scroll span {
   }
 
   .hero-exact-product-visual {
-    --hero-phone-height: clamp(12.6rem, 53vw, 14.5rem);
-    --hero-board-width: clamp(10.6rem, 45vw, 12.8rem);
-    height: clamp(13.4rem, 57vw, 15.4rem);
+    --hero-phone-height: clamp(10rem, 43vw, 12rem);
+    --hero-board-width: clamp(7.5rem, 32vw, 9.5rem);
+    height: clamp(11rem, 47vw, 13rem);
     margin-top: 1.05rem;
   }
 

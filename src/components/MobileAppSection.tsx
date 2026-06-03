@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/motion/Reveal";
+import { LazyMobileAppVideo } from "@/components/LazyMobileAppVideo";
 import { ENTRANCE_CONFIG } from "@/config/heroMotion";
 import type { MobileAppStepItem } from "@/types/landing";
 
@@ -20,16 +21,7 @@ export function MobileAppSection({ steps }: MobileAppSectionProps) {
               <span className="mobile-app-device-side mobile-app-device-side--right" aria-hidden="true" />
               <div className="mobile-app-device-bezel">
                 <div className="mobile-app-device-screen">
-                  <video
-                    aria-label="Vakitmatik mobil uygulama ekran kaydı"
-                    autoPlay
-                    className="mobile-app-device-video"
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    src="/videos/vakitmatik-mobil.mp4"
-                  />
+                  <LazyMobileAppVideo />
                   <span className="mobile-app-device-glare" aria-hidden="true" />
                 </div>
               </div>

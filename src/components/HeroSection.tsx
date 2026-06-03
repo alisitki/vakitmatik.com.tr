@@ -99,7 +99,7 @@ export function HeroSection({ highlights }: HeroSectionProps) {
             <div className="mobile-app-device-bezel hero-exact-phone-bezel">
               <div className="mobile-app-device-screen hero-exact-phone-screen">
                 <Image
-                  src="/images/ekrangor.png"
+                  src="/images/ekrangor.webp"
                   alt="Vakitmatik mobil uygulama ekran görüntüsü"
                   width={400}
                   height={836}
@@ -112,15 +112,20 @@ export function HeroSection({ highlights }: HeroSectionProps) {
               </div>
             </div>
           </div>
-          <Image
-            src="/images/mavitek.png"
-            alt="Mavi Vakitmatik ürün görseli"
-            width={1122}
-            height={1402}
-            className="hero-exact-product-image hero-exact-product-image--board"
-            priority
-            sizes="(max-width: 560px) 44vw, (max-width: 900px) 34vw, (max-width: 1280px) 24vw, 390px"
-          />
+          <picture className="hero-exact-product-picture hero-exact-product-image--board">
+            <source media="(max-width: 560px)" srcSet="/images/mavitek-mobile.webp" />
+            <source media="(max-width: 900px)" srcSet="/images/mavitek-tablet.webp" />
+            <Image
+              src="/images/mavitek.webp"
+              alt="Mavi Vakitmatik ürün görseli"
+              width={1122}
+              height={1402}
+              className="hero-exact-product-image"
+              fetchPriority="high"
+              loading="eager"
+              sizes="(max-width: 560px) 40vw, (max-width: 900px) 32vw, (max-width: 1280px) 24vw, 390px"
+            />
+          </picture>
         </div>
 
         <div className="hero-exact-highlights" aria-label="Öne çıkan özellikler">

@@ -66,6 +66,7 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
   return (
     <section className="product-story-section">
       <div className="container-shell">
+        <h2 className="sr-only">Vakitmatik ürünleri</h2>
         <div className="product-story-layout">
           <span
             aria-hidden="true"
@@ -100,7 +101,6 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                           className="product-media-image"
                           fill
                           key={currentMedia.src}
-                          priority={index < 2}
                           sizes="(max-width: 768px) 92vw, (max-width: 1200px) 58vw, 650px"
                           src={currentMedia.src}
                         />

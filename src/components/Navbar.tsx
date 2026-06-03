@@ -29,7 +29,7 @@ export function Navbar({ items }: NavbarProps) {
           <nav aria-label="Bölüm navigasyonu" className="site-nav-scroll">
             <ul className="site-nav-list">
               {items.map((item) => (
-                <li key={item.href}>
+                <li key={`${item.href}-${item.label}`}>
                   <a className="site-nav-pill" href={item.href}>
                     {item.label}
                   </a>

@@ -89,7 +89,7 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-desen-mavi/vakitmatik-desen-mavi-1.png",
+        src: "/images/vakitmatik-desen-mavi/vakitmatik-desen-mavi-1.webp",
         alt: "Mavi desenli Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
@@ -122,7 +122,7 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-desen-siyah/vakitmatik-desen-siyah-1.png",
+        src: "/images/vakitmatik-desen-siyah/vakitmatik-desen-siyah-1.webp",
         alt: "Siyah desenli Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
@@ -154,13 +154,13 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altın-1.png",
+        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altın-1.webp",
         alt: "Altın çerçeveli Vakitmatik dikey namaz vakti panosu",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-siyah-1.png",
+        src: "/images/vakitmatik-dikey/vakitmatik-dikey-siyah-1.webp",
         alt: "Siyah Vakitmatik dikey namaz vakti panosu",
         width: 1122,
         height: 1402,
@@ -192,7 +192,7 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-yatay/vakitmatik-yatay-1.png",
+        src: "/images/vakitmatik-yatay/vakitmatik-yatay-1.webp",
         alt: "Yatay Vakitmatik namaz vakti panosu",
         width: 1448,
         height: 1086,
@@ -221,7 +221,7 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-mesaj/vakitmatik-mesaj-1.png",
+        src: "/images/vakitmatik-mesaj/vakitmatik-mesaj-1.webp",
         alt: "Mesaj alanlı Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
@@ -250,7 +250,7 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-kayan/vakitmatik-kayan-1.png",
+        src: "/images/vakitmatik-kayan/vakitmatik-kayan-1.webp",
         alt: "Kayan yazı alanlı Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
@@ -279,19 +279,19 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-resimli/vakitmatik-resimli-1.png",
+        src: "/images/vakitmatik-resimli/vakitmatik-resimli-1.webp",
         alt: "Görsel alanlı Vakitmatik resimli namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-resimli/vakitmatik-resimli-2.png",
+        src: "/images/vakitmatik-resimli/vakitmatik-resimli-2.webp",
         alt: "Vakitmatik resimli pano alternatif görseli",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-resimli/vakitmatik-resimli-3.png",
+        src: "/images/vakitmatik-resimli/vakitmatik-resimli-3.webp",
         alt: "Vakitmatik resimli pano üçüncü alternatif görseli",
         width: 1122,
         height: 1402,
@@ -325,19 +325,19 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yesil-1.png",
+        src: "/images/vakitmatik-led/vakitmatik-led-yesil-1.webp",
         alt: "Yeşil LED Vakitmatik namaz vakti panosu",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-kırmızı-1.png",
+        src: "/images/vakitmatik-led/vakitmatik-led-kırmızı-1.webp",
         alt: "Kırmızı LED Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kırmızı-1.png",
+        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kırmızı-1.webp",
         alt: "Yatay kırmızı LED Vakitmatik namaz vakti panosu",
         width: 1448,
         height: 1086,
@@ -368,19 +368,19 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-1.png",
+        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-1.webp",
         alt: "Dikey kadrajlı kırmızı LED Vakitmatik modül panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-modul/vakitmatik-modul-yesil-1.png",
+        src: "/images/vakitmatik-modul/vakitmatik-modul-yesil-1.webp",
         alt: "Yeşil LED modüler Vakitmatik mesaj panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-2.png",
+        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-2.webp",
         alt: "Kırmızı LED modüler Vakitmatik mesaj panosu",
         width: 1448,
         height: 1086,
@@ -408,31 +408,31 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-1.png",
+        src: "/images/vakitmatik-lcd/vakitmatik-lcd-1.webp",
         alt: "Vakitmatik LCD namaz vakti ekranı",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-2.png",
+        src: "/images/vakitmatik-lcd/vakitmatik-lcd-2.webp",
         alt: "Vakitmatik LCD ekran ikinci alternatif",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-3.png",
+        src: "/images/vakitmatik-lcd/vakitmatik-lcd-3.webp",
         alt: "Vakitmatik LCD ekran üçüncü alternatif",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-4.png",
+        src: "/images/vakitmatik-lcd/vakitmatik-lcd-4.webp",
         alt: "Vakitmatik LCD ekran dördüncü alternatif",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-5.png",
+        src: "/images/vakitmatik-lcd/vakitmatik-lcd-5.webp",
         alt: "Vakitmatik LCD ekran beşinci alternatif",
         width: 1122,
         height: 1402,

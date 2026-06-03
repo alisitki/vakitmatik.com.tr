@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import Script from "next/script";
+import { productItems } from "@/data/landing";
 import "./globals.css";
 
 const sora = Sora({
@@ -31,14 +32,65 @@ try {
 }
 `;
 
+const siteUrl = "https://www.vakitmatik.com.tr";
+const siteDescription =
+  "Vakitmatik namaz vakti panoları, mobil uygulama desteği, akıllı cami projeleri ve iletişim bilgileri.";
+const socialDescription =
+  "Vakitmatik namaz vakti panolarını, mobil uygulama desteğini ve akıllı cami çözümlerini keşfedin.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vakitmatik",
+    url: siteUrl,
+    logo: `${siteUrl}/images/vakitmatik-logo2.png`,
+    email: "bilgi@vakitmatik.com.tr",
+    telephone: "+905333827533",
+    areaServed: "TR",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Kocaeli",
+      addressCountry: "TR",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Vakitmatik",
+    url: siteUrl,
+    inLanguage: "tr-TR",
+    description: siteDescription,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Vakitmatik ürünleri",
+    itemListElement: productItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${siteUrl}/#${item.id}`,
+      item: {
+        "@type": "Product",
+        name: item.title,
+        description: item.summary,
+        image: item.media.map((media) => `${siteUrl}${media.src}`),
+        brand: {
+          "@type": "Brand",
+          name: "Vakitmatik",
+        },
+      },
+    })),
+  },
+];
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vakitmatik.com.tr"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Vakitmatik | Cami Saatleri",
     template: "%s | Vakitmatik",
   },
-  description:
-    "Vakitmatik ürün özellikleri, akıllı cami projeleri ve iletişim bilgileri tek sayfada.",
+  description: siteDescription,
   keywords: [
     "vakitmatik",
     "namaz vakti paneli",
@@ -51,9 +103,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Vakitmatik | Cami Saatleri",
-    description:
-      "Vakitmatik ürününü antigravity tarzı modern bir tek sayfa deneyimde keşfedin.",
-    url: "https://vakitmatik.com.tr",
+    description: socialDescription,
+    url: siteUrl,
     siteName: "Vakitmatik",
     locale: "tr_TR",
     type: "website",
@@ -62,8 +113,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Vakitmatik | Cami Saatleri",
-    description:
-      "Vakitmatik ürün özellikleri, akıllı cami projeleri ve iletişim bilgileri tek sayfada.",
+    description: socialDescription,
     images: ["/images/og-vakitmatik.svg"],
   },
   robots: {
@@ -80,9 +130,36 @@ export default function RootLayout({
   return (
     <html lang="tr" suppressHydrationWarning>
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/mavitek-mobile.webp"
+          media="(max-width: 560px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/mavitek-tablet.webp"
+          media="(min-width: 561px) and (max-width: 900px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/mavitek.webp"
+          media="(min-width: 901px)"
+          fetchPriority="high"
+        />
         <Script id="vakitmatik-theme-init" strategy="beforeInteractive">
           {themeInitScript}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
       </head>
       <body className={`${sora.variable} ${jakarta.variable}`}>{children}</body>
     </html>

@@ -18,7 +18,7 @@ export function FooterSection({ items }: FooterSectionProps) {
           <nav aria-label="Alt menü">
             <ul className="site-footer-links">
               {items.map((item) => (
-                <li key={`footer-${item.href}`}>
+                <li key={`footer-${item.href}-${item.label}`}>
                   <a href={item.href}>{item.label}</a>
                 </li>
               ))}

@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type HTMLAttributes, type ReactNode } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { HTMLAttributes, ReactNode } from "react";
 
 type RevealProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
   children: ReactNode;
@@ -17,55 +15,21 @@ export function Reveal({
   children,
   className,
   style,
-  delay = 0,
-  distance = 22,
-  duration = 0.8,
-  once = true,
-  start = "top 86%",
+  delay: _delay = 0,
+  distance: _distance = 22,
+  duration: _duration = 0.8,
+  once: _once = true,
+  start: _start = "top 86%",
   ...rest
 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const node = ref.current;
-    if (!node) {
-      return;
-    }
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      gsap.set(node, { opacity: 1, y: 0 });
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        node,
-        { opacity: 0, y: distance },
-        {
-          opacity: 1,
-          y: 0,
-          duration,
-          delay,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: node,
-            start,
-            once,
-          },
-        },
-      );
-    }, node);
-
-    return () => {
-      ctx.revert();
-    };
-  }, [delay, distance, duration, once, start]);
+  void _delay;
+  void _distance;
+  void _duration;
+  void _once;
+  void _start;
 
   return (
-    <div ref={ref} className={className} style={style} {...rest}>
+    <div className={className} style={style} {...rest}>
       {children}
     </div>
   );

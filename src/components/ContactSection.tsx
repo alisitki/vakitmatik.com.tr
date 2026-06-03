@@ -1,4 +1,3 @@
-import { Reveal } from "@/components/motion/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
 import type { ContactItem } from "@/types/landing";
 
@@ -22,8 +21,8 @@ export function ContactSection({ items }: ContactSectionProps) {
         />
 
         <ul className="contact-grid">
-          {items.map((item, index) => (
-            <Reveal key={item.label} className="contact-card" delay={0.08 + index * 0.07}>
+          {items.map((item) => (
+            <li key={item.label} className="contact-card">
               <p className="contact-label">{item.label}</p>
               {item.href ? (
                 <a className="contact-value" href={item.href}>
@@ -33,7 +32,7 @@ export function ContactSection({ items }: ContactSectionProps) {
                 <p className="contact-value">{item.value}</p>
               )}
               {item.note ? <p className="contact-note">{item.note}</p> : null}
-            </Reveal>
+            </li>
           ))}
         </ul>
       </div>
