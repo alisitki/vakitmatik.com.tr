@@ -6,6 +6,11 @@ type FooterSectionProps = {
 
 export function FooterSection({ items }: FooterSectionProps) {
   const year = new Date().getFullYear();
+  const footerItems = [
+    ...items,
+    { href: "/privacy/", label: "Gizlilik Politikası" },
+    { href: "/support/", label: "Destek" },
+  ];
 
   return (
     <footer className="site-footer-wrap">
@@ -17,7 +22,7 @@ export function FooterSection({ items }: FooterSectionProps) {
 
           <nav aria-label="Alt menü">
             <ul className="site-footer-links">
-              {items.map((item) => (
+              {footerItems.map((item) => (
                 <li key={`footer-${item.href}-${item.label}`}>
                   <a href={item.href}>{item.label}</a>
                 </li>
