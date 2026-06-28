@@ -81,7 +81,7 @@ export const productItems: ProductItem[] = [
       { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Mavi desenli arka yüzey",
+      "Mavi desenli yüzey",
       "Türkçe ve Arapça vakit yazıları",
       "Sıcaklık / Saat dönüşümlü gösterim.",
       "Duvara montaj için hazır gövde",
@@ -114,7 +114,7 @@ export const productItems: ProductItem[] = [
       { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Siyah desenli arka yüzey",
+      "Siyah desenli yüzey",
       "Türkçe ve Arapça vakit yazıları",
       "Sıcaklık / Saat dönüşümlü gösterim.",
       "Duvara montaj için hazır gövde",
@@ -147,7 +147,7 @@ export const productItems: ProductItem[] = [
       { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Altın veya siyah arka yüzey",
+      "Altın veya siyah yüzey",
       "Sıcaklık / Saat dönüşümlü gösterim.",
       "Duvara montaj için hazır gövde",
       "Hafıza pili",
@@ -185,7 +185,7 @@ export const productItems: ProductItem[] = [
       { label: "Kullanım", value: "İç mekan" },
     ],
     features: [
-      "Altın veya siyah arka yüzey",
+      "Altın veya siyah yüzey",
       "Sıcaklık / Saat dönüşümlü gösterim.",
       "Duvara montaj için hazır gövde",
       "Hafıza pili",
