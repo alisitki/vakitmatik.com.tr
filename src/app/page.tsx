@@ -6,6 +6,7 @@ import { MobileAppSection } from "@/components/MobileAppSection";
 import { Navbar } from "@/components/Navbar";
 import { ProductShowcaseSection } from "@/components/sections/ProductShowcaseSection";
 import { UseCasesSection } from "@/components/UseCasesSection";
+import { absoluteUrl, siteUrl } from "@/config/seo";
 import {
   contactItems,
   heroHighlights,
@@ -14,18 +15,46 @@ import {
   productItems,
 } from "@/data/landing";
 
+const productStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Vakitmatik ürünleri",
+  itemListElement: productItems.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: `${siteUrl}/#${item.id}`,
+    name: item.title,
+    description: item.summary,
+    item: {
+      "@type": "Thing",
+      name: item.title,
+      description: item.summary,
+      url: `${siteUrl}/#${item.id}`,
+      image: item.media.map((media) => absoluteUrl(media.src)),
+    },
+  })),
+};
+
 export default function Home() {
   return (
-    <LandingControlsProvider>
-      <Navbar items={navItems} />
-      <main>
-        <HeroSection highlights={heroHighlights} />
-        <ProductShowcaseSection items={productItems} />
-        <MobileAppSection steps={mobileAppSteps} />
-        <UseCasesSection />
-        <ContactSection items={contactItems} />
-      </main>
-      <FooterSection items={navItems} />
-    </LandingControlsProvider>
+    <>
+      <LandingControlsProvider>
+        <Navbar items={navItems} />
+        <main>
+          <HeroSection highlights={heroHighlights} />
+          <ProductShowcaseSection items={productItems} />
+          <MobileAppSection steps={mobileAppSteps} />
+          <UseCasesSection />
+          <ContactSection items={contactItems} />
+        </main>
+        <FooterSection items={navItems} />
+      </LandingControlsProvider>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+    </>
   );
 }

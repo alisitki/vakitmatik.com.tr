@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { createPageMetadata } from "@/config/seo";
 
-export const metadata: Metadata = {
+const description =
+  "Vakitmatik mobil uygulamasının veri kullanımı, izinleri ve gizlilik uygulamaları.";
+
+export const metadata: Metadata = createPageMetadata({
   title: "Gizlilik Politikası",
-  description:
-    "Vakitmatik mobil uygulamasının veri kullanımı, izinleri ve gizlilik uygulamaları.",
-  alternates: {
-    canonical: "/privacy/",
-  },
-};
+  description,
+  path: "/privacy/",
+});
 
 export default function PrivacyPage() {
   return (

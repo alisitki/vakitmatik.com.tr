@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import Script from "next/script";
-import { productItems } from "@/data/landing";
+import {
+  defaultOpenGraphImage,
+  defaultTitle,
+  siteDescription,
+  siteName,
+  siteUrl,
+  seoKeywords,
+  socialDescription,
+  socialImage,
+} from "@/config/seo";
 import "./globals.css";
 
 const sora = Sora({
@@ -35,12 +44,6 @@ try {
 }
 `;
 
-const siteUrl = "https://www.vakitmatik.com.tr";
-const siteDescription =
-  "Vakitmatik namaz vakti panoları, mobil uygulama desteği, akıllı cami projeleri ve iletişim bilgileri.";
-const socialDescription =
-  "Vakitmatik namaz vakti panolarını, mobil uygulama desteğini ve akıllı cami çözümlerini keşfedin.";
-
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -60,63 +63,38 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Vakitmatik",
+    name: siteName,
     url: siteUrl,
     inLanguage: "tr-TR",
     description: siteDescription,
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Vakitmatik ürünleri",
-    itemListElement: productItems.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `${siteUrl}/#${item.id}`,
-      name: item.title,
-      description: item.summary,
-      item: {
-        "@type": "Thing",
-        name: item.title,
-        description: item.summary,
-        url: `${siteUrl}/#${item.id}`,
-        image: item.media.map((media) => `${siteUrl}${media.src}`),
-      },
-    })),
   },
 ];
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Vakitmatik | Cami Saatleri",
-    template: "%s | Vakitmatik",
+    default: defaultTitle,
+    template: `%s | ${siteName}`,
   },
   description: siteDescription,
-  keywords: [
-    "vakitmatik",
-    "namaz vakti paneli",
-    "cami vakit ekranı",
-    "mescit vakit sistemi",
-    "vakitmatik.com.tr",
-  ],
+  keywords: seoKeywords,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Vakitmatik | Cami Saatleri",
+    title: defaultTitle,
     description: socialDescription,
     url: siteUrl,
-    siteName: "Vakitmatik",
+    siteName,
     locale: "tr_TR",
     type: "website",
-    images: ["/images/og-vakitmatik.svg"],
+    images: [defaultOpenGraphImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vakitmatik | Cami Saatleri",
+    title: defaultTitle,
     description: socialDescription,
-    images: ["/images/og-vakitmatik.svg"],
+    images: [socialImage],
   },
   robots: {
     index: true,

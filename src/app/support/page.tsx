@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { createPageMetadata } from "@/config/seo";
 
-export const metadata: Metadata = {
+const description =
+  "Vakitmatik mobil uygulaması için destek, kullanım ve sorun giderme bilgileri.";
+
+export const metadata: Metadata = createPageMetadata({
   title: "Destek",
-  description:
-    "Vakitmatik mobil uygulaması için destek, kullanım ve sorun giderme bilgileri.",
-  alternates: {
-    canonical: "/support/",
-  },
-};
+  description,
+  path: "/support/",
+});
 
 export default function SupportPage() {
   return (
