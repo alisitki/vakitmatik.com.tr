@@ -16,7 +16,8 @@ Audit tarihi: 2026-06-28
 
 | Öncelik | Alan | Durum | Kabul kriteri |
 | --- | --- | --- | --- |
-| P0 | Search Console | Manuel işlem bekliyor | Domain property doğrulanır, sitemap gönderilir, 3 URL için URL Inspection çalışır |
+| P0 | Search Console | Tamamlandı | Domain property doğrulanır, sitemap gönderilir, 3 URL için URL Inspection çalışır |
+| P1 | Bing/IndexNow | Tamamlandı | IndexNow key dosyası yayınlanır ve 3 URL Bing IndexNow API'ye gönderilir |
 | P1 | Legal sayfa sosyal metadata | Kodda düzeltildi | `/privacy/` ve `/support/` kendi `og:title`, `og:url`, Twitter title değerlerini üretir |
 | P1 | JSON-LD kapsamı | Kodda düzeltildi | Organization/WebSite tüm sayfalarda, ürün `ItemList` yalnızca ana sayfada görünür |
 | P1 | Sosyal görsel formatı | Kodda düzeltildi | `og:image` PNG olarak `1200x630` servis edilir |
@@ -41,11 +42,11 @@ Audit tarihi: 2026-06-28
 - Structured data: Site-genel Organization/WebSite layout'ta kalıyor; ürün ItemList ana sayfaya taşındı.
 - Sosyal paylaşım: `public/images/og-vakitmatik.png` eklendi; SVG yedek olarak korunuyor.
 - Sitemap: `lastmod` değerleri eklendi; canonical host `https://www.vakitmatik.com.tr` ile uyumlu.
-- Dış servisler: Search Console ve Bing Webmaster Tools hesap erişimi gerektirir; kodla tamamlanamaz.
+- Dış servisler: Search Console domain property doğrulandı; Bing için hesap bağlamadan IndexNow kullanıldı.
 
 ## 30 Günlük Takip
 
-1. Gün 0: Search Console domain doğrulama, sitemap gönderimi, URL Inspection.
+1. Gün 0: Search Console domain doğrulama, sitemap gönderimi, URL Inspection ve IndexNow bildirimi.
 2. Gün 3-7: Coverage, crawl ve sitemap keşif durumunu kontrol et.
 3. Gün 7-14: Branded sorgular için impression/click görünmeye başladı mı kontrol et.
 4. Gün 14-30: Non-branded sorguları, Core Web Vitals ve en çok gösterim alan sayfaları izle.
@@ -53,10 +54,10 @@ Audit tarihi: 2026-06-28
 
 ## Manuel Checklist
 
-- Google Search Console'da domain property aç ve DNS TXT kaydıyla doğrula.
-- `https://www.vakitmatik.com.tr/sitemap.xml` sitemap'ini gönder.
-- `/`, `/privacy/`, `/support/` için URL Inspection ve request indexing çalıştır.
-- Bing Webmaster Tools'a siteyi ekle ve aynı sitemap'i gönder.
+- Google Search Console'da domain property doğrulandı.
+- `https://www.vakitmatik.com.tr/sitemap.xml` sitemap'i Search Console'da başarılı durumda.
+- `/`, `/privacy/`, `/support/` için URL Inspection ve request indexing çalıştırıldı.
+- Bing için `https://www.vakitmatik.com.tr/6e7827fabcf95fe208dfd49c8cd2ab0c.txt` IndexNow key dosyası yayınlandı ve URL bildirimi yapıldı.
 - Google Business Profile'da ad, telefon, adres, web sitesi ve çalışma saatlerini doğrula.
 - Sosyal paylaşım önizlemesini WhatsApp, LinkedIn ve X/Twitter kartlarında kontrol et.
 
@@ -67,3 +68,4 @@ Audit tarihi: 2026-06-28
 - [Google Canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
 - [Google Structured Data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
 - [Google Core Web Vitals](https://developers.google.com/search/docs/appearance/core-web-vitals)
+- [IndexNow Documentation](https://www.indexnow.org/documentation)
