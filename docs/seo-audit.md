@@ -52,6 +52,15 @@ Audit tarihi: 2026-06-28
 4. Gün 14-30: Non-branded sorguları, Core Web Vitals ve en çok gösterim alan sayfaları izle.
 5. Gün 30: Ürün detay sayfalarına gerek var mı karar ver.
 
+## Lighthouse Baseline
+
+Ölçüm tarihi: 2026-06-28
+
+| Strateji | Performance | SEO | Accessibility | Best Practices | FCP | LCP | CLS | TBT | Speed Index |
+| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+| Mobile | 95 | 100 | 100 | 100 | 1.1 s | 2.6 s | 0 | 10 ms | 4.0 s |
+| Desktop | 98 | 100 | 100 | 100 | 0.6 s | 1.0 s | 0 | 0 ms | 1.3 s |
+
 ## Manuel Checklist
 
 - Google Search Console'da domain property doğrulandı.
