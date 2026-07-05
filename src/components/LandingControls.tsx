@@ -63,9 +63,22 @@ function persistThemeMode(themeMode: ThemeMode) {
 }
 
 export function LandingControlsProvider({ children }: { children: ReactNode }) {
-  const [themeMode, setThemeModeState] = useState<ThemeMode>(() => readStoredThemeMode());
-  const [systemThemeMode, setSystemThemeMode] = useState<ResolvedThemeMode>(() => getSystemThemeMode());
+  const [themeMode, setThemeModeState] = useState<ThemeMode>("system");
+  const [systemThemeMode, setSystemThemeMode] = useState<ResolvedThemeMode>("light");
+  const [hasHydrated, setHasHydrated] = useState(false);
   const resolvedThemeMode = resolveThemeMode(themeMode, systemThemeMode);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setThemeModeState(readStoredThemeMode());
+      setSystemThemeMode(getSystemThemeMode());
+      setHasHydrated(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   useEffect(() => {
     if (!window.matchMedia) return;
@@ -83,6 +96,8 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    if (!hasHydrated) return;
+
     const root = document.documentElement;
 
     if (resolvedThemeMode === "dark") {
@@ -90,7 +105,7 @@ export function LandingControlsProvider({ children }: { children: ReactNode }) {
     } else {
       root.removeAttribute("data-theme");
     }
-  }, [resolvedThemeMode]);
+  }, [hasHydrated, resolvedThemeMode]);
 
   const setThemeMode = useCallback((value: ThemeMode) => {
     const nextThemeMode = sanitizeThemeMode(value);

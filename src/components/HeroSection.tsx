@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ThemeLogoToggle } from "@/components/ThemeLogoToggle";
+import { HeroExactNav } from "@/components/HeroExactNav";
 import type { HeroHighlightItem } from "@/types/landing";
 
 type HeroSectionProps = {
@@ -35,17 +35,7 @@ export function HeroSection({ highlights }: HeroSectionProps) {
       <div className="hero-exact-scrim" aria-hidden="true" />
 
       <div className="hero-exact-shell">
-        <header className="hero-exact-nav">
-          <ThemeLogoToggle className="hero-exact-brand" imageClassName="hero-exact-logo" />
-
-          <nav aria-label="Bölüm navigasyonu" className="hero-exact-menu">
-            {heroNavItems.map((item) => (
-              <a className="hero-exact-menu-link" href={item.href} key={`${item.href}-${item.label}`}>
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </header>
+        <HeroExactNav items={heroNavItems} />
 
         <div className="hero-exact-content">
           <div className="hero-exact-copy">

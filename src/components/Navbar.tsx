@@ -6,10 +6,11 @@ import { ThemeLogoToggle } from "@/components/ThemeLogoToggle";
 import type { NavItem } from "@/types/landing";
 
 type NavbarProps = {
+  className?: string;
   items: NavItem[];
 };
 
-export function Navbar({ items }: NavbarProps) {
+export function Navbar({ className, items }: NavbarProps) {
   const { logoScale, resolvedThemeMode, toggleThemeMode } = useLandingControls();
   const isDarkTheme = resolvedThemeMode === "dark";
   const logoStyle = {
@@ -17,7 +18,7 @@ export function Navbar({ items }: NavbarProps) {
   } as CSSProperties;
 
   return (
-    <header className="site-nav-wrap">
+    <header className={className ? `site-nav-wrap ${className}` : "site-nav-wrap"}>
       <div className="container-shell">
         <div className="site-nav">
           <ThemeLogoToggle

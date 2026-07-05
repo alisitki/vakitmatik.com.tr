@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import Script from "next/script";
+import { GoogleTag } from "@/components/GoogleTag";
+import { TrafficSourceTracker } from "@/components/TrafficSourceTracker";
 import {
   defaultOpenGraphImage,
   defaultTitle,
@@ -43,6 +47,10 @@ try {
   document.documentElement.removeAttribute("data-theme");
 }
 `;
+
+const googleTagId = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
+const googleAdsPhoneSendTo = process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_SEND_TO;
+const googleAdsEmailSendTo = process.env.NEXT_PUBLIC_GOOGLE_ADS_EMAIL_SEND_TO;
 
 const structuredData = [
   {
@@ -108,7 +116,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" suppressHydrationWarning>
+    <html lang="tr" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -141,7 +149,19 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${sora.variable} ${jakarta.variable}`}>{children}</body>
+      <body className={`${sora.variable} ${jakarta.variable}`}>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+        <TrafficSourceTracker />
+        {googleTagId ? (
+          <GoogleTag
+            emailSendTo={googleAdsEmailSendTo}
+            phoneSendTo={googleAdsPhoneSendTo}
+            tagId={googleTagId}
+          />
+        ) : null}
+      </body>
     </html>
   );
 }

@@ -154,7 +154,7 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altın-1.webp",
+        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altin-1.webp",
         alt: "Altın çerçeveli Vakitmatik dikey namaz vakti panosu",
         width: 1448,
         height: 1086,
@@ -331,13 +331,13 @@ export const productItems: ProductItem[] = [
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-kırmızı-1.webp",
+        src: "/images/vakitmatik-led/vakitmatik-led-kirmizi-1.webp",
         alt: "Kırmızı LED Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kırmızı-1.webp",
+        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kirmizi-1.webp",
         alt: "Yatay kırmızı LED Vakitmatik namaz vakti panosu",
         width: 1448,
         height: 1086,
