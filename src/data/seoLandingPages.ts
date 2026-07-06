@@ -14,20 +14,20 @@ export const seoLandingPages = {
       "Vakitmatik cami saatleri; namaz vakitlerini, saat ve sıcaklık bilgisini cami içinde okunaklı ve sade bir yüzeyde göstermek için hazırlanır.",
     images: [
       {
-        src: "/images/vakitmatik-desen-mavi/vakitmatik-desen-mavi-1.webp",
+        src: "/images/seo/vakitmatik-cami-saati-desen-mavi.webp",
         alt: "Mavi desenli Vakitmatik cami saati ve namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-desen-siyah/vakitmatik-desen-siyah-1.webp",
+        src: "/images/seo/vakitmatik-cami-saati-desen-siyah.webp",
         alt: "Siyah desenli Vakitmatik camii saati modeli",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altin-1.webp",
-        alt: "Dikey Vakitmatik namaz vakti panosu",
+        src: "/images/seo/vakitmatik-dikey-cami-saati-altin.webp",
+        alt: "Dikey Vakitmatik cami saati ve namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
@@ -79,19 +79,19 @@ export const seoLandingPages = {
       "Vakitmatik; cami ve mescitlerde namaz vakitlerini görünür, düzenli ve kolay yönetilebilir biçimde sunan pano ailesidir.",
     images: [
       {
-        src: "/images/vakitmatik-yatay/vakitmatik-yatay-1.webp",
+        src: "/images/seo/vakitmatik-yatay-cami-saati.webp",
         alt: "Yatay Vakitmatik cami saati modeli",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-siyah-1.webp",
+        src: "/images/seo/vakitmatik-dikey-cami-saati-siyah.webp",
         alt: "Siyah dikey Vakitmatik cami saati",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-mesaj/vakitmatik-mesaj-1.webp",
+        src: "/images/seo/vakitmatik-mesajli-namaz-vakti-panosu.webp",
         alt: "Mesaj alanlı Vakitmatik namaz vakti panosu",
         width: 1448,
         height: 1086,
@@ -148,19 +148,19 @@ export const seoLandingPages = {
       "Dijital cami saati çözümleri, büyük alanlarda güçlü okunabilirlik ve modern namaz vakti gösterimi ihtiyacı için değerlendirilir.",
     images: [
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yesil-1.webp",
+        src: "/images/seo/dijital-cami-saati-led-yesil.webp",
         alt: "Yeşil LED dijital cami saati ve namaz vakti ekranı",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kirmizi-1.webp",
+        src: "/images/seo/cami-saati-led-yatay-kirmizi.webp",
         alt: "Kırmızı yatay LED cami vakit saati",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-1.webp",
+        src: "/images/seo/vakitmatik-lcd-cami-saati.webp",
         alt: "LCD dijital cami saati ekranı",
         width: 1448,
         height: 1086,
@@ -217,19 +217,19 @@ export const seoLandingPages = {
           "Cami saati fiyatları tek bir sabit listeyle değil; model, ölçü, ekran tipi, gövde ve kurulum ihtiyacına göre netleşir. Doğru fiyat bilgisi için önce ürün ihtiyacını ve kullanım alanını anlamak gerekir.",
     images: [
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kirmizi-1.webp",
+        src: "/images/seo/cami-saati-led-yatay-kirmizi.webp",
         alt: "Yatay LED cami saati fiyat teklifi için ürün görseli",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-desen-mavi/vakitmatik-desen-mavi-1.webp",
+        src: "/images/seo/vakitmatik-cami-saati-desen-mavi.webp",
         alt: "Mavi desenli cami saati fiyat araştırması için ürün modeli",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-2.webp",
+        src: "/images/seo/vakitmatik-lcd-namaz-vakti-ekrani-2.webp",
         alt: "LCD cami dijital saat fiyatı için ürün ekranı",
         width: 1448,
         height: 1086,
@@ -282,19 +282,19 @@ export const seoLandingPages = {
       "Vakitmatik ayarlama desteği, cihazın sahada doğru kullanılmasını ve namaz vakti bilgisinin düzenli yönetilmesini kolaylaştırır. Destek süreci doğru bilgiyle daha hızlı ilerler.",
     images: [
       {
-        src: "/images/ekrangor.webp",
+        src: "/images/seo/vakitmatik-mobil-uygulama-namaz-vakti.webp",
         alt: "Vakitmatik mobil uygulama ayarlama ekranı",
         width: 1320,
         height: 742,
       },
       {
-        src: "/images/mavitek.webp",
+        src: "/images/seo/vakitmatik-cami-saati.webp",
         alt: "Vakitmatik cami saati ayarlama ve uygulama görseli",
         width: 1440,
         height: 960,
       },
       {
-        src: "/images/vakitmatik-yatay/vakitmatik-yatay-1.webp",
+        src: "/images/seo/vakitmatik-yatay-cami-saati.webp",
         alt: "Ayarlanabilir yatay Vakitmatik cami saati",
         width: 1448,
         height: 1086,

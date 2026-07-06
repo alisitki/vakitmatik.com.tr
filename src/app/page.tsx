@@ -6,7 +6,7 @@ import { MobileAppSection } from "@/components/MobileAppSection";
 import { Navbar } from "@/components/Navbar";
 import { ProductShowcaseSection } from "@/components/sections/ProductShowcaseSection";
 import { UseCasesSection } from "@/components/UseCasesSection";
-import { absoluteUrl, siteUrl } from "@/config/seo";
+import { absoluteUrl, defaultTitle, siteUrl } from "@/config/seo";
 import {
   contactItems,
   heroHighlights,
@@ -35,6 +35,16 @@ const productStructuredData = {
   })),
 };
 
+const homePageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: defaultTitle,
+  url: siteUrl,
+  inLanguage: "tr-TR",
+  primaryImageOfPage: absoluteUrl("/images/seo/vakitmatik-cami-saati.webp"),
+  image: productItems.flatMap((item) => item.media.map((media) => absoluteUrl(media.src))),
+};
+
 export default function Home() {
   return (
     <>
@@ -53,6 +63,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homePageStructuredData).replace(/</g, "\\u003c"),
         }}
       />
     </>

@@ -7,7 +7,7 @@ export const siteDescription =
   "Vakitmatik namaz vakti panoları, mobil uygulama desteği, akıllı cami projeleri ve iletişim bilgileri.";
 export const socialDescription =
   "Vakitmatik namaz vakti panolarını, mobil uygulama desteğini ve akıllı cami çözümlerini keşfedin.";
-export const socialImage = "/images/og-vakitmatik.png";
+export const socialImage = "/images/og-vakitmatik-hero-2026-07-06.png";
 
 export const seoKeywords = [
   "vakitmatik",

@@ -89,8 +89,8 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-desen-mavi/vakitmatik-desen-mavi-1.webp",
-        alt: "Mavi desenli Vakitmatik namaz vakti panosu",
+        src: "/images/seo/vakitmatik-cami-saati-desen-mavi.webp",
+        alt: "Mavi desenli Vakitmatik cami saati ve namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
@@ -122,8 +122,8 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-desen-siyah/vakitmatik-desen-siyah-1.webp",
-        alt: "Siyah desenli Vakitmatik namaz vakti panosu",
+        src: "/images/seo/vakitmatik-cami-saati-desen-siyah.webp",
+        alt: "Siyah desenli Vakitmatik cami saati ve namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
@@ -154,14 +154,14 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-altin-1.webp",
-        alt: "Altın çerçeveli Vakitmatik dikey namaz vakti panosu",
+        src: "/images/seo/vakitmatik-dikey-cami-saati-altin.webp",
+        alt: "Altın çerçeveli dikey Vakitmatik cami saati",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-dikey/vakitmatik-dikey-siyah-1.webp",
-        alt: "Siyah Vakitmatik dikey namaz vakti panosu",
+        src: "/images/seo/vakitmatik-dikey-cami-saati-siyah.webp",
+        alt: "Siyah dikey Vakitmatik cami saati modeli",
         width: 1122,
         height: 1402,
       },
@@ -192,8 +192,8 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-yatay/vakitmatik-yatay-1.webp",
-        alt: "Yatay Vakitmatik namaz vakti panosu",
+        src: "/images/seo/vakitmatik-yatay-cami-saati.webp",
+        alt: "Yatay Vakitmatik cami saati ve namaz vakti panosu",
         width: 1448,
         height: 1086,
       },
@@ -221,8 +221,8 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-mesaj/vakitmatik-mesaj-1.webp",
-        alt: "Mesaj alanlı Vakitmatik namaz vakti panosu",
+        src: "/images/seo/vakitmatik-mesajli-namaz-vakti-panosu.webp",
+        alt: "Mesaj alanlı Vakitmatik cami saati ve namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
@@ -250,8 +250,8 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-kayan/vakitmatik-kayan-1.webp",
-        alt: "Kayan yazı alanlı Vakitmatik namaz vakti panosu",
+        src: "/images/seo/vakitmatik-kayan-yazi-cami-panosu.webp",
+        alt: "Kayan yazı alanlı Vakitmatik cami panosu",
         width: 1122,
         height: 1402,
       },
@@ -279,20 +279,20 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-resimli/vakitmatik-resimli-1.webp",
-        alt: "Görsel alanlı Vakitmatik resimli namaz vakti panosu",
+        src: "/images/seo/vakitmatik-resimli-namaz-vakti-panosu.webp",
+        alt: "Resimli Vakitmatik namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-resimli/vakitmatik-resimli-2.webp",
-        alt: "Vakitmatik resimli pano alternatif görseli",
+        src: "/images/seo/vakitmatik-resimli-cami-ekrani-2.webp",
+        alt: "Resimli Vakitmatik cami ekranı alternatif model",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-resimli/vakitmatik-resimli-3.webp",
-        alt: "Vakitmatik resimli pano üçüncü alternatif görseli",
+        src: "/images/seo/vakitmatik-resimli-cami-ekrani-3.webp",
+        alt: "Resimli Vakitmatik cami ekranı üçüncü model",
         width: 1122,
         height: 1402,
       },
@@ -325,20 +325,20 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yesil-1.webp",
-        alt: "Yeşil LED Vakitmatik namaz vakti panosu",
+        src: "/images/seo/dijital-cami-saati-led-yesil.webp",
+        alt: "Yeşil LED dijital cami saati ve namaz vakti panosu",
         width: 1448,
         height: 1086,
       },
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-kirmizi-1.webp",
-        alt: "Kırmızı LED Vakitmatik namaz vakti panosu",
+        src: "/images/seo/dijital-cami-saati-led-kirmizi.webp",
+        alt: "Kırmızı LED dijital cami saati ve namaz vakti panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-led/vakitmatik-led-yatay-kirmizi-1.webp",
-        alt: "Yatay kırmızı LED Vakitmatik namaz vakti panosu",
+        src: "/images/seo/cami-saati-led-yatay-kirmizi.webp",
+        alt: "Yatay kırmızı LED cami saati ve namaz vakti panosu",
         width: 1448,
         height: 1086,
       },
@@ -368,20 +368,20 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-1.webp",
-        alt: "Dikey kadrajlı kırmızı LED Vakitmatik modül panosu",
+        src: "/images/seo/vakitmatik-modul-led-kirmizi.webp",
+        alt: "Kırmızı LED Vakitmatik modül cami panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-modul/vakitmatik-modul-yesil-1.webp",
-        alt: "Yeşil LED modüler Vakitmatik mesaj panosu",
+        src: "/images/seo/vakitmatik-modul-led-yesil.webp",
+        alt: "Yeşil LED modüler Vakitmatik cami panosu",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-modul/vakitmatik-modul-kirmizi-2.webp",
-        alt: "Kırmızı LED modüler Vakitmatik mesaj panosu",
+        src: "/images/seo/vakitmatik-modul-led-kirmizi-yatay.webp",
+        alt: "Yatay kırmızı LED modüler Vakitmatik cami panosu",
         width: 1448,
         height: 1086,
       },
@@ -408,32 +408,32 @@ export const productItems: ProductItem[] = [
     ],
     media: [
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-1.webp",
-        alt: "Vakitmatik LCD namaz vakti ekranı",
+        src: "/images/seo/vakitmatik-lcd-cami-saati.webp",
+        alt: "Vakitmatik LCD cami saati ve namaz vakti ekranı",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-2.webp",
-        alt: "Vakitmatik LCD ekran ikinci alternatif",
+        src: "/images/seo/vakitmatik-lcd-namaz-vakti-ekrani-2.webp",
+        alt: "Vakitmatik LCD namaz vakti ekranı ikinci model",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-3.webp",
-        alt: "Vakitmatik LCD ekran üçüncü alternatif",
+        src: "/images/seo/vakitmatik-lcd-namaz-vakti-ekrani-3.webp",
+        alt: "Vakitmatik LCD namaz vakti ekranı üçüncü model",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-4.webp",
-        alt: "Vakitmatik LCD ekran dördüncü alternatif",
+        src: "/images/seo/vakitmatik-lcd-namaz-vakti-ekrani-4.webp",
+        alt: "Vakitmatik LCD namaz vakti ekranı dördüncü model",
         width: 1122,
         height: 1402,
       },
       {
-        src: "/images/vakitmatik-lcd/vakitmatik-lcd-5.webp",
-        alt: "Vakitmatik LCD ekran beşinci alternatif",
+        src: "/images/seo/vakitmatik-lcd-namaz-vakti-ekrani-5.webp",
+        alt: "Vakitmatik LCD namaz vakti ekranı beşinci model",
         width: 1122,
         height: 1402,
       },

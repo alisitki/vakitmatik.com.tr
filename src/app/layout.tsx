@@ -121,21 +121,21 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/images/mavitek-mobile.webp"
+          href="/images/seo/vakitmatik-cami-saati-mobile.webp"
           media="(max-width: 560px)"
           fetchPriority="high"
         />
         <link
           rel="preload"
           as="image"
-          href="/images/mavitek-tablet.webp"
+          href="/images/seo/vakitmatik-cami-saati-tablet.webp"
           media="(min-width: 561px) and (max-width: 900px)"
           fetchPriority="high"
         />
         <link
           rel="preload"
           as="image"
-          href="/images/mavitek.webp"
+          href="/images/seo/vakitmatik-cami-saati.webp"
           media="(min-width: 901px)"
           fetchPriority="high"
         />

@@ -22,19 +22,19 @@ function absoluteUrl(path: string) {
 
 const compactFallbackImages: SeoImage[] = [
   {
-    src: "/images/vakitmatik-led/vakitmatik-led-yesil-1.webp",
+    src: "/images/seo/dijital-cami-saati-led-yesil.webp",
     alt: "Yeşil LED Vakitmatik cami saati modeli",
     width: 1448,
     height: 1086,
   },
   {
-    src: "/images/vakitmatik-desen-siyah/vakitmatik-desen-siyah-1.webp",
+    src: "/images/seo/vakitmatik-cami-saati-desen-siyah.webp",
     alt: "Siyah desenli Vakitmatik cami saati modeli",
     width: 1122,
     height: 1402,
   },
   {
-    src: "/images/vakitmatik-lcd/vakitmatik-lcd-1.webp",
+    src: "/images/seo/vakitmatik-lcd-cami-saati.webp",
     alt: "LCD Vakitmatik namaz vakti ekranı",
     width: 1448,
     height: 1086,
@@ -78,6 +78,16 @@ export function SeoLandingPage({ page }: SeoLandingPageProps) {
         text: faq.answer,
       },
     })),
+  };
+  const webPageStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: page.title,
+    description: page.metaDescription,
+    url: absoluteUrl(page.path),
+    inLanguage: "tr-TR",
+    primaryImageOfPage: absoluteUrl(seoImages[0]?.src ?? "/images/seo/vakitmatik-cami-saati.webp"),
+    image: seoImages.map((image) => absoluteUrl(image.src)),
   };
 
   return (
@@ -170,6 +180,12 @@ export function SeoLandingPage({ page }: SeoLandingPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(faqStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageStructuredData).replace(/</g, "\\u003c"),
         }}
       />
     </>

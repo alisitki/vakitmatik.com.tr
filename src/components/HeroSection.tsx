@@ -89,7 +89,7 @@ export function HeroSection({ highlights }: HeroSectionProps) {
             <div className="mobile-app-device-bezel hero-exact-phone-bezel">
               <div className="mobile-app-device-screen hero-exact-phone-screen">
                 <Image
-                  src="/images/ekrangor.webp"
+                  src="/images/seo/vakitmatik-mobil-uygulama-namaz-vakti.webp"
                   alt="Vakitmatik mobil uygulama ekran görüntüsü"
                   width={400}
                   height={836}
@@ -103,11 +103,11 @@ export function HeroSection({ highlights }: HeroSectionProps) {
             </div>
           </div>
           <picture className="hero-exact-product-picture hero-exact-product-image--board">
-            <source media="(max-width: 560px)" srcSet="/images/mavitek-mobile.webp" />
-            <source media="(max-width: 900px)" srcSet="/images/mavitek-tablet.webp" />
+            <source media="(max-width: 560px)" srcSet="/images/seo/vakitmatik-cami-saati-mobile.webp" />
+            <source media="(max-width: 900px)" srcSet="/images/seo/vakitmatik-cami-saati-tablet.webp" />
             <Image
-              src="/images/mavitek.webp"
-              alt="Mavi Vakitmatik ürün görseli"
+              src="/images/seo/vakitmatik-cami-saati.webp"
+              alt="Mavi Vakitmatik cami saati ve namaz vakti panosu"
               width={1122}
               height={1402}
               className="hero-exact-product-image"
