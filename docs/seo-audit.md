@@ -53,7 +53,7 @@ Google Ads Search kampanya planı: [`docs/google-ads-search-campaign-plan-2026-0
 
 - Metadata: Sayfa bazlı title, description, canonical, Open Graph ve Twitter alanları tek SEO helper üzerinden yönetiliyor.
 - Structured data: Site-genel Organization/WebSite layout'ta kalıyor; ürün ItemList ana sayfaya taşındı.
-- Sosyal paylaşım: `public/images/og-vakitmatik.png` eklendi; SVG yedek olarak korunuyor.
+- Sosyal paylaşım: `public/images/og-vakitmatik-hero-2026-07-06.png` aktif Open Graph/Twitter görseli olarak kullanılıyor.
 - Sitemap: `lastmod` değerleri eklendi; canonical host `https://www.vakitmatik.com.tr` ile uyumlu.
 - Dış servisler: Search Console domain property doğrulandı; sitemap API ile yeniden gönderildi. Bing için hesap bağlamadan IndexNow kullanıldı. Google Ads'te `Vakitmatik Telefon Lead` ve `Vakitmatik E-posta Lead` website conversion action'ları oluşturuldu; Vercel Production env değerleri girildi.
 
