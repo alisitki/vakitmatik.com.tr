@@ -100,14 +100,27 @@ export default async function DailyReportPage() {
                 </div>
                 <div className="listRow">
                   <div>
-                    <strong>Eski siteden gelen</strong>
-                    <span className="metaLine">Referrer: vakitmatik.org</span>
+                    <strong>Eski siteden gelen referrer</strong>
+                    <span className="metaLine">Kesin referrer: vakitmatik.org</span>
                   </div>
                   <span className="mono">{formatInteger(report.analytics.yesterday.oldSitePageviews)}</span>
                 </div>
                 <div className="listRow">
                   <div>
-                    <strong>Son 7 gün eski site</strong>
+                    <strong>Eski site takip eventi</strong>
+                    <span className="metaLine">
+                      {report.analytics.yesterday.oldSiteTrackingUnavailableReason ?? "old_site_visit custom event"}
+                    </span>
+                  </div>
+                  <span className="mono">
+                    {report.analytics.yesterday.oldSiteTrackedVisits === null
+                      ? "-"
+                      : formatInteger(report.analytics.yesterday.oldSiteTrackedVisits)}
+                  </span>
+                </div>
+                <div className="listRow">
+                  <div>
+                    <strong>Son 7 gün eski site referrer</strong>
                     <span className="metaLine">
                       {report.analytics.last7Days.dateRange.startDate} / {report.analytics.last7Days.dateRange.endDate}
                     </span>

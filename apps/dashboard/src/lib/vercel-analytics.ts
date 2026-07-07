@@ -21,6 +21,21 @@ type MetricsResponse = {
   data?: MetricsRow[];
 };
 
+type WebAnalyticsError = Error & {
+  status?: number;
+};
+
+type WebAnalyticsEventCountResponse = {
+  data?: {
+    count?: number;
+    visitors?: number;
+  };
+  error?: {
+    message?: string;
+  };
+  message?: string;
+};
+
 function startOfIstanbulDayUtc(date: string) {
   return `${addDays(date, -1)}T21:00:00.000Z`;
 }
@@ -99,6 +114,66 @@ async function pageviewsFor(dateRange: DateRange, filter?: string) {
   return pageviewCount(payload.summary?.[0]);
 }
 
+async function queryWebAnalyticsEventsCount(dateRange: DateRange) {
+  const token = getRequiredEnv("VERCEL_API_TOKEN");
+  const teamId = getRequiredEnv("VERCEL_TEAM_ID");
+  const projectId = getRequiredEnv("VERCEL_ANALYTICS_PROJECT_ID");
+  const url = new URL("https://api.vercel.com/v1/query/web-analytics/events/count");
+
+  url.searchParams.set("teamId", teamId);
+  url.searchParams.set("projectId", projectId);
+  url.searchParams.set("since", startOfIstanbulDayUtc(dateRange.startDate));
+  url.searchParams.set("until", endExclusiveIstanbulDayUtc(dateRange.endDate));
+  url.searchParams.set("filter", "eventName eq 'old_site_visit'");
+
+  const response = await fetch(url, {
+    headers: {
+      authorization: `Bearer ${token}`,
+      "content-type": "application/json",
+    },
+  });
+  const payload = (await response.json()) as WebAnalyticsEventCountResponse;
+
+  if (!response.ok) {
+    const error = new Error(payload.error?.message || payload.message || "Vercel custom event verisi alınamadı") as WebAnalyticsError;
+    error.status = response.status;
+    throw error;
+  }
+
+  return {
+    count: typeof payload.data?.count === "number" ? payload.data.count : 0,
+    visitors: typeof payload.data?.visitors === "number" ? payload.data.visitors : 0,
+  };
+}
+
+async function oldSiteTrackedVisitsFor(dateRange: DateRange) {
+  try {
+    const data = await queryWebAnalyticsEventsCount(dateRange);
+
+    return {
+      count: data.count,
+      visitors: data.visitors,
+      unavailableReason: null,
+    };
+  } catch (error) {
+    const status = (error as WebAnalyticsError).status;
+
+    if (status === 402 || status === 403) {
+      return {
+        count: null,
+        visitors: null,
+        unavailableReason: "Vercel Web Analytics custom event/UTM sorgusu mevcut planda kapalı.",
+      };
+    }
+
+    return {
+      count: null,
+      visitors: null,
+      unavailableReason: error instanceof Error ? error.message : "Vercel custom event verisi alınamadı.",
+    };
+  }
+}
+
 async function topReferrersFor(dateRange: DateRange) {
   const payload = await queryAnalytics({
     dateRange,
@@ -123,16 +198,20 @@ async function topReferrersFor(dateRange: DateRange) {
 }
 
 async function summaryFor(dateRange: DateRange): Promise<AnalyticsSummary> {
-  const [totalPageviews, oldSitePageviews, topReferrers] = await Promise.all([
+  const [totalPageviews, oldSitePageviews, topReferrers, oldSiteTracked] = await Promise.all([
     pageviewsFor(dateRange),
     pageviewsFor(dateRange, `(referrer_hostname eq '${OLD_SITE_HOST}' or referrer_hostname eq 'www.${OLD_SITE_HOST}')`),
     topReferrersFor(dateRange),
+    oldSiteTrackedVisitsFor(dateRange),
   ]);
 
   return {
     dateRange,
     totalPageviews,
     oldSitePageviews,
+    oldSiteTrackedVisits: oldSiteTracked.count,
+    oldSiteTrackedVisitors: oldSiteTracked.visitors,
+    oldSiteTrackingUnavailableReason: oldSiteTracked.unavailableReason,
     directPageviews: topReferrers.find((row) => row.referrerHostname === "direct")?.pageviews ?? 0,
     topReferrers,
   };

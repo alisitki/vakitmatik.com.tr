@@ -137,6 +137,9 @@ export type AnalyticsSummary = {
   dateRange: DateRange;
   totalPageviews: number;
   oldSitePageviews: number;
+  oldSiteTrackedVisits: number | null;
+  oldSiteTrackedVisitors: number | null;
+  oldSiteTrackingUnavailableReason: string | null;
   directPageviews: number;
   topReferrers: {
     referrerHostname: string;

@@ -98,19 +98,29 @@ export function AdsSummaryGrid({ summary }: { summary: AdsSummary }) {
 }
 
 export function AnalyticsSummaryGrid({ summary }: { summary: AnalyticsSummary }) {
+  const oldSiteTrackingDetail = summary.oldSiteTrackingUnavailableReason
+    ? "Plan kısıtı / custom event yok"
+    : `${formatInteger(summary.oldSiteTrackedVisitors ?? 0)} ziyaretçi`;
+
   return (
     <div className="metricGrid">
       <MetricCard detail={summary.dateRange.label} label="Ziyaret" value={formatInteger(summary.totalPageviews)} />
       <MetricCard
-        detail="Referrer: vakitmatik.org"
-        label="Eski site"
+        detail="Kesin referrer: vakitmatik.org"
+        label="Eski site referrer"
         tone={summary.oldSitePageviews > 0 ? "good" : "neutral"}
         value={formatInteger(summary.oldSitePageviews)}
       />
-      <MetricCard detail="Referrer boş" label="Direkt / bilinmeyen" value={formatInteger(summary.directPageviews)} />
+      <MetricCard detail="Referrer/UTM yok" label="Direkt / bilinmeyen" value={formatInteger(summary.directPageviews)} />
       <MetricCard
-        detail="Eski site / toplam"
-        label="Eski site oranı"
+        detail={oldSiteTrackingDetail}
+        label="Eski site takip"
+        tone={summary.oldSiteTrackedVisits && summary.oldSiteTrackedVisits > 0 ? "good" : "warn"}
+        value={summary.oldSiteTrackedVisits === null ? "-" : formatInteger(summary.oldSiteTrackedVisits)}
+      />
+      <MetricCard
+        detail="Referrer eski site / toplam"
+        label="Referrer oranı"
         value={formatPercent(summary.totalPageviews > 0 ? summary.oldSitePageviews / summary.totalPageviews : 0)}
       />
     </div>

@@ -61,6 +61,16 @@ export default async function DashboardPage() {
             title={`Site trafiği - ${analytics.last7Days.dateRange.startDate} / ${analytics.last7Days.dateRange.endDate}`}
           >
             <AnalyticsSummaryGrid summary={analytics.last7Days} />
+            {analytics.last7Days.oldSiteTrackingUnavailableReason ? (
+              <div className="infoNote">
+                <strong>Eski site ölçüm notu</strong>
+                <span>
+                  Dashboard şu anda eski siteyi kesin olarak sadece `referrer_hostname=vakitmatik.org` olan ziyaretlerden sayıyor.
+                  Referrer boş gelen ziyaretler eski siteden gelmiş olabilir, ancak mevcut Vercel planında UTM/custom event kırılımı
+                  API üzerinden okunamadığı için bu ziyaretleri kesin ayıramıyoruz.
+                </span>
+              </div>
+            ) : null}
             {analytics.last7Days.topReferrers.length === 0 ? (
               <EmptyState body="Vercel Analytics henüz trafik kaynağı döndürmedi." title="Kaynak verisi yok" />
             ) : (

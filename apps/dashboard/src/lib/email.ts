@@ -19,6 +19,12 @@ function row(label: string, value: string) {
   )}</td></tr>`;
 }
 
+function oldSiteTrackedValue(report: DailyReport) {
+  return report.analytics.yesterday.oldSiteTrackedVisits === null
+    ? "-"
+    : formatInteger(report.analytics.yesterday.oldSiteTrackedVisits);
+}
+
 export function dailyReportText(report: DailyReport) {
   const lines = [
     `Vakitmatik günlük rapor - ${report.reportDate}`,
@@ -36,7 +42,11 @@ export function dailyReportText(report: DailyReport) {
     `SEO gösterim: ${formatInteger(report.seo.summary.impressions)}`,
     "",
     `Site ziyaretleri: ${formatInteger(report.analytics.yesterday.totalPageviews)}`,
-    `Eski siteden gelen: ${formatInteger(report.analytics.yesterday.oldSitePageviews)}`,
+    `Eski siteden gelen referrer: ${formatInteger(report.analytics.yesterday.oldSitePageviews)}`,
+    `Eski site takip eventi: ${oldSiteTrackedValue(report)}`,
+    report.analytics.yesterday.oldSiteTrackingUnavailableReason
+      ? `Eski site ölçüm notu: ${report.analytics.yesterday.oldSiteTrackingUnavailableReason}`
+      : "",
     "",
     "Aksiyonlar:",
     ...report.actions.map((action) => `- ${action}`),
@@ -103,10 +113,18 @@ export function dailyReportHtml(report: DailyReport) {
             <h2 style="margin:0 0 12px;font-size:16px">Site trafiği</h2>
             <table role="presentation" style="width:100%;border-collapse:collapse">
               ${row("Dünkü ziyaret", formatInteger(report.analytics.yesterday.totalPageviews))}
-              ${row("Eski siteden gelen", formatInteger(report.analytics.yesterday.oldSitePageviews))}
+              ${row("Eski siteden gelen referrer", formatInteger(report.analytics.yesterday.oldSitePageviews))}
+              ${row("Eski site takip eventi", oldSiteTrackedValue(report))}
               ${row("Son 7 gün ziyaret", formatInteger(report.analytics.last7Days.totalPageviews))}
-              ${row("Son 7 gün eski site", formatInteger(report.analytics.last7Days.oldSitePageviews))}
+              ${row("Son 7 gün eski site referrer", formatInteger(report.analytics.last7Days.oldSitePageviews))}
             </table>
+            ${
+              report.analytics.yesterday.oldSiteTrackingUnavailableReason
+                ? `<p style="margin:12px 0 0;color:#5f6b65;font-size:13px">${escapeHtml(
+                    report.analytics.yesterday.oldSiteTrackingUnavailableReason,
+                  )}</p>`
+                : ""
+            }
           </td>
         </tr>
         <tr><td style="height:16px"></td></tr>

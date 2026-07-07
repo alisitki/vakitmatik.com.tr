@@ -45,8 +45,12 @@ function buildActions(report: Omit<DailyReport, "actions">) {
 
   if (report.analytics.yesterday.oldSitePageviews > 0) {
     actions.push(
-      `Eski siteden dün ${report.analytics.yesterday.oldSitePageviews} ziyaret geldi; bu trafiğin telefon/e-posta lead'e dönüp dönmediğini izleyin.`,
+      `Eski siteden dün referrer ile doğrulanan ${report.analytics.yesterday.oldSitePageviews} ziyaret geldi; bu trafiğin telefon/e-posta lead'e dönüp dönmediğini izleyin.`,
     );
+  }
+
+  if (report.analytics.yesterday.oldSiteTrackingUnavailableReason) {
+    actions.push("Eski site UTM/custom event kırılımı mevcut Vercel planında okunamıyor; direkt/bilinmeyen trafik eski site olarak yorumlanmamalı.");
   }
 
   if (actions.length === 0) {
