@@ -35,3 +35,12 @@ Kullanıcı tercihi doğrultusunda aday ürün aileleri: Vakitmatik Desen Mavi, 
 - Google Ads API ile 10 ürün görseli, 2 logo ve `Vakitmatik` business name asset olarak oluşturuldu.
 - Kampanyaya bağlı asset sayısı API kontrolünde `0` kaldı; ürün görselleri Google Ads UI'dan bağlanmalı.
 - Business logo ve business name bağlantısı için Google Ads hesabında advertiser/customer verification gerekiyor.
+
+## Manuel Google Ads UI Adımı
+
+1. Google Ads > Campaigns > Assets ekranına gir.
+2. `+ Image` ile image asset ekle.
+3. Seviye olarak kampanyayı seç: `Campaign #1`.
+4. Asset library'de görünen `Vakitmatik ...` ürün görsellerini seç veya canlı URL'lerden yükle.
+5. Logo ve business name için önce advertiser verification tamamlanmalı; doğrulama tamamlanmadan API `CUSTOMER_NOT_VERIFIED` hatası veriyor.
+6. Kaydettikten sonra asset status/policy review durumunu kontrol et.
