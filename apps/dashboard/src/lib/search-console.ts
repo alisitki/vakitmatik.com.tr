@@ -3,12 +3,17 @@ import "server-only";
 import { buildSearchConsoleDateRange, isSameOrAfter } from "./dates";
 import { getRequiredEnv } from "./env";
 import { getGoogleAccessToken } from "./google-auth";
+import { getRuntimeCached, type RuntimeCacheResult } from "./runtime-cache";
 import type {
   DateRange,
   SearchConsoleDashboardData,
   SearchConsoleMetricRow,
+  SearchConsoleOverviewData,
   SeoUrlStatus,
 } from "./types";
+
+const SEARCH_CONSOLE_OVERVIEW_CACHE_MS = 6 * 60 * 60 * 1000;
+const SEARCH_CONSOLE_DETAIL_CACHE_MS = 6 * 60 * 60 * 1000;
 
 const SEO_URLS = [
   {
@@ -252,11 +257,7 @@ async function urlMetrics(range: DateRange, url: string) {
   return summarize(rows);
 }
 
-export async function getSearchConsoleDashboardData({
-  includeInspection = true,
-}: {
-  includeInspection?: boolean;
-} = {}): Promise<SearchConsoleDashboardData> {
+async function buildSearchConsoleOverviewData(): Promise<SearchConsoleOverviewData> {
   const config = getConfig();
   const range = buildSearchConsoleDateRange();
   const [daily, queries, pages] = await Promise.all([
@@ -286,9 +287,35 @@ export async function getSearchConsoleDashboardData({
       .filter((date) => isSameOrAfter(date, range.startDate))
       .sort()
       .at(-1) ?? null;
+  const topQueriesByClicks = [...queryRows].sort((a, b) => b.clicks - a.clicks).slice(0, 10);
+  const topQueriesByImpressions = [...queryRows].sort((a, b) => b.impressions - a.impressions).slice(0, 10);
+
+  return {
+    siteUrl: config.siteUrl,
+    dateRange: range,
+    availableDataThrough,
+    summary: summarize(dailyRows),
+    topQueriesByClicks,
+    topQueriesByImpressions,
+    topPages: [...pageRows].sort((a, b) => b.impressions - a.impressions).slice(0, 10),
+  };
+}
+
+async function buildSearchConsoleDashboardData({
+  includeInspection = true,
+}: {
+  includeInspection?: boolean;
+} = {}): Promise<SearchConsoleDashboardData> {
+  const overview = await buildSearchConsoleOverviewData();
+  const pages = await querySearchAnalytics({
+    range: overview.dateRange,
+    dimensions: ["page"],
+    rowLimit: 25,
+  });
+  const pageRows = (pages.rows ?? []).map(toMetricRow);
   const seoUrls = await Promise.all(
     SEO_URLS.map(async (item) => {
-      const metrics = await urlMetrics(range, item.url);
+      const metrics = await urlMetrics(overview.dateRange, item.url);
       const inspection = includeInspection
         ? await inspectUrl(item.url)
         : {
@@ -310,17 +337,43 @@ export async function getSearchConsoleDashboardData({
       } satisfies SeoUrlStatus;
     }),
   );
-  const topQueriesByClicks = [...queryRows].sort((a, b) => b.clicks - a.clicks).slice(0, 10);
-  const topQueriesByImpressions = [...queryRows].sort((a, b) => b.impressions - a.impressions).slice(0, 10);
 
   return {
-    siteUrl: config.siteUrl,
-    dateRange: range,
-    availableDataThrough,
-    summary: summarize(dailyRows),
-    topQueriesByClicks,
-    topQueriesByImpressions,
+    ...overview,
     topPages: pageRows,
     seoUrls,
   };
+}
+
+export async function getSearchConsoleOverviewData({
+  refresh = false,
+}: {
+  refresh?: boolean;
+} = {}): Promise<RuntimeCacheResult<SearchConsoleOverviewData>> {
+  return getRuntimeCached({
+    key: "search-console:overview",
+    ttlMs: SEARCH_CONSOLE_OVERVIEW_CACHE_MS,
+    refresh,
+    load: buildSearchConsoleOverviewData,
+  });
+}
+
+export async function getSearchConsoleDashboardData({
+  includeInspection = true,
+  refresh = false,
+}: {
+  includeInspection?: boolean;
+  refresh?: boolean;
+} = {}): Promise<SearchConsoleDashboardData> {
+  const result = await getRuntimeCached({
+    key: `search-console:detail:${includeInspection ? "inspection" : "plain"}`,
+    ttlMs: SEARCH_CONSOLE_DETAIL_CACHE_MS,
+    refresh,
+    load: () =>
+      buildSearchConsoleDashboardData({
+        includeInspection,
+      }),
+  });
+
+  return result.data;
 }

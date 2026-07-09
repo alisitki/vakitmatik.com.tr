@@ -1,30 +1,7 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { requirePageSession } from "@/lib/auth";
-import { AdsIcon, GaugeIcon, LogOutIcon, MailIcon, SearchIcon } from "./icons";
-
-const navItems = [
-  {
-    href: "/dashboard",
-    label: "Özet",
-    icon: GaugeIcon,
-  },
-  {
-    href: "/dashboard/google-ads",
-    label: "Google Ads",
-    icon: AdsIcon,
-  },
-  {
-    href: "/dashboard/seo",
-    label: "SEO",
-    icon: SearchIcon,
-  },
-  {
-    href: "/dashboard/daily-report",
-    label: "Günlük Rapor",
-    icon: MailIcon,
-  },
-];
+import { HelpIcon, LogOutIcon } from "./icons";
+import { SidebarNav } from "./sidebar-nav";
 
 export async function DashboardShell({ children }: { children: ReactNode }) {
   const session = await requirePageSession();
@@ -33,43 +10,31 @@ export async function DashboardShell({ children }: { children: ReactNode }) {
     <div className="appShell">
       <aside className="sidebar">
         <div className="brandBlock">
-          <div className="brandMark">V</div>
-          <div>
-            <strong>Vakitmatik</strong>
-            <span>Raporlama</span>
+          <div aria-label="Vakitmatik" className="wordLogo">
+            <span>VAKIT</span>
+            <span className="logoClock" />
+            <span>MATIK</span>
           </div>
         </div>
-        <nav className="navList" aria-label="Dashboard">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <Link href={item.href} key={item.href}>
-                <Icon />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-        <form action="/api/logout" className="logoutForm" method="post">
-          <button type="submit">
-            <LogOutIcon />
-            <span>Çıkış</span>
-          </button>
-        </form>
+        <SidebarNav />
+        <div className="sidebarBottom">
+          <div className="helpLink">
+            <HelpIcon />
+            <span>Yardım & Destek</span>
+          </div>
+          <form action="/api/logout" className="userCard" method="post">
+            <div className="userAvatar">VK</div>
+            <div>
+              <strong>Vakitmatik</strong>
+              <span>{session.u}</span>
+            </div>
+            <button aria-label="Çıkış yap" type="submit">
+              <LogOutIcon />
+            </button>
+          </form>
+        </div>
       </aside>
-      <main className="mainArea">
-        <header className="topbar">
-          <div>
-            <span className="eyebrow">dashboard.vakitmatik.com.tr</span>
-            <strong>Karar destek paneli</strong>
-          </div>
-          <div className="sessionChip">
-            <span>{session.u}</span>
-          </div>
-        </header>
-        {children}
-      </main>
+      <main className="mainArea">{children}</main>
     </div>
   );
 }

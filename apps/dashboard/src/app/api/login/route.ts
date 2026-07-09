@@ -13,18 +13,26 @@ function sleep(ms: number) {
 
 export async function POST(request: NextRequest) {
   let username = "";
+  const contentType = request.headers.get("content-type") ?? "";
+  const htmlFormRequest = !contentType.includes("application/json");
 
   try {
-    const body = (await request.json()) as {
-      username?: string;
-      password?: string;
-    };
+    const body = contentType.includes("application/json")
+      ? ((await request.json()) as {
+          username?: string;
+          password?: string;
+        })
+      : Object.fromEntries(await request.formData());
     username = String(body.username ?? "").trim();
     const password = String(body.password ?? "");
     const key = loginKey(request, username || "empty");
     const limit = checkLoginRateLimit(key);
 
     if (!limit.allowed) {
+      if (htmlFormRequest) {
+        return NextResponse.redirect(new URL("/login?error=rate-limit", request.url), 303);
+      }
+
       return NextResponse.json(
         {
           error: "Çok fazla hatalı giriş denemesi. Biraz sonra tekrar deneyin.",
@@ -43,6 +51,10 @@ export async function POST(request: NextRequest) {
       recordFailedLogin(key);
       await sleep(350);
 
+      if (htmlFormRequest) {
+        return NextResponse.redirect(new URL("/login?error=invalid", request.url), 303);
+      }
+
       return NextResponse.json(
         {
           error: "Kullanıcı adı veya şifre hatalı.",
@@ -54,14 +66,20 @@ export async function POST(request: NextRequest) {
     }
 
     clearLoginRateLimit(key);
-    const response = NextResponse.json({
-      ok: true,
-      next: "/dashboard",
-    });
+    const response = htmlFormRequest
+      ? NextResponse.redirect(new URL("/dashboard", request.url), 303)
+      : NextResponse.json({
+          ok: true,
+          next: "/dashboard",
+        });
     setSessionCookie(response, passwordUsername);
 
     return response;
   } catch (error) {
+    if (htmlFormRequest) {
+      return NextResponse.redirect(new URL("/login?error=config", request.url), 303);
+    }
+
     return NextResponse.json(
       {
         error: publicError(error),

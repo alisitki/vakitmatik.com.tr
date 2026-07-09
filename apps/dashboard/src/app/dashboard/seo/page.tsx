@@ -1,7 +1,14 @@
+import { RefreshButton } from "@/components/refresh-button";
 import { getSearchConsoleDashboardData } from "@/lib/search-console";
 import { toDataState } from "@/lib/safe-data";
 import { compactUrl, formatDateTimeTr, formatInteger, formatNumber, formatPercent } from "@/lib/format";
 import { DataStateView, EmptyState, MetricCard, Panel } from "@/components/ui";
+
+type PageProps = {
+  searchParams?: Promise<{
+    refresh?: string;
+  }>;
+};
 
 function verdictTone(verdict: string | null) {
   if (verdict === "PASS") {
@@ -15,10 +22,13 @@ function verdictTone(verdict: string | null) {
   return "";
 }
 
-export default async function SeoPage() {
+export default async function SeoPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const refresh = Boolean(params?.refresh);
   const state = await toDataState(() =>
     getSearchConsoleDashboardData({
       includeInspection: true,
+      refresh,
     }),
   );
 
@@ -27,8 +37,9 @@ export default async function SeoPage() {
       <div className="pageHeader">
         <div>
           <h1>SEO / Search Console</h1>
-          <p>Sorgu, sayfa ve yeni SEO URL performansı. URL Inspection sonuçları 7 günlük runtime cache ile gösterilir.</p>
+          <p>Sorgu, sayfa ve yeni SEO URL performansı. URL Inspection sonuçları ayrı cache ile gösterilir.</p>
         </div>
+        <RefreshButton />
       </div>
 
       <DataStateView state={state} title="Search Console verisi alınamadı">

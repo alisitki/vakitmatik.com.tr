@@ -1,7 +1,14 @@
+import { RefreshButton } from "@/components/refresh-button";
 import { getAdsDashboardData } from "@/lib/google-ads";
 import { toDataState } from "@/lib/safe-data";
 import { formatInteger, formatMoneyMicros, formatPercent } from "@/lib/format";
 import { AdsSummaryGrid, DataStateView, EmptyState, Panel } from "@/components/ui";
+
+type PageProps = {
+  searchParams?: Promise<{
+    refresh?: string;
+  }>;
+};
 
 function statusTone(status: string) {
   if (status === "ENABLED") {
@@ -15,16 +22,19 @@ function statusTone(status: string) {
   return "";
 }
 
-export default async function GoogleAdsPage() {
-  const state = await toDataState(getAdsDashboardData);
+export default async function GoogleAdsPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const refresh = Boolean(params?.refresh);
+  const state = await toDataState(() => getAdsDashboardData({ refresh }));
 
   return (
     <div className="pageStack">
       <div className="pageHeader">
         <div>
-          <h1>Google Ads</h1>
+          <h1>Reklam</h1>
           <p>Kampanya, keyword ve search terms performansı. Bu ekran sadece okuma amaçlıdır.</p>
         </div>
+        <RefreshButton />
       </div>
 
       <DataStateView state={state} title="Google Ads verisi alınamadı">

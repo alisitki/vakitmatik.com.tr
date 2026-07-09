@@ -40,7 +40,7 @@ export function LoginForm() {
   }
 
   return (
-    <form className="loginForm" onSubmit={onSubmit}>
+    <form action="/api/login" className="loginForm" method="post" onSubmit={onSubmit}>
       <label>
         <span>Kullanıcı adı</span>
         <input autoComplete="username" name="username" required type="text" />

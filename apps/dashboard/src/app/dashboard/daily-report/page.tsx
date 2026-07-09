@@ -1,3 +1,4 @@
+import { RefreshButton } from "@/components/refresh-button";
 import { buildDailyReport } from "@/lib/report";
 import { toDataState } from "@/lib/safe-data";
 import {
@@ -9,16 +10,25 @@ import {
 } from "@/lib/format";
 import { AdsSummaryGrid, DataStateView, EmptyState, Panel } from "@/components/ui";
 
-export default async function DailyReportPage() {
-  const state = await toDataState(buildDailyReport);
+type PageProps = {
+  searchParams?: Promise<{
+    refresh?: string;
+  }>;
+};
+
+export default async function DailyReportPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const refresh = Boolean(params?.refresh);
+  const state = await toDataState(() => buildDailyReport({ refresh }));
 
   return (
     <div className="pageStack">
       <div className="pageHeader">
         <div>
-          <h1>Günlük Rapor</h1>
-          <p>Bu ekran storage kullanmaz; e-posta raporu için üretilecek özet canlı API verisinden yeniden hesaplanır.</p>
+          <h1>Rapor</h1>
+          <p>Her sabah gönderilecek e-posta özetinin sade ekran karşılığı.</p>
         </div>
+        <RefreshButton />
       </div>
 
       <DataStateView state={state} title="Günlük rapor hesaplanamadı">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { formatInteger, formatMoneyMicros, formatPercent } from "@/lib/format";
+import { formatDateTimeTr, formatInteger, formatMoneyMicros, formatPercent } from "@/lib/format";
+import type { RuntimeCacheResult } from "@/lib/runtime-cache";
 import type { AdsSummary, AnalyticsSummary, DataState } from "@/lib/types";
 import { AlertIcon } from "./icons";
 
@@ -65,6 +66,92 @@ export function MetricCard({
       <span>{label}</span>
       <strong>{value}</strong>
       <small>{detail}</small>
+    </div>
+  );
+}
+
+export function StatTile({
+  label,
+  value,
+  detail,
+  tone = "neutral",
+}: {
+  label: string;
+  value: string;
+  detail: string;
+  tone?: "neutral" | "good" | "warn";
+}) {
+  return (
+    <div className={`statTile ${tone}`}>
+      <span>{label}</span>
+      <strong>{value}</strong>
+      <small>{detail}</small>
+    </div>
+  );
+}
+
+export function FreshnessBar({
+  items,
+}: {
+  items: {
+    label: string;
+    result?: RuntimeCacheResult<unknown> | null;
+  }[];
+}) {
+  return (
+    <div className="freshnessBar">
+      <div>
+        <strong>Veri durumu</strong>
+        <span>Son bilinen değerler hızlı açılış için kısa süre saklanır.</span>
+      </div>
+      <div className="freshnessItems">
+        {items.map((item) => (
+          <span className={item.result?.stale ? "warn" : ""} key={item.label}>
+            {item.label}: {item.result ? formatDateTimeTr(item.result.cachedAt) : "-"}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ActionPanel({ actions }: { actions: string[] }) {
+  return (
+    <section className="actionPanel">
+      <div>
+        <h2>Bugün ne yapalım?</h2>
+        <p>Dashboard’un gördüğü veriye göre kısa aksiyon listesi.</p>
+      </div>
+      <ol>
+        {actions.map((action) => (
+          <li key={action}>{action}</li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+export function SummaryRows({
+  rows,
+}: {
+  rows: {
+    label: string;
+    value: string;
+    detail: string;
+    tone?: "neutral" | "good" | "warn";
+  }[];
+}) {
+  return (
+    <div className="summaryRows">
+      {rows.map((row) => (
+        <div className={`summaryRow ${row.tone ?? "neutral"}`} key={row.label}>
+          <div>
+            <strong>{row.label}</strong>
+            <span>{row.detail}</span>
+          </div>
+          <b>{row.value}</b>
+        </div>
+      ))}
     </div>
   );
 }

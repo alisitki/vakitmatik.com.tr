@@ -2,8 +2,10 @@ import "server-only";
 
 import { addDays, dateInTimeZone } from "./dates";
 import { getRequiredEnv } from "./env";
+import { getRuntimeCached, type RuntimeCacheResult } from "./runtime-cache";
 import type { AnalyticsDashboardData, AnalyticsSummary, DateRange } from "./types";
 
+const ANALYTICS_CACHE_MS = 15 * 60 * 1000;
 const METRIC = "vercel.analytics_pageview.count";
 const ROLLUP = "vercel_analytics_pageview_count_sum";
 const OLD_SITE_HOST = "vakitmatik.org";
@@ -240,7 +242,7 @@ function buildAnalyticsDateRanges(now = new Date()) {
   } satisfies Record<string, DateRange>;
 }
 
-export async function getAnalyticsDashboardData(): Promise<AnalyticsDashboardData> {
+async function buildAnalyticsDashboardData(): Promise<AnalyticsDashboardData> {
   const ranges = buildAnalyticsDateRanges();
   const [today, yesterday, last7Days] = await Promise.all([
     summaryFor(ranges.today),
@@ -253,4 +255,32 @@ export async function getAnalyticsDashboardData(): Promise<AnalyticsDashboardDat
     yesterday,
     last7Days,
   };
+}
+
+export async function getAnalyticsOverviewData({
+  refresh = false,
+}: {
+  refresh?: boolean;
+} = {}): Promise<RuntimeCacheResult<AnalyticsDashboardData>> {
+  return getRuntimeCached({
+    key: "vercel-analytics:overview",
+    ttlMs: ANALYTICS_CACHE_MS,
+    refresh,
+    load: buildAnalyticsDashboardData,
+  });
+}
+
+export async function getAnalyticsDashboardData({
+  refresh = false,
+}: {
+  refresh?: boolean;
+} = {}): Promise<AnalyticsDashboardData> {
+  const result = await getRuntimeCached({
+    key: "vercel-analytics:detail",
+    ttlMs: ANALYTICS_CACHE_MS,
+    refresh,
+    load: buildAnalyticsDashboardData,
+  });
+
+  return result.data;
 }

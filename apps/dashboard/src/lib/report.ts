@@ -60,11 +60,16 @@ function buildActions(report: Omit<DailyReport, "actions">) {
   return actions;
 }
 
-export async function buildDailyReport(): Promise<DailyReport> {
-  const [adsPayload, analytics] = await Promise.all([getAdsDailyReportData(), getAnalyticsDashboardData()]);
+export async function buildDailyReport({
+  refresh = false,
+}: {
+  refresh?: boolean;
+} = {}): Promise<DailyReport> {
+  const [adsPayload, analytics] = await Promise.all([getAdsDailyReportData(), getAnalyticsDashboardData({ refresh })]);
   const reportDate = adsPayload.ads.dateRange.startDate || addDays(dateInTimeZone(new Date(), adsPayload.account.timeZone), -1);
   const seo = await getSearchConsoleDashboardData({
     includeInspection: false,
+    refresh,
   });
   const negativeSuggestions = adsPayload.searchTerms.filter((row) => row.recommendation).slice(0, 5);
   const reportWithoutActions = {

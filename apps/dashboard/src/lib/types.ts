@@ -89,6 +89,10 @@ export type AdsDashboardData = {
   }[];
 };
 
+export type AdsOverviewData = Pick<AdsDashboardData, "account" | "today" | "yesterday" | "last7Days" | "conversionActions"> & {
+  campaigns: CampaignRow[];
+};
+
 export type SearchConsoleMetricRow = {
   keys: string[];
   clicks: number;
@@ -132,6 +136,17 @@ export type SearchConsoleDashboardData = {
   topPages: SearchConsoleMetricRow[];
   seoUrls: SeoUrlStatus[];
 };
+
+export type SearchConsoleOverviewData = Pick<
+  SearchConsoleDashboardData,
+  | "siteUrl"
+  | "dateRange"
+  | "availableDataThrough"
+  | "summary"
+  | "topQueriesByClicks"
+  | "topQueriesByImpressions"
+  | "topPages"
+>;
 
 export type AnalyticsSummary = {
   dateRange: DateRange;

@@ -3,14 +3,19 @@ import "server-only";
 import { addDays, buildAdsDateRanges, dateInTimeZone } from "./dates";
 import { getOptionalEnv, getRequiredEnv } from "./env";
 import { getGoogleAccessToken } from "./google-auth";
+import { getRuntimeCached, type RuntimeCacheResult } from "./runtime-cache";
 import type {
   AdsDashboardData,
+  AdsOverviewData,
   AdsSummary,
   CampaignRow,
   DateRange,
   KeywordRow,
   SearchTermRow,
 } from "./types";
+
+const ADS_OVERVIEW_CACHE_MS = 5 * 60 * 1000;
+const ADS_DETAIL_CACHE_MS = 5 * 60 * 1000;
 
 type GoogleAdsConfig = {
   apiVersion: string;
@@ -475,17 +480,15 @@ async function getSearchTermRows(range: DateRange) {
   });
 }
 
-export async function getAdsDashboardData(): Promise<AdsDashboardData> {
+async function buildAdsOverviewData(): Promise<AdsOverviewData> {
   const account = await getAccount();
   const ranges = buildAdsDateRanges(account.timeZone);
   const conversionActions = await getConversionActions();
-  const [today, yesterday, last7Days, campaigns, keywords, searchTerms] = await Promise.all([
+  const [today, yesterday, last7Days, campaigns] = await Promise.all([
     getSummary(ranges.today, account.currencyCode, conversionActions),
     getSummary(ranges.yesterday, account.currencyCode, conversionActions),
     getSummary(ranges.last7Days, account.currencyCode, conversionActions),
-    getCampaignRows(ranges.last7Days),
-    getKeywordRows(ranges.last7Days),
-    getSearchTermRows(ranges.last7Days),
+    getCampaignRows(ranges.today),
   ]);
 
   return {
@@ -493,11 +496,54 @@ export async function getAdsDashboardData(): Promise<AdsDashboardData> {
     today,
     yesterday,
     last7Days,
+    conversionActions,
+    campaigns,
+  };
+}
+
+async function buildAdsDashboardData(): Promise<AdsDashboardData> {
+  const overview = await buildAdsOverviewData();
+  const ranges = buildAdsDateRanges(overview.account.timeZone);
+  const [campaigns, keywords, searchTerms] = await Promise.all([
+    getCampaignRows(ranges.last7Days),
+    getKeywordRows(ranges.last7Days),
+    getSearchTermRows(ranges.last7Days),
+  ]);
+
+  return {
+    ...overview,
     campaigns,
     keywords,
     searchTerms,
-    conversionActions,
   };
+}
+
+export async function getAdsOverviewData({
+  refresh = false,
+}: {
+  refresh?: boolean;
+} = {}): Promise<RuntimeCacheResult<AdsOverviewData>> {
+  return getRuntimeCached({
+    key: "google-ads:overview",
+    ttlMs: ADS_OVERVIEW_CACHE_MS,
+    refresh,
+    load: buildAdsOverviewData,
+  });
+}
+
+export async function getAdsDashboardData({
+  refresh = false,
+}: {
+  refresh?: boolean;
+} = {}): Promise<AdsDashboardData> {
+  const result = await getRuntimeCached({
+    key: "google-ads:detail",
+    ttlMs: ADS_DETAIL_CACHE_MS,
+    refresh,
+    load: buildAdsDashboardData,
+  });
+
+  return result.data;
 }
 
 export async function getAdsDailyReportData(accountTimeZone?: string) {
