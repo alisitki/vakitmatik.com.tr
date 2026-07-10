@@ -47,9 +47,6 @@ export function dailyReportText(report: DailyReport) {
     report.analytics.yesterday.oldSiteTrackingUnavailableReason
       ? `Eski site ölçüm notu: ${report.analytics.yesterday.oldSiteTrackingUnavailableReason}`
       : "",
-    "",
-    "Aksiyonlar:",
-    ...report.actions.map((action) => `- ${action}`),
   ];
 
   return lines.join("\n");
@@ -125,15 +122,6 @@ export function dailyReportHtml(report: DailyReport) {
                   )}</p>`
                 : ""
             }
-          </td>
-        </tr>
-        <tr><td style="height:16px"></td></tr>
-        <tr>
-          <td style="background:#ffffff;border:1px solid #dde4df;border-radius:8px;padding:22px">
-            <h2 style="margin:0 0 12px;font-size:16px">Bugünkü aksiyonlar</h2>
-            <ul style="margin:0;padding-left:20px;color:#39443f">
-              ${report.actions.map((action) => `<li style="margin:6px 0">${escapeHtml(action)}</li>`).join("")}
-            </ul>
           </td>
         </tr>
       </table>

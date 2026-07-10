@@ -23,8 +23,16 @@ export function getEnvList(name: string) {
 
 export function publicError(error: unknown) {
   if (error instanceof Error) {
+    if (error.message.includes("is not configured")) {
+      return "Bu veri kaynağı henüz yapılandırılmamış.";
+    }
+
+    if (process.env.NODE_ENV === "production") {
+      return "Veri kaynağına şu anda bağlanılamıyor.";
+    }
+
     return error.message;
   }
 
-  return "Unexpected server error";
+  return "Beklenmeyen bir sunucu hatası oluştu.";
 }

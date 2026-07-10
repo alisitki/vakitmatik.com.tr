@@ -1,9 +1,10 @@
 import "server-only";
 
+import { cacheLife, cacheTag } from "next/cache";
 import { buildSearchConsoleDateRange, isSameOrAfter } from "./dates";
 import { getRequiredEnv } from "./env";
 import { getGoogleAccessToken } from "./google-auth";
-import { getRuntimeCached, type RuntimeCacheResult } from "./runtime-cache";
+import type { RuntimeCacheResult } from "./runtime-cache";
 import type {
   DateRange,
   SearchConsoleDashboardData,
@@ -13,7 +14,6 @@ import type {
 } from "./types";
 
 const SEARCH_CONSOLE_OVERVIEW_CACHE_MS = 6 * 60 * 60 * 1000;
-const SEARCH_CONSOLE_DETAIL_CACHE_MS = 6 * 60 * 60 * 1000;
 
 const SEO_URLS = [
   {
@@ -306,13 +306,7 @@ async function buildSearchConsoleDashboardData({
 }: {
   includeInspection?: boolean;
 } = {}): Promise<SearchConsoleDashboardData> {
-  const overview = await buildSearchConsoleOverviewData();
-  const pages = await querySearchAnalytics({
-    range: overview.dateRange,
-    dimensions: ["page"],
-    rowLimit: 25,
-  });
-  const pageRows = (pages.rows ?? []).map(toMetricRow);
+  const overview = (await getCachedSearchConsoleOverviewData()).data;
   const seoUrls = await Promise.all(
     SEO_URLS.map(async (item) => {
       const metrics = await urlMetrics(overview.dateRange, item.url);
@@ -340,40 +334,45 @@ async function buildSearchConsoleDashboardData({
 
   return {
     ...overview,
-    topPages: pageRows,
     seoUrls,
   };
 }
 
-export async function getSearchConsoleOverviewData({
-  refresh = false,
-}: {
+async function getCachedSearchConsoleOverviewData(): Promise<RuntimeCacheResult<SearchConsoleOverviewData>> {
+  "use cache: remote";
+  cacheTag("search-console");
+  cacheLife({ stale: 300, revalidate: 21600, expire: 604800 });
+
+  return {
+    data: await buildSearchConsoleOverviewData(),
+    cachedAt: new Date().toISOString(),
+    stale: false,
+    error: null,
+    ttlMs: SEARCH_CONSOLE_OVERVIEW_CACHE_MS,
+  };
+}
+
+async function getCachedSearchConsoleDashboardData(includeInspection: boolean) {
+  "use cache: remote";
+  cacheTag("search-console");
+  cacheLife({ stale: 300, revalidate: 21600, expire: 604800 });
+  return buildSearchConsoleDashboardData({ includeInspection });
+}
+
+export async function getSearchConsoleOverviewData(_options: {
   refresh?: boolean;
 } = {}): Promise<RuntimeCacheResult<SearchConsoleOverviewData>> {
-  return getRuntimeCached({
-    key: "search-console:overview",
-    ttlMs: SEARCH_CONSOLE_OVERVIEW_CACHE_MS,
-    refresh,
-    load: buildSearchConsoleOverviewData,
-  });
+  void _options.refresh;
+  return getCachedSearchConsoleOverviewData();
 }
 
 export async function getSearchConsoleDashboardData({
   includeInspection = true,
-  refresh = false,
+  refresh: _refresh = false,
 }: {
   includeInspection?: boolean;
   refresh?: boolean;
 } = {}): Promise<SearchConsoleDashboardData> {
-  const result = await getRuntimeCached({
-    key: `search-console:detail:${includeInspection ? "inspection" : "plain"}`,
-    ttlMs: SEARCH_CONSOLE_DETAIL_CACHE_MS,
-    refresh,
-    load: () =>
-      buildSearchConsoleDashboardData({
-        includeInspection,
-      }),
-  });
-
-  return result.data;
+  void _refresh;
+  return getCachedSearchConsoleDashboardData(includeInspection);
 }

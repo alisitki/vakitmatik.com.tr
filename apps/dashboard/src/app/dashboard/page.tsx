@@ -3,37 +3,31 @@ import type { ReactNode } from "react";
 import { RefreshButton } from "@/components/refresh-button";
 import {
   AdsIcon,
-  BarChartIcon,
   CalendarIcon,
   EyeIcon,
-  MegaphoneIcon,
-  MobileIcon,
   PhoneIcon,
   PointerIcon,
-  SearchIcon,
-  ShieldIcon,
   TargetIcon,
   WalletIcon,
 } from "@/components/icons";
-import { compactUrl, formatDateTimeTr, formatInteger, formatMoneyMicros, formatNumber, formatPercent } from "@/lib/format";
+import {
+  compactUrl,
+  formatDateTimeTr,
+  formatInteger,
+  formatMoneyMicros,
+  formatNumber,
+  formatPercent,
+} from "@/lib/format";
 import { getAdsOverviewData } from "@/lib/google-ads";
 import type { RuntimeCacheResult } from "@/lib/runtime-cache";
 import { toDataState } from "@/lib/safe-data";
 import { getSearchConsoleOverviewData } from "@/lib/search-console";
-import type { AdsOverviewData, DataState, SearchConsoleOverviewData } from "@/lib/types";
+import type { DataState } from "@/lib/types";
 
 type PageProps = {
   searchParams?: Promise<{
     refresh?: string;
   }>;
-};
-
-type MetricProps = {
-  icon: ReactNode;
-  label: string;
-  value: string;
-  previous: string;
-  delta: number | null;
 };
 
 function dataOrNull<T>(state: DataState<RuntimeCacheResult<T>>) {
@@ -50,96 +44,124 @@ function todayLabel() {
   }).format(new Date());
 }
 
-function trendValue(current: number, previous: number) {
-  if (!Number.isFinite(current) || !Number.isFinite(previous) || previous <= 0) {
+function trendValue(current: number | null, previous: number | null) {
+  if (current === null || previous === null || !Number.isFinite(current) || !Number.isFinite(previous) || previous <= 0) {
     return null;
   }
 
   return (current - previous) / previous;
 }
 
-function Trend({ value }: { value: number | null }) {
+function Trend({ value, inverse = false }: { value: number | null; inverse?: boolean }) {
   if (value === null) {
-    return <span className="metricTrend muted">-</span>;
+    return <span className="deltaPill muted">Kıyas yok</span>;
   }
 
-  return <span className={value >= 0 ? "metricTrend positive" : "metricTrend negative"}>{formatPercent(value)}</span>;
+  const favorable = inverse ? value <= 0 : value >= 0;
+
+  return (
+    <span className={`deltaPill ${favorable ? "positive" : "negative"}`}>
+      <span aria-hidden="true">{value >= 0 ? "↑" : "↓"}</span>
+      {formatPercent(Math.abs(value))}
+    </span>
+  );
 }
 
-function MetricBlock({ icon, label, value, previous, delta }: MetricProps) {
+function ComparisonIndicator({ current, previous }: { current: number | null; previous: number | null }) {
+  const ceiling = Math.max(current ?? 0, previous ?? 0, 1);
+  const currentWidth = current === null ? 0 : Math.max(4, (current / ceiling) * 100);
+  const previousWidth = previous === null ? 0 : Math.max(4, (previous / ceiling) * 100);
+
   return (
-    <div className="dashboardMetric">
-      <div className="metricIcon">{icon}</div>
-      <div className="metricBody">
-        <span>{label}</span>
-        <strong>{value}</strong>
-        <small>
-          {previous}
-          <Trend value={delta} />
-        </small>
-      </div>
+    <div aria-hidden="true" className="comparisonIndicator">
+      <span style={{ width: `${previousWidth}%` }} />
+      <span style={{ width: `${currentWidth}%` }} />
     </div>
   );
 }
 
-function ActionCard({
+function KpiCard({
   icon,
-  title,
-  body,
+  label,
+  value,
+  previousLabel,
+  currentRaw,
+  previousRaw,
+  inverse,
 }: {
   icon: ReactNode;
-  title: string;
-  body: string;
+  label: string;
+  value: string;
+  previousLabel: string;
+  currentRaw: number | null;
+  previousRaw: number | null;
+  inverse?: boolean;
 }) {
   return (
-    <div className="actionCard">
-      <div className="actionIcon">{icon}</div>
-      <div>
-        <strong>{title}</strong>
-        <p>{body}</p>
+    <article className="kpiCard">
+      <div className="kpiCardTop">
+        <div className="kpiIcon">{icon}</div>
+        <Trend inverse={inverse} value={trendValue(currentRaw, previousRaw)} />
       </div>
-      <span aria-hidden="true" className="actionArrow">
-        →
-      </span>
+      <div className="kpiValue">{value}</div>
+      <div className="kpiLabel">{label}</div>
+      <ComparisonIndicator current={currentRaw} previous={previousRaw} />
+      <div className="kpiComparison">
+        <span><i className="legendDot current" />Bugün</span>
+        <span><i className="legendDot previous" />{previousLabel}</span>
+      </div>
+    </article>
+  );
+}
+
+function Funnel({ impressions, clicks, leads }: { impressions: number; clicks: number; leads: number }) {
+  const stages = [
+    { label: "Gösterim", value: impressions, rate: null },
+    { label: "Tıklama", value: clicks, rate: impressions > 0 ? clicks / impressions : 0 },
+    { label: "Lead", value: leads, rate: clicks > 0 ? leads / clicks : 0 },
+  ];
+  const maximum = Math.max(impressions, 1);
+
+  return (
+    <div className="funnel" aria-label="Bugünkü dönüşüm hunisi">
+      {stages.map((stage, index) => (
+        <div className="funnelRow" key={stage.label}>
+          <div className="funnelLabel">
+            <span>{stage.label}</span>
+            <strong>{formatInteger(stage.value)}</strong>
+          </div>
+          <div className="funnelTrack">
+            <span
+              style={{
+                width: `${Math.max(stage.value > 0 ? 8 : 0, Math.min(100, (stage.value / maximum) * 100))}%`,
+              }}
+            />
+          </div>
+          <small>{index === 0 ? "Başlangıç" : formatPercent(stage.rate ?? 0)}</small>
+        </div>
+      ))}
     </div>
   );
 }
 
-function adsStatusLabel(status: string) {
-  if (status === "ENABLED") {
-    return "Aktif";
-  }
+function SourceState({
+  label,
+  result,
+  error,
+}: {
+  label: string;
+  result: RuntimeCacheResult<unknown> | null;
+  error: string | null;
+}) {
+  const state = error ? "error" : result?.stale ? "stale" : "ready";
+  const text = error ? "Bağlantı yok" : result?.stale ? "Eski veri" : "Güncel";
 
-  if (status === "PAUSED") {
-    return "Duraklatıldı";
-  }
-
-  return status || "-";
-}
-
-function buildActionCards(ads: AdsOverviewData | null, seo: SearchConsoleOverviewData | null) {
-  const topPage = seo?.topPages[0]?.keys[0] ? compactUrl(seo.topPages[0].keys[0]) : "/cami-saati/";
-  const hasClicksWithoutLead = (ads?.today.clicks ?? 0) > 0 && (ads?.today.totalLeads ?? 0) === 0;
-
-  return [
-    {
-      icon: <SearchIcon />,
-      title: "Fiyat odaklı kelimeleri genişlet",
-      body: hasClicksWithoutLead
-        ? "Tıklama var, lead yok. Fiyat ve teklif niyetli arama terimlerini ayrıca kontrol et."
-        : "\"cami saati fiyatları\" ve benzer kelimelerde fırsat var. Bütçe payını takip et.",
-    },
-    {
-      icon: <MobileIcon />,
-      title: "Mobil aramalara odaklan",
-      body: "Telefon lead'lerini artıracak reklam metni ve açılış sayfası çağrılarını kontrol et.",
-    },
-    {
-      icon: <BarChartIcon />,
-      title: "En çok gösterim alan sayfayı güçlendir",
-      body: `${topPage} daha fazla gösterim alıyor. İçeriği ve görselleri güncel tut.`,
-    },
-  ];
+  return (
+    <span className={`sourceState ${state}`} title={error ?? undefined}>
+      <i />
+      {label}: {text}
+    </span>
+  );
 }
 
 export default async function DashboardPage({ searchParams }: PageProps) {
@@ -154,180 +176,173 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   const ads = adsResult?.data ?? null;
   const seo = seoResult?.data ?? null;
   const currencyCode = ads?.account.currencyCode ?? "TRY";
-  const actionCards = buildActionCards(ads, seo);
-  const campaignRows = ads?.campaigns.slice(0, 3) ?? [];
-  const seoRows = seo?.topPages.slice(0, 3) ?? [];
+  const campaignRows = ads?.campaigns.slice(0, 5) ?? [];
   const updatedAt = adsResult?.cachedAt ?? seoResult?.cachedAt ?? null;
+  const todayLeads = ads?.today.totalLeads ?? null;
+  const yesterdayLeads = ads?.yesterday.totalLeads ?? null;
+  const todayConversion = ads ? (ads.today.clicks > 0 ? ads.today.totalLeads / ads.today.clicks : 0) : null;
+  const yesterdayConversion = ads ? (ads.yesterday.clicks > 0 ? ads.yesterday.totalLeads / ads.yesterday.clicks : 0) : null;
+  const adsError = adsState.ok ? null : adsState.error;
+  const seoError = seoState.ok ? null : seoState.error;
 
   return (
     <div className="dashboardHome">
       <header className="dashboardHeader">
         <div>
-          <h1>Bugünkü durum</h1>
+          <span className="pageEyebrow">GENEL BAKIŞ</span>
+          <h1>Performans</h1>
           <p>{todayLabel()}</p>
         </div>
         <div className="headerControls">
-          <div className="dateControl">
+          <div className="dateControl" aria-label="Seçili dönem bugün">
             <CalendarIcon />
             <span>Bugün</span>
-            <span aria-hidden="true">⌄</span>
           </div>
           <RefreshButton />
         </div>
       </header>
 
-      <section className="metricsStrip" aria-label="Bugünkü ana metrikler">
-        <MetricBlock
-          delta={trendValue(ads?.today.costMicros ?? 0, ads?.yesterday.costMicros ?? 0)}
+      <div className="sourceBar" aria-label="Veri kaynaklarının durumu">
+        <div>
+          <span className="sourceBarLabel">Veri durumu</span>
+          <SourceState error={adsError} label="Google Ads" result={adsResult} />
+          <SourceState error={seoError} label="Search Console" result={seoResult} />
+        </div>
+        <span>{updatedAt ? `${formatDateTimeTr(updatedAt)} tarihinde yenilendi` : "Henüz veri alınamadı"}</span>
+      </div>
+
+      <section className="kpiGrid" aria-label="Bugünkü temel performans göstergeleri">
+        <KpiCard
+          currentRaw={ads?.today.costMicros ?? null}
           icon={<WalletIcon />}
           label="Harcama"
-          previous={`Dün: ${formatMoneyMicros(ads?.yesterday.costMicros ?? null, currencyCode)}`}
+          previousLabel={`Dün ${formatMoneyMicros(ads?.yesterday.costMicros ?? null, currencyCode)}`}
+          previousRaw={ads?.yesterday.costMicros ?? null}
           value={formatMoneyMicros(ads?.today.costMicros ?? null, currencyCode)}
         />
-        <MetricBlock
-          delta={trendValue(ads?.today.clicks ?? 0, ads?.yesterday.clicks ?? 0)}
-          icon={<PointerIcon />}
-          label="Tıklama"
-          previous={`Dün: ${formatInteger(ads?.yesterday.clicks ?? 0)}`}
-          value={formatInteger(ads?.today.clicks ?? 0)}
-        />
-        <MetricBlock
-          delta={trendValue(ads?.today.totalLeads ?? 0, ads?.yesterday.totalLeads ?? 0)}
+        <KpiCard
+          currentRaw={todayLeads}
           icon={<PhoneIcon />}
-          label="Lead"
-          previous={`Dün: ${formatInteger(ads?.yesterday.totalLeads ?? 0)}`}
-          value={formatInteger(ads?.today.totalLeads ?? 0)}
+          label="Toplam lead"
+          previousLabel={`Dün ${yesterdayLeads === null ? "-" : formatInteger(yesterdayLeads)}`}
+          previousRaw={yesterdayLeads}
+          value={todayLeads === null ? "-" : formatInteger(todayLeads)}
         />
-        <MetricBlock
-          delta={null}
-          icon={<EyeIcon />}
-          label="SEO Gösterim"
-          previous={seo?.availableDataThrough ? `Son veri: ${seo.availableDataThrough}` : "Search Console"}
-          value={formatInteger(seo?.summary.impressions ?? 0)}
+        <KpiCard
+          currentRaw={ads?.today.costPerLeadMicros ?? null}
+          icon={<TargetIcon />}
+          inverse
+          label="Lead maliyeti"
+          previousLabel={`Dün ${formatMoneyMicros(ads?.yesterday.costPerLeadMicros ?? null, currencyCode)}`}
+          previousRaw={ads?.yesterday.costPerLeadMicros ?? null}
+          value={formatMoneyMicros(ads?.today.costPerLeadMicros ?? null, currencyCode)}
+        />
+        <KpiCard
+          currentRaw={todayConversion}
+          icon={<PointerIcon />}
+          label="Lead dönüşümü"
+          previousLabel={`Dün ${yesterdayConversion === null ? "-" : formatPercent(yesterdayConversion)}`}
+          previousRaw={yesterdayConversion}
+          value={todayConversion === null ? "-" : formatPercent(todayConversion)}
         />
       </section>
 
-      <section className="actionBand">
-        <div className="actionBandHeader">
-          <div className="targetBadge">
-            <TargetIcon />
-          </div>
-          <div>
-            <h2>Bugün ne yapalım?</h2>
-            <p>Kısa ve etkili adımlarla sonuçları büyütelim.</p>
-          </div>
-        </div>
-        <div className="actionCards">
-          {actionCards.map((action) => (
-            <ActionCard body={action.body} icon={action.icon} key={action.title} title={action.title} />
-          ))}
-        </div>
-      </section>
-
-      <div className="dashboardTables">
-        <section className="tablePanel">
-          <div className="tablePanelHeader">
+      <div className="insightGrid">
+        <section className="dashboardPanel funnelPanel">
+          <div className="dashboardPanelHeader">
             <div>
-              <MegaphoneIcon />
-              <h2>Reklam özeti</h2>
+              <span className="panelKicker">BUGÜN</span>
+              <h2>Dönüşüm hunisi</h2>
             </div>
-            <Link href="/dashboard/google-ads">Tümünü gör →</Link>
+            <span className="panelMeta">Gösterimden lead’e</span>
           </div>
-          <table className="overviewTable">
-            <thead>
-              <tr>
-                <th>Kampanya</th>
-                <th>Harcama</th>
-                <th>Tıklama</th>
-                <th>Lead</th>
-                <th>Durum</th>
-              </tr>
-            </thead>
-            <tbody>
-              {campaignRows.length > 0 ? (
-                campaignRows.map((campaign) => (
-                  <tr key={campaign.id}>
-                    <td>{campaign.name}</td>
-                    <td>{formatMoneyMicros(campaign.costMicros, currencyCode)}</td>
-                    <td>{formatInteger(campaign.clicks)}</td>
-                    <td>{formatNumber(campaign.conversions, 0)}</td>
-                    <td>
-                      <span className={campaign.status === "ENABLED" ? "statusPill active" : "statusPill"}>
-                        {adsStatusLabel(campaign.status)}
-                      </span>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5}>Bugün kampanya satırı yok.</td>
-                </tr>
-              )}
-              <tr className="totalRow">
-                <td>Toplam</td>
-                <td>{formatMoneyMicros(ads?.today.costMicros ?? null, currencyCode)}</td>
-                <td>{formatInteger(ads?.today.clicks ?? 0)}</td>
-                <td>{formatInteger(ads?.today.totalLeads ?? 0)}</td>
-                <td />
-              </tr>
-            </tbody>
-          </table>
+          {ads ? (
+            <Funnel impressions={ads.today.impressions} clicks={ads.today.clicks} leads={ads.today.totalLeads} />
+          ) : (
+            <div className="compactEmpty">Google Ads verisi geldiğinde dönüşüm akışı burada görünecek.</div>
+          )}
         </section>
 
-        <section className="tablePanel">
-          <div className="tablePanelHeader">
+        <section className="dashboardPanel organicPanel">
+          <div className="dashboardPanelHeader">
             <div>
-              <AdsIcon />
-              <h2>SEO özeti</h2>
+              <span className="panelKicker">ORGANİK</span>
+              <h2>Arama görünürlüğü</h2>
             </div>
-            <Link href="/dashboard/seo">Tümünü gör →</Link>
+            <Link href="/dashboard/seo">Detay</Link>
           </div>
-          <table className="overviewTable">
-            <thead>
-              <tr>
-                <th>Sayfa</th>
-                <th>Gösterim</th>
-                <th>Tıklama</th>
-                <th>CTR</th>
-                <th>Pozisyon</th>
-              </tr>
-            </thead>
-            <tbody>
-              {seoRows.length > 0 ? (
-                seoRows.map((row) => (
-                  <tr key={row.keys.join(":")}>
-                    <td>{compactUrl(row.keys[0] ?? "-")}</td>
-                    <td>{formatInteger(row.impressions)}</td>
-                    <td>{formatInteger(row.clicks)}</td>
-                    <td>{formatPercent(row.ctr)}</td>
-                    <td>{formatNumber(row.position, 1)}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5}>Search Console sayfa verisi yok.</td>
-                </tr>
-              )}
-              <tr className="totalRow">
-                <td>Toplam</td>
-                <td>{formatInteger(seo?.summary.impressions ?? 0)}</td>
-                <td>{formatInteger(seo?.summary.clicks ?? 0)}</td>
-                <td>{formatPercent(seo?.summary.ctr ?? 0)}</td>
-                <td>{seo?.summary.position ? formatNumber(seo.summary.position, 1) : "-"}</td>
-              </tr>
-            </tbody>
-          </table>
+          {seo ? (
+            <>
+              <div className="organicMetrics">
+                <div>
+                  <EyeIcon />
+                  <span>Gösterim</span>
+                  <strong>{formatInteger(seo.summary.impressions)}</strong>
+                </div>
+                <div>
+                  <PointerIcon />
+                  <span>Tıklama</span>
+                  <strong>{formatInteger(seo.summary.clicks)}</strong>
+                </div>
+                <div>
+                  <TargetIcon />
+                  <span>CTR</span>
+                  <strong>{formatPercent(seo.summary.ctr)}</strong>
+                </div>
+              </div>
+              <div className="topOrganicPage">
+                <span>En görünür sayfa</span>
+                <strong>{compactUrl(seo.topPages[0]?.keys[0] ?? "-")}</strong>
+                <small>Son veri: {seo.availableDataThrough ?? "-"}</small>
+              </div>
+            </>
+          ) : (
+            <div className="compactEmpty">Search Console verisi şu anda kullanılamıyor.</div>
+          )}
         </section>
       </div>
 
-      <footer className="dashboardFooter">
-        <span>Veriler {updatedAt ? formatDateTimeTr(updatedAt) : "-"} itibarıyla güncellenmiştir.</span>
-        <span>Kaynaklar: Google Ads, Search Console, Vercel Analytics</span>
-        <span className="secureNote">
-          <ShieldIcon />
-          Veri güvenli bağlantı ile korunmaktadır.
-        </span>
-      </footer>
+      <section className="dashboardPanel campaignPanel">
+        <div className="dashboardPanelHeader">
+          <div>
+            <span className="panelKicker">GOOGLE ADS</span>
+            <h2>Kampanya performansı</h2>
+          </div>
+          <Link href="/dashboard/google-ads">Tüm kampanyalar</Link>
+        </div>
+        {campaignRows.length > 0 ? (
+          <div className="tableWrap">
+            <table className="performanceTable">
+              <thead>
+                <tr>
+                  <th>Kampanya</th>
+                  <th>Harcama</th>
+                  <th>Tıklama</th>
+                  <th>Lead</th>
+                  <th>Lead maliyeti</th>
+                  <th>Durum</th>
+                </tr>
+              </thead>
+              <tbody>
+                {campaignRows.map((campaign) => (
+                  <tr key={campaign.id || campaign.name}>
+                    <td>
+                      <span className="campaignName"><AdsIcon />{campaign.name}</span>
+                    </td>
+                    <td>{formatMoneyMicros(campaign.costMicros, currencyCode)}</td>
+                    <td>{formatInteger(campaign.clicks)}</td>
+                    <td>{formatNumber(campaign.conversions, 0)}</td>
+                    <td>{formatMoneyMicros(campaign.costPerLeadMicros, currencyCode)}</td>
+                    <td><span className={`statusPill ${campaign.status === "ENABLED" ? "good" : ""}`}>{campaign.status === "ENABLED" ? "Aktif" : campaign.status}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="compactEmpty">Bugün gösterilecek kampanya performansı yok.</div>
+        )}
+      </section>
     </div>
   );
 }

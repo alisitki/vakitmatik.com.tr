@@ -10,6 +10,10 @@ export async function toDataState<T>(loader: () => Promise<T>): Promise<DataStat
       data: await loader(),
     };
   } catch (error) {
+    if (!(error instanceof Error && error.message.includes("is not configured"))) {
+      console.error("[dashboard:data]", error);
+    }
+
     return {
       ok: false,
       error: publicError(error),

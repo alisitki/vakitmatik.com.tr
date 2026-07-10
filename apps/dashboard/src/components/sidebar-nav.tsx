@@ -7,7 +7,7 @@ import { AdsIcon, DocumentIcon, HomeIcon, MegaphoneIcon } from "./icons";
 const navItems = [
   {
     href: "/dashboard",
-    label: "Özet",
+    label: "Genel",
     icon: HomeIcon,
   },
   {
@@ -34,7 +34,7 @@ export function SidebarNav() {
     <nav className="navList" aria-label="Dashboard">
       {navItems.map((item) => {
         const Icon = item.icon;
-        const active = pathname === item.href;
+        const active = item.href === "/dashboard" ? pathname === item.href : pathname.startsWith(item.href);
 
         return (
           <Link aria-current={active ? "page" : undefined} className={active ? "active" : ""} href={item.href} key={item.href}>

@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { connection, NextRequest, NextResponse } from "next/server";
 import { getRequiredEnv, publicError } from "@/lib/env";
 import { buildDailyReport } from "@/lib/report";
 import { sendDailyReportEmail } from "@/lib/email";
 
 export async function GET(request: NextRequest) {
+  await connection();
   const cronSecret = getRequiredEnv("CRON_SECRET");
   const authHeader = request.headers.get("authorization");
 

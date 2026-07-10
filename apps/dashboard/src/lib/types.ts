@@ -63,7 +63,6 @@ export type SearchTermRow = {
   ctr: number;
   averageCpcMicros: number;
   conversions: number;
-  recommendation: string | null;
 };
 
 export type AdsDashboardData = {
@@ -176,9 +175,7 @@ export type DailyReport = {
   topKeyword: KeywordRow | null;
   weakKeyword: KeywordRow | null;
   topSearchTerm: SearchTermRow | null;
-  negativeSuggestions: SearchTermRow[];
   seo: SearchConsoleDashboardData;
-  actions: string[];
 };
 
 export type DataState<T> =

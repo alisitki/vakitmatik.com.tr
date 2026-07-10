@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { requirePageSession } from "@/lib/auth";
-import { HelpIcon, LogOutIcon } from "./icons";
+import { LogOutIcon } from "./icons";
 import { SidebarNav } from "./sidebar-nav";
 
 export async function DashboardShell({ children }: { children: ReactNode }) {
@@ -15,13 +15,10 @@ export async function DashboardShell({ children }: { children: ReactNode }) {
             <span className="logoClock" />
             <span>MATIK</span>
           </div>
+          <span className="brandCaption">PERFORMANS</span>
         </div>
         <SidebarNav />
         <div className="sidebarBottom">
-          <div className="helpLink">
-            <HelpIcon />
-            <span>Yardım & Destek</span>
-          </div>
           <form action="/api/logout" className="userCard" method="post">
             <div className="userAvatar">VK</div>
             <div>

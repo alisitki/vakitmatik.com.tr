@@ -1,8 +1,9 @@
 import "server-only";
 
+import { cacheLife, cacheTag } from "next/cache";
 import { addDays, dateInTimeZone } from "./dates";
 import { getRequiredEnv } from "./env";
-import { getRuntimeCached, type RuntimeCacheResult } from "./runtime-cache";
+import type { RuntimeCacheResult } from "./runtime-cache";
 import type { AnalyticsDashboardData, AnalyticsSummary, DateRange } from "./types";
 
 const ANALYTICS_CACHE_MS = 15 * 60 * 1000;
@@ -257,30 +258,30 @@ async function buildAnalyticsDashboardData(): Promise<AnalyticsDashboardData> {
   };
 }
 
-export async function getAnalyticsOverviewData({
-  refresh = false,
-}: {
-  refresh?: boolean;
-} = {}): Promise<RuntimeCacheResult<AnalyticsDashboardData>> {
-  return getRuntimeCached({
-    key: "vercel-analytics:overview",
+async function getCachedAnalyticsData(): Promise<RuntimeCacheResult<AnalyticsDashboardData>> {
+  "use cache: remote";
+  cacheTag("vercel-analytics");
+  cacheLife({ stale: 60, revalidate: 900, expire: 86400 });
+
+  return {
+    data: await buildAnalyticsDashboardData(),
+    cachedAt: new Date().toISOString(),
+    stale: false,
+    error: null,
     ttlMs: ANALYTICS_CACHE_MS,
-    refresh,
-    load: buildAnalyticsDashboardData,
-  });
+  };
 }
 
-export async function getAnalyticsDashboardData({
-  refresh = false,
-}: {
+export async function getAnalyticsOverviewData(_options: {
+  refresh?: boolean;
+} = {}): Promise<RuntimeCacheResult<AnalyticsDashboardData>> {
+  void _options.refresh;
+  return getCachedAnalyticsData();
+}
+
+export async function getAnalyticsDashboardData(_options: {
   refresh?: boolean;
 } = {}): Promise<AnalyticsDashboardData> {
-  const result = await getRuntimeCached({
-    key: "vercel-analytics:detail",
-    ttlMs: ANALYTICS_CACHE_MS,
-    refresh,
-    load: buildAnalyticsDashboardData,
-  });
-
-  return result.data;
+  void _options.refresh;
+  return (await getCachedAnalyticsData()).data;
 }

@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { getPageSession } from "@/lib/auth";
 import { LoginForm } from "@/components/login-form";
 
-export default async function LoginPage() {
+async function LoginContent() {
   const session = await getPageSession();
 
   if (session) {
@@ -13,16 +14,25 @@ export default async function LoginPage() {
     <main className="loginPage">
       <section className="loginCard">
         <div className="brandBlock">
-          <div className="brandMark">V</div>
-          <div>
-            <strong>Vakitmatik</strong>
-            <span>Raporlama</span>
+          <div aria-label="Vakitmatik" className="wordLogo">
+            <span>VAKIT</span>
+            <span className="logoClock" />
+            <span>MATIK</span>
           </div>
+          <span className="brandCaption">PERFORMANS</span>
         </div>
         <h1>Dashboard girişi</h1>
         <p>Google Ads ve Search Console raporları yalnızca yetkili kullanıcılar için gösterilir.</p>
         <LoginForm />
       </section>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="shellLoading">Giriş hazırlanıyor…</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }

@@ -1,9 +1,10 @@
 import "server-only";
 
+import { cacheLife, cacheTag } from "next/cache";
 import { addDays, buildAdsDateRanges, dateInTimeZone } from "./dates";
 import { getOptionalEnv, getRequiredEnv } from "./env";
 import { getGoogleAccessToken } from "./google-auth";
-import { getRuntimeCached, type RuntimeCacheResult } from "./runtime-cache";
+import type { RuntimeCacheResult } from "./runtime-cache";
 import type {
   AdsDashboardData,
   AdsOverviewData,
@@ -15,7 +16,6 @@ import type {
 } from "./types";
 
 const ADS_OVERVIEW_CACHE_MS = 5 * 60 * 1000;
-const ADS_DETAIL_CACHE_MS = 5 * 60 * 1000;
 
 type GoogleAdsConfig = {
   apiVersion: string;
@@ -405,36 +405,6 @@ async function getKeywordRows(range: DateRange) {
   });
 }
 
-function suggestNegativeKeyword(row: Omit<SearchTermRow, "recommendation">) {
-  const term = row.term.toLocaleLowerCase("tr-TR");
-  const irrelevantTokens = [
-    "indir",
-    "apk",
-    "bedava",
-    "ücretsiz",
-    "ucretsiz",
-    "kol saati",
-    "telefon saati",
-    "imsakiye",
-    "ramazan",
-    "tamir",
-  ];
-
-  if (irrelevantTokens.some((token) => term.includes(token))) {
-    return "Alakasız niyet içeriyor";
-  }
-
-  if (row.clicks >= 3 && row.conversions === 0) {
-    return "Tıklama var, lead yok";
-  }
-
-  if (row.impressions >= 100 && row.ctr < 0.01) {
-    return "Yüksek gösterim, düşük CTR";
-  }
-
-  return null;
-}
-
 async function getSearchTermRows(range: DateRange) {
   const rows = await googleAdsMetricsSearch<Record<string, unknown>>(`
     SELECT
@@ -459,7 +429,7 @@ async function getSearchTermRows(range: DateRange) {
     const keyword = ((segments(row).keyword as Record<string, unknown> | undefined)?.info ??
       {}) as Record<string, unknown>;
     const rowMetrics = metrics(row);
-    const base = {
+    return {
       term: stringValue(searchTermView(row).searchTerm, "-"),
       campaignName: stringValue(campaign(row).name, "-"),
       adGroupName: stringValue(adGroup(row).name, "-"),
@@ -471,11 +441,6 @@ async function getSearchTermRows(range: DateRange) {
       ctr: numberValue(rowMetrics.ctr),
       averageCpcMicros: numberValue(rowMetrics.averageCpc),
       conversions: numberValue(rowMetrics.conversions),
-    };
-
-    return {
-      ...base,
-      recommendation: suggestNegativeKeyword(base),
     } satisfies SearchTermRow;
   });
 }
@@ -502,7 +467,7 @@ async function buildAdsOverviewData(): Promise<AdsOverviewData> {
 }
 
 async function buildAdsDashboardData(): Promise<AdsDashboardData> {
-  const overview = await buildAdsOverviewData();
+  const overview = (await getCachedAdsOverviewData()).data;
   const ranges = buildAdsDateRanges(overview.account.timeZone);
   const [campaigns, keywords, searchTerms] = await Promise.all([
     getCampaignRows(ranges.last7Days),
@@ -518,32 +483,39 @@ async function buildAdsDashboardData(): Promise<AdsDashboardData> {
   };
 }
 
-export async function getAdsOverviewData({
-  refresh = false,
-}: {
-  refresh?: boolean;
-} = {}): Promise<RuntimeCacheResult<AdsOverviewData>> {
-  return getRuntimeCached({
-    key: "google-ads:overview",
+async function getCachedAdsOverviewData(): Promise<RuntimeCacheResult<AdsOverviewData>> {
+  "use cache: remote";
+  cacheTag("google-ads");
+  cacheLife({ stale: 30, revalidate: 300, expire: 3600 });
+
+  return {
+    data: await buildAdsOverviewData(),
+    cachedAt: new Date().toISOString(),
+    stale: false,
+    error: null,
     ttlMs: ADS_OVERVIEW_CACHE_MS,
-    refresh,
-    load: buildAdsOverviewData,
-  });
+  };
 }
 
-export async function getAdsDashboardData({
-  refresh = false,
-}: {
+async function getCachedAdsDashboardData() {
+  "use cache: remote";
+  cacheTag("google-ads");
+  cacheLife({ stale: 30, revalidate: 300, expire: 3600 });
+  return buildAdsDashboardData();
+}
+
+export async function getAdsOverviewData(_options: {
+  refresh?: boolean;
+} = {}): Promise<RuntimeCacheResult<AdsOverviewData>> {
+  void _options.refresh;
+  return getCachedAdsOverviewData();
+}
+
+export async function getAdsDashboardData(_options: {
   refresh?: boolean;
 } = {}): Promise<AdsDashboardData> {
-  const result = await getRuntimeCached({
-    key: "google-ads:detail",
-    ttlMs: ADS_DETAIL_CACHE_MS,
-    refresh,
-    load: buildAdsDashboardData,
-  });
-
-  return result.data;
+  void _options.refresh;
+  return getCachedAdsDashboardData();
 }
 
 export async function getAdsDailyReportData(accountTimeZone?: string) {
