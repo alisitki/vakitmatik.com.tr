@@ -2,6 +2,8 @@ export type LandingVariant = "cami-saati" | "fiyat-model" | "ayet-hadis";
 
 export type AdLandingImage = {
   src: string;
+  mobileSrc?: string;
+  tabletSrc?: string;
   alt: string;
   width: number;
   height: number;
@@ -38,6 +40,7 @@ export type LandingConfig = {
     eyebrow: string;
     title: string;
     lead: string;
+    microCopy: string;
     primaryCta: string;
     secondaryCta: string;
     productImage: AdLandingImage;
@@ -69,6 +72,10 @@ export type LandingConfig = {
     title: string;
     lead: string;
     whatsappLabel: string;
+    whatsappHref: string;
     phoneLabel: string;
+    phoneHref: string;
+    note: string;
   };
+  footerNote: string;
 };

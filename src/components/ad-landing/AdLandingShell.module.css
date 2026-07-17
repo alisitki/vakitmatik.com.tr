@@ -286,6 +286,10 @@
   transform: rotate(1.5deg);
 }
 
+.productFrame picture {
+  display: block;
+}
+
 .productImage {
   display: block;
   width: 100%;
