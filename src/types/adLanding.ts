@@ -62,12 +62,6 @@ export type LandingConfig = {
     insightStrip: string[];
     details: AdLandingDetail[];
   };
-  selection: {
-    eyebrow: string;
-    title: string;
-    lead: string;
-    steps: AdLandingProof[];
-  };
   faqs: AdLandingFaq[];
   contact: {
     eyebrow: string;

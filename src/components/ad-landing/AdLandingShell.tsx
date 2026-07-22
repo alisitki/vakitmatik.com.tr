@@ -38,7 +38,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
             <div className={styles.navLinks}>
               <a href="#models">Modeller</a>
               <a href="#engineering">Neden Vakitmatik?</a>
-              <a href="#selection">Model seçimi</a>
+              <a href="#faq">Sık sorulanlar</a>
             </div>
             <a className={styles.navCta} href="#contact">
               Bize yazın
@@ -225,27 +225,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
         </div>
       </section>
 
-      <section className={styles.selectionSection} id="selection">
-        <div className={styles.shell}>
-          <header className={styles.selectionHeader}>
-            <p className={styles.sectionEyebrow}>{config.selection.eyebrow}</p>
-            <h2>{config.selection.title}</h2>
-            <p>{config.selection.lead}</p>
-          </header>
-
-          <div className={styles.selectionGrid}>
-            {config.selection.steps.map((step) => (
-              <article className={styles.selectionCard} key={step.title}>
-                <span>{step.index}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.faqSection}>
+      <section className={styles.faqSection} id="faq">
         <div className={`${styles.shell} ${styles.faqLayout}`}>
           <header>
             <p className={styles.sectionEyebrow}>Sık sorulanlar</p>

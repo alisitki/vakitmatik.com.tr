@@ -69,7 +69,7 @@ export const camiSaatiLanding: LandingConfig = {
     title: "Cami Saati Modelleri",
     lead:
       "Klasik desenli modellerden mesaj, kayan yazı, LED, modül ve LCD seçeneklerine kadar tüm Vakitmatik cami saati modellerini inceleyin.",
-    ctaLabel: "Modeller için WhatsApp’tan yazın",
+    ctaLabel: "Ürün bilgisi için WhatsApp’tan yazın",
     items: models,
   },
   engineering: {
@@ -107,29 +107,6 @@ export const camiSaatiLanding: LandingConfig = {
       },
     ],
   },
-  selection: {
-    eyebrow: "Birlikte bakalım",
-    title: "Üç kısa adımda tamamlayalım.",
-    lead:
-      "Caminizin bir fotoğrafını veya yaklaşık ölçüsünü WhatsApp’tan göndermeniz yeterli.",
-    steps: [
-      {
-        index: "01",
-        title: "Fotoğrafı gönderin",
-        description: "Caminizi ve saatin yerleşeceği alanı kısaca görelim.",
-      },
-      {
-        index: "02",
-        title: "Birlikte bakalım",
-        description: "Görünüş ve kullanımınıza uygun modeli konuşalım.",
-      },
-      {
-        index: "03",
-        title: "Adresinize gönderelim",
-        description: "Vakitmatik’inizi Türkiye’nin her yerine kargo ile ulaştıralım.",
-      },
-    ],
-  },
   faqs: [
     {
       question: "Namaz vakitleri telefondan güncellenebilir mi?",
@@ -142,9 +119,9 @@ export const camiSaatiLanding: LandingConfig = {
         "Hayır. Cihaz temel çalışması için sürekli internet istemez. Güncel veriyi almak için telefonun interneti kullanılabilir; aktarım mobil uygulama üzerinden yapılır.",
     },
     {
-      question: "Hangi cami saati modelinin uygun olduğunu nasıl belirleriz?",
+      question: "Cami saati modeli seçerken nelere bakılmalı?",
       answer:
-        "Caminin ölçüsü, izleme mesafesi, montaj noktası ve ayet, hadis veya görsel içerik ihtiyacı birlikte değerlendirilir.",
+        "Model karşılaştırırken pano ölçüsü, izleme mesafesi, yatay veya dikey kullanım ile mesaj, LED ya da LCD ekran ihtiyacı dikkate alınabilir. Ürünlerin ölçü ve özellikleri model kartlarında yer alır.",
     },
     {
       question: "Vakitmatik cami saatlerinin garanti süresi nedir?",
@@ -159,9 +136,9 @@ export const camiSaatiLanding: LandingConfig = {
   ],
   contact: {
     eyebrow: "Sorunuz mu var?",
-    title: "WhatsApp’tan yazın, birlikte bakalım.",
+    title: "Sorunuz varsa WhatsApp’tan yazın.",
     lead:
-      "Cami saati modelleri, ölçüler ve gönderim hakkında bize yazabilir veya doğrudan arayabilirsiniz.",
+      "Ürün özellikleri, ölçüler, sipariş ve kargo hakkında WhatsApp’tan yazabilir veya bizi arayabilirsiniz.",
     whatsappLabel: "WhatsApp’tan yazın",
     whatsappHref: `https://wa.me/905333827533?text=${whatsappMessage}`,
     phoneLabel: "+90 533 382 75 33",

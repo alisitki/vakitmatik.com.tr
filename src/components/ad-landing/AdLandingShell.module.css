@@ -397,7 +397,6 @@
 }
 
 .modelsSection,
-.selectionSection,
 .faqSection {
   background: var(--adlp-paper);
 }
@@ -426,7 +425,6 @@
 }
 
 .sectionHeader h2,
-.selectionHeader h2,
 .faqLayout h2 {
   color: var(--adlp-ink);
   font-size: clamp(2.7rem, 5vw, 5rem);
@@ -435,8 +433,7 @@
   letter-spacing: -0.055em;
 }
 
-.sectionHeader > div > p,
-.selectionHeader > p:last-child {
+.sectionHeader > div > p {
   max-width: 44rem;
   color: var(--adlp-muted);
   font-size: 1rem;
@@ -773,55 +770,6 @@
   line-height: 1.65;
 }
 
-.selectionSection {
-  padding-block: clamp(6rem, 10vw, 9rem);
-}
-
-.selectionHeader {
-  display: grid;
-  gap: 1.1rem;
-  max-width: 53rem;
-  margin-bottom: clamp(3rem, 5vw, 4.5rem);
-}
-
-.selectionGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid var(--adlp-line);
-}
-
-.selectionCard {
-  min-height: 17rem;
-  padding: 2rem clamp(1.3rem, 2.5vw, 2.4rem);
-  border-bottom: 1px solid var(--adlp-line);
-}
-
-.selectionCard + .selectionCard {
-  border-left: 1px solid var(--adlp-line);
-}
-
-.selectionCard > span {
-  display: inline-flex;
-  margin-bottom: 4.5rem;
-  color: #3869c9;
-  font-size: 0.7rem;
-  font-weight: 850;
-}
-
-.selectionCard h3 {
-  color: var(--adlp-ink);
-  font-size: clamp(1.45rem, 2.2vw, 2rem);
-  font-weight: 620;
-  line-height: 1.1;
-}
-
-.selectionCard p {
-  margin-top: 0.8rem;
-  color: var(--adlp-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
 .faqSection {
   padding-block: clamp(5rem, 8vw, 7.5rem);
   border-top: 1px solid var(--adlp-line);
@@ -1134,8 +1082,7 @@
     border-left: 0;
   }
 
-  .modelsSection,
-  .selectionSection {
+  .modelsSection {
     padding-block: 5.3rem;
   }
 
@@ -1145,7 +1092,6 @@
   }
 
   .sectionHeader h2,
-  .selectionHeader h2,
   .faqLayout h2,
   .engineeringCopy h2,
   .contactLayout h2 {
@@ -1188,23 +1134,6 @@
 
   .detailItem > p {
     padding-left: 1.6rem;
-  }
-
-  .selectionGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .selectionCard {
-    min-height: 0;
-    padding: 1.6rem 0.4rem 2rem;
-  }
-
-  .selectionCard + .selectionCard {
-    border-left: 0;
-  }
-
-  .selectionCard > span {
-    margin-bottom: 2.5rem;
   }
 
   .faqSection {
