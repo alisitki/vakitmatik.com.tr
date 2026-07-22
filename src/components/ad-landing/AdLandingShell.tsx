@@ -26,7 +26,12 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
 
         <div className={styles.shell}>
           <nav className={styles.nav} aria-label="Cami saati sayfa menüsü">
-            <Link className={styles.brand} href="/" aria-label="Vakitmatik ana sayfasına git">
+            <Link
+              aria-label="Vakitmatik ana sayfasına git"
+              className={styles.brand}
+              href="/"
+              prefetch={false}
+            >
               <Image
                 alt="Vakitmatik"
                 className={styles.logo}
@@ -149,6 +154,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
           </header>
 
           <AdLandingProductRail
+            label={config.models.railLabel}
             trackId={`${config.variant}-model-rayi`}
           >
             {config.models.items.map((model) => (
@@ -159,9 +165,9 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                 key={model.id}
               >
                 <Link
-                  aria-label={`${model.title} ürününü ana sayfada detaylı incele`}
                   className={styles.modelCardLink}
                   href={`/#${model.id}`}
+                  prefetch={false}
                 >
                   <figure className={styles.modelMedia}>
                     <Image
@@ -188,7 +194,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
           </AdLandingProductRail>
 
           <div className={styles.modelsExit}>
-            <Link href="/#urun-deneyimi">
+            <Link href="/#urun-deneyimi" prefetch={false}>
               Tüm ürünleri detaylı incele <span aria-hidden="true">→</span>
             </Link>
           </div>

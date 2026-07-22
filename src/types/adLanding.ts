@@ -59,6 +59,7 @@ export type LandingConfig = {
     eyebrow: string;
     title: string;
     lead: string;
+    railLabel?: string;
     items: AdLandingModel[];
   };
   engineering: {

@@ -6,6 +6,7 @@ import styles from "./AdLandingShell.module.css";
 
 type AdLandingProductRailProps = {
   children: ReactNode;
+  label?: string;
   trackId: string;
 };
 
@@ -16,6 +17,7 @@ type NavigationState = {
 
 export function AdLandingProductRail({
   children,
+  label = "Cami saati modelleri",
   trackId,
 }: AdLandingProductRailProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -82,7 +84,7 @@ export function AdLandingProductRail({
   return (
     <div className={styles.productRail}>
       <div className={styles.railToolbar}>
-        <p>Cami saati modelleri</p>
+        <p>{label}</p>
         <div
           aria-label="Ürün rayı kontrolleri"
           className={styles.railButtons}
@@ -110,7 +112,7 @@ export function AdLandingProductRail({
       </div>
 
       <div
-        aria-label="Vakitmatik cami saati modelleri"
+        aria-label={`Vakitmatik ${label.toLocaleLowerCase("tr-TR")}`}
         className={styles.modelTrack}
         id={trackId}
         ref={trackRef}
