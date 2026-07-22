@@ -31,6 +31,7 @@ export const camiSaatiLanding: LandingConfig = {
       "Vakitmatik cami saati; namaz vakitlerini Diyanet verilerine göre gösteren, mobil uygulama ile kolayca güncellenen ve 3 yıl garantiyle sunulan yerli üretim bir cami saatidir.",
     microCopy: "Diyanet verileri · Mobil uygulama · Yerli üretim",
     primaryCta: "WhatsApp’tan yazın",
+    mobilePrimaryCta: "WhatsApp",
     secondaryCta: "Hemen arayın",
     productImage: {
       src: "/images/seo/vakitmatik-cami-saati.webp",
@@ -69,7 +70,6 @@ export const camiSaatiLanding: LandingConfig = {
     title: "Cami Saati Modelleri",
     lead:
       "Klasik desenli modellerden mesaj, kayan yazı, LED, modül ve LCD seçeneklerine kadar tüm Vakitmatik cami saati modellerini inceleyin.",
-    ctaLabel: "Ürün bilgisi için WhatsApp’tan yazın",
     items: models,
   },
   engineering: {
@@ -136,10 +136,10 @@ export const camiSaatiLanding: LandingConfig = {
   ],
   contact: {
     eyebrow: "Sorunuz mu var?",
-    title: "Sorunuz varsa WhatsApp’tan yazın.",
+    title: "Sorunuz varsa bize ulaşın.",
     lead:
-      "Ürün özellikleri, ölçüler, sipariş ve kargo hakkında WhatsApp’tan yazabilir veya bizi arayabilirsiniz.",
-    whatsappLabel: "WhatsApp’tan yazın",
+      "Ürün özellikleri, ölçüler, sipariş ve kargo için bize yazabilir veya bizi arayabilirsiniz.",
+    whatsappLabel: "WhatsApp",
     whatsappHref: `https://wa.me/905333827533?text=${whatsappMessage}`,
     phoneLabel: "+90 533 382 75 33",
     phoneHref: "tel:+905333827533",

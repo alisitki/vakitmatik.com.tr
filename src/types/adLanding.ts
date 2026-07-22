@@ -42,6 +42,7 @@ export type LandingConfig = {
     lead: string;
     microCopy: string;
     primaryCta: string;
+    mobilePrimaryCta?: string;
     secondaryCta: string;
     productImage: AdLandingImage;
     appImage: AdLandingImage;
@@ -51,7 +52,6 @@ export type LandingConfig = {
     eyebrow: string;
     title: string;
     lead: string;
-    ctaLabel: string;
     items: AdLandingModel[];
   };
   engineering: {

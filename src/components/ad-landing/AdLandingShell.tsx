@@ -55,11 +55,19 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                 <a
                   className={styles.primaryButton}
                   href={config.contact.whatsappHref}
+                  aria-label={config.hero.primaryCta}
                   rel={whatsappExternal ? "noreferrer" : undefined}
                   target={whatsappExternal ? "_blank" : undefined}
                 >
-                  {config.hero.primaryCta}
-                  <span aria-hidden="true">↗</span>
+                  <span className={styles.primaryLabelDesktop} aria-hidden="true">
+                    {config.hero.primaryCta}
+                  </span>
+                  <span className={styles.primaryLabelMobile} aria-hidden="true">
+                    {config.hero.mobilePrimaryCta ?? config.hero.primaryCta}
+                  </span>
+                  <span className={styles.buttonArrow} aria-hidden="true">
+                    ↗
+                  </span>
                 </a>
                 <a className={styles.secondaryButton} href={config.contact.phoneHref}>
                   {config.hero.secondaryCta}
@@ -167,17 +175,6 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
               </article>
             ))}
           </AdLandingProductRail>
-
-          <div className={styles.modelAction}>
-            <a
-              href={config.contact.whatsappHref}
-              rel={whatsappExternal ? "noreferrer" : undefined}
-              target={whatsappExternal ? "_blank" : undefined}
-            >
-              {config.models.ctaLabel}
-              <span aria-hidden="true">↗</span>
-            </a>
-          </div>
         </div>
       </section>
 
@@ -283,17 +280,6 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
           <p>{config.footerNote}</p>
         </div>
       </footer>
-
-      <div className={styles.mobileActions} aria-label="Mobil iletişim seçenekleri">
-        <a
-          href={config.contact.whatsappHref}
-          rel={whatsappExternal ? "noreferrer" : undefined}
-          target={whatsappExternal ? "_blank" : undefined}
-        >
-          WhatsApp
-        </a>
-        <a href={config.contact.phoneHref}>Ara</a>
-      </div>
     </main>
   );
 }
