@@ -36,7 +36,6 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                 alt="Vakitmatik"
                 className={styles.logo}
                 height={56}
-                priority
                 src="/images/landing/vakitmatik-logo-400.webp"
                 width={400}
               />
@@ -107,7 +106,6 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                     className={styles.productImage}
                     fetchPriority="high"
                     height={config.hero.productImage.height}
-                    priority
                     sizes="(max-width: 720px) 58vw, (max-width: 1100px) 36vw, 410px"
                     src={config.hero.productImage.src}
                     width={config.hero.productImage.width}
@@ -120,7 +118,6 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                   alt={config.hero.appImage.alt}
                   className={styles.phoneImage}
                   height={config.hero.appImage.height}
-                  priority
                   sizes="(max-width: 720px) 22vw, 150px"
                   src={config.hero.appImage.src}
                   width={config.hero.appImage.width}

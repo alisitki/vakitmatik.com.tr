@@ -62,6 +62,7 @@ export const ayetHadisLanding: LandingConfig = {
     secondaryHref: "/",
     productImage: {
       src: "/images/landing/ayet-hadis/vakitmatik-modul-480.webp",
+      mobileSrc: "/images/landing/ayet-hadis/vakitmatik-modul-320.webp",
       alt: "Ayet, hadis, duyuru ve namaz vakti gösterebilen Vakitmatik modül pano",
       width: 480,
       height: 600,
