@@ -16,16 +16,16 @@ export type AdLandingProof = {
 };
 
 export type AdLandingModel = {
-  label: string;
+  id: string;
   title: string;
   description: string;
+  dimensions: string;
   image: AdLandingImage;
 };
 
 export type AdLandingDetail = {
   title: string;
-  benefit: string;
-  technical: string;
+  description: string;
 };
 
 export type AdLandingFaq = {
@@ -51,6 +51,7 @@ export type LandingConfig = {
     eyebrow: string;
     title: string;
     lead: string;
+    ctaLabel: string;
     items: AdLandingModel[];
   };
   engineering: {
@@ -58,6 +59,7 @@ export type LandingConfig = {
     title: string;
     lead: string;
     image: AdLandingImage;
+    insightStrip: string[];
     details: AdLandingDetail[];
   };
   selection: {

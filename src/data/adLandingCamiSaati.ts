@@ -1,18 +1,36 @@
+import { productItems } from "@/data/landing";
 import type { LandingConfig } from "@/types/adLanding";
 
 const whatsappMessage = encodeURIComponent(
   "Merhaba, cami saati modelleriniz hakkında bilgi almak istiyorum.",
 );
 
+const models = productItems.map((product) => {
+  const primaryImage = product.media[0];
+
+  return {
+    id: product.id,
+    title: product.shortName,
+    description: product.summary,
+    dimensions: product.dimensions,
+    image: {
+      src: `/images/landing/cami-saati/${product.id}-640.webp`,
+      alt: primaryImage.alt,
+      width: 640,
+      height: 800,
+    },
+  };
+});
+
 export const camiSaatiLanding: LandingConfig = {
   variant: "cami-saati",
   hero: {
     eyebrow: "Vakitmatik / Profesyonel Cami Saati",
-    title: "Caminizin vaktini güvenle yönetin.",
+    title: "Cami saatiniz hep güncel kalsın.",
     lead:
-      "Vakitmatik cami saati; namaz vakitlerini net gösteren, mobil uygulama ile kolay güncellenen ve üç yıl garantiyle sunulan profesyonel bir namaz vakti panosudur.",
-    microCopy: "Cami saati · Namaz vakti panosu · Mobil uygulama ile güncelleme",
-    primaryCta: "WhatsApp’tan bilgi alın",
+      "Vakitmatik cami saati; namaz vakitlerini Diyanet verilerine göre gösteren, mobil uygulama ile kolayca güncellenen ve 3 yıl garantiyle sunulan yerli üretim bir cami saatidir.",
+    microCopy: "Diyanet verileri · Mobil uygulama · Yerli üretim",
+    primaryCta: "WhatsApp’tan yazın",
     secondaryCta: "Hemen arayın",
     productImage: {
       src: "/images/seo/vakitmatik-cami-saati.webp",
@@ -33,118 +51,82 @@ export const camiSaatiLanding: LandingConfig = {
     {
       index: "01",
       title: "3 yıl garanti",
-      description: "Üretim kalitesine dayanan uzun süreli güvence.",
+      description: "Üretim kaynaklı hata ve arızalara karşı 3 yıl güvence.",
     },
     {
       index: "02",
-      title: "Telefondan güncelleme",
-      description: "Güncel vakitleri bilgisayara ihtiyaç duymadan aktarın.",
+      title: "Mobil uygulamayla güncelleme",
+      description: "Namaz vakitlerini telefonunuzdan kolayca güncelleyin.",
     },
     {
       index: "03",
-      title: "Hassas zaman takibi",
-      description: "Üretimde kalibre edilen saat devresiyle güvenilir kullanım.",
+      title: "Türkiye’nin her yerine kargo",
+      description: "Ürünlerinizi Türkiye genelinde adresinize gönderiyoruz.",
     },
   ],
   models: {
-    eyebrow: "Cami saati çözümleri",
-    title: "Caminize uygun üç güçlü yaklaşım.",
+    eyebrow: "Vakitmatik ürün ailesi",
+    title: "Cami Saati Modelleri",
     lead:
-      "Mimari görünüm, izleme mesafesi ve göstermek istediğiniz içerik belirlenir; ihtiyacınıza uyan ürün ailesi birlikte seçilir.",
-    items: [
-      {
-        label: "Klasik seri",
-        title: "Caminin mimarisiyle bütünleşir.",
-        description: "Dekoratif çerçeve ve yüksek kontrastlı namaz vakti görünümü.",
-        image: {
-          src: "/images/seo/vakitmatik-yatay-cami-saati.webp",
-          alt: "Cami içerisinde klasik yatay Vakitmatik namaz vakti panosu",
-          width: 1122,
-          height: 1402,
-        },
-      },
-      {
-        label: "Mesaj serisi",
-        title: "Vakitlerle birlikte mesajınız da görünür.",
-        description: "Namaz vakitleriyle ayet, hadis ve duyuru alanını birleştiren yapı.",
-        image: {
-          src: "/images/seo/vakitmatik-mesajli-namaz-vakti-panosu.webp",
-          alt: "Ayet, hadis ve duyuru gösterebilen Vakitmatik cami saati",
-          width: 1122,
-          height: 1402,
-        },
-      },
-      {
-        label: "LCD seri",
-        title: "Yeni nesil camiler için dijital yüzey.",
-        description: "Namaz vakitlerini ve görsel içerikleri aynı ekranda buluşturur.",
-        image: {
-          src: "/images/seo/vakitmatik-lcd-cami-saati.webp",
-          alt: "Cami içerisinde Vakitmatik LCD namaz vakti ekranı",
-          width: 1122,
-          height: 1402,
-        },
-      },
-    ],
+      "Klasik desenli modellerden mesaj, kayan yazı, LED, modül ve LCD seçeneklerine kadar tüm Vakitmatik cami saati modellerini inceleyin.",
+    ctaLabel: "Modeller için WhatsApp’tan yazın",
+    items: models,
   },
   engineering: {
     eyebrow: "Neden Vakitmatik?",
     title: "İyi görünen ürünün arkasında iyi mühendislik var.",
     lead:
-      "Kullanırken yalnızca sadeliği görürsünüz. Uzun süre güvenilir çalışmasını sağlayan teknik ayrıntılar ise üretim sürecinde çözülür.",
+      "Günlük kullanım sade; vakit güncelleme, zaman yedekleme ve garanti desteği işinizi kolaylaştırır.",
     image: {
-      src: "/images/seo/vakitmatik-cami-saati-desen-mavi.webp",
+      src: "/images/landing/cami-saati/vakitmatik-desen-mavi-640.webp",
       alt: "Cami içinde kullanılan mavi desenli Vakitmatik cami saati",
-      width: 1122,
-      height: 1402,
+      width: 640,
+      height: 800,
     },
+    insightStrip: ["Sade kullanım", "Mobil güncelleme", "Güvenilir yedekleme"],
     details: [
       {
-        title: "Uzun süre doğru kalan saat",
-        benefit: "Vakit bilgisini güvenle takip edin.",
-        technical:
-          "Düşük sapmalı RTC zaman devresi üretim sırasında kalibre edilir ve teslimat öncesinde doğrulanır.",
-      },
-      {
-        title: "Elektrik kesintisine karşı yedekleme",
-        benefit: "Saat ve ayarlarınız korunsun.",
-        technical:
-          "Duracell yedekleme pili ve ilgili devre bileşenleri üretim testinden geçirilir.",
+        title: "Diyanet verilerine göre güncel vakitler",
+        description:
+          "Vakitler, T.C. Diyanet İşleri Başkanlığının yayımladığı veriler esas alınarak mobil uygulama üzerinden cihaza aktarılır.",
       },
       {
         title: "Telefondan kolay güncelleme",
-        benefit: "Bilgisayar olmadan birkaç adımda vakit aktarın.",
-        technical:
-          "Vakitmatik mobil uygulaması güncel namaz vakti verilerini cihazla doğrudan bağlantı kurarak aktarır.",
+        description:
+          "Bilgisayar kullanmadan güncel namaz vakitlerini telefonunuzdan cihaza aktarın.",
       },
       {
-        title: "Teslimat öncesi tam kontrol",
-        benefit: "Kurulduğu günden itibaren tutarlı çalışsın.",
-        technical:
-          "Her ürünün zaman sapması, ekran fonksiyonları, bağlantısı ve yedekleme devresi teslimat öncesinde kontrol edilir.",
+        title: "Elektrik kesintisine karşı yedekleme",
+        description:
+          "Saat bilgisinin korunmasına yardımcı olan yedekleme devresinde Duracell pil kullanılır.",
+      },
+      {
+        title: "Yerli üretim, 3 yıl garanti",
+        description:
+          "Vakitmatik cami saatleri yerli olarak üretilir ve üretim kaynaklı hata ve arızalara karşı 3 yıl garanti kapsamındadır.",
       },
     ],
   },
   selection: {
-    eyebrow: "Doğru model seçimi",
-    title: "Caminize göre netleştirelim.",
+    eyebrow: "Birlikte bakalım",
+    title: "Üç kısa adımda tamamlayalım.",
     lead:
-      "Tek bir fiyat listesi yerine alanı, izleme mesafesini ve içerik ihtiyacını anlayarak doğru cami saatini seçiyoruz.",
+      "Caminizin bir fotoğrafını veya yaklaşık ölçüsünü WhatsApp’tan göndermeniz yeterli.",
     steps: [
       {
         index: "01",
-        title: "Alanı anlayalım",
-        description: "Caminin ölçüsü, montaj noktası ve izleme mesafesi değerlendirilir.",
+        title: "Fotoğrafı gönderin",
+        description: "Caminizi ve saatin yerleşeceği alanı kısaca görelim.",
       },
       {
         index: "02",
-        title: "Ürün ailesini seçelim",
-        description: "Klasik, mesajlı veya LCD seçenekleri ihtiyaca göre sadeleştirilir.",
+        title: "Birlikte bakalım",
+        description: "Görünüş ve kullanımınıza uygun modeli konuşalım.",
       },
       {
         index: "03",
-        title: "Teklifi netleştirelim",
-        description: "Seçilen model ve ölçü için açık, anlaşılır teklif paylaşılır.",
+        title: "Adresinize gönderelim",
+        description: "Vakitmatik’inizi Türkiye’nin her yerine kargo ile ulaştıralım.",
       },
     ],
   },
@@ -170,17 +152,17 @@ export const camiSaatiLanding: LandingConfig = {
         "Vakitmatik ürünleri üretim kaynaklı hata ve arızalara karşı üç yıl garanti kapsamındadır.",
     },
     {
-      question: "Cami saati fiyatı nasıl belirlenir?",
+      question: "Türkiye’nin her yerine gönderim yapıyor musunuz?",
       answer:
-        "Fiyat; seçilen ürün ailesine, ölçüye, ekran tipine ve kullanım ihtiyacına göre netleşir. Kısa bir görüşmeyle doğru model üzerinden teklif hazırlanır.",
+        "Evet. Vakitmatik cami saatlerini Türkiye’nin her yerine kargo ile gönderiyoruz.",
     },
   ],
   contact: {
-    eyebrow: "Doğru modeli birlikte seçelim",
-    title: "Caminize uygun Vakitmatik’i konuşalım.",
+    eyebrow: "Sorunuz mu var?",
+    title: "WhatsApp’tan yazın, birlikte bakalım.",
     lead:
-      "Kullanım alanınızı ve görünürlük ihtiyacınızı paylaşın; seçenekleri sadeleştirip doğru model üzerinden ilerleyelim.",
-    whatsappLabel: "WhatsApp’tan bilgi alın",
+      "Cami saati modelleri, ölçüler ve gönderim hakkında bize yazabilir veya doğrudan arayabilirsiniz.",
+    whatsappLabel: "WhatsApp’tan yazın",
     whatsappHref: `https://wa.me/905333827533?text=${whatsappMessage}`,
     phoneLabel: "+90 533 382 75 33",
     phoneHref: "tel:+905333827533",

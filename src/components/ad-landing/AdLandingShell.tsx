@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { LandingConfig } from "@/types/adLanding";
+import { AdLandingProductRail } from "./AdLandingProductRail";
 import styles from "./AdLandingShell.module.css";
 
 type AdLandingShellProps = {
@@ -28,19 +29,19 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
               <Image
                 alt="Vakitmatik"
                 className={styles.logo}
-                height={113}
+                height={56}
                 priority
-                src="/images/vakitmatik-logo2.png"
-                width={810}
+                src="/images/landing/vakitmatik-logo-400.webp"
+                width={400}
               />
             </a>
             <div className={styles.navLinks}>
-              <a href="#models">Çözümler</a>
+              <a href="#models">Modeller</a>
               <a href="#engineering">Neden Vakitmatik?</a>
               <a href="#selection">Model seçimi</a>
             </div>
             <a className={styles.navCta} href="#contact">
-              Bilgi alın
+              Bize yazın
             </a>
           </nav>
 
@@ -136,27 +137,46 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
             </div>
           </header>
 
-          <div className={styles.modelGrid}>
-            {config.models.items.map((model, index) => (
-              <article className={styles.modelCard} key={model.title}>
+          <AdLandingProductRail
+            itemCount={config.models.items.length}
+            trackId="cami-saati-model-rayi"
+          >
+            {config.models.items.map((model) => (
+              <article
+                className={styles.modelCard}
+                data-product-card
+                id={`model-${model.id}`}
+                key={model.id}
+              >
                 <figure className={styles.modelMedia}>
                   <Image
                     alt={model.image.alt}
                     className={styles.modelImage}
                     height={model.image.height}
-                    sizes="(max-width: 720px) 92vw, (max-width: 1100px) 46vw, 380px"
+                    loading="lazy"
+                    sizes="(max-width: 760px) 84vw, (max-width: 1050px) 44vw, 385px"
                     src={model.image.src}
                     width={model.image.width}
                   />
-                  <span className={styles.modelNumber}>0{index + 1}</span>
                 </figure>
                 <div className={styles.modelCopy}>
-                  <p>{model.label}</p>
                   <h3>{model.title}</h3>
                   <span>{model.description}</span>
+                  <p>{model.dimensions}</p>
                 </div>
               </article>
             ))}
+          </AdLandingProductRail>
+
+          <div className={styles.modelAction}>
+            <a
+              href={config.contact.whatsappHref}
+              rel={whatsappExternal ? "noreferrer" : undefined}
+              target={whatsappExternal ? "_blank" : undefined}
+            >
+              {config.models.ctaLabel}
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </section>
@@ -165,20 +185,23 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
         <div className={`${styles.shell} ${styles.engineeringLayout}`}>
           <div className={styles.engineeringVisual}>
             <figure>
-              <Image
-                alt={config.engineering.image.alt}
-                className={styles.engineeringImage}
-                height={config.engineering.image.height}
-                sizes="(max-width: 900px) 92vw, 520px"
-                src={config.engineering.image.src}
-                width={config.engineering.image.width}
-              />
+              <div className={styles.engineeringMedia}>
+                <Image
+                  alt={config.engineering.image.alt}
+                  className={styles.engineeringImage}
+                  height={config.engineering.image.height}
+                  loading="lazy"
+                  sizes="(max-width: 900px) 92vw, 520px"
+                  src={config.engineering.image.src}
+                  width={config.engineering.image.width}
+                />
+              </div>
+              <figcaption className={styles.engineeringStrip}>
+                {config.engineering.insightStrip.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </figcaption>
             </figure>
-            <p>
-              <strong>Görünen:</strong> sade kullanım
-              <span />
-              <strong>Arkasında:</strong> kontrollü mühendislik
-            </p>
           </div>
 
           <div className={styles.engineeringCopy}>
@@ -190,14 +213,11 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
               {config.engineering.details.map((detail, index) => (
                 <details className={styles.detailItem} key={detail.title}>
                   <summary>
-                    <span>0{index + 1}</span>
-                    <div>
-                      <strong>{detail.title}</strong>
-                      <small>{detail.benefit}</small>
-                    </div>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{detail.title}</strong>
                     <i aria-hidden="true">+</i>
                   </summary>
-                  <p>{detail.technical}</p>
+                  <p>{detail.description}</p>
                 </details>
               ))}
             </div>
@@ -273,7 +293,13 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
 
       <footer className={styles.footer}>
         <div className={styles.shell}>
-          <Image alt="Vakitmatik" height={113} src="/images/vakitmatik-logo2.png" width={810} />
+          <Image
+            alt="Vakitmatik"
+            height={56}
+            loading="lazy"
+            src="/images/landing/vakitmatik-logo-400.webp"
+            width={400}
+          />
           <p>{config.footerNote}</p>
         </div>
       </footer>

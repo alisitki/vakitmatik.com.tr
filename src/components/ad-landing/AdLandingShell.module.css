@@ -2,7 +2,7 @@
   --adlp-blue: #4f8cff;
   --adlp-blue-strong: #2f6ff3;
   --adlp-ink: #0b0d12;
-  --adlp-muted: #6f737c;
+  --adlp-muted: #62666e;
   --adlp-paper: #f5f3ee;
   --adlp-line: rgba(11, 13, 18, 0.13);
   min-height: 100vh;
@@ -11,11 +11,11 @@
   color: var(--adlp-ink);
 }
 
-.page :where(a, summary) {
+.page :where(a, summary, button) {
   -webkit-tap-highlight-color: transparent;
 }
 
-.page :where(a, summary):focus-visible {
+.page :where(a, summary, button):focus-visible {
   outline: 2px solid var(--adlp-blue);
   outline-offset: 4px;
 }
@@ -443,33 +443,117 @@
   line-height: 1.7;
 }
 
-.modelGrid {
-  display: grid;
-  grid-template-columns: 1.14fr 0.93fr 0.93fr;
+.productRail {
+  min-width: 0;
+}
+
+.railToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.railToolbar > p {
+  color: #5f6672;
+  font-size: 0.74rem;
+  font-weight: 780;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.railButtons {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.railButtons button {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--adlp-line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--adlp-ink);
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.railButtons button:not(:disabled):hover {
+  border-color: rgba(47, 111, 243, 0.55);
+  color: var(--adlp-blue-strong);
+  transform: translateY(-2px);
+}
+
+.railButtons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.34;
+}
+
+.railButtons span {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.modelTrack {
+  display: grid;
+  grid-auto-columns: 31%;
+  grid-auto-flow: column;
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 0.25rem 0.2rem 1.25rem;
+  scroll-padding-inline: 0.2rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: rgba(47, 111, 243, 0.42) rgba(11, 13, 18, 0.08);
+  scrollbar-width: thin;
+}
+
+.modelTrack::-webkit-scrollbar {
+  height: 0.42rem;
+}
+
+.modelTrack::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(11, 13, 18, 0.08);
+}
+
+.modelTrack::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(47, 111, 243, 0.42);
 }
 
 .modelCard {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid var(--adlp-line);
   border-radius: 1rem;
   background: #fff;
   box-shadow: 0 1.2rem 3.5rem rgba(13, 17, 24, 0.055);
+  scroll-snap-align: start;
 }
 
 .modelMedia {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   margin: 0;
-  background: #e8e4dc;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(79, 140, 255, 0.13), transparent 48%),
+    #ece9e2;
 }
 
 .modelImage {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  padding: clamp(0.85rem, 2.1vw, 1.45rem);
+  object-fit: contain;
   transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -477,35 +561,11 @@
   transform: scale(1.025);
 }
 
-.modelNumber {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 50%;
-  background: rgba(10, 12, 16, 0.45);
-  color: #fff;
-  font-size: 0.68rem;
-  font-weight: 800;
-  backdrop-filter: blur(10px);
-}
-
 .modelCopy {
   display: grid;
+  align-content: start;
   gap: 0.65rem;
   padding: 1.5rem 1.4rem 1.7rem;
-}
-
-.modelCopy > p {
-  color: #477de7;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
 }
 
 .modelCopy h3 {
@@ -520,6 +580,44 @@
   color: var(--adlp-muted);
   font-size: 0.85rem;
   line-height: 1.6;
+}
+
+.modelCopy > p {
+  align-self: end;
+  margin-top: 0.25rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--adlp-line);
+  color: #3869c9;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.modelAction {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.6rem;
+}
+
+.modelAction a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 3.5rem;
+  padding-inline: 1.25rem;
+  border-radius: 0.65rem;
+  background: var(--adlp-ink);
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 800;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.modelAction a:hover {
+  background: var(--adlp-blue-strong);
+  transform: translateY(-2px);
 }
 
 .engineeringSection {
@@ -540,20 +638,23 @@
 }
 
 .engineeringVisual {
-  position: relative;
+  min-width: 0;
 }
 
 .engineeringVisual figure {
+  margin: 0;
+}
+
+.engineeringMedia {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  margin: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 1rem;
   background: radial-gradient(circle at 50% 42%, rgba(55, 105, 216, 0.26), transparent 58%);
 }
 
-.engineeringVisual figure::after {
+.engineeringMedia::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -570,34 +671,26 @@
   filter: drop-shadow(0 2rem 2.6rem rgba(0, 0, 0, 0.52));
 }
 
-.engineeringVisual > p {
-  position: absolute;
-  right: -2rem;
-  bottom: 2.2rem;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: auto;
-  gap: 0.28rem;
-  min-width: 15rem;
-  margin: 0;
-  padding: 1rem 1.1rem;
+.engineeringStrip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+  padding: 0.9rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 0.75rem;
-  background: rgba(14, 17, 24, 0.8);
-  color: rgba(255, 255, 255, 0.52);
-  font-size: 0.72rem;
-  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.7rem;
+  font-weight: 720;
+  line-height: 1.5;
 }
 
-.engineeringVisual > p strong {
-  color: #fff;
-  font-weight: 700;
-}
-
-.engineeringVisual > p span {
-  height: 1px;
-  margin-block: 0.28rem;
-  background: rgba(255, 255, 255, 0.11);
+.engineeringStrip span + span::before {
+  content: "·";
+  margin-right: 0.65rem;
+  color: #75a5ff;
 }
 
 .engineeringCopy {
@@ -651,19 +744,9 @@
   font-weight: 850;
 }
 
-.detailItem summary > div {
-  display: grid;
-  gap: 0.24rem;
-}
-
 .detailItem summary strong {
   font-size: 1rem;
   font-weight: 700;
-}
-
-.detailItem summary small {
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.74rem;
 }
 
 .detailItem summary i {
@@ -720,7 +803,7 @@
 .selectionCard > span {
   display: inline-flex;
   margin-bottom: 4.5rem;
-  color: #477de7;
+  color: #3869c9;
   font-size: 0.7rem;
   font-weight: 850;
 }
@@ -882,7 +965,7 @@
 
 .contactActions small {
   margin-top: 0.25rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.58);
   font-size: 0.68rem;
   text-align: center;
 }
@@ -891,7 +974,7 @@
   padding-block: 1.6rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: #07090d;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .footer > div {
@@ -933,20 +1016,8 @@
     font-size: clamp(3.4rem, 7vw, 5.3rem);
   }
 
-  .modelGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .modelCard:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .modelCard:first-child .modelMedia {
-    aspect-ratio: 16 / 9;
-  }
-
-  .modelCard:first-child .modelImage {
-    object-position: center 48%;
+  .modelTrack {
+    grid-auto-columns: 46%;
   }
 
   .engineeringLayout {
@@ -1006,7 +1077,7 @@
 
   .heroCopy h1 {
     max-width: 100%;
-    font-size: clamp(2.75rem, 13vw, 4rem);
+    font-size: clamp(2.9rem, 15vw, 4rem);
     line-height: 0.98;
   }
 
@@ -1037,8 +1108,8 @@
   }
 
   .productFrame {
-    right: 2%;
-    width: min(70%, 19rem);
+    right: 4%;
+    width: min(58%, 17rem);
   }
 
   .phoneFrame {
@@ -1081,17 +1152,21 @@
     font-size: clamp(2.55rem, 11vw, 3.6rem);
   }
 
-  .modelGrid {
-    grid-template-columns: 1fr;
+  .modelTrack {
+    grid-auto-columns: 86%;
   }
 
-  .modelCard:first-child {
-    grid-column: auto;
+  .railButtons button {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
-  .modelCard:first-child .modelMedia,
-  .modelMedia {
-    aspect-ratio: 4 / 4.7;
+  .modelAction {
+    justify-content: stretch;
+  }
+
+  .modelAction a {
+    width: 100%;
   }
 
   .engineeringSection {
@@ -1105,12 +1180,6 @@
   .engineeringVisual {
     width: min(100%, 30rem);
     margin-inline: auto;
-  }
-
-  .engineeringVisual > p {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    min-width: 13.5rem;
   }
 
   .detailItem summary {
@@ -1205,6 +1274,8 @@
   .modelImage,
   .primaryButton,
   .secondaryButton,
+  .railButtons button,
+  .modelAction a,
   .detailItem summary i,
   .faqItem summary span {
     transition: none;

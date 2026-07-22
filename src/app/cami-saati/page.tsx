@@ -6,7 +6,7 @@ import { camiSaatiLanding } from "@/data/adLandingCamiSaati";
 const path = "/cami-saati/";
 const metaTitle = "Vakitmatik Cami Saati ve Namaz Vakti Panosu";
 const metaDescription =
-  "Vakitmatik cami saati ve namaz vakti panosu: mobil uygulama ile güncelleme, 3 yıl garanti, hassas zaman takibi ve ihtiyaca uygun modeller.";
+  "Vakitmatik cami saati modelleri: Diyanet verilerine göre namaz vakitleri, mobil uygulamayla kolay güncelleme, 3 yıl garanti ve Türkiye geneline kargo.";
 
 export const metadata: Metadata = createPageMetadata({
   title: metaTitle,
@@ -53,15 +53,45 @@ const structuredData = {
         },
         {
           "@type": "PropertyValue",
-          name: "Zaman devresi",
-          value: "Üretimde kalibre edilmiş düşük sapmalı RTC",
+          name: "Namaz vakti verisi",
+          value: "T.C. Diyanet İşleri Başkanlığı verileri",
         },
         {
           "@type": "PropertyValue",
           name: "Yedekleme",
-          value: "Duracell pil destekli zaman yedekleme",
+          value: "Duracell pil kullanılan zaman yedekleme devresi",
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Üretim",
+          value: "Yerli üretim",
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Gönderim",
+          value: "Türkiye’nin her yerine kargo",
         },
       ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${pageUrl}#models`,
+      name: "Vakitmatik Cami Saati Modelleri",
+      numberOfItems: camiSaatiLanding.models.items.length,
+      itemListElement: camiSaatiLanding.models.items.map((model, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${pageUrl}#model-${model.id}`,
+        item: {
+          "@type": "Product",
+          name: `Vakitmatik ${model.title} Cami Saati`,
+          description: model.description,
+          category: "Cami saati ve namaz vakti panosu",
+          image: absoluteUrl(model.image.src),
+          url: `${pageUrl}#model-${model.id}`,
+          brand: { "@id": brandId },
+        },
+      })),
     },
     {
       "@type": "BreadcrumbList",
