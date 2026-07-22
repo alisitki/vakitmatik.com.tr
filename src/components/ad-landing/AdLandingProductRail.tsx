@@ -6,7 +6,6 @@ import styles from "./AdLandingShell.module.css";
 
 type AdLandingProductRailProps = {
   children: ReactNode;
-  itemCount: number;
   trackId: string;
 };
 
@@ -17,7 +16,6 @@ type NavigationState = {
 
 export function AdLandingProductRail({
   children,
-  itemCount,
   trackId,
 }: AdLandingProductRailProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -84,7 +82,7 @@ export function AdLandingProductRail({
   return (
     <div className={styles.productRail}>
       <div className={styles.railToolbar}>
-        <p>{itemCount} cami saati modeli</p>
+        <p>Cami saati modelleri</p>
         <div
           aria-label="Ürün rayı kontrolleri"
           className={styles.railButtons}

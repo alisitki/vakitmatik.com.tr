@@ -18,7 +18,7 @@ export const fiyatModelLanding: LandingConfig = {
     title: "Cami saati fiyatları modele ve ölçüye göre değişir.",
     lead:
       "Klasik, mesajlı, LED, modül ve LCD Vakitmatik cami saatlerinin ölçüleri ve özellikleri farklıdır. Modelleri inceleyin; beğendiğiniz ürünün güncel fiyatını WhatsApp’tan veya telefonla öğrenin.",
-    microCopy: "10 model · 3 yıl garanti · Türkiye geneli kargo",
+    microCopy: "3 yıl garanti · Türkiye geneli kargo",
     primaryCta: "WhatsApp’tan fiyat sorun",
     mobilePrimaryCta: "WhatsApp",
     secondaryCta: "Hemen arayın",
@@ -28,7 +28,7 @@ export const fiyatModelLanding: LandingConfig = {
   proofs: [
     {
       index: "01",
-      title: "10 farklı model",
+      title: "Farklı model seçenekleri",
       description: "Klasik, mesajlı, kayan yazı, LED, modül ve LCD seçenekleri.",
     },
     {

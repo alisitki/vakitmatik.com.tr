@@ -146,7 +146,6 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
           </header>
 
           <AdLandingProductRail
-            itemCount={config.models.items.length}
             trackId={`${config.variant}-model-rayi`}
           >
             {config.models.items.map((model) => (
