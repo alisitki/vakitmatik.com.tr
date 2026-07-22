@@ -104,7 +104,7 @@ export const ayetHadisLanding: LandingConfig = {
     eyebrow: "Vakitmatik ürün ailesi",
     title: "Cami Mesaj Panosu Modelleri",
     lead:
-      "Sayfalı mesaj alanı, kayan yazı, modül ve LCD ekran seçeneklerini inceleyin. Beğendiğiniz ürünün kartına tıklayarak ana sayfadaki tüm görsellerine ve özelliklerine ulaşabilirsiniz.",
+      "Namaz vakitlerini ayet, hadis, Esmaül Hüsna ve duyurularınızla birlikte gösterin. Caminize uygun ekran modelini seçin.",
     railLabel: "Cami mesaj panosu modelleri",
     items: models,
   },
