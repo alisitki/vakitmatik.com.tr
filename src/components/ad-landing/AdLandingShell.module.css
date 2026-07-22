@@ -1027,6 +1027,11 @@
     width: min(58%, 17rem);
   }
 
+  .page[data-variant="fiyat-model"] .productFrame {
+    right: 7%;
+    width: min(48%, 14rem);
+  }
+
   .phoneFrame {
     left: 8%;
     width: clamp(6.2rem, 24vw, 7.4rem);

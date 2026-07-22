@@ -12,7 +12,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
   const whatsappExternal = config.contact.whatsappHref.startsWith("http");
 
   return (
-    <main className={styles.page}>
+    <main className={styles.page} data-variant={config.variant}>
       {config.previewNote ? (
         <aside className={styles.previewBar} id="design-notes">
           <span>Tasarım önizlemesi</span>
