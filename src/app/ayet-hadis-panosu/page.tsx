@@ -6,7 +6,7 @@ import { ayetHadisLanding } from "@/data/adLandingAyetHadis";
 const path = "/ayet-hadis-panosu/";
 const metaTitle = "Ayet Hadis Panosu ve Cami Mesaj Panosu";
 const metaDescription =
-  "Vakitmatik ayet hadis ve cami mesaj panosu modelleri: mesaj, kayan yazı, modül ve LCD seçeneklerini ölçü ve özellikleriyle inceleyin.";
+  "Namaz vakitleriyle birlikte Ayet, Hadis, Esmaül Hüsna ve duyuruları gösteren, cep telefonundan ayarlanabilen Vakitmatik cami mesaj panoları.";
 
 export const metadata: Metadata = createPageMetadata({
   title: metaTitle,

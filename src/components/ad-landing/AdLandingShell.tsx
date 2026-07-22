@@ -88,7 +88,14 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
               <p className={styles.microCopy}>{config.hero.microCopy}</p>
             </div>
 
-            <div className={styles.heroVisual} aria-label="Vakitmatik ürün ve mobil uygulama görünümü">
+            <div
+              className={styles.heroVisual}
+              aria-label={
+                config.hero.secondaryProductImage
+                  ? "Kırmızı ve yeşil Vakitmatik modül cami mesaj panoları"
+                  : "Vakitmatik ürün ve mobil uygulama görünümü"
+              }
+            >
               <div className={styles.visualHalo} aria-hidden="true" />
               <figure className={styles.productFrame}>
                 <picture>
@@ -106,23 +113,52 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                     className={styles.productImage}
                     fetchPriority="high"
                     height={config.hero.productImage.height}
+                    loading="eager"
                     sizes="(max-width: 720px) 58vw, (max-width: 1100px) 36vw, 410px"
                     src={config.hero.productImage.src}
                     width={config.hero.productImage.width}
                   />
                 </picture>
               </figure>
-              <figure className={styles.phoneFrame}>
-                <span className={styles.phoneSpeaker} aria-hidden="true" />
-                <Image
-                  alt={config.hero.appImage.alt}
-                  className={styles.phoneImage}
-                  height={config.hero.appImage.height}
-                  sizes="(max-width: 720px) 22vw, 150px"
-                  src={config.hero.appImage.src}
-                  width={config.hero.appImage.width}
-                />
-              </figure>
+              {config.hero.secondaryProductImage ? (
+                <figure className={styles.secondaryProductFrame}>
+                  <picture>
+                    {config.hero.secondaryProductImage.mobileSrc ? (
+                      <source
+                        media="(max-width: 560px)"
+                        srcSet={config.hero.secondaryProductImage.mobileSrc}
+                      />
+                    ) : null}
+                    {config.hero.secondaryProductImage.tabletSrc ? (
+                      <source
+                        media="(min-width: 561px) and (max-width: 900px)"
+                        srcSet={config.hero.secondaryProductImage.tabletSrc}
+                      />
+                    ) : null}
+                    <Image
+                      alt={config.hero.secondaryProductImage.alt}
+                      className={styles.secondaryProductImage}
+                      fetchPriority="low"
+                      height={config.hero.secondaryProductImage.height}
+                      sizes="(max-width: 720px) 54vw, (max-width: 1100px) 34vw, 350px"
+                      src={config.hero.secondaryProductImage.src}
+                      width={config.hero.secondaryProductImage.width}
+                    />
+                  </picture>
+                </figure>
+              ) : config.hero.appImage ? (
+                <figure className={styles.phoneFrame}>
+                  <span className={styles.phoneSpeaker} aria-hidden="true" />
+                  <Image
+                    alt={config.hero.appImage.alt}
+                    className={styles.phoneImage}
+                    height={config.hero.appImage.height}
+                    sizes="(max-width: 720px) 22vw, 150px"
+                    src={config.hero.appImage.src}
+                    width={config.hero.appImage.width}
+                  />
+                </figure>
+              ) : null}
             </div>
           </div>
 

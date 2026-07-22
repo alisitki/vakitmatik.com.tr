@@ -52,7 +52,8 @@ export type LandingConfig = {
     secondaryCta: string;
     secondaryHref?: string;
     productImage: AdLandingImage;
-    appImage: AdLandingImage;
+    secondaryProductImage?: AdLandingImage;
+    appImage?: AdLandingImage;
   };
   proofs: AdLandingProof[];
   models: {

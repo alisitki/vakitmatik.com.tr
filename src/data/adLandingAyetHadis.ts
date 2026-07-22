@@ -1,12 +1,12 @@
 import { productItems } from "@/data/landing";
 import type { LandingConfig } from "@/types/adLanding";
 
-const modelIds = new Set([
+const modelIds = [
+  "vakitmatik-modul",
   "vakitmatik-mesaj",
   "vakitmatik-kayan",
-  "vakitmatik-modul",
   "vakitmatik-lcd",
-]);
+] as const;
 
 const modelDescriptions: Record<string, string> = {
   "vakitmatik-mesaj":
@@ -19,24 +19,30 @@ const modelDescriptions: Record<string, string> = {
     "Namaz vakitlerini fotoğraf ve grafiklerle birlikte yüksek çözünürlüklü 4K ekranda gösterir.",
 };
 
-const models = productItems
-  .filter((product) => modelIds.has(product.id))
-  .map((product) => {
-    const primaryImage = product.media[0];
+const models = modelIds.flatMap((modelId) => {
+  const product = productItems.find((item) => item.id === modelId);
 
-    return {
+  if (!product) {
+    return [];
+  }
+
+  const primaryImage = product.media[0];
+
+  return [
+    {
       id: product.id,
       title: product.shortName,
       description: modelDescriptions[product.id] ?? product.summary,
       dimensions: product.dimensions,
       image: {
-        src: `/images/landing/cami-saati/${product.id}-640.webp`,
+        src: `/images/landing/ayet-hadis/${product.id}-480.webp`,
         alt: primaryImage.alt,
-        width: 640,
-        height: 800,
+        width: 480,
+        height: 600,
       },
-    };
-  });
+    },
+  ];
+});
 
 const whatsappMessage = encodeURIComponent(
   "Merhaba, ayet hadis ve cami mesaj panosu modelleriniz hakkında bilgi almak istiyorum.",
@@ -52,10 +58,10 @@ export const ayetHadisLanding: LandingConfig = {
   },
   hero: {
     eyebrow: "Vakitmatik / Ayet Hadis Panosu",
-    title: "Mesajınız her zaman görünür.",
+    title: "Ayet, Hadis, Esmaül Hüsna ve Duyurularınız.",
     lead:
-      "Vakitmatik ayet hadis ve cami mesaj panosu seçenekleri; ayet, hadis, duyuru ve namaz vakti bilgilerini caminizde düzenli ve okunaklı biçimde göstermenizi sağlar.",
-    microCopy: "Ayet · Hadis · Cami duyuruları",
+      "Namaz vakitleriyle birlikte hazır Ayet, Hadis ve Esmaül Hüsna içeriklerini; ölüm ilanı, duyuru ve istediğiniz mesajları gösterebilir, tümünü cep telefonunuzdan ayarlayabilirsiniz.",
+    microCopy: "Ayet · Hadis · Esmaül Hüsna · Duyuru",
     primaryCta: "WhatsApp’tan yazın",
     mobilePrimaryCta: "WhatsApp",
     secondaryCta: "Ürünleri incele",
@@ -67,25 +73,26 @@ export const ayetHadisLanding: LandingConfig = {
       width: 480,
       height: 600,
     },
-    appImage: {
-      src: "/images/seo/vakitmatik-mobil-uygulama-namaz-vakti.webp",
-      alt: "Vakitmatik mobil uygulamasında namaz vakti güncelleme ekranı",
-      width: 400,
-      height: 836,
+    secondaryProductImage: {
+      src: "/images/landing/ayet-hadis/vakitmatik-modul-yesil-480.webp",
+      mobileSrc: "/images/landing/ayet-hadis/vakitmatik-modul-yesil-320.webp",
+      alt: "Yeşil LED Vakitmatik modül ayet hadis ve cami mesaj panosu",
+      width: 480,
+      height: 600,
     },
   },
   proofs: [
     {
       index: "01",
-      title: "Ayet, hadis ve duyuru alanı",
+      title: "Hazır dini içerikler",
       description:
-        "İçeriğinizi seçtiğiniz modele göre sayfalı veya kayan yazı biçiminde gösterin.",
+        "Ayet, Hadis ve Esmaül Hüsna içeriklerini namaz vakitleriyle birlikte gösterin.",
     },
     {
       index: "02",
-      title: "Namaz vakitleri aynı ekranda",
+      title: "Telefondan içerik yönetimi",
       description:
-        "Cami mesajlarınızla namaz vakti bilgilerini tek panoda bir araya getirin.",
+        "Duyuru, ölüm ilanı ve istediğiniz mesajları cep telefonunuzdan ayarlayın.",
     },
     {
       index: "03",
@@ -107,12 +114,12 @@ export const ayetHadisLanding: LandingConfig = {
     lead:
       "Kısa duyurular, kayan metinler, hazır içerikler ve görseller için farklı Vakitmatik ekran seçenekleri bulunur.",
     image: {
-      src: "/images/landing/cami-saati/vakitmatik-mesaj-640.webp",
-      alt: "Ayet, hadis ve duyuru alanlı Vakitmatik mesaj panosu",
-      width: 640,
-      height: 800,
+      src: "/images/landing/ayet-hadis/vakitmatik-modul-480.webp",
+      alt: "Kırmızı LED Vakitmatik modül ayet hadis ve cami mesaj panosu",
+      width: 480,
+      height: 600,
     },
-    insightStrip: ["Ayet ve hadis", "Cami duyuruları", "Namaz vakitleri"],
+    insightStrip: ["Ayet ve hadis", "Esmaül Hüsna", "Cami duyuruları"],
     details: [
       {
         title: "Sayfalı mesaj alanı",
@@ -157,9 +164,9 @@ export const ayetHadisLanding: LandingConfig = {
         "Mesaj modelinde üç satır ve 16 karakterlik içerikler sayfa sayfa gösterilir. Kayan Yazı modelinde metin, ekran üzerinde hareket ederek ilerler.",
     },
     {
-      question: "Namaz vakitleri telefondan güncellenebilir mi?",
+      question: "İçerikleri cep telefonundan ayarlayabilir miyiz?",
       answer:
-        "Evet. Uyumlu Vakitmatik modellerinde güncel namaz vakitleri mobil uygulama üzerinden cihaza aktarılabilir.",
+        "Evet. Namaz vakitlerini, hazır dini içerikleri ve kendi mesajlarınızı cep telefonunuzdan ayarlayabilirsiniz.",
     },
     {
       question: "Türkiye’nin her yerine gönderim yapıyor musunuz?",
