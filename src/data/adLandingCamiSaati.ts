@@ -38,7 +38,8 @@ export const camiSaatiLanding: LandingConfig = {
     microCopy: "Diyanet verileri · Mobil uygulama · Yerli üretim",
     primaryCta: "WhatsApp’tan yazın",
     mobilePrimaryCta: "WhatsApp",
-    secondaryCta: "Hemen arayın",
+    secondaryCta: "Ürünleri incele",
+    secondaryHref: "/#urun-deneyimi",
     productImage: {
       src: "/images/seo/vakitmatik-cami-saati.webp",
       mobileSrc: "/images/seo/vakitmatik-cami-saati-mobile.webp",

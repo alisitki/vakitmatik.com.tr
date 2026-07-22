@@ -73,7 +73,10 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                     ↗
                   </span>
                 </a>
-                <a className={styles.secondaryButton} href={config.contact.phoneHref}>
+                <a
+                  className={styles.secondaryButton}
+                  href={config.hero.secondaryHref ?? config.contact.phoneHref}
+                >
                   {config.hero.secondaryCta}
                 </a>
               </div>
@@ -155,25 +158,40 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                 id={`model-${model.id}`}
                 key={model.id}
               >
-                <figure className={styles.modelMedia}>
-                  <Image
-                    alt={model.image.alt}
-                    className={styles.modelImage}
-                    height={model.image.height}
-                    loading="lazy"
-                    sizes="(max-width: 760px) 84vw, (max-width: 1050px) 44vw, 385px"
-                    src={model.image.src}
-                    width={model.image.width}
-                  />
-                </figure>
-                <div className={styles.modelCopy}>
-                  <h3>{model.title}</h3>
-                  <span>{model.description}</span>
-                  <p>{model.dimensions}</p>
-                </div>
+                <Link
+                  aria-label={`${model.title} ürününü ana sayfada detaylı incele`}
+                  className={styles.modelCardLink}
+                  href={`/#${model.id}`}
+                >
+                  <figure className={styles.modelMedia}>
+                    <Image
+                      alt={model.image.alt}
+                      className={styles.modelImage}
+                      height={model.image.height}
+                      loading="lazy"
+                      sizes="(max-width: 760px) 84vw, (max-width: 1050px) 44vw, 385px"
+                      src={model.image.src}
+                      width={model.image.width}
+                    />
+                  </figure>
+                  <div className={styles.modelCopy}>
+                    <h3>{model.title}</h3>
+                    <span className={styles.modelDescription}>{model.description}</span>
+                    <p>{model.dimensions}</p>
+                    <span className={styles.modelDetailHint} aria-hidden="true">
+                      Ürünü detaylı incele <i>→</i>
+                    </span>
+                  </div>
+                </Link>
               </article>
             ))}
           </AdLandingProductRail>
+
+          <div className={styles.modelsExit}>
+            <Link href="/#urun-deneyimi">
+              Tüm ürünleri detaylı incele <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 

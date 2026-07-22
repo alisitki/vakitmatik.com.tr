@@ -50,6 +50,7 @@ export type LandingConfig = {
     primaryCta: string;
     mobilePrimaryCta?: string;
     secondaryCta: string;
+    secondaryHref?: string;
     productImage: AdLandingImage;
     appImage: AdLandingImage;
   };

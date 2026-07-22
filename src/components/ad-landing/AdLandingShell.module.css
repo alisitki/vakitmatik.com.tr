@@ -528,8 +528,6 @@
 }
 
 .modelCard {
-  display: grid;
-  grid-template-rows: auto 1fr;
   min-width: 0;
   overflow: hidden;
   border: 1px solid var(--adlp-line);
@@ -537,6 +535,25 @@
   background: #fff;
   box-shadow: 0 1.2rem 3.5rem rgba(13, 17, 24, 0.055);
   scroll-snap-align: start;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.modelCard:hover {
+  border-color: rgba(47, 111, 243, 0.34);
+  box-shadow: 0 1.5rem 4rem rgba(13, 17, 24, 0.1);
+  transform: translateY(-3px);
+}
+
+.modelCardLink {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100%;
+  color: inherit;
+}
+
+.modelCardLink:focus-visible {
+  outline: 3px solid rgba(47, 111, 243, 0.55);
+  outline-offset: -3px;
 }
 
 .modelMedia {
@@ -577,7 +594,7 @@
   letter-spacing: -0.035em;
 }
 
-.modelCopy > span {
+.modelDescription {
   color: var(--adlp-muted);
   font-size: 0.85rem;
   line-height: 1.6;
@@ -593,6 +610,59 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.modelDetailHint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.35rem;
+  color: var(--adlp-ink);
+  font-size: 0.78rem;
+  font-weight: 780;
+}
+
+.modelDetailHint i {
+  color: var(--adlp-blue-strong);
+  font-size: 1.05rem;
+  font-style: normal;
+  transition: transform 180ms ease;
+}
+
+.modelCard:hover .modelDetailHint i {
+  transform: translateX(3px);
+}
+
+.modelsExit {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 4vw, 3.2rem);
+}
+
+.modelsExit a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 3.5rem;
+  padding-inline: 1.4rem;
+  border: 1px solid rgba(11, 13, 18, 0.18);
+  border-radius: 999px;
+  color: var(--adlp-ink);
+  font-size: 0.86rem;
+  font-weight: 780;
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.modelsExit a:hover {
+  border-color: rgba(47, 111, 243, 0.55);
+  color: var(--adlp-blue-strong);
+  transform: translateY(-2px);
+}
+
+.modelsExit span {
+  font-size: 1.05rem;
 }
 
 .engineeringSection {
@@ -1140,6 +1210,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .modelImage,
+  .modelCard,
+  .modelDetailHint i,
+  .modelsExit a,
   .primaryButton,
   .secondaryButton,
   .railButtons button,
