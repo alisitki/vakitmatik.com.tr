@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { LandingConfig } from "@/types/adLanding";
 import { AdLandingProductRail } from "./AdLandingProductRail";
 import styles from "./AdLandingShell.module.css";
@@ -25,7 +26,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
 
         <div className={styles.shell}>
           <nav className={styles.nav} aria-label="Cami saati sayfa menüsü">
-            <a className={styles.brand} href="#landing-top" aria-label="Vakitmatik cami saati sayfa başlangıcı">
+            <Link className={styles.brand} href="/" aria-label="Vakitmatik ana sayfasına git">
               <Image
                 alt="Vakitmatik"
                 className={styles.logo}
@@ -34,15 +35,18 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                 src="/images/landing/vakitmatik-logo-400.webp"
                 width={400}
               />
-            </a>
-            <div className={styles.navLinks}>
-              <a href="#models">Modeller</a>
-              <a href="#engineering">Neden Vakitmatik?</a>
-              <a href="#faq">Sık sorulanlar</a>
+            </Link>
+            <div className={styles.navActions}>
+              <div className={styles.navLinks}>
+                <a href="#models">Modeller</a>
+                <a href="#engineering">Neden Vakitmatik?</a>
+                <a href="#faq">Sık sorulanlar</a>
+              </div>
+              <span className={styles.navDivider} aria-hidden="true" />
+              <a className={styles.navCta} href="#contact">
+                İletişim
+              </a>
             </div>
-            <a className={styles.navCta} href="#contact">
-              Bize yazın
-            </a>
           </nav>
 
           <div className={styles.heroLayout} id="landing-top">
