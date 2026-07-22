@@ -39,7 +39,7 @@ export const camiSaatiLanding: LandingConfig = {
     primaryCta: "WhatsApp’tan yazın",
     mobilePrimaryCta: "WhatsApp",
     secondaryCta: "Ürünleri incele",
-    secondaryHref: "/#urun-deneyimi",
+    secondaryHref: "/",
     productImage: {
       src: "/images/seo/vakitmatik-cami-saati.webp",
       mobileSrc: "/images/seo/vakitmatik-cami-saati-mobile.webp",

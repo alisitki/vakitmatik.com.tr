@@ -22,7 +22,7 @@ export const fiyatModelLanding: LandingConfig = {
     primaryCta: "WhatsApp’tan fiyat sorun",
     mobilePrimaryCta: "WhatsApp",
     secondaryCta: "Ürünleri incele",
-    secondaryHref: "/#urun-deneyimi",
+    secondaryHref: "/",
     productImage: camiSaatiLanding.hero.productImage,
     appImage: camiSaatiLanding.hero.appImage,
   },
