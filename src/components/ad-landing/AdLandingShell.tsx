@@ -114,10 +114,6 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                   width={config.hero.appImage.width}
                 />
               </figure>
-              <p className={styles.visualCaption}>
-                <span>Vakitmatik</span>
-                Ürün + mobil kontrol
-              </p>
             </div>
           </div>
 
