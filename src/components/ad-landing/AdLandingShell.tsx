@@ -38,13 +38,13 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
             </Link>
             <div className={styles.navActions}>
               <div className={styles.navLinks}>
-                <a href="#models">Modeller</a>
-                <a href="#engineering">Neden Vakitmatik?</a>
-                <a href="#faq">Sık sorulanlar</a>
+                <a href="#models">{config.navigation.modelsLabel}</a>
+                <a href="#engineering">{config.navigation.detailsLabel}</a>
+                <a href="#faq">{config.navigation.faqLabel}</a>
               </div>
               <span className={styles.navDivider} aria-hidden="true" />
               <a className={styles.navCta} href="#contact">
-                İletişim
+                {config.navigation.contactLabel}
               </a>
             </div>
           </nav>
@@ -147,7 +147,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
 
           <AdLandingProductRail
             itemCount={config.models.items.length}
-            trackId="cami-saati-model-rayi"
+            trackId={`${config.variant}-model-rayi`}
           >
             {config.models.items.map((model) => (
               <article
@@ -225,8 +225,8 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
       <section className={styles.faqSection} id="faq">
         <div className={`${styles.shell} ${styles.faqLayout}`}>
           <header>
-            <p className={styles.sectionEyebrow}>Sık sorulanlar</p>
-            <h2>Kısa, doğrudan cevaplar.</h2>
+            <p className={styles.sectionEyebrow}>{config.faqHeading.eyebrow}</p>
+            <h2>{config.faqHeading.title}</h2>
           </header>
           <div className={styles.faqList}>
             {config.faqs.map((faq) => (

@@ -24,6 +24,12 @@ const models = productItems.map((product) => {
 
 export const camiSaatiLanding: LandingConfig = {
   variant: "cami-saati",
+  navigation: {
+    modelsLabel: "Modeller",
+    detailsLabel: "Neden Vakitmatik?",
+    faqLabel: "Sık sorulanlar",
+    contactLabel: "İletişim",
+  },
   hero: {
     eyebrow: "Vakitmatik / Profesyonel Cami Saati",
     title: "Cami saatiniz hep güncel kalsın.",
@@ -106,6 +112,10 @@ export const camiSaatiLanding: LandingConfig = {
           "Vakitmatik cami saatleri yerli olarak üretilir ve üretim kaynaklı hata ve arızalara karşı 3 yıl garanti kapsamındadır.",
       },
     ],
+  },
+  faqHeading: {
+    eyebrow: "Sık sorulanlar",
+    title: "Kısa, doğrudan cevaplar.",
   },
   faqs: [
     {

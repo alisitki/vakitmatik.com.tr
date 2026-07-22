@@ -36,6 +36,12 @@ export type AdLandingFaq = {
 export type LandingConfig = {
   variant: LandingVariant;
   previewNote?: string;
+  navigation: {
+    modelsLabel: string;
+    detailsLabel: string;
+    faqLabel: string;
+    contactLabel: string;
+  };
   hero: {
     eyebrow: string;
     title: string;
@@ -61,6 +67,10 @@ export type LandingConfig = {
     image: AdLandingImage;
     insightStrip: string[];
     details: AdLandingDetail[];
+  };
+  faqHeading: {
+    eyebrow: string;
+    title: string;
   };
   faqs: AdLandingFaq[];
   contact: {
