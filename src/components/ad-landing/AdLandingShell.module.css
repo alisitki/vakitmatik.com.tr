@@ -204,6 +204,18 @@
   letter-spacing: -0.055em;
 }
 
+@media (min-width: 1051px) {
+  .page[data-variant="fiyat-model"] .heroLayout {
+    grid-template-columns: minmax(0, 1.18fr) minmax(25rem, 0.82fr);
+    gap: clamp(2rem, 3.5vw, 4rem);
+  }
+
+  .page[data-variant="fiyat-model"] .heroCopy h1 {
+    max-width: 100%;
+    font-size: clamp(4rem, 4vw, 4.65rem);
+  }
+}
+
 .heroLead {
   max-width: 42rem;
   color: rgba(255, 255, 255, 0.66);
@@ -986,6 +998,10 @@
     max-width: 100%;
     font-size: clamp(2.75rem, 13vw, 4rem);
     line-height: 0.98;
+  }
+
+  .page[data-variant="fiyat-model"] .heroCopy h1 {
+    font-size: clamp(2.4rem, 11vw, 3.25rem);
   }
 
   .heroLead {
