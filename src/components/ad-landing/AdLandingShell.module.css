@@ -988,7 +988,7 @@
 
   .heroLayout {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
     min-height: 0;
     padding-block: 3.7rem 2.5rem;
   }
@@ -1034,7 +1034,7 @@
   }
 
   .heroVisual {
-    min-height: 24rem;
+    min-height: clamp(14.5rem, 68vw, 17rem);
   }
 
   .productFrame {
