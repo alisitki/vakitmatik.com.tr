@@ -15,7 +15,7 @@ export const fiyatModelLanding: LandingConfig = {
   },
   hero: {
     eyebrow: "Vakitmatik / Cami Saati Fiyatları",
-    title: "Cami saati fiyatları modele ve ölçüye göre değişir.",
+    title: "Cami saati fiyatları modele ve ölçüye göre değişmektedir.",
     lead:
       "Klasik, mesajlı, LED, modül ve LCD Vakitmatik cami saatlerinin ölçüleri ve özellikleri farklıdır. Modelleri inceleyin; beğendiğiniz ürünün güncel fiyatını WhatsApp’tan veya telefonla öğrenin.",
     microCopy: "3 yıl garanti · Türkiye geneli kargo",
