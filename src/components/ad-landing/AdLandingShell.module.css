@@ -196,12 +196,13 @@
 }
 
 .heroCopy h1 {
-  max-width: 10.4ch;
+  max-width: 12.5ch;
   color: #fff;
-  font-size: clamp(3.4rem, 6.1vw, 6.7rem);
+  font-size: clamp(3.2rem, 5.25vw, 5.75rem);
   font-weight: 600;
-  line-height: 0.96;
-  letter-spacing: -0.055em;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 @media (min-width: 1051px) {
@@ -212,7 +213,7 @@
 
   .page[data-variant="fiyat-model"] .heroCopy h1 {
     max-width: 100%;
-    font-size: clamp(4rem, 4vw, 4.65rem);
+    font-size: clamp(3.55rem, 3.55vw, 4.2rem);
   }
 }
 
@@ -425,9 +426,8 @@
   }
 
   .page[data-variant="ayet-hadis"] .heroCopy h1 {
-    max-width: 17ch;
-    font-size: clamp(3.8rem, 4.4vw, 5rem);
-    text-wrap: balance;
+    max-width: 18ch;
+    font-size: clamp(3.55rem, 4vw, 4.6rem);
   }
 
 }
@@ -1093,13 +1093,12 @@
   }
 
   .heroCopy h1 {
-    font-size: clamp(3.4rem, 7vw, 5.3rem);
+    font-size: clamp(3.2rem, 6.6vw, 4.9rem);
   }
 
   .page[data-variant="ayet-hadis"] .heroCopy h1 {
     max-width: 100%;
-    font-size: clamp(3.1rem, 5.7vw, 3.65rem);
-    text-wrap: balance;
+    font-size: clamp(3rem, 5.4vw, 3.5rem);
   }
 
   .page[data-variant="ayet-hadis"] .heroVisual {
@@ -1167,12 +1166,13 @@
 
   .heroCopy h1 {
     max-width: 100%;
-    font-size: clamp(2.75rem, 13vw, 4rem);
-    line-height: 0.98;
+    font-size: clamp(2.55rem, 11.8vw, 3.55rem);
+    line-height: 1.06;
+    letter-spacing: -0.018em;
   }
 
   .page[data-variant="fiyat-model"] .heroCopy h1 {
-    font-size: clamp(2.4rem, 11vw, 3.25rem);
+    font-size: clamp(2.25rem, 9.9vw, 2.95rem);
   }
 
   .heroLead {
@@ -1221,8 +1221,7 @@
 
   .page[data-variant="ayet-hadis"] .heroCopy h1 {
     max-width: 100%;
-    font-size: clamp(2.45rem, 10.7vw, 3.2rem);
-    text-wrap: balance;
+    font-size: clamp(2.3rem, 9.8vw, 2.9rem);
   }
 
   .page[data-variant="ayet-hadis"] .heroVisual {
