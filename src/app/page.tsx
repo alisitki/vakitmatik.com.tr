@@ -1,3 +1,5 @@
+import "./site.css";
+
 import { ContactSection } from "@/components/ContactSection";
 import { FooterSection } from "@/components/FooterSection";
 import { HeroSection } from "@/components/HeroSection";

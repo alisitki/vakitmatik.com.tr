@@ -1,3 +1,5 @@
+import "../../site.css";
+
 import type { Metadata } from "next";
 import { SeoLandingPage } from "@/components/SeoLandingPage";
 import { createPageMetadata } from "@/config/seo";

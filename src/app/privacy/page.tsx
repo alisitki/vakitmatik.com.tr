@@ -1,3 +1,5 @@
+import "../site.css";
+
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
 import { createPageMetadata } from "@/config/seo";
