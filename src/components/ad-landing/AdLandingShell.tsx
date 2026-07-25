@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ResponsiveImagePreload } from "@/components/ResponsiveImagePreload";
 import type { LandingConfig } from "@/types/adLanding";
 import { AdLandingProductRail } from "./AdLandingProductRail";
 import styles from "./AdLandingShell.module.css";
@@ -10,9 +11,15 @@ type AdLandingShellProps = {
 
 export function AdLandingShell({ config }: AdLandingShellProps) {
   const whatsappExternal = config.contact.whatsappHref.startsWith("http");
+  const heroImage = config.hero.productImage;
 
   return (
     <main className={styles.page} data-variant={config.variant}>
+      <ResponsiveImagePreload
+        desktopSrc={heroImage.src}
+        mobileSrc={heroImage.mobileSrc ?? heroImage.src}
+        tabletSrc={heroImage.tabletSrc}
+      />
       {config.previewNote ? (
         <aside className={styles.previewBar} id="design-notes">
           <span>Tasarım önizlemesi</span>
@@ -25,7 +32,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
         <div className={styles.heroGlow} aria-hidden="true" />
 
         <div className={styles.shell}>
-          <nav className={styles.nav} aria-label="Cami saati sayfa menüsü">
+          <nav className={styles.nav} aria-label="Vakitmatik sayfa menüsü">
             <Link
               aria-label="Vakitmatik ana sayfasına git"
               className={styles.brand}
@@ -138,8 +145,8 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                     <Image
                       alt={config.hero.secondaryProductImage.alt}
                       className={styles.secondaryProductImage}
-                      fetchPriority="low"
                       height={config.hero.secondaryProductImage.height}
+                      loading="eager"
                       sizes="(max-width: 720px) 54vw, (max-width: 1100px) 34vw, 350px"
                       src={config.hero.secondaryProductImage.src}
                       width={config.hero.secondaryProductImage.width}

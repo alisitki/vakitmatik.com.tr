@@ -23,7 +23,7 @@ export function AdLandingProductRail({
   const trackRef = useRef<HTMLDivElement>(null);
   const [navigation, setNavigation] = useState<NavigationState>({
     canGoBack: false,
-    canGoForward: true,
+    canGoForward: false,
   });
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export function AdLandingProductRail({
         >
           <button
             aria-controls={trackId}
-            aria-label="Önceki cami saati modellerini göster"
+            aria-label={`${label}: önceki ürünleri göster`}
             disabled={!navigation.canGoBack}
             onClick={() => scroll(-1)}
             type="button"
@@ -101,7 +101,7 @@ export function AdLandingProductRail({
           </button>
           <button
             aria-controls={trackId}
-            aria-label="Sonraki cami saati modellerini göster"
+            aria-label={`${label}: sonraki ürünleri göster`}
             disabled={!navigation.canGoForward}
             onClick={() => scroll(1)}
             type="button"

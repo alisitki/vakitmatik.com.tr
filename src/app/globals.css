@@ -1387,6 +1387,7 @@ section {
 
 .mobile-app-section {
   position: relative;
+  overflow: clip;
   padding-block: clamp(4.5rem, 9vw, 8rem);
   background:
     linear-gradient(180deg, #f7f8fa 0%, #ffffff 42%, #f8fafc 100%);

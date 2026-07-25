@@ -1,16 +1,13 @@
-import type { NavItem } from "@/types/landing";
+const footerItems = [
+  { href: "/cami-saati/", label: "Cami Saati Modelleri" },
+  { href: "/cami-saati-fiyatlari/", label: "Cami Saati Fiyatları" },
+  { href: "/ayet-hadis-panosu/", label: "Ayet, Hadis ve Mesaj Panoları" },
+  { href: "/support/", label: "Destek" },
+  { href: "/privacy/", label: "Gizlilik" },
+] as const;
 
-type FooterSectionProps = {
-  items: NavItem[];
-};
-
-export function FooterSection({ items }: FooterSectionProps) {
+export function FooterSection() {
   const year = new Date().getFullYear();
-  const footerItems = [
-    ...items,
-    { href: "/privacy/", label: "Gizlilik Politikası" },
-    { href: "/support/", label: "Destek" },
-  ];
 
   return (
     <footer className="site-footer-wrap">

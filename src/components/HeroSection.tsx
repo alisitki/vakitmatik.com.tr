@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { HeroExactNav } from "@/components/HeroExactNav";
+import { ResponsiveImagePreload } from "@/components/ResponsiveImagePreload";
 import type { HeroHighlightItem } from "@/types/landing";
 
 type HeroSectionProps = {
@@ -31,6 +32,11 @@ const heroHighlightMeta = {
 export function HeroSection({ highlights }: HeroSectionProps) {
   return (
     <section id="urun" className="hero-section hero-section--exact">
+      <ResponsiveImagePreload
+        desktopSrc="/images/seo/vakitmatik-cami-saati.webp"
+        mobileSrc="/images/seo/vakitmatik-cami-saati-mobile.webp"
+        tabletSrc="/images/seo/vakitmatik-cami-saati-tablet.webp"
+      />
       <div className="hero-reference-art" aria-hidden="true" />
       <div className="hero-exact-scrim" aria-hidden="true" />
 

@@ -57,7 +57,7 @@ export default function Home() {
           <UseCasesSection />
           <ContactSection items={contactItems} />
         </main>
-        <FooterSection items={navItems} />
+        <FooterSection />
       </LandingControlsProvider>
       <script
         type="application/ld+json"

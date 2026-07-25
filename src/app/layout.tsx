@@ -25,6 +25,7 @@ const sora = Sora({
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
+  preload: false,
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
 });
@@ -119,27 +120,6 @@ export default function RootLayout({
   return (
     <html lang="tr" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <link
-          rel="preload"
-          as="image"
-          href="/images/seo/vakitmatik-cami-saati-mobile.webp"
-          media="(max-width: 560px)"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/seo/vakitmatik-cami-saati-tablet.webp"
-          media="(min-width: 561px) and (max-width: 900px)"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/seo/vakitmatik-cami-saati.webp"
-          media="(min-width: 901px)"
-          fetchPriority="high"
-        />
         <Script id="vakitmatik-theme-init" strategy="beforeInteractive">
           {themeInitScript}
         </Script>
