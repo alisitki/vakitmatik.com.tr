@@ -18,11 +18,10 @@ declare global {
 type GoogleTagProps = {
   tagId: string;
   phoneSendTo?: string;
-  emailSendTo?: string;
   whatsappSendTo?: string;
 };
 
-type LeadEventName = "lead_phone_click" | "lead_whatsapp_click" | "email_lead";
+type LeadEventName = "lead_phone_click" | "lead_whatsapp_click";
 
 type LeadAttribution = {
   entry_landing_variant: "homepage" | "cami-saati" | "fiyat-model" | "ayet-hadis" | "other";
@@ -171,7 +170,7 @@ function isWhatsAppHref(href: string) {
 
 function trackLead(
   eventName: LeadEventName,
-  channel: "phone" | "whatsapp" | "email",
+  channel: "phone" | "whatsapp",
   href: string,
   sendTo?: string,
   onConversionSent?: () => void,
@@ -214,7 +213,6 @@ function trackLead(
 export function GoogleTag({
   tagId,
   phoneSendTo,
-  emailSendTo,
   whatsappSendTo,
 }: GoogleTagProps) {
   const initScript = `
@@ -276,10 +274,6 @@ gtag('config', ${JSON.stringify(tagId)});
         trackLead("lead_whatsapp_click", "whatsapp", href, whatsappSendTo);
         return;
       }
-
-      if (href.toLowerCase().startsWith("mailto:")) {
-        trackLead("email_lead", "email", href, emailSendTo);
-      }
     }
 
     document.addEventListener("click", handleClick, true);
@@ -287,7 +281,7 @@ gtag('config', ${JSON.stringify(tagId)});
     return () => {
       document.removeEventListener("click", handleClick, true);
     };
-  }, [emailSendTo, phoneSendTo, whatsappSendTo]);
+  }, [phoneSendTo, whatsappSendTo]);
 
   return (
     <>

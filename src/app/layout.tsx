@@ -51,7 +51,6 @@ try {
 
 const googleTagId = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
 const googleAdsPhoneSendTo = process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_SEND_TO;
-const googleAdsEmailSendTo = process.env.NEXT_PUBLIC_GOOGLE_ADS_EMAIL_SEND_TO;
 const googleAdsWhatsappSendTo = process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_SEND_TO;
 
 const structuredData = [
@@ -137,7 +136,6 @@ export default function RootLayout({
         <TrafficSourceTracker />
         {googleTagId ? (
           <GoogleTag
-            emailSendTo={googleAdsEmailSendTo}
             phoneSendTo={googleAdsPhoneSendTo}
             tagId={googleTagId}
             whatsappSendTo={googleAdsWhatsappSendTo}
