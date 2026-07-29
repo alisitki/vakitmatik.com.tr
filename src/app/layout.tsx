@@ -52,11 +52,13 @@ try {
 const googleTagId = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
 const googleAdsPhoneSendTo = process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_SEND_TO;
 const googleAdsWhatsappSendTo = process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_SEND_TO;
+const organizationId = `${siteUrl}/#organization`;
 
 const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": organizationId,
     name: "Vakitmatik",
     url: siteUrl,
     logo: `${siteUrl}/images/vakitmatik-logo2.png`,

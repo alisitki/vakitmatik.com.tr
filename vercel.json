@@ -1,4 +1,16 @@
 {
   "cleanUrls": true,
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/urunler/vakitmatik-cami-saati",
+      "destination": "/cami-saati/",
+      "permanent": true
+    },
+    {
+      "source": "/urunler/vakitmatik-cami-saati/",
+      "destination": "/cami-saati/",
+      "permanent": true
+    }
+  ]
 }

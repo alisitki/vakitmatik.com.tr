@@ -15,6 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const brandId = `${absoluteUrl("/")}#brand`;
+const organizationId = `${absoluteUrl("/")}#organization`;
 const pageUrl = absoluteUrl(path);
 
 const structuredData = {
@@ -39,7 +40,7 @@ const structuredData = {
         ...camiSaatiLanding.models.items.map((model) => absoluteUrl(model.image.src)),
       ],
       brand: { "@id": brandId },
-      manufacturer: { "@id": brandId },
+      manufacturer: { "@id": organizationId },
       additionalProperty: [
         {
           "@type": "PropertyValue",
