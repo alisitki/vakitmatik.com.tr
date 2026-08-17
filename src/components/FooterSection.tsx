@@ -15,6 +15,10 @@ export function FooterSection() {
         <div className="site-footer">
           <div className="site-footer-head">
             <p>© {year} Reksan Reklem &amp; Elektronik . Tüm hakları saklıdır.</p>
+            <p className="site-footer-trademarks">
+              Apple ve Apple logosu, Apple Inc.’in; Google Play ve Google Play logosu,
+              Google LLC’nin ticari markalarıdır.
+            </p>
           </div>
 
           <nav aria-label="Alt menü">

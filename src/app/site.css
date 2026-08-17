@@ -1449,31 +1449,82 @@
   gap: 0;
 }
 
-.mobile-app-platform-row {
+.mobile-app-download {
+  min-width: 0;
+}
+
+.mobile-app-store-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.9rem;
 }
 
-.mobile-app-platform-row span {
+.mobile-app-store-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.48rem;
-  min-height: 2.15rem;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.74);
-  color: var(--ink-strong);
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 0.35rem 0.72rem;
+  gap: 0.9rem;
+  width: min(15.25rem, 100%);
+  min-height: 5rem;
+  padding: 0.9rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #191b20 0%, #08090c 100%);
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 34px rgba(13, 15, 20, 0.14);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.mobile-app-platform-icon {
-  width: 1.1rem;
-  height: 1.1rem;
+.mobile-app-store-link:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(145deg, #22252b 0%, #0d0f13 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 38px rgba(13, 15, 20, 0.2);
+}
+
+.mobile-app-store-link:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 4px;
+}
+
+.mobile-app-store-icon {
+  display: inline-grid;
   flex: 0 0 auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+}
+
+.mobile-app-store-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-app-store-icon--apple {
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.mobile-app-store-icon--google {
+  width: 2rem;
+  height: 2.15rem;
+}
+
+.mobile-app-store-name {
+  color: #ffffff;
+  font-family: var(--font-display), "Avenir Next", system-ui, sans-serif;
+  font-size: 1.14rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .mobile-app-step-list {
@@ -2510,14 +2561,21 @@
 
 .site-footer-head {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.32rem;
 }
 
 .site-footer-head p {
   color: var(--ink-muted);
   font-size: 0.86rem;
+}
+
+.site-footer-head .site-footer-trademarks {
+  max-width: 47rem;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  opacity: 0.72;
 }
 
 .site-footer nav {
@@ -2843,7 +2901,6 @@ html[data-theme="dark"] .smart-mosques-section {
     linear-gradient(180deg, #090a0c 0%, #101216 50%, #0b0d10 100%);
 }
 
-html[data-theme="dark"] .mobile-app-platform-row span,
 html[data-theme="dark"] .product-thumbnail-row,
 html[data-theme="dark"] .product-spec {
   border-color: var(--line);
@@ -3180,6 +3237,18 @@ html[data-theme="dark"] .site-footer-links a:focus-visible {
 
   .mobile-app-section-shell {
     gap: 2rem;
+  }
+
+  .mobile-app-store-row {
+    display: grid;
+    justify-items: start;
+    gap: 0.8rem;
+  }
+
+  .mobile-app-store-link {
+    width: min(18rem, 100%);
+    min-height: 5.25rem;
+    padding-inline: 1.25rem;
   }
 
   .smart-mosques-shell {
