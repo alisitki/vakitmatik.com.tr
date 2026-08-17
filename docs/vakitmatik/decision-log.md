@@ -1,6 +1,6 @@
 # Vakitmatik Karar ve Açık Soru Kaydı
 
-Sürüm: `0.4-draft`
+Sürüm: `0.5-draft`
 
 Son güncelleme: `2026-08-17`
 
@@ -31,6 +31,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | D-019 | Desenli Beyaz, Sabah Duruş ve Vakit 38 Günlü güncel ürün portföyünde yoktur | Sahibi onayladı | 2026-07-29 |
 | D-020 | Dikey bağımsız ürün sayfası ana sayfadaki mevcut Dikey bölümünü ve aynı ürün veri kaynağını yeniden kullanır; logo ana sayfaya, alttaki tek `Tüm ürünler` bağlantısı ana sayfanın ürün bölümüne gider. Bu onay diğer modellere veya production yayınına otomatik uygulanmaz | Sahibi onayladı | 2026-07-29 |
 | D-021 | Paket P0 kaynak–canlı–karar baseline konsolidasyonu sınırlarıyla onaylandı; bu onay production, Google Ads mutasyonu, `.org` yönlendirmesi veya P1 başlangıcı değildir | Sahibi onayladı | 2026-08-17 |
+| D-022 | Paket P0 sonucu onaylandı ve paket tamamlandı; P1 henüz başlamadı ve ayrı kapsam/yön onayı gerektirir | Sahibi onayladı | 2026-08-17 |
 
 ## Kanıtlanmış mevcut durum
 
@@ -89,3 +90,4 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | 0.2-draft | 2026-07-29 | OSEO-2 Karar Kapısı 1 ürün eşleşmeleri, ölçü değişikliği ve güncel portföyde olmayan üç eski ürün kaydedildi | Sahibi onayladı |
 | 0.3-draft | 2026-07-29 | Dikey bağımsız ürün sayfasının ana sayfa bölümünü yeniden kullanan görsel ve içerik yönü kaydedildi | Sahibi onayladı |
 | 0.4-draft | 2026-08-17 | Paket P0 canlı/source/ölçüm/GSC baseline bulguları, commit ayrımı ve açık sorular kaydedildi | Sonuç onayı bekliyor |
+| 0.5-draft | 2026-08-17 | Paket P0 sonuç onayı kaydedildi; paket tamamlandı ve P1 ayrı onay kapısında bırakıldı | Sahibi onayladı |

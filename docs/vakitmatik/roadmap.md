@@ -1,10 +1,10 @@
 # Vakitmatik Yaşayan Yol Haritası
 
-Sürüm: `0.2-draft`
+Sürüm: `0.3-draft`
 
 Tarih: `2026-08-17`
 
-Durum: `Paket P0 sonucu incelemede`
+Durum: `Paket P0 tamamlandı — P1 başlamadı`
 
 Kuzey yıldızı: `Sipariş`
 
@@ -14,7 +14,7 @@ Bu yol haritası yeni veri ve kullanıcı kararlarıyla güncellenebilir. Her de
 
 `KANITLANDI`
 
-- Paket P0 için kaynak, canlı ve karar baseline denetimi uygulandı; sonuç onayı bekleniyor.
+- Paket P0 için kaynak, canlı ve karar baseline denetimi uygulandı; proje sahibi sonucu 17 Ağustos 2026'da onayladı.
 - Canlı deployment değişmedi ve `gitDirty: 1` riski devam ediyor.
 - Karışık çalışma ağacı; canlı eşdeğer, yalnız yerel ürün detail, dashboard/Ads aracı ve dokümantasyon commitlerine ayrıldı.
 - 10 ürün detail route'u yerelde tutuluyor; canlıda 404, sitemap ve iç bağlantı dışında.
@@ -24,7 +24,7 @@ Bu yol haritası yeni veri ve kullanıcı kararlarıyla güncellenebilir. Her de
 
 Ayrıntılı kanıt ve geri alma kaydı: [`p0-baseline-2026-08-17.md`](p0-baseline-2026-08-17.md).
 
-Sıradaki öneri, P0 sonucunun kullanıcı tarafından onaylanmasından sonra ayrı kapsamla `Paket P1 — 10 ürün detay sayfası incelemesi`dir. P0 sonuç onayı P1'i otomatik başlatmaz.
+Sıradaki öneri, ayrı kapsam ve yön onayıyla `Paket P1 — 10 ürün detay sayfası incelemesi`dir. P0 sonuç onayı P1'i otomatik başlatmamıştır.
 
 > Aşağıdaki Temmuz başlangıç snapshot'ı ve eski faz tablosu tarihsel plan kaydıdır; güncel canlı durum yerine kullanılamaz.
 
@@ -210,7 +210,7 @@ Vakitmatik'te en az bir tamamlanmış ölçüm döngüsü görülmeden genel pro
 
 ## Güncel önerilen sıra
 
-1. `Paket P0 sonuç onayı`
+1. `Paket P1 — kapsam ve yön onayı`
 2. `Paket P1 — 10 ürün detay sayfası incelemesi`
 3. Yalnız onaylanan ürünler için organik bağlama ve production hazırlığı
 4. Ayrı onaylarla `.org` taşıması ve daha sonra Google Ads landing geçişi

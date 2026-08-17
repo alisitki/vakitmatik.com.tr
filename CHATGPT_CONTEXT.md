@@ -7,8 +7,8 @@
 | Hazırlanma tarihi | 17 Ağustos 2026 — Europe/Istanbul |
 | Çalışma dalı | `codex/google-ads-landing-quality` |
 | P0 kaynak başlangıcı | `108cb91ad739f33d1bdd573c4e49359c1bf693af` — `fix(seo): consolidate cami saati canonical` |
-| P0 teknik baseline | `691b6cb`–`15f1be0` arası mantıksal ayrım commitleri; bu belge P0 kapanış commitindedir |
-| Remote durumu | P0 kapanış commitinden sonra dal remote'dan 10 commit ileridedir; push yapılmamıştır |
+| P0 teknik baseline | `691b6cb`–`4228d18` arası ayrım ve kapanış commitleri; sonuç onayı bu belgenin son commitindedir |
+| Remote durumu | P0 sonuç onayı commitinden sonra dal remote'dan 11 commit ileridedir; push yapılmamıştır |
 | `main` ve ilk güvenlik etiketi | `4b760fa`; `backup/pre-google-landing-20260717` aynı noktada |
 | Canlı alan adı | `https://www.vakitmatik.com.tr` |
 | Canlı Vercel deployment | `dpl_54riDvXkHPwR2UpRbTTu4J7FUYr3` — 15 Ağustos 2026 10:19 TRT |
@@ -34,7 +34,7 @@ Gizlilik notu: Bu dosyada parola, API anahtarı, OAuth tokenı, sertifika, `.env
 - `[KRİTİK RİSK]` Canlı Vercel deployment hâlâ `gitDirty: 1` ile üretilmiştir. Ayrıca dal HEAD'i yayınlanmamış 10 ürün route'unu içerir; açık production onayı olmadan bu dal deploy edilmemelidir.
 - `[KANITLANDI / AÇIK SORU]` Telefon ve WhatsApp `send_to` hedefleri doğru Ads hesabındaki etkin conversion action'larla eşleşir. Temel tag farklı önek taşır; split-routing ve WhatsApp'ın 0 olma nedeni gerçek cihaz testi olmadan açık kalır.
 - `[KANITLANDI BLOKAJ]` GSC credential kayıtları yerelde ve production'da boştur; güncel GSC snapshot'ı alınamamıştır.
-- `[ÖNERİLEN SIRADAKİ KARAR]` Önce P0 sonucu onaylanmalıdır. Ardından ayrı onayla 10 ürün sayfasının preview/model-model inceleme paketi P1'e geçilebilir.
+- `[SAHİBİ ONAYLADI]` Paket P0 sonucu onaylandı ve paket tamamlandı. P1 henüz başlamadı; sıradaki karar yalnız P1 kapsam ve yön onayıdır.
 
 ## Bilginin nasıl okunacağı
 
@@ -570,7 +570,7 @@ Server-only env grupları:
 
 ### 13.1 Kaynak–canlı baseline konsolidasyonu
 
-`[P0 UYGULANDI / SONUÇ İNCELEMESİNDE]` Karışık çalışma ağacı aşağıdaki mantıksal commitlere ayrıldı:
+`[P0 TAMAMLANDI / SAHİBİ ONAYLADI]` Karışık çalışma ağacı aşağıdaki mantıksal commitlere ayrıldı:
 
 - `691b6cb`: canlıyla eşleşen mobil mağaza kartları/footer/CSS
 - `dcd9f56`: yalnız yerel 10 ürün detail route'u ve bağlı veri/bileşen/CSS
@@ -579,6 +579,7 @@ Server-only env grupları:
 - `b9dbd0c`: ayrı tutulan, çalıştırılmamış bütçe mutasyon aracı
 - `2bbf157`: tarihli organik SEO taşıma kayıtları
 - `15f1be0`: proje yönetişim belgeleri
+- `4228d18`: P0 baseline, roadmap, karar kaydı ve devir teslim kapanış belgeleri
 
 Canlı manifest, ölçüm bulguları, GSC blokajı ve geri alma yöntemi `docs/vakitmatik/p0-baseline-2026-08-17.md` dosyasındadır. P0 kapanışında çalışma ağacı temizdir; final doğrulama sonucu bu belgenin üst tablosuna işlenmiştir.
 
@@ -701,7 +702,7 @@ Her satır ayrı iş paketidir. Bir paketin onayı sonrakini, production'ı veya
 
 ### Paket P0 — Kaynak, canlı ve karar baseline konsolidasyonu
 
-Durum: `Uygulandı — sonuç onayı bekliyor`.
+Durum: `Tamamlandı — sahibi onayladı`.
 
 Sonuç:
 
@@ -716,7 +717,7 @@ Değişmeyenler: görünür canlı site, production deployment, Ads reklam/büt�
 
 Ayrıntı ve geri alma: `docs/vakitmatik/p0-baseline-2026-08-17.md`.
 
-P0 sonuç onayı P1'i otomatik başlatmaz.
+P0 sonuç onayı P1'i otomatik başlatmamıştır. P1 ayrı kapsam ve yön onayı bekler.
 
 ### Paket P1 — 10 ürün detay sayfası incelemesi
 
@@ -872,4 +873,4 @@ Muhalefet formatı:
 
 ### Yeni bir ChatGPT konuşmasına yapıştırılacak başlangıç metni
 
-> Repo kökündeki `CHATGPT_CONTEXT.md` dosyasını proje için güncel devir teslim belgesi olarak tamamen oku. Ardından `AGENTS.md`, `docs/project-system/controlled-workflow.md`, `docs/vakitmatik/project-charter.md`, `docs/vakitmatik/roadmap.md` ve `docs/vakitmatik/decision-log.md` kurallarına uy. `docs/vakitmatik/p0-baseline-2026-08-17.md` Paket P0'ın kanıt ve geri alma kaydıdır. Vakitmatik'in kuzey yıldızı sipariştir; müşteri, Google Ads ve organik SEO birlikte düşünülür. Varsayım yapma, marka karakterini pazar yerine çevirme, production veya Ads hesabına açık onaysız dokunma. Paket P0 uygulanmıştır ve sonuç onayı beklemektedir; kullanıcı P0 sonucunu onaylamadan Paket P1'e veya başka pakete başlama.
+> Repo kökündeki `CHATGPT_CONTEXT.md` dosyasını proje için güncel devir teslim belgesi olarak tamamen oku. Ardından `AGENTS.md`, `docs/project-system/controlled-workflow.md`, `docs/vakitmatik/project-charter.md`, `docs/vakitmatik/roadmap.md` ve `docs/vakitmatik/decision-log.md` kurallarına uy. `docs/vakitmatik/p0-baseline-2026-08-17.md` tamamlanan Paket P0'ın kanıt ve geri alma kaydıdır. Vakitmatik'in kuzey yıldızı sipariştir; müşteri, Google Ads ve organik SEO birlikte düşünülür. Varsayım yapma, marka karakterini pazar yerine çevirme, production veya Ads hesabına açık onaysız dokunma. Paket P0 tamamlanmış ve sahibi tarafından onaylanmıştır. Paket P1 henüz başlamamıştır; önce yalnız P1 kapsamını, testini, geri alma noktasını ve onay kapısını sun, onay gelmeden uygulama yapma.
