@@ -1,6 +1,6 @@
 # Vakitmatik Karar ve Açık Soru Kaydı
 
-Sürüm: `0.7-draft`
+Sürüm: `0.8-draft`
 
 Son güncelleme: `2026-08-17`
 
@@ -36,6 +36,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | D-024 | `.org` e-posta hizmeti taşınmayacak; aktif Vakitmatik posta kanalı Google Workspace'teki `bilgi@vakitmatik.com.tr` olarak kalacak | Sahibi onayladı | 2026-08-17 |
 | D-025 | P0.5 hazırlığı başlayabilir; canlı `.org` domain/DNS yayını ve doğrulama sonrası SH hosting iptali ayrı onay kapılarıdır | Sahibi onayladı | 2026-08-17 |
 | D-026 | P0.5 canlı production/DNS yayını onaylandı; `.org` apex/www/mail ile birlikte çalışmayan `vakitmatik.net` apex/www de aynı Vercel redirect projesine alınacak | Sahibi onayladı | 2026-08-17 |
+| D-027 | Recursive DNS cache'i eski SH IP'sini gösterirken Google'dan gelen `.org` ziyaretçilerini bekletmemek için eski SH sitesine, yedek alınarak Vercel haritasıyla uyumlu geçici `301` köprüsü uygulanacak | Sahibi onayladı | 2026-08-17 |
 
 ## Kanıtlanmış mevcut durum
 
@@ -65,6 +66,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | E-022 | SH sahibi panelinde `.org` ve `.net` nameserver'ları yalnız `ns1.vercel-dns.com` ile `ns2.vercel-dns.com` olarak başarıyla kaydedildi; iki domainin TLD parent delegasyonu ve RDAP kaydı Vercel'e geçti | SH owner panel başarı mesajları, RDAP ve TLD authoritative DNS | 2026-08-17 |
 | E-023 | `.org` eski A/MX/CNAME TTL'i `14400` iken kesim uygulandı; hazırlık runbook'undaki `TTL 300 + 24 saat bekleme` gerçekleşmedi. Eski cache yaklaşık dört saat SH'yi gösterebilir; `.net` eski delegation/negative cache etkisi 48 saate kadar sürebilir | SH/Vercel authoritative DNS ve TLD TTL denetimi | 2026-08-17 |
 | E-024 | HTTPS kaynaklar doğrudan açık `301` ile canonical `.com.tr` hedefine gider; Vercel platformu düz HTTP'yi önce aynı hostun HTTPS sürümüne `308` yükselttiği için HTTP girişleri iki yönlendirme adımı kullanır | Canlı Vercel edge GET/HEAD ve `Location` matrisi | 2026-08-17 |
+| E-025 | Google ve Cloudflare recursive cache'leri eski SH IP'sini döndürürken eski site önce `200` veriyordu. SH `public_html/.htaccess` dosyası web kökü dışında yedeklenip geçici `301` haritası eklendikten sonra eski IP'ye zorlanan ana sayfa ve temsilî güçlü URL'ler doğru `.com.tr` hedeflerine gitti; Chrome'da eski ürün URL'si `/cami-saati/` ile sonuçlandı | SH cPanel dosya kaydı, `curl --resolve` matrisi ve Chrome uçtan uca testi | 2026-08-17 |
 
 E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha sonra kurulan conversion action'ları ve WhatsApp ölçüm kodundan önceki durumu anlatır; güncel durum için E-012–E-014 esas alınır.
 
@@ -105,3 +107,4 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | 0.5-draft | 2026-08-17 | Paket P0 sonuç onayı kaydedildi; paket tamamlandı ve P1 ayrı onay kapısında bırakıldı | Sahibi onayladı |
 | 0.6-draft | 2026-08-17 | P0.5 `.org` Vercel geçiş kararı, registrar/mail sınırı ve hazırlık kanıtı kaydedildi | Hazırlık sahibi onaylı; canlı yayın bekliyor |
 | 0.7-draft | 2026-08-17 | `.net` dahil P0.5 canlı yayın onayı, iki ayrı SH hosting düzeltmesi, Vercel domain/DNS/SSL hazırlığı ve nameserver kesim kanıtı kaydedildi | Sahibi onayladı; DNS/cache yakınsaması izleniyor |
+| 0.8-draft | 2026-08-17 | Eski recursive DNS cache'leri için SH `.htaccess` geçici `301` köprüsü, yedek ve uçtan uca doğrulama kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |

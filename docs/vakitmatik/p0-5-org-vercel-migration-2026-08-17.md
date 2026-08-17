@@ -103,6 +103,13 @@ ayrı pakette daraltılabilir.
 - Proje koruması `all_except_custom_domains` olarak doğrulandı; custom domain
   üzerinde Vercel SSO ekranı çıkmaması canlı kabul kriteridir.
 - Query parametresi edge testinde korundu.
+- Recursive DNS cache'i nedeniyle hâlâ eski SH IP'sine giden trafik için
+  `public_html/.htaccess` içine aynı URL sınıflarını kullanan geçici `301`
+  köprüsü eklendi. Eski SH IP'sine zorlanan ana sayfa, ürün, fiyat,
+  Ayet/Hadis, destek, iletişim, robots, sitemap ve catch-all testlerinin tamamı
+  doğru `.com.tr` hedefini verdi; query parametreleri korundu.
+- SH'deki önceki `.htaccess`, web kökü dışındaki
+  `/.p0-5-backup-20260817-1754/.htaccess` konumuna kopyalanarak doğrulandı.
 - Sekiz benzersiz son hedefin tamamı `200` döndü ve başka bir hosta
   sapmadı.
 - Beş custom host projeye bağlandı. Vercel zone'larında apex ve gerekli
@@ -138,12 +145,16 @@ ayrı pakette daraltılabilir.
    TTL'i `172800` olduğu için bazı recursive resolverlarda eski `SERVFAIL`
    önbelleği 48 saate kadar sürebilir.
 7. `.org` eski web/MX/CNAME kayıtlarının TTL'i `14400` iken canlı kesim
-   uygulandı. Eski cache'ler yaklaşık dört saat SH sitesini göstermeye devam
-   edebilir; bu aralıkta eski hosting açık tutulur. Hazırlık runbook'undaki
-   `TTL 300 + 24 saat bekleme` adımı uygulanmış kabul edilemez.
+   uygulandı. İlk kontrolde eski cache'ler SH sitesini göstermeye devam etti.
+   SH `.htaccess` köprüsü açıldıktan sonra bu cache'lerdeki web trafiği de
+   `.com.tr`ye yönlenir; recursive DNS yakınsaması yine ayrıca izlenir.
+   Hazırlık runbook'undaki `TTL 300 + 24 saat bekleme` adımı uygulanmış kabul
+   edilemez.
 8. Doğrudan HTTPS girişleri tek `301` ile canonical `.com.tr` hedefine gider.
    Vercel HTTP'yi önce aynı hostun HTTPS sürümüne platform düzeyinde `308`
-   yönlendirdiği için düz HTTP girişlerinde toplam iki yönlendirme vardır.
+   yönlendirdiği için düz HTTP girişlerinde toplam iki yönlendirme vardır. Eski
+   SH cache yolunda da sunucu düz HTTP'yi önce `.org` HTTPS'e `301`, ardından
+   geçici köprü `.com.tr`ye `301` yönlendirir.
 
 ## Canlı geçiş uygulama kaydı
 
@@ -171,9 +182,14 @@ Canlı yayın onayından sonra uygulanan koordineli pencere:
    üzerinde test edildi. HTTPS doğrudan `301`; HTTP ise Vercel `308` HTTPS
    yükseltmesinden sonra `301` verir. Public recursive-resolver kabulü cache
    yakınsaması boyunca sürer.
-9. Son hedeflerde `200`, doğru canonical/indexlenebilirlik ve döngüsüzlük edge
+9. Google/Cloudflare recursive DNS cache'lerinin eski SH IP'sini döndürdüğü
+   görülünce, kullanıcı açık onayıyla eski `public_html/.htaccess` dosyası web
+   kökü dışında yedeklendi ve Vercel'deki yönlendirme sınıflarını karşılayan
+   geçici `301` köprüsü eklendi. Eski IP'ye zorlanan HTTPS matrisi ve normal
+   Chrome ürün sonucu tıklaması `.com.tr` hedefine ulaştı.
+10. Son hedeflerde `200`, doğru canonical/indexlenebilirlik ve döngüsüzlük edge
    testinde doğrulandı.
-10. Search Console credential'ları boş olduğu için Change of Address
+11. Search Console credential'ları boş olduğu için Change of Address
     uygulanmadı; ayrı blokaj olarak kaldı.
 
 ## Geri alma ve SH hosting iptali
@@ -182,6 +198,9 @@ Canlı yayın onayından sonra uygulanan koordineli pencere:
 - Canlı geçişte kritik hata görülürse `.org` nameserver'ları kayıtlı SH
   değerlerine geri çevrilir; eski hosting bu sırada açık kalır.
 - DNS yayılımı ve cache nedeniyle geri dönüş anlık olmayabilir.
+- SH web köprüsünün geri dönüş noktası
+  `/.p0-5-backup-20260817-1754/.htaccess` dosyasıdır; gerekirse bu dosya
+  `public_html/.htaccess` üzerine geri kopyalanır.
 - SH'deki `Small — vakitmatik.org` hizmeti `83999` en az yedi günlük sağlıklı
   canlı gözlemden ve tam cPanel yedeği/bağımlılık denetiminden sonra ayrı ve
   açık iptal onayıyla kapatılabilir. `Small — vakitmatik.com.tr` hizmeti
