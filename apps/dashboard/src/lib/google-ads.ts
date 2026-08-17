@@ -16,6 +16,8 @@ import type {
 } from "./types";
 
 const ADS_OVERVIEW_CACHE_MS = 5 * 60 * 1000;
+const DEFAULT_GOOGLE_ADS_API_VERSION = "v24";
+const MINIMUM_GOOGLE_ADS_API_MAJOR = 24;
 
 type GoogleAdsConfig = {
   apiVersion: string;
@@ -56,9 +58,22 @@ function isManagerMetricsError(error: unknown) {
   return error instanceof Error && error.message.includes("REQUESTED_METRICS_FOR_MANAGER");
 }
 
+function getGoogleAdsApiVersion() {
+  const version = getOptionalEnv("GOOGLE_ADS_API_VERSION") || DEFAULT_GOOGLE_ADS_API_VERSION;
+  const match = /^v(\d+)$/.exec(version);
+
+  if (!match || Number(match[1]) < MINIMUM_GOOGLE_ADS_API_MAJOR) {
+    throw new Error(
+      `GOOGLE_ADS_API_VERSION must be v${MINIMUM_GOOGLE_ADS_API_MAJOR} or newer; received ${version}`,
+    );
+  }
+
+  return version;
+}
+
 function getConfig(): GoogleAdsConfig {
   return {
-    apiVersion: getOptionalEnv("GOOGLE_ADS_API_VERSION") || "v22",
+    apiVersion: getGoogleAdsApiVersion(),
     developerToken: getRequiredEnv("GOOGLE_ADS_DEVELOPER_TOKEN"),
     loginCustomerId: getOptionalEnv("GOOGLE_ADS_LOGIN_CUSTOMER_ID"),
     customerId: getRequiredEnv("GOOGLE_ADS_CUSTOMER_ID"),
