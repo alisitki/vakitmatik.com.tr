@@ -1,0 +1,65 @@
+id,old_url,content_type,proposed_target,classification,decision_needed
+1,http://www.vakitmatik.org/,homepage,https://www.vakitmatik.com.tr/,HAZIR_HEDEF,Hayır
+2,http://www.vakitmatik.org/index.html,homepage_alias,https://www.vakitmatik.com.tr/,HAZIR_HEDEF,Hayır
+3,http://www.vakitmatik.org/urunler/vakitmatik.html,cami_saati_category,https://www.vakitmatik.com.tr/cami-saati/,HAZIR_HEDEF,Hayır
+4,http://www.vakitmatik.org/urunler/ezan-okuyan-saat.html,ezanmatik_category,,YENI_SAYFA_GEREKLI,Ezanmatik ürün ailesinin güncel durumu ve hedef URL
+5,http://www.vakitmatik.org/urunler/ayet-hadis.html,ayet_hadis_category,https://www.vakitmatik.com.tr/ayet-hadis-panosu/,HAZIR_HEDEF,Hayır
+6,http://www.vakitmatik.org/update/update.html,support_hub,https://www.vakitmatik.com.tr/destek/,YENI_SAYFA_GEREKLI,Eski ve yeni cihaz desteği ayrımı
+7,http://www.vakitmatik.org/programlar.html,software_archive,https://www.vakitmatik.com.tr/destek/programlar/,YENI_SAYFA_GEREKLI,Program güvenliği ve cihaz uyumluluğu
+8,http://www.vakitmatik.org/kilavuzlar.html,manual_archive,https://www.vakitmatik.com.tr/destek/kilavuzlar/,YENI_SAYFA_GEREKLI,Kılavuzların güncellik ve ürün eşlemesi
+9,http://www.vakitmatik.org/fiyatlist/fiyatlist.html,price_intent,https://www.vakitmatik.com.tr/cami-saati-fiyatlari/,HAZIR_HEDEF,Hayır
+10,http://www.vakitmatik.org/iletisim.html,contact,https://www.vakitmatik.com.tr/#iletisim,HAZIR_HEDEF,Hayır
+11,http://www.vakitmatik.org/urunler/vakitmatik/vakitmatik-desenli-mavi.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-desen-mavi/,YENI_SAYFA_GEREKLI,Sahibi onayladı Desen Mavi eşleşmesi; detay veya kategori hedefi açık
+12,http://www.vakitmatik.org/urunler/vakitmatik/vakitmatik-desenli-siyah.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-desen-siyah/,YENI_SAYFA_GEREKLI,Sahibi onayladı Desen Siyah eşleşmesi; detay veya kategori hedefi açık
+13,http://www.vakitmatik.org/urunler/vakitmatik/vakitmatik-desenli-beyaz.html,product,,ESKI_URUN_SATIS_YOK,Sahibi onayladı güncel portföyde yok; eski destek veya 410 kararı açık
+14,http://www.vakitmatik.org/urunler/vakitmatik/sabah-durus.html,product,,ESKI_URUN_SATIS_YOK,Sahibi onayladı güncel portföyde yok; eski destek veya 410 kararı açık
+15,http://www.vakitmatik.org/urunler/vakitmatik/vakit-57.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-dikey/,YENI_SAYFA_GEREKLI,Sahibi onayladı Dikey büyük boy eşleşmesi
+16,http://www.vakitmatik.org/urunler/vakitmatik/vakit-38.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-dikey/,YENI_SAYFA_GEREKLI,Sahibi onayladı Dikey küçük boy eşleşmesi ve ölçünün 38x58'den 40x60'a değiştiği
+17,http://www.vakitmatik.org/urunler/vakitmatik/vakit-57-yatay.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-yatay/,YENI_SAYFA_GEREKLI,Sahibi onayladı Yatay büyük boy eşleşmesi
+18,http://www.vakitmatik.org/urunler/vakitmatik/vakit-38-yatay.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-yatay/,YENI_SAYFA_GEREKLI,Sahibi onayladı Yatay küçük boy eşleşmesi
+19,http://www.vakitmatik.org/urunler/vakitmatik/vakit-38-gunlu.html,product,,ESKI_URUN_SATIS_YOK,Sahibi onayladı güncel portföyde yok; eski destek veya 410 kararı açık
+20,http://www.vakitmatik.org/urunler/vakitmatik/vakit-57-resimli.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-resimli/,YENI_SAYFA_GEREKLI,Sahibi onayladı Resimli eşleşmesi
+21,http://www.vakitmatik.org/urunler/vakitmatik/vakit-57-mesajli.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-kayan-yazi/,YENI_SAYFA_GEREKLI,Sahibi onayladı Kayan Yazı eşleşmesi
+22,http://www.vakitmatik.org/urunler/vakitmatik/vakit-38-mesajli.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-mesaj/,YENI_SAYFA_GEREKLI,Sahibi onayladı Mesaj eşleşmesi
+23,http://www.vakitmatik.org/urunler/vakitmatik/vakit-100.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-led/,YENI_SAYFA_GEREKLI,Sahibi onayladı LED eşleşmesi
+24,http://www.vakitmatik.org/urunler/ezan-okuyan-saat/ezanmatik-eks-1.html,product,,URUN_KARARI_GEREKLI,Ezanmatik EKS 1 güncel satış ve destek durumu
+25,http://www.vakitmatik.org/urunler/ezan-okuyan-saat/ezanmatik-eks-2.html,product,,URUN_KARARI_GEREKLI,Ezanmatik EKS 2 güncel satış ve destek durumu
+26,http://www.vakitmatik.org/urunler/ezan-okuyan-saat/anfi-tip-ezanmatik.html,product,,URUN_KARARI_GEREKLI,Anfi tip Ezanmatik güncel satış ve destek durumu
+27,http://www.vakitmatik.org/urunler/cami-ayet-hadis/mesaj-vakit-led-b.html,product,,URUN_KARARI_GEREKLI,Güncel Modül veya başka ürünle eşleşmesi
+28,http://www.vakitmatik.org/urunler/cami-ayet-hadis/mesaj-vakit-led-k.html,product,,URUN_KARARI_GEREKLI,Güncel Modül veya başka ürünle eşleşmesi
+29,http://www.vakitmatik.org/urunler/cami-ayet-hadis/esma-ul-husna.html,product,,URUN_KARARI_GEREKLI,Güncel ürün ailesi ve satış durumu
+30,http://www.vakitmatik.org/urunler/cami-ayet-hadis/led-esma.html,product,,URUN_KARARI_GEREKLI,Güncel ürün ailesi ve satış durumu
+31,http://www.vakitmatik.org/urunler/cami-ayet-hadis/mesaj-5-ozel.html,product,https://www.vakitmatik.com.tr/cami-saati/vakitmatik-mesaj/,YENI_SAYFA_GEREKLI,Mesaj modeli eşleşmesi doğrulanmalı
+32,http://www.vakitmatik.org/urunler/cami-ayet-hadis/mesaj-vakit-8.html,product,,URUN_KARARI_GEREKLI,Güncel Modül veya başka ürünle eşleşmesi
+33,http://www.vakitmatik.org/urunler/cami-ayet-hadis/mesaj-vakit-8-yatay.html,product,,URUN_KARARI_GEREKLI,Güncel yatay ürün karşılığı
+34,http://www.vakitmatik.org/urunler/cami-ayet-hadis/cami-kayan-yazi.html,product,https://www.vakitmatik.com.tr/ayet-hadis-panosu/,URUN_KARARI_GEREKLI,Kategori veya ayrı kayan yazı detay sayfası kararı
+35,http://www.vakitmatik.org/update/vakitmatik-desenli.html,legacy_support,https://www.vakitmatik.com.tr/destek/eski-cihazlar/desenli/,ESKI_DESTEK_GEREKLI,Doğrulanmış eski cihaz adımları
+36,http://www.vakitmatik.org/update/vakitmatik.html,legacy_support,https://www.vakitmatik.com.tr/destek/eski-cihazlar/dikey/,ESKI_DESTEK_GEREKLI,RS232 ve USB nesilleri ayrılmalı
+37,http://www.vakitmatik.org/update/vakitmatik-yatay.html,legacy_support,https://www.vakitmatik.com.tr/destek/eski-cihazlar/yatay/,ESKI_DESTEK_GEREKLI,Doğrulanmış eski cihaz adımları
+38,http://www.vakitmatik.org/update/vakitmatik-mesajli.html,legacy_support,https://www.vakitmatik.com.tr/destek/eski-cihazlar/mesajli/,ESKI_DESTEK_GEREKLI,Doğrulanmış eski cihaz adımları
+39,http://www.vakitmatik.org/update/Data/kk/Vakitmatik57-38KK.pdf,manual_pdf,,DOSYA_INCELEMESI,Yeni domaine kopyalama ve güncellik kontrolü
+40,http://www.vakitmatik.org/update/Data/kk/Vakit57MKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Yeni domaine kopyalama ve güncellik kontrolü
+41,http://www.vakitmatik.org/update/Data/kk/Vakit38MKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Yeni domaine kopyalama ve güncellik kontrolü
+42,http://www.vakitmatik.org/update/Data/kk/SabahVakitKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Ürün durumu ve yeni domaine kopyalama kararı
+43,http://www.vakitmatik.org/update/Data/kk/AnfitipEzanmatik-KK.pdf,manual_pdf,,DOSYA_INCELEMESI,Ezanmatik ürün durumu ve yeni hedef
+44,http://www.vakitmatik.org/update/Data/kk/ReksanEzanmatik%20Kullanma%20K%C4%B1lavuzu.pdf,manual_pdf,,DOSYA_INCELEMESI,Ezanmatik ürün durumu ve yeni hedef
+45,http://www.vakitmatik.org/update/Data/kk/Ezanmatik-Kur'an'l%C4%B1-KK.pdf,manual_pdf,,DOSYA_INCELEMESI,Ezanmatik ürün durumu ve yeni hedef
+46,http://www.vakitmatik.org/update/Data/kk/Mesaj5OzelKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Güncel mesaj ürünüyle eşleşme
+47,http://www.vakitmatik.org/update/Data/kk/MesajVakitKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Güncel mesaj/modül ürünüyle eşleşme
+48,http://www.vakitmatik.org/update/Data/kk/FiyatPanKK.pdf,manual_pdf,,REKSAN_HEDEFI_GEREKLI,Reksan fiyat panosu destek hedefi
+49,http://www.vakitmatik.org/update/Data/kk/NobEczKK.pdf,manual_pdf,,REKSAN_HEDEFI_GEREKLI,Reksan eczane panosu destek hedefi
+50,http://www.vakitmatik.org/update/Data/kk/SAAT%20KUMANDA.pdf,manual_pdf,,DOSYA_INCELEMESI,Hangi Vakitmatik cihazlarıyla uyumlu olduğu
+51,http://www.vakitmatik.org/fiyatlist/fiyatlist.pdf,stale_price_pdf,https://www.vakitmatik.com.tr/cami-saati-fiyatlari/,HAZIR_HEDEF,Eski PDF'nin yayından kaldırılması onayı
+52,https://mail.vakitmatik.org/index.html,duplicate_mail_host,https://www.vakitmatik.com.tr/,HAZIR_HEDEF,Mail hizmetine dokunmadan yalnız web kopyasının yönlendirilmesi
+53,https://www.vakitmatik.org/update/ezanmatik.html,legacy_support,,ESKI_DESTEK_GEREKLI,Ezanmatik satış ve destek durumu
+54,https://www.vakitmatik.org/gizlilik-politikasi.html,legal_privacy,https://www.vakitmatik.com.tr/privacy/,HAZIR_HEDEF,Hayır
+55,https://www.vakitmatik.org/kullanim-kosullari.html,legal_terms,,YENI_SAYFA_GEREKLI,Güncel kullanım koşulları sayfası veya 410 kararı
+56,https://www.vakitmatik.org/update/vakitmatik_usb.html,legacy_support,https://www.vakitmatik.com.tr/destek/eski-cihazlar/usb/,ESKI_DESTEK_GEREKLI,USB cihaz kapsamı ve doğrulanmış adımlar
+57,https://www.vakitmatik.org/update/eks.html,legacy_support,,ESKI_DESTEK_GEREKLI,EKS cihaz satış ve destek durumu
+58,https://www.vakitmatik.org/update/vakitmatik_rs232.html,legacy_support,https://www.vakitmatik.com.tr/destek/eski-cihazlar/rs232/,ESKI_DESTEK_GEREKLI,RS232 cihaz kapsamı ve doğrulanmış adımlar
+59,https://www.vakitmatik.org/update/sabah-durus.html,legacy_support,,ESKI_DESTEK_GEREKLI,Sabah Duruş ürün ve destek durumu
+60,https://vakitmatik.org/update/Data/kk/ReksanEKSKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Ezanmatik ürün durumu ve güncel hedef
+61,https://www.vakitmatik.org/update/Data/kk/MesajVakitLedKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Güncel mesaj veya modül ürünüyle eşleşme
+62,https://www.vakitmatik.org/update/Data/kk/ReksanEzanmatikKK.pdf,manual_pdf,,DOSYA_INCELEMESI,Ezanmatik ürün durumu ve güncel hedef
+63,https://www.vakitmatik.org/update/Data/kk/VakitMatik-V4.pdf,manual_pdf,,DOSYA_INCELEMESI,Hangi eski Vakitmatik nesliyle uyumlu olduğu
+64,https://www.vakitmatik.org/update/Data/kk/Vakitmatik-Bluetooth-KK.pdf,manual_pdf,,DOSYA_INCELEMESI,Güncel mobil ürün kapsamı ve yayın şekli
