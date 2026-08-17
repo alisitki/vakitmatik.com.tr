@@ -1,0 +1,90 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.vakitmatik.com.tr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.html",
+      "destination": "https://www.vakitmatik.com.tr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "https://www.vakitmatik.com.tr/robots.txt",
+      "statusCode": 301
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://www.vakitmatik.com.tr/sitemap.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/iletisim.html",
+      "destination": "https://www.vakitmatik.com.tr/#iletisim",
+      "statusCode": 301
+    },
+    {
+      "source": "/gizlilik-politikasi.html",
+      "destination": "https://www.vakitmatik.com.tr/privacy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/fiyatlist/:path*",
+      "destination": "https://www.vakitmatik.com.tr/cami-saati-fiyatlari/",
+      "statusCode": 301
+    },
+    {
+      "source": "/urunler/vakitmatik.html",
+      "destination": "https://www.vakitmatik.com.tr/cami-saati/",
+      "statusCode": 301
+    },
+    {
+      "source": "/urunler/vakitmatik/:path*",
+      "destination": "https://www.vakitmatik.com.tr/cami-saati/",
+      "statusCode": 301
+    },
+    {
+      "source": "/urunler/ayet-hadis.html",
+      "destination": "https://www.vakitmatik.com.tr/ayet-hadis-panosu/",
+      "statusCode": 301
+    },
+    {
+      "source": "/urunler/cami-ayet-hadis/:path*",
+      "destination": "https://www.vakitmatik.com.tr/ayet-hadis-panosu/",
+      "statusCode": 301
+    },
+    {
+      "source": "/programlar.html",
+      "destination": "https://www.vakitmatik.com.tr/destek/vakitmatik-ayarlama/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kilavuzlar.html",
+      "destination": "https://www.vakitmatik.com.tr/destek/vakitmatik-ayarlama/",
+      "statusCode": 301
+    },
+    {
+      "source": "/update/:path*",
+      "destination": "https://www.vakitmatik.com.tr/destek/vakitmatik-ayarlama/",
+      "statusCode": 301
+    },
+    {
+      "source": "/urunler/ezan-okuyan-saat.html",
+      "destination": "https://www.vakitmatik.com.tr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/urunler/ezan-okuyan-saat/:path*",
+      "destination": "https://www.vakitmatik.com.tr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://www.vakitmatik.com.tr/",
+      "statusCode": 301
+    }
+  ]
+}

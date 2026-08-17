@@ -1,10 +1,10 @@
 # Vakitmatik Yaşayan Yol Haritası
 
-Sürüm: `0.3-draft`
+Sürüm: `0.4-draft`
 
 Tarih: `2026-08-17`
 
-Durum: `Paket P0 tamamlandı — P1 başlamadı`
+Durum: `Paket P0.5 hazırlığı tamamlandı — canlı .org geçiş onayı bekleniyor; P1 başlamadı`
 
 Kuzey yıldızı: `Sipariş`
 
@@ -21,10 +21,16 @@ Bu yol haritası yeni veri ve kullanıcı kararlarıyla güncellenebilir. Her de
 - Telefon/WhatsApp conversion hedefleri doğru Ads hesabındaki etkin primary action'larla eşleşiyor. Temel tag'in farklı öneki split-routing riski olarak açık tutuldu.
 - Güncel GSC snapshot'ı, yerel ve production credential kayıtları boş olduğu için alınamadı.
 - Production, Google Ads, Search Console ve `.org` yönlendirme ayarlarında değişiklik yapılmadı.
+- Proje sahibi P1'den önce `Paket P0.5 — Vakitmatik.org Vercel geçişi`ni araya aldı.
+- Registrar transferinden vazgeçildi: üç alan adının kaydı SH'de kalacak; `.org` web ve DNS katmanı Vercel'e geçirilecek.
+- Bağımsız `apps/org-redirect` uygulaması ve izole Vercel doğrulama deployment'ı hazırlandı; özel `.org` domainleri henüz bağlanmadı ve canlı trafik değişmedi.
+- Ana SH sahiplik hesabı doğrulandı: eski `.org` sitesi ayrı `.org` adlı paket yerine `Small (vakitmatik.com.tr)` hosting hesabına bağlıdır. Ayrıca DNS'i `SERVFAIL` veren, canlı sitesi olmayan `vakitmatik.net` alanı keşfedildi; P0.5'e eklenmesi canlı karar kapısındadır.
 
 Ayrıntılı kanıt ve geri alma kaydı: [`p0-baseline-2026-08-17.md`](p0-baseline-2026-08-17.md).
 
-Sıradaki öneri, ayrı kapsam ve yön onayıyla `Paket P1 — 10 ürün detay sayfası incelemesi`dir. P0 sonuç onayı P1'i otomatik başlatmamıştır.
+Sıradaki karar `Paket P0.5` için canlı domain/DNS yayın onayıdır. SH hosting iptali, geçiş doğrulaması ve geri dönüş penceresinden sonra ayrıca onaylanacaktır. P1 bu iki kapı tamamlanmadan başlamaz.
+
+Ayrıntılı P0.5 hazırlık ve geri alma kaydı: [`p0-5-org-vercel-migration-2026-08-17.md`](p0-5-org-vercel-migration-2026-08-17.md).
 
 > Aşağıdaki Temmuz başlangıç snapshot'ı ve eski faz tablosu tarihsel plan kaydıdır; güncel canlı durum yerine kullanılamaz.
 
@@ -210,9 +216,12 @@ Vakitmatik'te en az bir tamamlanmış ölçüm döngüsü görülmeden genel pro
 
 ## Güncel önerilen sıra
 
-1. `Paket P1 — kapsam ve yön onayı`
-2. `Paket P1 — 10 ürün detay sayfası incelemesi`
-3. Yalnız onaylanan ürünler için organik bağlama ve production hazırlığı
-4. Ayrı onaylarla `.org` taşıması ve daha sonra Google Ads landing geçişi
+1. `Paket P0.5 — canlı .org domain/DNS yayın onayı`
+2. `.org` yönlendirme matrisi ve organik görünürlük doğrulaması
+3. En az yedi günlük geri dönüş penceresinden sonra ayrı SH hosting iptal onayı
+4. `Paket P1 — kapsam ve yön onayı`
+5. `Paket P1 — 10 ürün detay sayfası incelemesi`
+6. Yalnız onaylanan ürünler için organik bağlama ve production hazırlığı
+7. Daha sonra Google Ads landing geçişi
 
 Ölçümde telefon conversionının çalıştığına dair üretim kanıtı vardır; WhatsApp'ın 0 olma nedeni hâlâ açık sorudur. Gerçek cihaz firing testi, GSC credential düzeltmesi veya dashboard URL listesinin güncellenmesi P1 kapsamına kendiliğinden girmez ve ayrı paket olarak sunulmalıdır.
