@@ -82,6 +82,7 @@ export type ProductSizeOption = {
 
 export type ProductItem = {
   id: string;
+  slug: string;
   title: string;
   shortName: string;
   summary: string;

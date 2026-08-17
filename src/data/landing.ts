@@ -66,6 +66,7 @@ export const mobileAppSteps: MobileAppStepItem[] = [
 export const productItems: ProductItem[] = [
   {
     id: "vakitmatik-desen-mavi",
+    slug: "vakitmatik-desen-mavi",
     title: "Vakitmatik Desen Mavi",
     shortName: "Desen Mavi",
     summary:
@@ -99,6 +100,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-desen-siyah",
+    slug: "vakitmatik-desen-siyah",
     title: "Vakitmatik Desen Siyah",
     shortName: "Desen Siyah",
     summary:
@@ -132,6 +134,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-dikey",
+    slug: "vakitmatik-dikey",
     title: "Vakitmatik Dikey",
     shortName: "Dikey",
     summary:
@@ -170,6 +173,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-yatay",
+    slug: "vakitmatik-yatay",
     title: "Vakitmatik Yatay",
     shortName: "Yatay",
     summary:
@@ -202,6 +206,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-mesaj",
+    slug: "vakitmatik-mesaj",
     title: "Vakitmatik Mesaj",
     shortName: "Mesaj",
     summary:
@@ -231,6 +236,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-kayan",
+    slug: "vakitmatik-kayan-yazi",
     title: "Vakitmatik Kayan Yazı",
     shortName: "Kayan Yazı",
     summary:
@@ -260,6 +266,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-resimli",
+    slug: "vakitmatik-resimli",
     title: "Vakitmatik Resimli",
     shortName: "Resimli",
     summary:
@@ -301,6 +308,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-led",
+    slug: "vakitmatik-led",
     title: "Vakitmatik LED",
     shortName: "LED",
     summary:
@@ -347,6 +355,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-modul",
+    slug: "vakitmatik-modul",
     title: "Vakitmatik Modül",
     shortName: "Modül",
     summary:
@@ -390,6 +399,7 @@ export const productItems: ProductItem[] = [
   },
   {
     id: "vakitmatik-lcd",
+    slug: "vakitmatik-lcd",
     title: "Vakitmatik LCD",
     shortName: "LCD",
     summary:

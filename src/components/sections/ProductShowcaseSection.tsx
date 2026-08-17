@@ -13,16 +13,21 @@ import type { ProductItem } from "@/types/landing";
 
 type ProductShowcaseSectionProps = {
   items: ProductItem[];
+  mode?: "story" | "detail";
 };
 
 function formatIndex(index: number) {
   return String(index + 1).padStart(2, "0");
 }
 
-export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
+export function ProductShowcaseSection({
+  items,
+  mode = "story",
+}: ProductShowcaseSectionProps) {
   const [selectedMedia, setSelectedMedia] = useState<Record<string, number>>({});
   const itemRefs = useRef<Array<HTMLElement | null>>([]);
   const lastTouchActionRef = useRef(0);
+  const isDetailPage = mode === "detail";
 
   const scrollToProduct = useCallback((index: number) => {
     const node = itemRefs.current[index];
@@ -63,9 +68,15 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
   );
 
   return (
-    <section className="product-story-section">
+    <section
+      className={
+        isDetailPage
+          ? "product-story-section product-story-section--detail"
+          : "product-story-section"
+      }
+    >
       <div className="container-shell">
-        <h2 className="sr-only">Vakitmatik ürünleri</h2>
+        {isDetailPage ? null : <h2 className="sr-only">Vakitmatik ürünleri</h2>}
         <div className="product-story-layout">
           <span
             aria-hidden="true"
@@ -82,7 +93,11 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
 
               return (
                 <article
-                  aria-label={`${formatIndex(index)}. ürün: ${item.title}`}
+                  aria-label={
+                    isDetailPage
+                      ? `${item.title} ürün bilgileri`
+                      : `${formatIndex(index)}. ürün: ${item.title}`
+                  }
                   className="product-story-panel"
                   data-index={index}
                   id={item.id}
@@ -100,7 +115,13 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                           className="product-media-image"
                           fill
                           key={currentMedia.src}
-                          sizes="(max-width: 768px) 92vw, (max-width: 1200px) 58vw, 650px"
+                          loading={isDetailPage && index === 0 ? "eager" : undefined}
+                          priority={isDetailPage && index === 0}
+                          sizes={
+                            isDetailPage
+                              ? "(max-width: 768px) 94vw, (max-width: 1200px) 90vw, 720px"
+                              : "(max-width: 768px) 92vw, (max-width: 1200px) 58vw, 650px"
+                          }
                           src={currentMedia.src}
                         />
                         {item.media.length > 1 ? (
@@ -134,7 +155,7 @@ export function ProductShowcaseSection({ items }: ProductShowcaseSectionProps) {
                       distance={18}
                       start="top 62%"
                     >
-                      <h3>{item.title}</h3>
+                      {isDetailPage ? <h1>{item.title}</h1> : <h3>{item.title}</h3>}
                       <p className="product-summary">{item.summary}</p>
 
                       {item.media.length > 1 ? (
