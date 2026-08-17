@@ -1,6 +1,6 @@
 # Vakitmatik Karar ve Açık Soru Kaydı
 
-Sürüm: `0.6-draft`
+Sürüm: `0.7-draft`
 
 Son güncelleme: `2026-08-17`
 
@@ -32,9 +32,10 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | D-020 | Dikey bağımsız ürün sayfası ana sayfadaki mevcut Dikey bölümünü ve aynı ürün veri kaynağını yeniden kullanır; logo ana sayfaya, alttaki tek `Tüm ürünler` bağlantısı ana sayfanın ürün bölümüne gider. Bu onay diğer modellere veya production yayınına otomatik uygulanmaz | Sahibi onayladı | 2026-07-29 |
 | D-021 | Paket P0 kaynak–canlı–karar baseline konsolidasyonu sınırlarıyla onaylandı; bu onay production, Google Ads mutasyonu, `.org` yönlendirmesi veya P1 başlangıcı değildir | Sahibi onayladı | 2026-08-17 |
 | D-022 | Paket P0 sonucu onaylandı ve paket tamamlandı; P1 henüz başlamadı ve ayrı kapsam/yön onayı gerektirir | Sahibi onayladı | 2026-08-17 |
-| D-023 | P1'den önce Paket P0.5 uygulanacak; registrar transferi yapılmadan `.org` web/DNS Vercel'e geçirilecek, üç alan adının kayıt/yenilemesi SH'de kalacak | Sahibi onayladı | 2026-08-17 |
+| D-023 | P1'den önce Paket P0.5 uygulanacak; registrar transferi yapılmadan `.org` web/DNS Vercel'e geçirilecek, alan adı kayıt/yenilemeleri SH'de kalacak | Sahibi onayladı | 2026-08-17 |
 | D-024 | `.org` e-posta hizmeti taşınmayacak; aktif Vakitmatik posta kanalı Google Workspace'teki `bilgi@vakitmatik.com.tr` olarak kalacak | Sahibi onayladı | 2026-08-17 |
 | D-025 | P0.5 hazırlığı başlayabilir; canlı `.org` domain/DNS yayını ve doğrulama sonrası SH hosting iptali ayrı onay kapılarıdır | Sahibi onayladı | 2026-08-17 |
+| D-026 | P0.5 canlı production/DNS yayını onaylandı; `.org` apex/www/mail ile birlikte çalışmayan `vakitmatik.net` apex/www de aynı Vercel redirect projesine alınacak | Sahibi onayladı | 2026-08-17 |
 
 ## Kanıtlanmış mevcut durum
 
@@ -58,8 +59,12 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | E-016 | Karışık çalışma ağacı canlı eşdeğer, yalnız yerel ürün detail, dashboard/Ads aracı ve dokümantasyon commitlerine ayrıldı | Git diff, partial staging ve commit denetimi | 2026-08-17 |
 | E-017 | `.org` hâlâ SH nameserver/web/mail altyapısındadır; iki `.com.tr` alanının web ve DNS'i Vercel'de, maili Google Workspace'tedir; yalnız registrar/yenileme SH'de kalır | DNS, RDAP, HTTP ve Vercel salt-okunur denetimi | 2026-08-17 |
 | E-018 | Bağımsız `.org` yönlendirme projesi Vercel edge üzerinde açık `301`, doğru mutlak hedef ve query korumasıyla çalışır; 64 URL envanteri test kapsamındadır | `apps/org-redirect`, 25 otomatik test ve izole Vercel deployment denetimi | 2026-08-17 |
-| E-019 | Ana SH sahiplik hesabında üç Vakitmatik/Reksan domaini ve `vakitmatik.net` birlikte görünür; eski `.org` sitesini barındıran tek hosting hizmetinin panel adı `Small (vakitmatik.com.tr)`dir | Kullanıcının açtığı ana SH hesabı ve servis/domain detaylarının salt-okunur denetimi | 2026-08-17 |
+| E-019 | Ana SH sahiplik hesabında eski `.org` sitesini barındıran cp25/`78.135.65.2` üzerindeki `Small — vakitmatik.org` hizmeti `83999` ile Plesk01/`78.135.65.11` üzerindeki ayrı `Small — vakitmatik.com.tr` hizmeti `96837` birlikte bulunur; önceki “tek hosting” tespiti yanlıştı | Ana SH sahibi hesabında hizmet detayları, cPanel ve canlı DNS denetimi | 2026-08-17 |
 | E-020 | `vakitmatik.net` aktif ve 10 Haziran 2027'ye kadar kayıtlıdır; SH nameserver delegasyonuna rağmen authoritative zone bulunmadığı için DNS `SERVFAIL` verir, web/MX çalışmaz ve güncel `site:` aramasında sonuç yoktur | SH sahiplik paneli, RDAP, authoritative DNS ve güncel arama denetimi | 2026-08-17 |
+| E-021 | Ayrı Vercel redirect projesine `.org` apex/www/mail ve `.net` apex/www bağlandı; Vercel zone'larında web kayıtları, Null MX, SPF `-all`, DMARC `reject` ve ACME kayıtları hazırlandı; beş host için geçerli sertifika ve SSO'suz `301` edge testi başarılıdır | Vercel CLI/API, authoritative DNS ve `curl --resolve` kabul matrisi | 2026-08-17 |
+| E-022 | SH sahibi panelinde `.org` ve `.net` nameserver'ları yalnız `ns1.vercel-dns.com` ile `ns2.vercel-dns.com` olarak başarıyla kaydedildi; iki domainin TLD parent delegasyonu ve RDAP kaydı Vercel'e geçti | SH owner panel başarı mesajları, RDAP ve TLD authoritative DNS | 2026-08-17 |
+| E-023 | `.org` eski A/MX/CNAME TTL'i `14400` iken kesim uygulandı; hazırlık runbook'undaki `TTL 300 + 24 saat bekleme` gerçekleşmedi. Eski cache yaklaşık dört saat SH'yi gösterebilir; `.net` eski delegation/negative cache etkisi 48 saate kadar sürebilir | SH/Vercel authoritative DNS ve TLD TTL denetimi | 2026-08-17 |
+| E-024 | HTTPS kaynaklar doğrudan açık `301` ile canonical `.com.tr` hedefine gider; Vercel platformu düz HTTP'yi önce aynı hostun HTTPS sürümüne `308` yükselttiği için HTTP girişleri iki yönlendirme adımı kullanır | Canlı Vercel edge GET/HEAD ve `Location` matrisi | 2026-08-17 |
 
 E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha sonra kurulan conversion action'ları ve WhatsApp ölçüm kodundan önceki durumu anlatır; güncel durum için E-012–E-014 esas alınır.
 
@@ -78,7 +83,6 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | Q-009 | WhatsApp conversionının 0 olma nedeni | Kod, canlı asset ve Ads action doğru; gerçek talep yokluğu ile event teslim sorunu ayrışmadı | Ayrı gerçek cihaz testi |
 | Q-010 | Search Console OAuth bilgilerinin güvenli kaynağı | Yerel ve production kayıtları boş; kullanıcıdan secret istenmeden mevcut yetkili kaynak belirlenmeli | Ayrı GSC yapılandırma paketi |
 | Q-011 | Bare HTTPS hostun www'ye `307` yönlendirmesinin kalıcılaştırılması | Canonical www'ye doğru; redirect türü değişikliği Vercel/SEO dış sistem kararıdır | Teknik SEO paketi |
-| Q-012 | Çalışmayan `vakitmatik.net` apex/www aynı Vercel redirect projesine alınacak mı? | Domain kullanıcıya ait ve teknik olarak boştadır; P0.5 yalnız `.org` olarak onaylandığı için kapsam sessizce genişletilemez | P0.5 canlı yayın kapısı |
 
 ## Yasaklı varsayımlar
 
@@ -100,3 +104,4 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | 0.4-draft | 2026-08-17 | Paket P0 canlı/source/ölçüm/GSC baseline bulguları, commit ayrımı ve açık sorular kaydedildi | Sonuç onayı bekliyor |
 | 0.5-draft | 2026-08-17 | Paket P0 sonuç onayı kaydedildi; paket tamamlandı ve P1 ayrı onay kapısında bırakıldı | Sahibi onayladı |
 | 0.6-draft | 2026-08-17 | P0.5 `.org` Vercel geçiş kararı, registrar/mail sınırı ve hazırlık kanıtı kaydedildi | Hazırlık sahibi onaylı; canlı yayın bekliyor |
+| 0.7-draft | 2026-08-17 | `.net` dahil P0.5 canlı yayın onayı, iki ayrı SH hosting düzeltmesi, Vercel domain/DNS/SSL hazırlığı ve nameserver kesim kanıtı kaydedildi | Sahibi onayladı; DNS/cache yakınsaması izleniyor |

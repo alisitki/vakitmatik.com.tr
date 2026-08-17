@@ -1,8 +1,8 @@
-# Paket P0.5 — Vakitmatik.org Vercel Geçiş Hazırlığı
+# Paket P0.5 — Vakitmatik.org ve Vakitmatik.net Vercel Geçişi
 
 Hazırlanma tarihi: `2026-08-17`
 
-Durum: `Hazırlık tamamlandı — canlı domain/DNS yayını onayı bekleniyor`
+Durum: `Canlı kesim uygulandı — DNS/cache yakınsaması izleniyor; SH hosting korunuyor`
 
 ## Amaç ve sahibi onaylı sınır
 
@@ -11,6 +11,8 @@ Durum: `Hazırlık tamamlandı — canlı domain/DNS yayını onayı bekleniyor`
 - `vakitmatik.org` alan adı kaydı ve yıllık yenilemesi SH'de kalacak.
 - Eski `.org` web sitesi Vercel'deki bağımsız yönlendirme projesiyle
   `https://www.vakitmatik.com.tr` alan adına taşınacak.
+- Çalışmayan `vakitmatik.net` alanının apex ve `www` girişleri aynı Vercel
+  yönlendirme projesine alınacak.
 - `vakitmatik.com.tr` ve `reksanreklam.com.tr` registrar transferi
   yapılmayacak.
 - `.org` e-posta hizmeti taşınmayacak. Aktif Vakitmatik posta kanalı Google
@@ -18,10 +20,12 @@ Durum: `Hazırlık tamamlandı — canlı domain/DNS yayını onayı bekleniyor`
 - SH hosting, canlı geçiş ve geri dönüş penceresi doğrulanmadan
   kapatılmayacak.
 - P0.5, P1 ürün detay incelemesinden önce uygulanacaktır.
+- Proje sahibi `.org` ve `.net` için canlı production/DNS yayınını 17 Ağustos
+  2026'da ayrıca açıkça onayladı.
 
-Bu hazırlık onayı canlı domain/DNS yayını veya SH hosting iptali değildir. Bu
-iki geri dönüş riski farklı işlem gruplarıdır ve ayrı açık onay kapılarında
-tutulur.
+Hazırlık onayı canlı domain/DNS yayını veya SH hosting iptali değildi. Canlı
+yayın daha sonra `.net` dahil ayrıca onaylandı ve uygulandı. SH hosting iptali
+ise geri dönüş penceresi sonrasındaki ayrı açık onay kapısında kalır.
 
 ## Kanıtlanmış başlangıç durumu
 
@@ -36,9 +40,12 @@ tutulur.
 - Kullanıcının açtığı ana SH sahiplik hesabında `vakitmatik.org`,
   `vakitmatik.com.tr` ve `reksanreklam.com.tr` aktif/otomatik faturalı domainler
   olarak birlikte görünür. `.org` bitiş tarihi `2027-09-09`dur.
-- Aynı ana hesapta tek aktif hosting hizmeti `Small (vakitmatik.com.tr)` adıyla
-  görünür. Eski `.org` sitesi bu cPanel hesabına bağlıdır; bu nedenle ilerideki
-  iptal hedefi `.org` adlı ayrı bir paket değil bu ortak hosting hizmetidir.
+- Ana SH hesap yeniden denetlendiğinde iki ayrı aktif hosting hizmeti
+  kanıtlandı. Eski `.org` sitesi cp25/`78.135.65.2` üzerindeki `Small —
+  vakitmatik.org` hizmeti `83999` içindedir. `Small — vakitmatik.com.tr`
+  hizmeti `96837` ise Plesk01/`78.135.65.11` üzerindedir ve ayrı bağımlılıklar
+  taşır. İlerideki olası iptal hedefi yalnız `.org` hizmeti `83999` olabilir;
+  `96837` bu paketin kapsamı değildir.
 - SH ana hesap iletişim adresi ve Vercel kullanıcı adresi `@vakitmatik.org`
   kullanmıyor. `.org` mail kapanışı bu iki yönetim hesabını kilitlemez.
 - Vercel `.com.tr` registrar transferini desteklemiyor. Kullanıcının
@@ -59,12 +66,10 @@ Bağımsız ve bağımlılıksız yönlendirme katmanı:
 - Canonical hedef kökü: `https://www.vakitmatik.com.tr`
 
 Vercel'de yeni projenin varsayılan `vercel.app` aliasına bağlı izole doğrulama
-deployment'ı oluşturuldu. Vercel bu ilk deployment'ı proje içinde `production`
-target olarak işaretledi; ancak hiçbir özel `.org` domaini projeye bağlanmadığı
-için mevcut `.org` trafiği ve SH sitesi değişmedi. Varsayılan Vercel adresleri
-hesap giriş korumasındadır; proje ayarı custom domainleri bu korumanın dışında
-tutar, böylece canlı `.org` ziyaretçisinin giriş ekranı görmemesi beklenir ve
-cutover kabul testinde ayrıca doğrulanır.
+deployment'ı oluşturuldu. `vakitmatik.org`, `www.vakitmatik.org`,
+`mail.vakitmatik.org`, `vakitmatik.net` ve `www.vakitmatik.net` projeye özel
+domain olarak bağlandı. Varsayılan Vercel adresleri hesap giriş korumasında
+kalırken custom domainlerin bu koruma dışında olduğu edge testinde doğrulandı.
 
 ## URL grupları
 
@@ -100,8 +105,16 @@ ayrı pakette daraltılabilir.
 - Query parametresi edge testinde korundu.
 - Sekiz benzersiz son hedefin tamamı `200` döndü ve başka bir hosta
   sapmadı.
-- `.org`, `www` veya `mail` custom domaini bağlanmadı; SH DNS, hosting, mail,
-  Google Ads, Search Console ve `.com.tr` production deployment'ı değişmedi.
+- Beş custom host projeye bağlandı. Vercel zone'larında apex ve gerekli
+  `www`/`mail` web kayıtları; Null MX, SPF `-all` ve DMARC `reject` hazırlandı.
+- `.org` apex/www/mail SAN sertifikası ve `.net` apex/www SAN sertifikası
+  üretildi. Beş host da Vercel edge üzerinde geçerli TLS, SSO'suz doğrudan
+  `301` ve doğru `.com.tr` hedefi verdi.
+- SH sahibi panelinde `.org` ve `.net` için yalnız `ns1.vercel-dns.com` ve
+  `ns2.vercel-dns.com` kaydedildi. Her iki TLD parent delegasyonu ve RDAP kaydı
+  Vercel nameserver'larına geçti.
+- SH hosting, `.com.tr` production deployment'ı, Google Ads ve Search Console
+  değiştirilmedi.
 
 ## Bilinen riskler
 
@@ -119,37 +132,49 @@ ayrı pakette daraltılabilir.
 5. Güncel Search Console credential'ları boş olduğu için API üzerinden site
    taşıma snapshot'ı alınamıyor. Search Console sahipliği/Change of Address
    ayrı dış sistem kontrolüdür.
-6. Ana SH hesapta ayrıca `vakitmatik.net` bulundu. Domain `2027-06-10`a kadar
-   aktif ve SH nameserver'larına delege edilmiş olsa da SH zone'u bulunmadığı
-   için şu anda DNS `SERVFAIL` verir; web/MX çalışmaz ve güncel `site:`
-   aramasında sonuç görülmedi. Aynı Vercel redirect projesine alınması mantıklı
-   görünür, fakat `.org` paketine sessizce eklenmez; canlı kapıda ayrı sahip
-   kararı gerekir.
+6. `vakitmatik.net` geçiş öncesinde SH nameserver'larına delege fakat zonesuzdu;
+   DNS `SERVFAIL` veriyor, web/MX çalışmıyor ve güncel `site:` sonucu
+   bulunmuyordu. Proje sahibi alanı canlı kapsama açıkça ekledi. Eski delegation
+   TTL'i `172800` olduğu için bazı recursive resolverlarda eski `SERVFAIL`
+   önbelleği 48 saate kadar sürebilir.
+7. `.org` eski web/MX/CNAME kayıtlarının TTL'i `14400` iken canlı kesim
+   uygulandı. Eski cache'ler yaklaşık dört saat SH sitesini göstermeye devam
+   edebilir; bu aralıkta eski hosting açık tutulur. Hazırlık runbook'undaki
+   `TTL 300 + 24 saat bekleme` adımı uygulanmış kabul edilemez.
+8. Doğrudan HTTPS girişleri tek `301` ile canonical `.com.tr` hedefine gider.
+   Vercel HTTP'yi önce aynı hostun HTTPS sürümüne platform düzeyinde `308`
+   yönlendirdiği için düz HTTP girişlerinde toplam iki yönlendirme vardır.
 
-## Canlı geçiş kapısı
+## Canlı geçiş uygulama kaydı
 
-Canlı yayın onayından sonra tek koordineli pencerede:
+Canlı yayın onayından sonra uygulanan koordineli pencere:
 
-1. SH web ve DNS başlangıç kayıtları ile statik site dosyalarının geri dönüş
-   yedeği alınır.
-2. Registrar/Vercel/Google hesap kurtarma veya yönetici adreslerinin
-   `@vakitmatik.org` posta kutusuna bağlı olmadığı doğrulanır.
-3. Mevcut 4–24 saatlik cache etkisini azaltmak için SH web/mail/TXT TTL'leri
-   `300` saniyeye indirilir ve en az 24 saat beklenir.
-4. Vercel projesine `vakitmatik.org`, `www.vakitmatik.org` ve indekslenmiş web
-   kopyasını kapatmak için `mail.vakitmatik.org` bağlanır.
-5. `.org` e-posta kullanılmadığını ilan eden Null MX, SPF `-all` ve DMARC
-   `p=reject; sp=reject; adkim=s; aspf=s` kayıtları hazırlanır; eski SH mail
-   kayıtları taşınmaz.
-6. Vercel'in istediği doğrulama kaydı SH zone'a eklenerek apex/www/mail SSL
-   sertifikalarının nameserver kesiminden önce hazır olması hedeflenir.
-7. Registrar SH'de kalırken nameserver'lar Vercel DNS'e çevrilir.
-8. Apex/www/mail; HTTP/HTTPS; GET/HEAD; query; Türkçe/encoded dosya; güçlü
-   ürün/fiyat/pano/destek ve bilinmeyen yol matrisi test edilir.
-9. Son hedeflerde `200`, doğru canonical, indexlenebilirlik, tek yönlendirme
-   adımı ve döngüsüzlük doğrulanır.
-10. Search Console yetkisi varsa eski/yeni mülk sahipliği ve Change of Address
-   ayrıca uygulanır.
+1. SH authoritative DNS başlangıcı, canlı URL/dosya envanteri ve geri dönüş
+   nameserver'ları kaydedildi. Tam off-server cPanel hesap yedeği bu kesimde
+   alınmadı; hosting iptal paketinin zorunlu önkoşulu olarak kaldı.
+2. Registrar/Vercel yönetim adreslerinin `@vakitmatik.org` posta kutusuna
+   bağlı olmadığı doğrulandı. Google Search Console erişimi ayrı blokajda
+   kaldı.
+3. SH zone başlangıcı kaydedildi. Mevcut web/MX/CNAME TTL'i `14400` olarak
+   kaldı; cache etkisi eski hosting açık tutularak yönetildi.
+4. Vercel projesine `.org` apex/www/mail ile `.net` apex/www bağlandı.
+5. `.org` ve `.net` için e-posta kullanılmadığını ilan eden Null MX, SPF
+   `-all` ve DMARC `p=reject; sp=reject; adkim=s; aspf=s` kayıtları hazırlandı;
+   eski SH mail kayıtları taşınmadı.
+6. Vercel'in verdiği üç `.org` ACME TXT kaydı SH zone'a eklendi; dört SH
+   authoritative sunucusunda doğrulandı ve apex/www/mail sertifikası kesimden
+   önce üretildi. `.net` eski zone'u bulunmadığından sertifika nameserver
+   kesiminden hemen sonra Vercel TXT kayıtları üzerinden üretildi.
+7. Registrar SH'de kalırken `.org` ve `.net` nameserver'ları Vercel DNS'e
+   çevrildi.
+8. Beş host; HTTP/HTTPS, query ve temsilî güçlü/bilinmeyen yollar Vercel edge
+   üzerinde test edildi. HTTPS doğrudan `301`; HTTP ise Vercel `308` HTTPS
+   yükseltmesinden sonra `301` verir. Public recursive-resolver kabulü cache
+   yakınsaması boyunca sürer.
+9. Son hedeflerde `200`, doğru canonical/indexlenebilirlik ve döngüsüzlük edge
+   testinde doğrulandı.
+10. Search Console credential'ları boş olduğu için Change of Address
+    uygulanmadı; ayrı blokaj olarak kaldı.
 
 ## Geri alma ve SH hosting iptali
 
@@ -157,16 +182,16 @@ Canlı yayın onayından sonra tek koordineli pencerede:
 - Canlı geçişte kritik hata görülürse `.org` nameserver'ları kayıtlı SH
   değerlerine geri çevrilir; eski hosting bu sırada açık kalır.
 - DNS yayılımı ve cache nedeniyle geri dönüş anlık olmayabilir.
-- SH'deki `Small (vakitmatik.com.tr)` hosting hizmeti en az yedi günlük
-  sağlıklı canlı gözlemden sonra, cPanel içindeki bütün domain/dosya/mail
-  bağımlılıkları tekrar doğrulanarak ayrı ve açık iptal onayıyla kapatılır.
+- SH'deki `Small — vakitmatik.org` hizmeti `83999` en az yedi günlük sağlıklı
+  canlı gözlemden ve tam cPanel yedeği/bağımlılık denetiminden sonra ayrı ve
+  açık iptal onayıyla kapatılabilir. `Small — vakitmatik.com.tr` hizmeti
+  `96837` bu iptal kapsamına alınmaz.
   İptal yalnız hosting hizmetini hedefler; alan adı kayıtları/yenilemeleri
   SH'de kalır.
 
-## Bu kapıda kullanıcıdan beklenecek tek karar
+## Sıradaki ayrı kapı
 
-`vakitmatik.org`, `www.vakitmatik.org` ve web kopyası olarak
-`mail.vakitmatik.org` alanlarını Vercel yönlendirme projesine bağlayıp `.org`
-nameserver'larını Vercel'e geçirecek canlı production/DNS yayınını onaylamak;
-ayrıca şu anda çalışmayan `vakitmatik.net` apex/www adreslerinin aynı projeye
-eklenip eklenmeyeceğini kararlaştırmak.
+Canlı DNS/cache yakınsaması ve en az yedi günlük gözlem tamamlandıktan sonra
+yalnız `.org` hosting hizmeti `83999` için tam yedek, bağımlılık denetimi ve
+iptal kararı ayrı iş paketi olarak sunulur. Bu P0.5 yayını hosting iptalini
+onaylamaz.

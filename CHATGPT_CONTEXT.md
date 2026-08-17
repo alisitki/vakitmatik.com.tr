@@ -14,7 +14,7 @@
 | Canlı Vercel deployment | `dpl_54riDvXkHPwR2UpRbTTu4J7FUYr3` — 15 Ağustos 2026 10:19 TRT |
 | Son doğrulanmış rollback deployment | `dpl_9o9vFeAxpRYrntmuzmtRHHabXZ1y` — 15 Ağustos 2026 09:17 TRT |
 | Canlı deployment kaynak işareti | Git SHA `108cb91`; Vercel metadata `gitDirty: 1` |
-| Son yerel doğrulama | 17 Ağustos P0.5 hazırlığı: `.org` redirect testleri `25/25`, Vercel edge `301`/query matrisi, sekiz canlı hedef `200` ve `git diff --check` başarılı |
+| Son yerel/doğrudan edge doğrulama | 17 Ağustos P0.5 canlı kesimi: redirect testleri `25/25`; `.org` apex/www/mail ve `.net` apex/www geçerli TLS + SSO'suz `301`; sekiz hedef `200` |
 | Son Google Ads denetimi | 17 Ağustos 2026; conversion hedef hesabı ve metrikler salt okunur doğrulandı |
 | P0 ayrıntılı kayıt | `docs/vakitmatik/p0-baseline-2026-08-17.md` |
 | P0.5 ayrıntılı kayıt | `docs/vakitmatik/p0-5-org-vercel-migration-2026-08-17.md` |
@@ -30,13 +30,13 @@ Gizlilik notu: Bu dosyada parola, API anahtarı, OAuth tokenı, sertifika, `.env
 - `[KANITLANDI]` Google Ads'teki etkin reklamların tamamı hâlâ ana sayfaya gider. Landing final URL geçişi yapılmamıştır. Mevcut reklam askıya alınmamıştır.
 - `[KANITLANDI]` 10 bağımsız model detay sayfası yerelde hazırlanmıştır ve build alır; canlıda 404 döner, sitemap'te ve site içi link yapısında yoktur. Kullanıcı aynı görsel yönle 10 modelin oluşturulmasına izin vermiştir; final sayfa incelemesi ve production onayı verilmemiştir.
 - `[KANITLANDI]` Mobil uygulama bölümündeki App Store ve Google Play kartları doğru mağaza adresleriyle canlıdır.
-- `[KANITLANDI]` Eski güçlü alan adı `vakitmatik.org` henüz taşınmamıştır. Bağımsız Vercel yönlendirme katmanı, 64 URL envanteri ve izole edge deployment'ı hazırdır; custom domain/DNS canlı yayın onayı bekler.
-- `[KANITLANDI / AÇIK SORU]` Ana SH sahiplik hesabında ayrıca `vakitmatik.net` vardır. Domain aktiftir fakat DNS zone bulunmadığı için `SERVFAIL` verir; canlı sitesi/maili ve güncel `site:` sonucu yoktur. Aynı redirect projesine eklenmesi P0.5 canlı kapısında karar bekler.
+- `[KANITLANDI / YAYILIM]` Eski güçlü `vakitmatik.org` için Vercel redirect katmanı canlı kesime alındı. SH sahibi paneli, RDAP ve TLD parent delegasyonu yalnız Vercel nameserver'larını gösterir. Eski `14400` saniyelik cache nedeniyle SH sitesi yaklaşık dört saat daha görülebilir.
+- `[KANITLANDI / YAYILIM]` `vakitmatik.net` sahibi tarafından P0.5 canlı kapsamına eklendi. TLD delegasyonu Vercel'e geçti; apex/www sertifikası ve yönlendirmesi hazırdır. Eski zonesuz SH delegasyonundan kalan `SERVFAIL` cache'i bazı resolverlarda 48 saate kadar sürebilir.
 - `[KANITLANDI]` P0, karışık çalışma ağacını canlı eşdeğer, yalnız yerel ürün detail, dashboard/Ads aracı ve dokümantasyon commitlerine ayırmıştır. Production ve dış sistemler değişmemiştir.
 - `[KRİTİK RİSK]` Canlı Vercel deployment hâlâ `gitDirty: 1` ile üretilmiştir. Ayrıca dal HEAD'i yayınlanmamış 10 ürün route'unu içerir; açık production onayı olmadan bu dal deploy edilmemelidir.
 - `[KANITLANDI / AÇIK SORU]` Telefon ve WhatsApp `send_to` hedefleri doğru Ads hesabındaki etkin conversion action'larla eşleşir. Temel tag farklı önek taşır; split-routing ve WhatsApp'ın 0 olma nedeni gerçek cihaz testi olmadan açık kalır.
 - `[KANITLANDI BLOKAJ]` GSC credential kayıtları yerelde ve production'da boştur; güncel GSC snapshot'ı alınamamıştır.
-- `[SAHİBİ ONAYLADI]` P1'den önce P0.5 uygulanacaktır: registrar kayıtları SH'de kalır, `.org` web/DNS Vercel'e geçer, `.org` mail taşınmaz. Hazırlık tamamlandı; sıradaki karar canlı `.org` domain/DNS yayınıdır. SH hosting iptali bundan sonraki ayrı kapıdır.
+- `[SAHİBİ ONAYLADI]` P1'den önce P0.5 canlı yayını `.net` dahil onaylandı ve uygulandı: registrar kayıtları SH'de kalır, `.org`/`.net` web-DNS Vercel'e geçer, `.org` mail taşınmaz. SH hosting iptali en az yedi günlük gözlem ve tam yedek/bağımlılık denetiminden sonraki ayrı kapıdır.
 
 ## Bilginin nasıl okunacağı
 
@@ -62,7 +62,7 @@ Vakitmatik sistemi iki bağımsız fakat ilişkili Next.js uygulaması ve bir co
 
 1. Kamuya açık satış ve ürün sitesi: cami saatlerini ve pano ürünlerini güçlü görsellerle tanıtır; organik arama, Google Ads landing deneyimi ve WhatsApp/telefon iletişimini destekler.
 2. Özel operasyon dashboard'u: Google Ads, Google Search Console ve Vercel Analytics verilerini salt okunur biçimde bir araya getirir; günlük rapor üretebilir.
-3. `apps/org-redirect`: `vakitmatik.org` trafiğini URL gruplarıyla canonical `.com.tr` hedeflerine taşıyan bağımsız Vercel projesi; canlı custom domain henüz bağlı değildir.
+3. `apps/org-redirect`: `vakitmatik.org` ve `vakitmatik.net` trafiğini URL gruplarıyla canonical `.com.tr` hedeflerine taşıyan bağımsız canlı Vercel projesi; `.org` apex/www/mail ve `.net` apex/www bağlıdır.
 
 `[SAHİBİ ONAYLADI]` Kuzey yıldızı gerçek sipariştir. Gösterim, tıklama, CTR, CPC, optimizasyon skoru, Quality Score, landing deneyimi, telefon ve WhatsApp tıklaması ara teşhis sinyalleridir; iş sonucu değildir.
 
@@ -599,15 +599,27 @@ Bu düzenleme canlıdaki `gitDirty: 1` deployment'ı kendiliğinden temizlemez. 
 
 - `vakitmatik.org` ve `reksanreklam.com.tr` kullanıcıya aittir.
 - `.org` eski site 51 sitemap URL'si ve sitemap dışı PDF/APK/MSI/EXE/RAR dosyalarıyla hâlâ güçlü organik varlıktır.
-- Proje sahibi P1'den önce P0.5 geçişini onayladı. Domain registrar transferi yapılmayacak; üç alan adının kayıt/yenilemesi SH'de kalacak.
+- Proje sahibi P1'den önce P0.5 geçişini ve canlı kesimi `vakitmatik.net`
+  dahil onayladı. Domain registrar transferi yapılmayacak; alan adı
+  kayıt/yenilemeleri SH'de kalacak.
 - `apps/org-redirect` altında bağımsız Vercel `301` katmanı hazırlandı. 64 envanter satırı test kapsamındadır ve Vercel edge örnekleri doğru hedefleri vermektedir.
-- `.org`, `www` ve indekslenmiş `mail` web kopyası custom domain olarak henüz bağlanmadı; nameserver/DNS ve mevcut SH trafiği değişmedi.
-- Ana SH sahiplik hesabında eski `.org` sitesinin bağlı olduğu tek aktif hosting hizmeti `Small (vakitmatik.com.tr)` adıyla görünür. İlerideki hosting iptali, bu ortak cPanel hesabındaki bütün bağımlılıklar yeniden doğrulanmadan yapılamaz.
-- Ana hesapta ayrıca `vakitmatik.net` aktiftir; SH delegasyonunda zone olmadığı için DNS `SERVFAIL` verir. Apex/www'yi aynı redirect projesine almak ayrı canlı karar olarak açıktır.
+- `.org` apex/www/mail ve `.net` apex/www canlı Vercel redirect projesine
+  bağlandı. Vercel web kayıtları, Null MX/SPF/DMARC ve sertifikalar hazırdır;
+  beş host doğrudan edge testinde geçerli TLS ile `301` verdi.
+- Ana SH hesabında iki ayrı hosting vardır. Eski `.org` sitesi cp25 üzerindeki
+  `Small — vakitmatik.org` hizmeti `83999` içindedir. Plesk01 üzerindeki
+  `Small — vakitmatik.com.tr` hizmeti `96837` ayrıdır ve P0.5 iptal kapsamına
+  girmez.
+- SH panelinde `.org` ve `.net` nameserver'ları yalnız Vercel olarak başarıyla
+  kaydedildi; iki TLD parent delegasyonu ve RDAP kaydı Vercel'e geçti. `.org`
+  eski cache'i yaklaşık dört saat, `.net` eski `SERVFAIL` cache'i 48 saate
+  kadar sürebilir.
 - Eski ürün sayfaları, production'da detail route'lar `404` olduğu için şimdilik canlı `/cami-saati/` ailesine gider. Ayet/Hadis ve fiyat kümeleri kendi canlı landing'lerine gider.
 - Ezanmatik/karşılıksız URL'lerin ana sayfaya; eski program/kılavuz/dosyaların genel ayarlama desteğine gitmesi, sahibin sadeleştirme kararına bağlı bilinen soft-404/alaka riskidir.
 - `.org` mail taşınmayacaktır. Null MX/SPF/DMARC canlı DNS paketi içindedir; `bilgi@vakitmatik.com.tr` Google Workspace'te değişmeden kalır.
-- Sıradaki kapı canlı `.org` domain/DNS yayın onayıdır. SH hosting iptali en az yedi günlük doğrulama penceresinden sonra ayrıca onaylanır.
+- Sıradaki adım public DNS/cache yakınsaması ve canlı kabul matrisidir. SH
+  `.org` hosting hizmeti `83999` ancak en az yedi günlük gözlem, tam cPanel
+  yedeği ve bağımlılık denetiminden sonra ayrıca onaylanarak iptal edilebilir.
 - `reksanreklam.com.tr` bütünüyle Vakitmatik'e yönlendirilmemelidir; daha geniş ürün kapsamı vardır.
 
 ### 13.4 Ölçüm doğrulaması
@@ -729,21 +741,29 @@ Ayrıntı ve geri alma: `docs/vakitmatik/p0-baseline-2026-08-17.md`.
 
 P0 sonuç onayı P1'i otomatik başlatmamıştır. P1 ayrı kapsam ve yön onayı bekler.
 
-### Paket P0.5 — Vakitmatik.org Vercel geçişi
+### Paket P0.5 — Vakitmatik.org ve Vakitmatik.net Vercel geçişi
 
-Durum: `Hazırlık tamamlandı — canlı domain/DNS yayın onayı bekleniyor`.
+Durum: `Canlı kesim uygulandı — DNS/cache yakınsaması izleniyor`.
 
-Tamamlanan hazırlık:
+Tamamlanan hazırlık ve canlı adımlar:
 
 1. Registrar transferi kapsamdan çıkarıldı; domain kayıt/yenilemeleri SH'de kalacak.
 2. Bağımlılıksız `apps/org-redirect` Vercel projesi oluşturuldu.
 3. Ana kategori, fiyat, Ayet/Hadis, iletişim, gizlilik, destek ve catch-all `301` grupları hazırlandı.
 4. 64 URL envanteri, duplicate/loop/hedef allowlist ve temsilî route'larla `25/25` test geçti.
 5. İzole Vercel edge deployment'ında gerçek `301`, mutlak `Location` ve query koruması doğrulandı.
+6. `.org` apex/www/mail ile `.net` apex/www custom domainleri bağlandı; Vercel
+   zone kayıtları, mail-kapalı Null MX/SPF/DMARC ve sertifikalar oluşturuldu.
+7. SH sahibi panelinde iki domainin nameserver'ları yalnız Vercel olarak
+   başarıyla kaydedildi; iki TLD parent delegasyonu da geçti. Recursive cache
+   yakınsaması izleniyor.
 
-Değişmeyenler: `.org` custom domainleri/nameserver/DNS/mail/SH hosting, `.com.tr` production, Google Ads ve Search Console.
+Değişmeyenler: SH hosting hizmetleri, `.com.tr` production deployment'ı,
+Google Ads ve Search Console. `.org` posta içeriği taşınmadı; Vercel DNS'te
+alanın posta kabul etmediği ilan edildi.
 
-Sıradaki tek karar canlı `.org` domain/DNS yayınıdır. Ayrıntı ve geri alma:
+Sıradaki adım public DNS/cache yakınsaması ve canlı kabul matrisidir. Hosting
+iptali bu onayın kapsamında değildir. Ayrıntı ve geri alma:
 `docs/vakitmatik/p0-5-org-vercel-migration-2026-08-17.md`.
 
 ### Paket P1 — 10 ürün detay sayfası incelemesi
@@ -894,4 +914,4 @@ Muhalefet formatı:
 
 ### Yeni bir ChatGPT konuşmasına yapıştırılacak başlangıç metni
 
-> Repo kökündeki `CHATGPT_CONTEXT.md` dosyasını proje için güncel devir teslim belgesi olarak tamamen oku. Ardından `AGENTS.md`, `docs/project-system/controlled-workflow.md`, `docs/vakitmatik/project-charter.md`, `docs/vakitmatik/roadmap.md` ve `docs/vakitmatik/decision-log.md` kurallarına uy. `docs/vakitmatik/p0-baseline-2026-08-17.md` tamamlanan Paket P0'ın; `docs/vakitmatik/p0-5-org-vercel-migration-2026-08-17.md` ise devam eden P0.5'in kanıt ve geri alma kaydıdır. Vakitmatik'in kuzey yıldızı sipariştir; müşteri, Google Ads ve organik SEO birlikte düşünülür. Varsayım yapma, marka karakterini pazar yerine çevirme, production veya Ads hesabına açık onaysız dokunma. P0.5 hazırlığı tamamlanmıştır; `.org` custom domain/DNS canlı yayın onayı bekler. SH hosting iptali bunun ardından ayrı kapıdır. P1 henüz başlamamıştır.
+> Repo kökündeki `CHATGPT_CONTEXT.md` dosyasını proje için güncel devir teslim belgesi olarak tamamen oku. Ardından `AGENTS.md`, `docs/project-system/controlled-workflow.md`, `docs/vakitmatik/project-charter.md`, `docs/vakitmatik/roadmap.md` ve `docs/vakitmatik/decision-log.md` kurallarına uy. `docs/vakitmatik/p0-baseline-2026-08-17.md` tamamlanan Paket P0'ın; `docs/vakitmatik/p0-5-org-vercel-migration-2026-08-17.md` ise devam eden P0.5'in kanıt ve geri alma kaydıdır. Vakitmatik'in kuzey yıldızı sipariştir; müşteri, Google Ads ve organik SEO birlikte düşünülür. Varsayım yapma, marka karakterini pazar yerine çevirme, production veya Ads hesabına açık onaysız dokunma. P0.5 canlı kesimi `.net` dahil uygulanmıştır; public DNS/cache yakınsaması ve kabul matrisi izlenmektedir. SH hosting iptali ayrı kapıdır. P1 henüz başlamamıştır.

@@ -1,10 +1,10 @@
 # Vakitmatik Yaşayan Yol Haritası
 
-Sürüm: `0.4-draft`
+Sürüm: `0.5-draft`
 
 Tarih: `2026-08-17`
 
-Durum: `Paket P0.5 hazırlığı tamamlandı — canlı .org geçiş onayı bekleniyor; P1 başlamadı`
+Durum: `Paket P0.5 canlı kesimi uygulandı — DNS/cache yakınsaması izleniyor; P1 başlamadı`
 
 Kuzey yıldızı: `Sipariş`
 
@@ -20,15 +20,30 @@ Bu yol haritası yeni veri ve kullanıcı kararlarıyla güncellenebilir. Her de
 - 10 ürün detail route'u yerelde tutuluyor; canlıda 404, sitemap ve iç bağlantı dışında.
 - Telefon/WhatsApp conversion hedefleri doğru Ads hesabındaki etkin primary action'larla eşleşiyor. Temel tag'in farklı öneki split-routing riski olarak açık tutuldu.
 - Güncel GSC snapshot'ı, yerel ve production credential kayıtları boş olduğu için alınamadı.
-- Production, Google Ads, Search Console ve `.org` yönlendirme ayarlarında değişiklik yapılmadı.
+- Ana `.com.tr` production deployment'ı, Google Ads ve Search Console
+  değiştirilmedi. Ayrı P0.5 Vercel redirect projesi ile `.org`/`.net` DNS
+  geçişi canlı olarak başlatıldı.
 - Proje sahibi P1'den önce `Paket P0.5 — Vakitmatik.org Vercel geçişi`ni araya aldı.
-- Registrar transferinden vazgeçildi: üç alan adının kaydı SH'de kalacak; `.org` web ve DNS katmanı Vercel'e geçirilecek.
-- Bağımsız `apps/org-redirect` uygulaması ve izole Vercel doğrulama deployment'ı hazırlandı; özel `.org` domainleri henüz bağlanmadı ve canlı trafik değişmedi.
-- Ana SH sahiplik hesabı doğrulandı: eski `.org` sitesi ayrı `.org` adlı paket yerine `Small (vakitmatik.com.tr)` hosting hesabına bağlıdır. Ayrıca DNS'i `SERVFAIL` veren, canlı sitesi olmayan `vakitmatik.net` alanı keşfedildi; P0.5'e eklenmesi canlı karar kapısındadır.
+- Registrar transferinden vazgeçildi: alan adı kayıt/yenilemeleri SH'de kalırken
+  `.org` ve `.net` web/DNS katmanı Vercel'e geçirildi.
+- Bağımsız `apps/org-redirect` uygulaması canlı Vercel projesine alındı;
+  `.org` apex/www/mail ve `.net` apex/www bağlandı, sertifikaları üretildi ve
+  SH panelinde iki domainin nameserver'ları yalnız Vercel olarak kaydedildi.
+- Ana SH sahiplik hesabında iki ayrı hosting kanıtlandı: eski `.org` sitesi
+  cp25 üzerindeki `Small — vakitmatik.org` hizmeti `83999` içindedir;
+  Plesk01 üzerindeki `Small — vakitmatik.com.tr` hizmeti `96837` ayrıdır ve
+  P0.5 iptal kapsamına girmez.
+- `.net` P0.5 canlı kapsamına sahibi tarafından açıkça eklendi. `.org` ve
+  `.net` TLD delegasyonları ile RDAP kayıtları Vercel nameserver'larına geçti.
+  Eski `.org` web cache'i yaklaşık dört saat, `.net` `SERVFAIL` cache'i 48
+  saate kadar sürebilir.
 
 Ayrıntılı kanıt ve geri alma kaydı: [`p0-baseline-2026-08-17.md`](p0-baseline-2026-08-17.md).
 
-Sıradaki karar `Paket P0.5` için canlı domain/DNS yayın onayıdır. SH hosting iptali, geçiş doğrulaması ve geri dönüş penceresinden sonra ayrıca onaylanacaktır. P1 bu iki kapı tamamlanmadan başlamaz.
+Sıradaki adım P0.5 public DNS/cache yakınsaması ve yönlendirme matrisinin canlı
+kabulüdür. SH `.org` hosting hizmeti `83999` için tam yedek/bağımlılık denetimi
+ve iptal, en az yedi günlük geri dönüş penceresinden sonra ayrıca onaylanacaktır.
+P1 henüz başlamamıştır.
 
 Ayrıntılı P0.5 hazırlık ve geri alma kaydı: [`p0-5-org-vercel-migration-2026-08-17.md`](p0-5-org-vercel-migration-2026-08-17.md).
 
@@ -216,7 +231,7 @@ Vakitmatik'te en az bir tamamlanmış ölçüm döngüsü görülmeden genel pro
 
 ## Güncel önerilen sıra
 
-1. `Paket P0.5 — canlı .org domain/DNS yayın onayı`
+1. `Paket P0.5 — .org/.net DNS/cache yakınsaması ve canlı kabul`
 2. `.org` yönlendirme matrisi ve organik görünürlük doğrulaması
 3. En az yedi günlük geri dönüş penceresinden sonra ayrı SH hosting iptal onayı
 4. `Paket P1 — kapsam ve yön onayı`
