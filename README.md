@@ -26,5 +26,5 @@ npm run start
 
 - Production canonical host: `https://www.vakitmatik.com.tr`
 - `next.config.ts` icinde `output: "export"` ve `images.unoptimized` aktif.
-- SEO static dosyalari `public/robots.txt` ve `public/sitemap.xml` altindadir.
+- Robots dosyasi `public/robots.txt`; sitemap kaynagi `src/app/sitemap.ts` altindadir.
 - Buyuk urun gorselleri WebP olarak servis edilir; orijinal PNG dosyalari yedek olarak korunur.

@@ -1,11 +1,32 @@
 # Vakitmatik Yaşayan Yol Haritası
 
-Sürüm: `0.1-draft`  
-Tarih: `2026-07-22`  
-Durum: `İş Paketi 0 incelemede`  
+Sürüm: `0.2-draft`
+
+Tarih: `2026-08-17`
+
+Durum: `Paket P0 sonucu incelemede`
+
 Kuzey yıldızı: `Sipariş`
 
 Bu yol haritası yeni veri ve kullanıcı kararlarıyla güncellenebilir. Her değişiklik `decision-log.md` dosyasına işlenir. Bir fazın onayı sonraki fazı otomatik olarak başlatmaz.
+
+## 17 Ağustos 2026 güncel geçiş durumu
+
+`KANITLANDI`
+
+- Paket P0 için kaynak, canlı ve karar baseline denetimi uygulandı; sonuç onayı bekleniyor.
+- Canlı deployment değişmedi ve `gitDirty: 1` riski devam ediyor.
+- Karışık çalışma ağacı; canlı eşdeğer, yalnız yerel ürün detail, dashboard/Ads aracı ve dokümantasyon commitlerine ayrıldı.
+- 10 ürün detail route'u yerelde tutuluyor; canlıda 404, sitemap ve iç bağlantı dışında.
+- Telefon/WhatsApp conversion hedefleri doğru Ads hesabındaki etkin primary action'larla eşleşiyor. Temel tag'in farklı öneki split-routing riski olarak açık tutuldu.
+- Güncel GSC snapshot'ı, yerel ve production credential kayıtları boş olduğu için alınamadı.
+- Production, Google Ads, Search Console ve `.org` yönlendirme ayarlarında değişiklik yapılmadı.
+
+Ayrıntılı kanıt ve geri alma kaydı: [`p0-baseline-2026-08-17.md`](p0-baseline-2026-08-17.md).
+
+Sıradaki öneri, P0 sonucunun kullanıcı tarafından onaylanmasından sonra ayrı kapsamla `Paket P1 — 10 ürün detay sayfası incelemesi`dir. P0 sonuç onayı P1'i otomatik başlatmaz.
+
+> Aşağıdaki Temmuz başlangıç snapshot'ı ve eski faz tablosu tarihsel plan kaydıdır; güncel canlı durum yerine kullanılamaz.
 
 ## Mevcut doğrulanmış başlangıç durumu
 
@@ -187,11 +208,11 @@ Rutin:
 
 Vakitmatik'te en az bir tamamlanmış ölçüm döngüsü görülmeden genel proje şablonu çıkarılmaz.
 
-## İş Paketi 0 onayından sonraki önerilen sıra
+## Güncel önerilen sıra
 
-1. `Paket 0.4 — Güvenlik ve baseline yenileme`
-2. `Paket 1.1 — Ölçüm tasarımı`
+1. `Paket P0 sonuç onayı`
+2. `Paket P1 — 10 ürün detay sayfası incelemesi`
+3. Yalnız onaylanan ürünler için organik bağlama ve production hazırlığı
+4. Ayrı onaylarla `.org` taşıması ve daha sonra Google Ads landing geçişi
 
-Önce production, kaynak commit, mevcut preview, Google Ads ve ölçüm durumu tek geri dönüş paketinde yeniden doğrulanır. Ardından mevcut sistem 430 tıklamanın hangisinin siparişe dönüştüğünü bilmediği için WhatsApp/telefon ve sipariş bağlantısının en hafif yöntemi tasarlanır.
-
-Bu paketlerin hiçbiri İş Paketi 0 onaylanmadan başlamaz. Paket 0.4'ün tamamlanması da Paket 1.1'i otomatik olarak onaylamaz.
+Ölçümde telefon conversionının çalıştığına dair üretim kanıtı vardır; WhatsApp'ın 0 olma nedeni hâlâ açık sorudur. Gerçek cihaz firing testi, GSC credential düzeltmesi veya dashboard URL listesinin güncellenmesi P1 kapsamına kendiliğinden girmez ve ayrı paket olarak sunulmalıdır.

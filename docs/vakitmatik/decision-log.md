@@ -1,7 +1,8 @@
 # Vakitmatik Karar ve Açık Soru Kaydı
 
-Sürüm: `0.3-draft`  
-Son güncelleme: `2026-07-29`
+Sürüm: `0.4-draft`
+
+Son güncelleme: `2026-08-17`
 
 Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış taslak kayıtlar `TASLAK` olarak kalır.
 
@@ -29,6 +30,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | D-018 | Eski Vakit 38 küçük boy ölçüsü `38 × 58` iken güncel Dikey küçük boy ölçüsü zaman içinde `40 × 60` olarak değişmiştir | Sahibi onayladı | 2026-07-29 |
 | D-019 | Desenli Beyaz, Sabah Duruş ve Vakit 38 Günlü güncel ürün portföyünde yoktur | Sahibi onayladı | 2026-07-29 |
 | D-020 | Dikey bağımsız ürün sayfası ana sayfadaki mevcut Dikey bölümünü ve aynı ürün veri kaynağını yeniden kullanır; logo ana sayfaya, alttaki tek `Tüm ürünler` bağlantısı ana sayfanın ürün bölümüne gider. Bu onay diğer modellere veya production yayınına otomatik uygulanmaz | Sahibi onayladı | 2026-07-29 |
+| D-021 | Paket P0 kaynak–canlı–karar baseline konsolidasyonu sınırlarıyla onaylandı; bu onay production, Google Ads mutasyonu, `.org` yönlendirmesi veya P1 başlangıcı değildir | Sahibi onayladı | 2026-08-17 |
 
 ## Kanıtlanmış mevcut durum
 
@@ -42,6 +44,16 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | E-006 | Kod WhatsApp tıklamasını ölçmüyor; telefon/e-posta olayları mevcut | `src/components/GoogleTag.tsx` | 2026-07-22 |
 | E-007 | Eski organik sayfalarda SEO ve ana sayfaya geçişi anlatan müşteri dışı uzun metinler var | `src/data/seoLandingPages.ts` | 2026-07-22 |
 | E-008 | `camii saatleri` gerçek gösterim ve tıklama alıyor | Google Ads arama terimleri ve keyword verisi | 2026-07-22 |
+| E-009 | Canlı production deployment `dpl_54riDvXkHPwR2UpRbTTu4J7FUYr3`, Git SHA `108cb91` ve `gitDirty: 1` metadata'sı taşır | Vercel CLI/API salt-okunur denetimi | 2026-08-17 |
+| E-010 | Sekiz canonical route canlıda 200/indexlenebilir; preview noindex; 10 yerel ürün route'u canlıda 404 ve sitemap dışıdır | Canlı HTTP, HTML canonical/robots ve sitemap denetimi | 2026-08-17 |
+| E-011 | App Store ve Google Play kartları canlı ana sayfada doğru Vakitmatik mağaza hedeflerine gider | Canlı DOM ve mağaza GET denetimi | 2026-08-17 |
+| E-012 | Telefon ve WhatsApp `send_to` değerleri hedef Ads hesabındaki etkin primary conversion action'ların tag snippet'leriyle birebir eşleşir | Google Ads API v24 salt-okunur GAQL + canlı asset karşılaştırması | 2026-08-17 |
+| E-013 | 20 Temmuz–16 Ağustos dönemindeki 3 conversionın tamamı telefondur; WhatsApp 0'dır | Google Ads API v24 salt-okunur metrics sorgusu | 2026-08-17 |
+| E-014 | Temel Google tag öneki, telefon/WhatsApp conversion destination önekinden farklıdır; bu açık conversion hedefini bozduğu kanıtlanmış hata değildir, ancak genel olaylar için split-routing riski taşır | Canlı HTML/JS, yerel env biçimi ve Ads API tag snippet denetimi | 2026-08-17 |
+| E-015 | GSC için gerekli dört env kaydı hem yerelde hem production'da vardır fakat boştur; güncel snapshot alınamaz | Yerel env ad/değer-doluluğu ve Vercel production env salt-okunur denetimi | 2026-08-17 |
+| E-016 | Karışık çalışma ağacı canlı eşdeğer, yalnız yerel ürün detail, dashboard/Ads aracı ve dokümantasyon commitlerine ayrıldı | Git diff, partial staging ve commit denetimi | 2026-08-17 |
+
+E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha sonra kurulan conversion action'ları ve WhatsApp ölçüm kodundan önceki durumu anlatır; güncel durum için E-012–E-014 esas alınır.
 
 ## Açık sorular ve ertelenmiş kararlar
 
@@ -54,6 +66,10 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | Q-005 | Eski cihaz desteğinin herkese açık kapsamı | Satış mesajını geriye çekmeden destek sağlanmalı | Faz 5 |
 | Q-006 | Avrupa doğrudan lojistik sağlayıcısı ve maliyeti | FedEx/DHL araştırması tamamlanmadı | Faz 7 |
 | Q-007 | Gerçek sipariş sayısının Ads dönemine bağlanması | Kullanıcı hareket gözlemliyor ancak kesin sayı yok | Faz 1 ve Faz 8 |
+| Q-008 | Temel Google tag ile hedef Ads tag'inin Google Tag yönetiminde connected/combined durumu | Ads API açık `send_to` hedeflerini doğruluyor; tag destination bağlantısını göstermiyor | Ayrı ölçüm doğrulaması |
+| Q-009 | WhatsApp conversionının 0 olma nedeni | Kod, canlı asset ve Ads action doğru; gerçek talep yokluğu ile event teslim sorunu ayrışmadı | Ayrı gerçek cihaz testi |
+| Q-010 | Search Console OAuth bilgilerinin güvenli kaynağı | Yerel ve production kayıtları boş; kullanıcıdan secret istenmeden mevcut yetkili kaynak belirlenmeli | Ayrı GSC yapılandırma paketi |
+| Q-011 | Bare HTTPS hostun www'ye `307` yönlendirmesinin kalıcılaştırılması | Canonical www'ye doğru; redirect türü değişikliği Vercel/SEO dış sistem kararıdır | Teknik SEO paketi |
 
 ## Yasaklı varsayımlar
 
@@ -72,3 +88,4 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | 0.1-draft | 2026-07-22 | İlk kontrollü iş akışı, Vakitmatik anayasası, yol haritası ve karar kaydı hazırlandı | Bekliyor |
 | 0.2-draft | 2026-07-29 | OSEO-2 Karar Kapısı 1 ürün eşleşmeleri, ölçü değişikliği ve güncel portföyde olmayan üç eski ürün kaydedildi | Sahibi onayladı |
 | 0.3-draft | 2026-07-29 | Dikey bağımsız ürün sayfasının ana sayfa bölümünü yeniden kullanan görsel ve içerik yönü kaydedildi | Sahibi onayladı |
+| 0.4-draft | 2026-08-17 | Paket P0 canlı/source/ölçüm/GSC baseline bulguları, commit ayrımı ve açık sorular kaydedildi | Sonuç onayı bekliyor |
