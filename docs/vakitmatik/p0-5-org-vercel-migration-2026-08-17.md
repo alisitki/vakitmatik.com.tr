@@ -136,9 +136,10 @@ ayrı pakette daraltılabilir.
    DNS öncesi edge matrisi ve geri dönüş kaydı zorunludur.
 4. `.org` e-posta taşınmayacağı için eski `@vakitmatik.org` adreslerine gönderim
    teslim edilmeyecektir. Web yönlendirmesi e-postayı yönlendirmez.
-5. Güncel Search Console credential'ları boş olduğu için API üzerinden site
-   taşıma snapshot'ı alınamıyor. Search Console sahipliği/Change of Address
-   ayrı dış sistem kontrolüdür.
+5. Search Console API credential'ları hâlâ boş olduğu için otomatik API
+   snapshot'ı alınamıyor. Bununla birlikte 25 Ağustos 2026'da doğrulanmış sahip
+   hesabının canlı Search Console oturumu kullanılarak `.org` sahipliği ve
+   Change of Address işlemleri tamamlandı; bu artık geçiş blokajı değildir.
 6. `vakitmatik.net` geçiş öncesinde SH nameserver'larına delege fakat zonesuzdu;
    DNS `SERVFAIL` veriyor, web/MX çalışmıyor ve güncel `site:` sonucu
    bulunmuyordu. Proje sahibi alanı canlı kapsama açıkça ekledi. Eski delegation
@@ -192,6 +193,41 @@ Canlı yayın onayından sonra uygulanan koordineli pencere:
 11. Search Console credential'ları boş olduğu için Change of Address
     uygulanmadı; ayrı blokaj olarak kaldı.
 
+## Search Console kapanış kaydı — 25 Ağustos 2026
+
+`KANITLANDI`
+
+1. `vakitmatik.org` alan adı mülkü, `.com.tr` alan adı mülkünün doğrulanmış
+   sahibi olan aynı Google hesabına eklendi.
+2. Google'ın verdiği alan adı doğrulama TXT kaydı Vercel DNS'e eklendi. Kayıt
+   hem Google Public DNS hem Cloudflare resolver üzerinden görünür oldu ve
+   Search Console sahipliği başarıyla doğruladı.
+3. Google'ın alt alan adı varyantlarını ayrı taşıma isteğiyle bildirme kuralı
+   nedeniyle aşağıdaki URL-prefix mülkleri aynı DNS sahipliği üzerinden
+   otomatik doğrulandı:
+   - `https://vakitmatik.org/`
+   - `https://www.vakitmatik.org/`
+   - `https://www.vakitmatik.com.tr/`
+4. Alan adı mülkündeki ilk ön kontrol Vercel'in düz HTTP'yi önce HTTPS'e `308`
+   yükseltmesi nedeniyle `http://vakitmatik.org/` için “Sayfa getirilemedi”
+   sonucu verdi. Canlı Googlebot ve normal istemci testlerinde HTTP `308`,
+   ardından HTTPS `301` zinciri çalışmaya devam etti; yönlendirme davranışı bu
+   hata için değiştirilmedi.
+5. Google'ın HTTPS kaynak mülkleri üzerinden yaptığı zorunlu testlerde hem
+   ana sayfa `301` yönlendirmesi hem iki tarafın sahipliği başarılı oldu.
+6. Aşağıdaki iki Change of Address isteği başlatıldı:
+   - `https://vakitmatik.org/` → `https://www.vakitmatik.com.tr/`
+   - `https://www.vakitmatik.org/` → `https://www.vakitmatik.com.tr/`
+7. Her iki kaynak mülk “Bu site şu anda taşınıyor” durumunu, hedef mülk ise
+   “Diğer sitelerinizden 2 tanesi bu siteye taşınıyor” durumunu gösterdi.
+   Başlangıç tarihi `25 Ağustos 2026` olarak kaydedildi.
+8. `.com.tr` alan adı mülkündeki `sitemap.xml` durumu yeniden kontrol edildi:
+   durum `Başarılı`, keşfedilen sayfa sayısı `8`, son okuma tarihi
+   `20 Ağustos 2026`.
+9. Change of Address geri dönüş noktası her kaynak mülkteki
+   `Taşıma işlemini iptal et` kontrolüdür. DNS doğrulama TXT kaydı sahipliği
+   korumak için kaldırılmamalıdır.
+
 ## Geri alma ve SH hosting iptali
 
 - DNS öncesi geri dönüş noktası SH nameserver ve zone kaydıdır.
@@ -210,7 +246,6 @@ Canlı yayın onayından sonra uygulanan koordineli pencere:
 
 ## Sıradaki ayrı kapı
 
-Canlı DNS/cache yakınsaması ve en az yedi günlük gözlem tamamlandıktan sonra
-yalnız `.org` hosting hizmeti `83999` için tam yedek, bağımlılık denetimi ve
-iptal kararı ayrı iş paketi olarak sunulur. Bu P0.5 yayını hosting iptalini
-onaylamaz.
+P0.5 web/DNS ve Search Console taşıma kapsamı tamamlandı. Yalnız `.org` hosting
+hizmeti `83999` için tam yedek, bağımlılık denetimi ve iptal kararı ayrı iş
+paketi olarak sunulur. Bu P0.5 kapanışı hosting iptalini onaylamaz.

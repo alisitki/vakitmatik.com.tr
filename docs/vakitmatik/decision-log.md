@@ -1,8 +1,8 @@
 # Vakitmatik Karar ve Açık Soru Kaydı
 
-Sürüm: `0.8-draft`
+Sürüm: `0.9-draft`
 
-Son güncelleme: `2026-08-17`
+Son güncelleme: `2026-08-25`
 
 Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış taslak kayıtlar `TASLAK` olarak kalır.
 
@@ -37,6 +37,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | D-025 | P0.5 hazırlığı başlayabilir; canlı `.org` domain/DNS yayını ve doğrulama sonrası SH hosting iptali ayrı onay kapılarıdır | Sahibi onayladı | 2026-08-17 |
 | D-026 | P0.5 canlı production/DNS yayını onaylandı; `.org` apex/www/mail ile birlikte çalışmayan `vakitmatik.net` apex/www de aynı Vercel redirect projesine alınacak | Sahibi onayladı | 2026-08-17 |
 | D-027 | Recursive DNS cache'i eski SH IP'sini gösterirken Google'dan gelen `.org` ziyaretçilerini bekletmemek için eski SH sitesine, yedek alınarak Vercel haritasıyla uyumlu geçici `301` köprüsü uygulanacak | Sahibi onayladı | 2026-08-17 |
+| D-028 | P0.6 ve P1'den önce P0.5 Search Console kapanışı yapılacak; `.org` mülk sahipliği doğrulanıp Google'a `.com.tr` adres değişikliği bildirilecek | Sahibi onayladı | 2026-08-25 |
 
 ## Kanıtlanmış mevcut durum
 
@@ -67,6 +68,9 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | E-023 | `.org` eski A/MX/CNAME TTL'i `14400` iken kesim uygulandı; hazırlık runbook'undaki `TTL 300 + 24 saat bekleme` gerçekleşmedi. Eski cache yaklaşık dört saat SH'yi gösterebilir; `.net` eski delegation/negative cache etkisi 48 saate kadar sürebilir | SH/Vercel authoritative DNS ve TLD TTL denetimi | 2026-08-17 |
 | E-024 | HTTPS kaynaklar doğrudan açık `301` ile canonical `.com.tr` hedefine gider; Vercel platformu düz HTTP'yi önce aynı hostun HTTPS sürümüne `308` yükselttiği için HTTP girişleri iki yönlendirme adımı kullanır | Canlı Vercel edge GET/HEAD ve `Location` matrisi | 2026-08-17 |
 | E-025 | Google ve Cloudflare recursive cache'leri eski SH IP'sini döndürürken eski site önce `200` veriyordu. SH `public_html/.htaccess` dosyası web kökü dışında yedeklenip geçici `301` haritası eklendikten sonra eski IP'ye zorlanan ana sayfa ve temsilî güçlü URL'ler doğru `.com.tr` hedeflerine gitti; Chrome'da eski ürün URL'si `/cami-saati/` ile sonuçlandı | SH cPanel dosya kaydı, `curl --resolve` matrisi ve Chrome uçtan uca testi | 2026-08-17 |
+| E-026 | `vakitmatik.org` alan adı mülkü ile apex/www `.org` ve hedef `www.vakitmatik.com.tr` URL-prefix mülkleri aynı doğrulanmış sahip hesabına eklendi; Google TXT kaydı Vercel DNS'te yayınlandı ve sahiplik doğrulandı | Search Console canlı sahiplik ekranı, Vercel DNS ve Google/Cloudflare TXT sorguları | 2026-08-25 |
+| E-027 | `https://vakitmatik.org/` ve `https://www.vakitmatik.org/` kaynakları için `https://www.vakitmatik.com.tr/` hedefine iki ayrı Change of Address isteği Google'ın zorunlu `301` ve sahiplik testleri geçilerek başlatıldı; hedef mülk iki taşınan siteyi gösteriyor | Search Console Adres Değişikliği kaynak ve hedef durum ekranları | 2026-08-25 |
+| E-028 | `.com.tr` sitemap durumu `Başarılı`; 8 sayfa keşfedilmiş ve son okuma tarihi 20 Ağustos 2026'dır | Search Console alan adı mülkü sitemap raporu | 2026-08-25 |
 
 E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha sonra kurulan conversion action'ları ve WhatsApp ölçüm kodundan önceki durumu anlatır; güncel durum için E-012–E-014 esas alınır.
 
@@ -83,7 +87,6 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | Q-007 | Gerçek sipariş sayısının Ads dönemine bağlanması | Kullanıcı hareket gözlemliyor ancak kesin sayı yok | Faz 1 ve Faz 8 |
 | Q-008 | Temel Google tag ile hedef Ads tag'inin Google Tag yönetiminde connected/combined durumu | Ads API açık `send_to` hedeflerini doğruluyor; tag destination bağlantısını göstermiyor | Ayrı ölçüm doğrulaması |
 | Q-009 | WhatsApp conversionının 0 olma nedeni | Kod, canlı asset ve Ads action doğru; gerçek talep yokluğu ile event teslim sorunu ayrışmadı | Ayrı gerçek cihaz testi |
-| Q-010 | Search Console OAuth bilgilerinin güvenli kaynağı | Yerel ve production kayıtları boş; kullanıcıdan secret istenmeden mevcut yetkili kaynak belirlenmeli | Ayrı GSC yapılandırma paketi |
 | Q-011 | Bare HTTPS hostun www'ye `307` yönlendirmesinin kalıcılaştırılması | Canonical www'ye doğru; redirect türü değişikliği Vercel/SEO dış sistem kararıdır | Teknik SEO paketi |
 
 ## Yasaklı varsayımlar
@@ -108,3 +111,4 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | 0.6-draft | 2026-08-17 | P0.5 `.org` Vercel geçiş kararı, registrar/mail sınırı ve hazırlık kanıtı kaydedildi | Hazırlık sahibi onaylı; canlı yayın bekliyor |
 | 0.7-draft | 2026-08-17 | `.net` dahil P0.5 canlı yayın onayı, iki ayrı SH hosting düzeltmesi, Vercel domain/DNS/SSL hazırlığı ve nameserver kesim kanıtı kaydedildi | Sahibi onayladı; DNS/cache yakınsaması izleniyor |
 | 0.8-draft | 2026-08-17 | Eski recursive DNS cache'leri için SH `.htaccess` geçici `301` köprüsü, yedek ve uçtan uca doğrulama kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |
+| 0.9-draft | 2026-08-25 | `.org` Search Console sahipliği, apex/www Change of Address istekleri, hedef mülk bildirimi ve `.com.tr` sitemap doğrulaması kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |
