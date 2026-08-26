@@ -33,12 +33,27 @@ export function createPageMetadata({
   title,
   description,
   path,
+  image,
 }: {
   title: string;
   description: string;
   path: string;
+  image?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
 }): Metadata {
   const fullTitle = `${title} | ${siteName}`;
+  const pageImage = image
+    ? {
+        url: absoluteUrl(image.src),
+        width: image.width,
+        height: image.height,
+        alt: image.alt,
+      }
+    : defaultOpenGraphImage;
 
   return {
     title,
@@ -53,13 +68,13 @@ export function createPageMetadata({
       siteName,
       locale: "tr_TR",
       type: "website",
-      images: [defaultOpenGraphImage],
+      images: [pageImage],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [absoluteUrl(socialImage)],
+      images: [pageImage.url],
     },
   };
 }

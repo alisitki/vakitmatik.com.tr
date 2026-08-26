@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ResponsiveImagePreload } from "@/components/ResponsiveImagePreload";
 import type { LandingConfig } from "@/types/adLanding";
+import { AdLandingPriceGrid } from "./AdLandingPriceGrid";
 import { AdLandingProductRail } from "./AdLandingProductRail";
 import styles from "./AdLandingShell.module.css";
 
@@ -81,7 +82,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
                     {config.hero.mobilePrimaryCta ?? config.hero.primaryCta}
                   </span>
                   <span className={styles.buttonArrow} aria-hidden="true">
-                    ↗
+                    {whatsappExternal ? "↗" : "↓"}
                   </span>
                 </a>
                 <a
@@ -193,45 +194,52 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
             </div>
           </header>
 
-          <AdLandingProductRail
-            label={config.models.railLabel}
-            trackId={`${config.variant}-model-rayi`}
-          >
-            {config.models.items.map((model) => (
-              <article
-                className={styles.modelCard}
-                data-product-card
-                id={`model-${model.id}`}
-                key={model.id}
-              >
-                <Link
-                  className={styles.modelCardLink}
-                  href={`/#${model.id}`}
-                  prefetch={false}
+          {config.models.priceInquiry ? (
+            <AdLandingPriceGrid
+              inquiry={config.models.priceInquiry}
+              models={config.models.items}
+            />
+          ) : (
+            <AdLandingProductRail
+              label={config.models.railLabel}
+              trackId={`${config.variant}-model-rayi`}
+            >
+              {config.models.items.map((model) => (
+                <article
+                  className={styles.modelCard}
+                  data-product-card
+                  id={`model-${model.id}`}
+                  key={model.id}
                 >
-                  <figure className={styles.modelMedia}>
-                    <Image
-                      alt={model.image.alt}
-                      className={styles.modelImage}
-                      height={model.image.height}
-                      loading="lazy"
-                      sizes="(max-width: 760px) 84vw, (max-width: 1050px) 44vw, 385px"
-                      src={model.image.src}
-                      width={model.image.width}
-                    />
-                  </figure>
-                  <div className={styles.modelCopy}>
-                    <h3>{model.title}</h3>
-                    <span className={styles.modelDescription}>{model.description}</span>
-                    <p>{model.dimensions}</p>
-                    <span className={styles.modelDetailHint} aria-hidden="true">
-                      Ürünü detaylı incele <i>→</i>
-                    </span>
-                  </div>
-                </Link>
-              </article>
-            ))}
-          </AdLandingProductRail>
+                  <Link
+                    className={styles.modelCardLink}
+                    href={`/#${model.id}`}
+                    prefetch={false}
+                  >
+                    <figure className={styles.modelMedia}>
+                      <Image
+                        alt={model.image.alt}
+                        className={styles.modelImage}
+                        height={model.image.height}
+                        loading="lazy"
+                        sizes="(max-width: 760px) 84vw, (max-width: 1050px) 44vw, 385px"
+                        src={model.image.src}
+                        width={model.image.width}
+                      />
+                    </figure>
+                    <div className={styles.modelCopy}>
+                      <h3>{model.title}</h3>
+                      <span className={styles.modelDescription}>{model.description}</span>
+                      <p>{model.dimensions}</p>
+                      <span className={styles.modelDetailHint} aria-hidden="true">
+                        Ürünü detaylı incele <i>→</i>
+                      </span>
+                    </div>
+                  </Link>
+                </article>
+              ))}
+            </AdLandingProductRail>
+          )}
 
           <div className={styles.modelsExit}>
             <Link href="/#urun-deneyimi" prefetch={false}>
@@ -321,7 +329,7 @@ export function AdLandingShell({ config }: AdLandingShellProps) {
               target={whatsappExternal ? "_blank" : undefined}
             >
               {config.contact.whatsappLabel}
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true">{whatsappExternal ? "↗" : "↑"}</span>
             </a>
             <a className={styles.contactSecondary} href={config.contact.phoneHref}>
               {config.contact.phoneLabel}

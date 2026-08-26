@@ -120,7 +120,7 @@ Her sayfa ayrı iş paketidir.
 | Paket | Sayfa | Mevcut durum | Sonraki kapı |
 | --- | --- | --- | --- |
 | 2.1 Cami Saati | `/cami-saati/` | Yön ve büyük bölümü onaylandı; final anayasa denetimi bekliyor | Final içerik/görsel onayı |
-| 2.2 Cami Saati Fiyatları | `/cami-saati-fiyatlari/` | Taslak ve bazı revizyonlar var; fiyat dili yeniden denetlenecek | Ayrı sayfa onayı |
+| 2.2 Cami Saati Fiyatları | `/cami-saati-fiyatlari/` | Model/ölçü bazlı fiyat sorma akışı ve katalog görünümü production için onaylandı | Canlı doğrulama; Ads final URL ayrı onay |
 | 2.3 Ayet Hadis Panosu | `/ayet-hadis-panosu/` | Görsel ve metin revizyonları sürüyor | Ayrı sayfa onayı |
 
 Her sayfa için kabul kriterleri:

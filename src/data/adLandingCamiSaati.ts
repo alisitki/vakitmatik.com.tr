@@ -5,19 +5,33 @@ const whatsappMessage = encodeURIComponent(
   "Merhaba, cami saati modelleriniz hakkında bilgi almak istiyorum.",
 );
 
+const portraitCatalogImages: Record<string, string> = {
+  "vakitmatik-dikey": "/images/vakitmatik-dikey/vakitmatik-dikey-altin-1.webp",
+  "vakitmatik-yatay": "/images/vakitmatik-yatay/vakitmatik-yatay-1.webp",
+  "vakitmatik-led": "/images/vakitmatik-led/vakitmatik-led-yesil-1.webp",
+};
+
 const models = productItems.map((product) => {
   const primaryImage = product.media[0];
 
   return {
     id: product.id,
+    slug: product.slug,
     title: product.shortName,
     description: product.summary,
     dimensions: product.dimensions,
+    sizeOptions: product.sizeOptions,
     image: {
       src: `/images/landing/cami-saati/${product.id}-640.webp`,
       alt: primaryImage.alt,
       width: 640,
       height: 800,
+    },
+    catalogImage: {
+      ...primaryImage,
+      src: portraitCatalogImages[product.id] ?? primaryImage.src,
+      width: 1122,
+      height: 1402,
     },
   };
 });

@@ -480,6 +480,32 @@
   padding-block: clamp(6rem, 10vw, 9.5rem);
 }
 
+.page[data-variant="fiyat-model"] .modelsSection {
+  background: #05070a;
+}
+
+.page[data-variant="fiyat-model"] .sectionEyebrow {
+  color: #8eb5ff;
+}
+
+.page[data-variant="fiyat-model"] .sectionHeader h2 {
+  color: #fff;
+}
+
+.page[data-variant="fiyat-model"] .sectionHeader > div > p {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.page[data-variant="fiyat-model"] .modelsExit a {
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.page[data-variant="fiyat-model"] .modelsExit a:hover {
+  border-color: rgba(142, 181, 255, 0.7);
+  color: #8eb5ff;
+}
+
 .sectionHeader {
   display: grid;
   grid-template-columns: minmax(10rem, 0.34fr) minmax(0, 1fr);
@@ -748,6 +774,164 @@
 
 .modelsExit span {
   font-size: 1.05rem;
+}
+
+.priceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.priceCard {
+  min-width: 0;
+  overflow: hidden;
+  scroll-margin-top: 1rem;
+  border: 1px solid var(--adlp-line);
+  border-radius: 1.15rem;
+  background: #fff;
+  box-shadow: 0 1.2rem 3.8rem rgba(13, 17, 24, 0.065);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.priceCard:hover {
+  border-color: rgba(47, 111, 243, 0.32);
+  box-shadow: 0 1.55rem 4.2rem rgba(13, 17, 24, 0.105);
+  transform: translateY(-3px);
+}
+
+.priceCardMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  margin: 0;
+  border-bottom: 1px solid var(--adlp-line);
+  background: #05070a;
+}
+
+.priceCardImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.priceCardBody {
+  display: grid;
+  gap: 1.2rem;
+  padding: clamp(1.2rem, 2.3vw, 1.75rem);
+}
+
+.priceCardIntro {
+  display: grid;
+  gap: 0.62rem;
+}
+
+.priceCardIntro > p {
+  color: #3869c9;
+  font-size: 0.67rem;
+  font-weight: 820;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.priceCardIntro h3 {
+  color: var(--adlp-ink);
+  font-size: clamp(1.65rem, 2.6vw, 2.25rem);
+  font-weight: 620;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.priceCardIntro > span {
+  min-height: 2.8rem;
+  color: var(--adlp-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.priceOptions {
+  display: grid;
+  gap: 0.65rem;
+  padding-top: 0.15rem;
+}
+
+.priceOption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  padding: 0.85rem;
+  border: 1px solid rgba(11, 13, 18, 0.11);
+  border-radius: 0.8rem;
+  background: #f7f7f5;
+}
+
+.priceOption > div {
+  display: grid;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.priceOption strong {
+  color: var(--adlp-ink);
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+
+.priceOption > div > span {
+  color: var(--adlp-muted);
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+.priceOption > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 2.85rem;
+  padding-inline: 0.95rem;
+  border-radius: 0.58rem;
+  background: var(--adlp-blue-strong);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 820;
+  line-height: 1.2;
+  text-align: center;
+  transition: background 180ms ease, transform 180ms ease;
+  white-space: nowrap;
+}
+
+.priceOption > a:hover {
+  background: #245ed1;
+  transform: translateY(-1px);
+}
+
+.priceOption > a > span {
+  font-size: 0.95rem;
+}
+
+.priceDetailLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--adlp-line);
+  color: var(--adlp-ink);
+  font-size: 0.78rem;
+  font-weight: 780;
+}
+
+.priceDetailLink > span {
+  color: var(--adlp-blue-strong);
+  font-size: 1.05rem;
+  transition: transform 180ms ease;
+}
+
+.priceDetailLink:hover > span {
+  transform: translateX(3px);
 }
 
 .engineeringSection {
@@ -1114,6 +1298,10 @@
     grid-auto-columns: 46%;
   }
 
+  .priceGrid {
+    grid-template-columns: 1fr;
+  }
+
   .engineeringLayout {
     grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);
     gap: 3rem;
@@ -1279,6 +1467,27 @@
     grid-auto-columns: 86%;
   }
 
+  .priceGrid {
+    gap: 0.9rem;
+  }
+
+  .priceCardBody {
+    padding: 1.15rem;
+  }
+
+  .priceCardIntro > span {
+    min-height: 0;
+  }
+
+  .priceOption {
+    grid-template-columns: 1fr;
+  }
+
+  .priceOption > a {
+    width: 100%;
+    white-space: normal;
+  }
+
   .railButtons button {
     width: 2.75rem;
     height: 2.75rem;
@@ -1335,6 +1544,10 @@
   .modelImage,
   .modelCard,
   .modelDetailHint i,
+  .priceCard,
+  .priceCardImage,
+  .priceOption > a,
+  .priceDetailLink > span,
   .modelsExit a,
   .primaryButton,
   .secondaryButton,

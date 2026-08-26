@@ -1,10 +1,6 @@
 import { camiSaatiLanding } from "@/data/adLandingCamiSaati";
 import type { LandingConfig } from "@/types/adLanding";
 
-const whatsappMessage = encodeURIComponent(
-  "Merhaba, cami saati modellerinizin güncel fiyatlarını öğrenmek istiyorum.",
-);
-
 export const fiyatModelLanding: LandingConfig = {
   variant: "fiyat-model",
   navigation: {
@@ -19,8 +15,8 @@ export const fiyatModelLanding: LandingConfig = {
     lead:
       "Klasik, mesajlı, LED, modül ve LCD Vakitmatik cami saatlerinin ölçüleri ve özellikleri farklıdır. Modelleri inceleyin; beğendiğiniz ürünün güncel fiyatını WhatsApp’tan veya telefonla öğrenin.",
     microCopy: "3 yıl garanti · Türkiye geneli kargo",
-    primaryCta: "WhatsApp’tan fiyat sorun",
-    mobilePrimaryCta: "WhatsApp",
+    primaryCta: "Model seçip fiyat sorun",
+    mobilePrimaryCta: "Model seç",
     secondaryCta: "Ürünleri incele",
     secondaryHref: "/",
     productImage: camiSaatiLanding.hero.productImage,
@@ -47,7 +43,12 @@ export const fiyatModelLanding: LandingConfig = {
     eyebrow: "Modeli seçin",
     title: "Vakitmatik Cami Saati Modelleri",
     lead:
-      "Fiyat, seçtiğiniz modelin yapısına, ölçüsüne ve ekran türüne göre değişir. Kartlardan modeli belirleyip adını bize yazmanız yeterli.",
+      "Fiyat, seçtiğiniz modelin yapısına, ölçüsüne ve ekran türüne göre değişir. Modeli ve varsa ölçüsünü seçin; WhatsApp mesajınız ürün adıyla hazır açılsın.",
+    priceInquiry: {
+      phone: "905333827533",
+      productCtaLabel: "Bu ürünün fiyatını sor",
+      sizeCtaLabel: "Bu ölçünün fiyatını sor",
+    },
     items: camiSaatiLanding.models.items,
   },
   engineering: {
@@ -98,7 +99,7 @@ export const fiyatModelLanding: LandingConfig = {
     {
       question: "Güncel fiyatı en hızlı nasıl öğrenebilirim?",
       answer:
-        "Beğendiğiniz modelin adını veya ekran görüntüsünü WhatsApp’tan gönderebilirsiniz. İsterseniz bizi doğrudan arayarak da güncel fiyatı öğrenebilirsiniz.",
+        "Beğendiğiniz modelin kartından, varsa ölçüsünü de seçerek WhatsApp düğmesine dokunabilirsiniz. Ürün adı ve ölçüsü mesajınıza otomatik eklenir.",
     },
     {
       question: "LED ve LCD cami saati fiyatları farklı mı?",
@@ -118,11 +119,11 @@ export const fiyatModelLanding: LandingConfig = {
   ],
   contact: {
     eyebrow: "Güncel fiyat",
-    title: "Modelin adını yazın, fiyatını söyleyelim.",
+    title: "Modelinizi seçin, fiyatını söyleyelim.",
     lead:
-      "Beğendiğiniz modelin adını veya ekran görüntüsünü WhatsApp’tan gönderebilir, isterseniz doğrudan arayabilirsiniz.",
-    whatsappLabel: "WhatsApp",
-    whatsappHref: `https://wa.me/905333827533?text=${whatsappMessage}`,
+      "Yukarıdaki kartlardan model ve ölçüyü seçerek hazır WhatsApp mesajını gönderebilir, isterseniz doğrudan arayabilirsiniz.",
+    whatsappLabel: "Model seçip fiyat sor",
+    whatsappHref: "#models",
     phoneLabel: "+90 533 382 75 33",
     phoneHref: "tel:+905333827533",
     note: "Hafta içi 08:30–18:30 · Cumartesi 08:30–12:00",

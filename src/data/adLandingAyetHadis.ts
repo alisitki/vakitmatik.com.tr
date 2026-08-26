@@ -31,6 +31,7 @@ const models = modelIds.flatMap((modelId) => {
   return [
     {
       id: product.id,
+      slug: product.slug,
       title: product.shortName,
       description: modelDescriptions[product.id] ?? product.summary,
       dimensions: product.dimensions,

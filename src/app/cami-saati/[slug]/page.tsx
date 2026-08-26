@@ -36,6 +36,7 @@ export async function generateMetadata({
     title: metaTitle,
     description: `${metaTitle}; ${lowercaseFirst(product.summary)}`,
     path,
+    image: product.media[0],
   });
 }
 

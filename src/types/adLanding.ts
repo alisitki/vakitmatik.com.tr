@@ -17,10 +17,17 @@ export type AdLandingProof = {
 
 export type AdLandingModel = {
   id: string;
+  slug: string;
   title: string;
   description: string;
   dimensions: string;
+  sizeOptions?: Array<{
+    label: string;
+    dimensions: string;
+    digitHeight: string;
+  }>;
   image: AdLandingImage;
+  catalogImage?: AdLandingImage;
 };
 
 export type AdLandingDetail = {
@@ -61,6 +68,11 @@ export type LandingConfig = {
     title: string;
     lead: string;
     railLabel?: string;
+    priceInquiry?: {
+      phone: string;
+      productCtaLabel: string;
+      sizeCtaLabel: string;
+    };
     items: AdLandingModel[];
   };
   engineering: {
