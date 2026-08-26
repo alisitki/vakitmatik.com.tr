@@ -4,16 +4,16 @@
 
 | Alan | Güncel durum |
 | --- | --- |
-| Hazırlanma tarihi | 17 Ağustos 2026 — Europe/Istanbul |
-| Çalışma dalı | `codex/google-ads-landing-quality` |
+| Hazırlanma tarihi | 26 Ağustos 2026 — Europe/Istanbul |
+| Çalışma dalı | `main` |
 | P0 kaynak başlangıcı | `108cb91ad739f33d1bdd573c4e49359c1bf693af` — `fix(seo): consolidate cami saati canonical` |
 | P0 teknik baseline | `691b6cb`–`4228d18` arası ayrım ve kapanış commitleri; sonuç onayı bu belgenin son commitindedir |
-| Remote durumu | P0.5 hazırlık commitinden sonra dal remote'dan 12 commit ileridedir; push yapılmamıştır |
+| Remote durumu | `main` ve `origin/main` fiyat akışı production commitinde eşittir: `ecc568a` |
 | `main` ve ilk güvenlik etiketi | `4b760fa`; `backup/pre-google-landing-20260717` aynı noktada |
 | Canlı alan adı | `https://www.vakitmatik.com.tr` |
-| Canlı Vercel deployment | `dpl_54riDvXkHPwR2UpRbTTu4J7FUYr3` — 15 Ağustos 2026 10:19 TRT |
-| Son doğrulanmış rollback deployment | `dpl_9o9vFeAxpRYrntmuzmtRHHabXZ1y` — 15 Ağustos 2026 09:17 TRT |
-| Canlı deployment kaynak işareti | Git SHA `108cb91`; Vercel metadata `gitDirty: 1` |
+| Canlı Vercel deployment | `dpl_AJfjrYfLK5uWTiuE61MFf68SGKEW` — 26 Ağustos 2026 12:28 TRT |
+| Son doğrulanmış rollback deployment | `dpl_CBnGJ9HKGmaEcWf5qBQjZvAWeciU` — 25 Ağustos 2026 09:12 TRT |
+| Canlı deployment kaynak işareti | Git SHA `ecc568a`; temiz GitHub `main` deployment'ı, `gitDirty` işareti yok |
 | Son yerel/doğrudan edge doğrulama | 17 Ağustos P0.5 canlı kesimi: redirect testleri `25/25`; `.org` apex/www/mail ve `.net` apex/www geçerli TLS + SSO'suz `301`; sekiz hedef `200` |
 | Son Google Ads denetimi | 17 Ağustos 2026; conversion hedef hesabı ve metrikler salt okunur doğrulandı |
 | P0 ayrıntılı kayıt | `docs/vakitmatik/p0-baseline-2026-08-17.md` |
@@ -28,12 +28,13 @@ Gizlilik notu: Bu dosyada parola, API anahtarı, OAuth tokenı, sertifika, `.env
 - `[KANITLANDI]` Ana sayfanın premium ürün vitrini korunmuştur. Reklam landing'leri ayrı sayfalardır; ana sayfanın yerine geçmez.
 - `[KANITLANDI]` Telefon ve WhatsApp tıklama dönüşümleri canlı kodda vardır. Google Ads son dört haftada 3 dönüşüm kaydetmiştir; üçünün de kanalı telefondur, WhatsApp dönüşümü 0'dır. Bunlar sipariş değil iletişim tıklaması sinyalidir.
 - `[KANITLANDI]` Google Ads'teki etkin reklamların tamamı hâlâ ana sayfaya gider. Landing final URL geçişi yapılmamıştır. Mevcut reklam askıya alınmamıştır.
-- `[KANITLANDI]` 10 bağımsız model detay sayfası yerelde hazırlanmıştır ve build alır; canlıda 404 döner, sitemap'te ve site içi link yapısında yoktur. Kullanıcı aynı görsel yönle 10 modelin oluşturulmasına izin vermiştir; final sayfa incelemesi ve production onayı verilmemiştir.
+- `[KANITLANDI]` 10 bağımsız model detay sayfası canlıda `200` döner. Fiyat landing'indeki ürün kartları ilgili detay sayfasına gider ve WhatsApp mesajına aynı ürün URL'sini ekler. Sayfalar henüz sitemap'e alınmamıştır; ana sayfa/organik bağlama P2 kapsamındadır.
 - `[KANITLANDI]` Mobil uygulama bölümündeki App Store ve Google Play kartları doğru mağaza adresleriyle canlıdır.
 - `[KANITLANDI / YAYILIM]` Eski güçlü `vakitmatik.org` için Vercel redirect katmanı canlı kesime alındı. SH sahibi paneli, RDAP ve TLD parent delegasyonu yalnız Vercel nameserver'larını gösterir. Eski `14400` saniyelik cache nedeniyle SH sitesi yaklaşık dört saat daha görülebilir.
 - `[KANITLANDI / YAYILIM]` `vakitmatik.net` sahibi tarafından P0.5 canlı kapsamına eklendi. TLD delegasyonu Vercel'e geçti; apex/www sertifikası ve yönlendirmesi hazırdır. Eski zonesuz SH delegasyonundan kalan `SERVFAIL` cache'i bazı resolverlarda 48 saate kadar sürebilir.
 - `[KANITLANDI]` P0, karışık çalışma ağacını canlı eşdeğer, yalnız yerel ürün detail, dashboard/Ads aracı ve dokümantasyon commitlerine ayırmıştır. Production ve dış sistemler değişmemiştir.
-- `[KRİTİK RİSK]` Canlı Vercel deployment hâlâ `gitDirty: 1` ile üretilmiştir. Ayrıca dal HEAD'i yayınlanmamış 10 ürün route'unu içerir; açık production onayı olmadan bu dal deploy edilmemelidir.
+- `[KANITLANDI]` 26 Ağustos production deployment'ı temiz `main` commit'i `ecc568a` ile üretildi; önceki `gitDirty: 1` kaynak belirsizliği kapandı. Geri dönüş noktası `dpl_CBnGJ9HKGmaEcWf5qBQjZvAWeciU` olarak kaydedildi.
+- `[KANITLANDI]` `/cami-saati-fiyatlari/` genel fiyat sorusu yerine 10 model ve toplam 15 model/ölçü bazlı WhatsApp bağlantısı kullanır; ürünler bölümü siyah arka planlıdır, görseller kırpılmadan gösterilir ve ürün detaylarında modele özel Open Graph görseli vardır. Google Ads değişmedi.
 - `[KANITLANDI / AÇIK SORU]` Telefon ve WhatsApp `send_to` hedefleri doğru Ads hesabındaki etkin conversion action'larla eşleşir. Temel tag farklı önek taşır; split-routing ve WhatsApp'ın 0 olma nedeni gerçek cihaz testi olmadan açık kalır.
 - `[KANITLANDI BLOKAJ]` GSC credential kayıtları yerelde ve production'da boştur; güncel GSC snapshot'ı alınamamıştır.
 - `[SAHİBİ ONAYLADI]` P1'den önce P0.5 canlı yayını `.net` dahil onaylandı ve uygulandı: registrar kayıtları SH'de kalır, `.org`/`.net` web-DNS Vercel'e geçer, `.org` mail taşınmaz. SH hosting iptali en az yedi günlük gözlem ve tam yedek/bağımlılık denetiminden sonraki ayrı kapıdır.
@@ -652,8 +653,8 @@ Bu düzenleme canlıdaki `gitDirty: 1` deployment'ı kendiliğinden temizlemez. 
 
 ### 14.1 Kritik operasyonel riskler
 
-1. Canlı deployment `gitDirty: 1`; commit tek başına canlı source-of-truth değildir.
-2. Kaynak değişiklikleri mantıksal commitlere ayrılmıştır; ancak dal HEAD'i production onayı olmayan 10 ürün route'unu içerir. Dal doğrudan deploy edilmemelidir.
+1. Önceki `gitDirty: 1` production kaynak belirsizliği 26 Ağustos'taki temiz `ecc568a` deployment'ıyla kapanmıştır.
+2. 10 ürün route'u canlıdır ve fiyat landing'inden bağlanır; ancak sitemap ve ana sayfadaki doğal organik bağlama P2 onayı bekler.
 3. Canlı tag ve conversion destination Ads önekleri farklıdır. Açık `send_to` hedef hesabı doğrulanmıştır; connected/combined tag durumu ve genel olay split-routing'i açık sorudur.
 4. Root `.env` ve `apps/dashboard/.env.local` gibi birden fazla credential deposu gelecekte token rotasyonunda çakışma riski taşır.
 
@@ -782,6 +783,7 @@ iptali bu onayın kapsamında değildir. Ayrıntı ve geri alma:
 
 ### Paket P3 — Ürün sayfalarını production'a alma
 
+- `2026-08-26`: Fiyat sorma paketinin onaylı production yayınıyla 10 ürün route'u canlı `200` oldu. Sitemap ve ana sayfa organik bağlama bu yayın kapsamında değildi.
 - Final preview ve değişiklik listesini göster.
 - Açık `production'a al` onayından sonra deploy et.
 - Canlı route, canonical, schema, görsel ve linkleri tekrar doğrula.
