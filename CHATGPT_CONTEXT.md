@@ -8,7 +8,7 @@
 | Çalışma dalı | `main` |
 | P0 kaynak başlangıcı | `108cb91ad739f33d1bdd573c4e49359c1bf693af` — `fix(seo): consolidate cami saati canonical` |
 | P0 teknik baseline | `691b6cb`–`4228d18` arası ayrım ve kapanış commitleri; sonuç onayı bu belgenin son commitindedir |
-| Remote durumu | `main` ve `origin/main` fiyat akışı production commitinde eşittir: `ecc568a` |
+| Remote durumu | `main` ve `origin/main` eşittir; canlı uygulama kaynak commit'i `ecc568a`, sonraki commitler yalnız canlı kanıt belgeleridir |
 | `main` ve ilk güvenlik etiketi | `4b760fa`; `backup/pre-google-landing-20260717` aynı noktada |
 | Canlı alan adı | `https://www.vakitmatik.com.tr` |
 | Canlı Vercel deployment | `dpl_AJfjrYfLK5uWTiuE61MFf68SGKEW` — 26 Ağustos 2026 12:28 TRT |
