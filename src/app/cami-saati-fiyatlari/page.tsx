@@ -6,7 +6,7 @@ import { fiyatModelLanding } from "@/data/adLandingFiyatModel";
 const path = "/cami-saati-fiyatlari/";
 const metaTitle = "Cami Saati Fiyatları ve Modelleri";
 const metaDescription =
-  "Vakitmatik cami saati fiyatları ve modelleri: klasik, mesajlı, LED, modül ve LCD seçeneklerini ölçüleriyle inceleyin; güncel fiyatı öğrenin.";
+  "Vakitmatik cami saati fiyatları ve modelleri: klasik, mesajlı, LED ve modül seçeneklerini ölçüleriyle inceleyin; güncel fiyatı öğrenin.";
 
 export const metadata: Metadata = createPageMetadata({
   title: metaTitle,

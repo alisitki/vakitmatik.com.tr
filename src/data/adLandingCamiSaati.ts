@@ -90,7 +90,7 @@ export const camiSaatiLanding: LandingConfig = {
     eyebrow: "Vakitmatik ürün ailesi",
     title: "Cami Saati Modelleri",
     lead:
-      "Klasik desenli modellerden mesaj, kayan yazı, LED, modül ve LCD seçeneklerine kadar tüm Vakitmatik cami saati modellerini inceleyin.",
+      "Klasik desenli modellerden mesaj, kayan yazı, LED ve modül seçeneklerine kadar tüm Vakitmatik cami saati modellerini inceleyin.",
     items: models,
   },
   engineering: {
@@ -146,7 +146,7 @@ export const camiSaatiLanding: LandingConfig = {
     {
       question: "Cami saati modeli seçerken nelere bakılmalı?",
       answer:
-        "Model karşılaştırırken pano ölçüsü, izleme mesafesi, yatay veya dikey kullanım ile mesaj, LED ya da LCD ekran ihtiyacı dikkate alınabilir. Ürünlerin ölçü ve özellikleri model kartlarında yer alır.",
+        "Model karşılaştırırken pano ölçüsü, izleme mesafesi, yatay veya dikey kullanım ile mesaj ya da LED ekran ihtiyacı dikkate alınabilir. Ürünlerin ölçü ve özellikleri model kartlarında yer alır.",
     },
     {
       question: "Vakitmatik cami saatlerinin garanti süresi nedir?",

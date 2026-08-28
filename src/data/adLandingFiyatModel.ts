@@ -13,7 +13,7 @@ export const fiyatModelLanding: LandingConfig = {
     eyebrow: "Vakitmatik / Cami Saati Fiyatları",
     title: "Cami saati fiyatları modele ve ölçüye göre değişmektedir.",
     lead:
-      "Klasik, mesajlı, LED, modül ve LCD Vakitmatik cami saatlerinin ölçüleri ve özellikleri farklıdır. Modelleri inceleyin; beğendiğiniz ürünün güncel fiyatını WhatsApp’tan veya telefonla öğrenin.",
+      "Klasik, mesajlı, LED ve modül Vakitmatik cami saatlerinin ölçüleri ve özellikleri farklıdır. Modelleri inceleyin; beğendiğiniz ürünün güncel fiyatını WhatsApp’tan veya telefonla öğrenin.",
     microCopy: "3 yıl garanti · Türkiye geneli kargo",
     primaryCta: "Model seçip fiyat sorun",
     mobilePrimaryCta: "Model seç",
@@ -26,7 +26,7 @@ export const fiyatModelLanding: LandingConfig = {
     {
       index: "01",
       title: "Farklı model seçenekleri",
-      description: "Klasik, mesajlı, kayan yazı, LED, modül ve LCD seçenekleri.",
+      description: "Klasik, mesajlı, kayan yazı, LED ve modül seçenekleri.",
     },
     {
       index: "02",
@@ -67,7 +67,7 @@ export const fiyatModelLanding: LandingConfig = {
       {
         title: "Model türü",
         description:
-          "Klasik display, mesajlı, kayan yazı, LED, modül ve LCD ürünler farklı gövde ve ekran yapılarına sahiptir.",
+          "Klasik display, mesajlı, kayan yazı, LED ve modül ürünler farklı gövde ve ekran yapılarına sahiptir.",
       },
       {
         title: "Pano ölçüsü ve rakam yüksekliği",
@@ -94,17 +94,12 @@ export const fiyatModelLanding: LandingConfig = {
     {
       question: "Cami saati fiyatları neden tek değil?",
       answer:
-        "Klasik, mesajlı, LED, modül ve LCD modellerin ölçüleri, ekran yapıları ve gösterdikleri içerikler farklıdır. Bu nedenle fiyat seçilen modele göre değişir.",
+        "Klasik, mesajlı, LED ve modül modellerin ölçüleri, ekran yapıları ve gösterdikleri içerikler farklıdır. Bu nedenle fiyat seçilen modele göre değişir.",
     },
     {
       question: "Güncel fiyatı en hızlı nasıl öğrenebilirim?",
       answer:
         "Beğendiğiniz modelin kartından, varsa ölçüsünü de seçerek WhatsApp düğmesine dokunabilirsiniz. Ürün adı ve ölçüsü mesajınıza otomatik eklenir.",
-    },
-    {
-      question: "LED ve LCD cami saati fiyatları farklı mı?",
-      answer:
-        "Evet. LED ve LCD ürünler farklı ekran teknolojileri ve ölçü seçenekleri kullandığı için fiyatları klasik modellerden ve birbirlerinden farklıdır.",
     },
     {
       question: "Vakitmatik cami saatlerinin garanti süresi nedir?",

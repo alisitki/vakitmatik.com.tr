@@ -85,6 +85,7 @@ export type ProductItem = {
   slug: string;
   title: string;
   shortName: string;
+  availability?: "active" | "temporarily-unavailable";
   summary: string;
   dimensions: string;
   sizeOptions?: ProductSizeOption[];

@@ -33,12 +33,6 @@ const compactFallbackImages: SeoImage[] = [
     width: 1122,
     height: 1402,
   },
-  {
-    src: "/images/seo/vakitmatik-lcd-cami-saati.webp",
-    alt: "LCD Vakitmatik namaz vakti ekranı",
-    width: 1448,
-    height: 1086,
-  },
 ];
 
 function getSeoImages(page: SeoLandingPageContent) {

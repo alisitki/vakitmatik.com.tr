@@ -77,10 +77,16 @@ Kamuya açık ana tarih ifadesi gerektiğinde `1996'dan beri` olabilir. Şirket 
 - Diyanet verileri
 - Mobil güncelleme
 - Duracell kullanılan zaman yedekleme devresi
-- Klasik, dikey, yatay, mesaj, kayan yazı, resimli, LED, modül ve LCD ürün seçenekleri
+- Klasik, dikey, yatay, mesaj, kayan yazı, resimli, LED ve modül ürün seçenekleri
 - Türkiye'nin her yerine kargo
 
 Bu iddiaların model bazında sunumu, ilgili model paketi ele alınırken mevcut ürün verisiyle yeniden doğrulanır. Doğrulanmamış özellik bütün modellere otomatik kopyalanmaz.
+
+`SAHİBİ ONAYLADI — GEÇİCİ ÜRETİM DURUŞU (2026-08-28)`
+
+- LCD modeli mevcut üretim sorunu nedeniyle geçici olarak üretilememektedir.
+- LCD ürünü bu durum devam ederken sitenin hiçbir sayfasında gösterilmez.
+- Bu karar LCD'nin kalıcı olarak ürün portföyünden çıkarıldığı anlamına gelmez.
 
 ## 6. İç rekabet bilgisi
 
@@ -165,4 +171,3 @@ Sayfalar kişiye göre ayrılmak yerine arama niyeti ve ürün ihtiyacına göre
 - Kullanıcının doğrulamadığı ürün özelliği veya hizmet yayımlanmaz.
 - Model öncelikleri ayrı iş paketi olmadan belirlenmez.
 - Avrupa doğrudan gönderimi lojistik doğrulanmadan vaat edilmez.
-

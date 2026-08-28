@@ -1,8 +1,8 @@
 # Vakitmatik Karar ve Açık Soru Kaydı
 
-Sürüm: `0.10-draft`
+Sürüm: `0.11-draft`
 
-Son güncelleme: `2026-08-26`
+Son güncelleme: `2026-08-28`
 
 Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış taslak kayıtlar `TASLAK` olarak kalır.
 
@@ -39,6 +39,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | D-027 | Recursive DNS cache'i eski SH IP'sini gösterirken Google'dan gelen `.org` ziyaretçilerini bekletmemek için eski SH sitesine, yedek alınarak Vercel haritasıyla uyumlu geçici `301` köprüsü uygulanacak | Sahibi onayladı | 2026-08-17 |
 | D-028 | P0.6 ve P1'den önce P0.5 Search Console kapanışı yapılacak; `.org` mülk sahipliği doğrulanıp Google'a `.com.tr` adres değişikliği bildirilecek | Sahibi onayladı | 2026-08-25 |
 | D-029 | P0.6-A öncesinde `/cami-saati-fiyatlari/` genel fiyat sorusu kaldırılacak; müşteri model ve varsa ölçü seçerek ürün adı, ölçüsü ve ürün bağlantısı hazır WhatsApp mesajıyla fiyat soracak. Sayısal fiyat yayımlanmayacak. Ürünler bölümü siyah arka planlı olacak, ürün görselleri kırpılmadan tam gösterilecek ve ürün bağlantılarında modele özel paylaşım görseli kullanılacak. Bu paket production için onaylandı; Google Ads değişikliği kapsam dışıdır | Sahibi onayladı | 2026-08-26 |
+| D-030 | LCD modeli mevcut üretim sorunu nedeniyle geçici olarak üretilemediği sürece sitenin hiçbir sayfasında gösterilmeyecek; bu karar kalıcı ürün iptali değildir | Sahibi onayladı | 2026-08-28 |
 
 ## Kanıtlanmış mevcut durum
 
@@ -115,3 +116,4 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | 0.7-draft | 2026-08-17 | `.net` dahil P0.5 canlı yayın onayı, iki ayrı SH hosting düzeltmesi, Vercel domain/DNS/SSL hazırlığı ve nameserver kesim kanıtı kaydedildi | Sahibi onayladı; DNS/cache yakınsaması izleniyor |
 | 0.8-draft | 2026-08-17 | Eski recursive DNS cache'leri için SH `.htaccess` geçici `301` köprüsü, yedek ve uçtan uca doğrulama kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |
 | 0.9-draft | 2026-08-25 | `.org` Search Console sahipliği, apex/www Change of Address istekleri, hedef mülk bildirimi ve `.com.tr` sitemap doğrulaması kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |
+| 0.11-draft | 2026-08-28 | LCD modelinin geçici üretim sorunu süresince bütün site sayfalarından gizlenmesi kararı kaydedildi | Sahibi onayladı; production bekliyor |

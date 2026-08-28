@@ -5,7 +5,6 @@ const modelIds = [
   "vakitmatik-modul",
   "vakitmatik-mesaj",
   "vakitmatik-kayan",
-  "vakitmatik-lcd",
 ] as const;
 
 const modelDescriptions: Record<string, string> = {
@@ -15,8 +14,6 @@ const modelDescriptions: Record<string, string> = {
     "Namaz vakitleriyle birlikte ayet, hadis ve duyuruları kayan yazı alanında gösterir.",
   "vakitmatik-modul":
     "Hazır ayet, hadis ve Esmaül Hüsna içeriklerini gösterir; istenen ölçülere göre projelendirilebilir.",
-  "vakitmatik-lcd":
-    "Namaz vakitlerini fotoğraf ve grafiklerle birlikte yüksek çözünürlüklü 4K ekranda gösterir.",
 };
 
 const models = modelIds.flatMap((modelId) => {
@@ -137,11 +134,6 @@ export const ayetHadisLanding: LandingConfig = {
         description:
           "Modül modelinde hazır ayet, hadis ve Esmaül Hüsna sayfaları ile ayrıca yazılabilen mesaj alanı bulunur.",
       },
-      {
-        title: "LCD ekranda görsel içerik",
-        description:
-          "LCD modelinde namaz vakitleri fotoğraf ve grafiklerle birlikte yüksek çözünürlüklü ekranda gösterilebilir.",
-      },
     ],
   },
   faqHeading: {
@@ -157,7 +149,7 @@ export const ayetHadisLanding: LandingConfig = {
     {
       question: "Ayet hadis panosu namaz vakitlerini de gösterir mi?",
       answer:
-        "Evet. Bu sayfadaki Mesaj, Kayan Yazı, Modül ve LCD Vakitmatik seçenekleri namaz vakti bilgilerini de ekranda gösterir.",
+        "Evet. Bu sayfadaki Mesaj, Kayan Yazı ve Modül Vakitmatik seçenekleri namaz vakti bilgilerini de ekranda gösterir.",
     },
     {
       question: "Sabit mesaj ile kayan yazı arasındaki fark nedir?",

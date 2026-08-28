@@ -63,7 +63,7 @@ export const mobileAppSteps: MobileAppStepItem[] = [
   },
 ];
 
-export const productItems: ProductItem[] = [
+const allProductItems: ProductItem[] = [
   {
     id: "vakitmatik-desen-mavi",
     slug: "vakitmatik-desen-mavi",
@@ -402,6 +402,7 @@ export const productItems: ProductItem[] = [
     slug: "vakitmatik-lcd",
     title: "Vakitmatik LCD",
     shortName: "LCD",
+    availability: "temporarily-unavailable",
     summary:
       "Fotoğraf, grafik ve vakit bilgisini yüksek çözünürlüklü 4K LCD yüzeyde birleştiren modern ekran ailesi.",
     dimensions: "100 cm ve üzeri ekran sınıfı",
@@ -452,6 +453,10 @@ export const productItems: ProductItem[] = [
   },
 
 ];
+
+export const productItems = allProductItems.filter(
+  (product) => product.availability !== "temporarily-unavailable",
+);
 
 export const useCaseItems: UseCaseItem[] = [
   {

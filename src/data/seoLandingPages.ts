@@ -139,9 +139,9 @@ export const seoLandingPages = {
   },
   dijitalCamiSaati: {
     path: "/urunler/dijital-cami-saati/",
-    metaTitle: "Dijital Cami Saati, LED ve LCD Namaz Vakti Ekranı",
+    metaTitle: "Dijital Cami Saati ve LED Namaz Vakti Ekranı",
     metaDescription:
-      "Dijital cami saati, LED cami vakit saati ve LCD namaz vakti ekranı seçenekleri için Vakitmatik ana sitesine geçin.",
+      "Dijital cami saati ve LED cami vakit saati seçenekleri için Vakitmatik ana sitesine geçin.",
     eyebrow: "Dijital Cami Saati",
     title: "Dijital cami saati ve LED vakit ekranları",
     lead:
@@ -159,12 +159,6 @@ export const seoLandingPages = {
         width: 1448,
         height: 1086,
       },
-      {
-        src: "/images/seo/vakitmatik-lcd-cami-saati.webp",
-        alt: "LCD dijital cami saati ekranı",
-        width: 1448,
-        height: 1086,
-      },
     ],
     sections: [
       {
@@ -173,22 +167,12 @@ export const seoLandingPages = {
           "Dijital cami saati aramalarında kullanıcı genellikle uzaktan rahat görülen, vakit bilgisini düzenli gösteren ve cami içinde modern duran bir çözüm arar. LED cami vakit saati modelleri özellikle geniş alanlarda, yüksek tavanlı ibadet mekanlarında veya güçlü okunabilirlik gereken noktalarda öne çıkar. Renk, rakam yüksekliği, gövde yapısı ve yerleşim bu kararın parçasıdır. Doğru ürün, cemaatin panoya bakarak bilgiyi hızlıca almasını sağlar. Bu noktada dijital görünüm tek başına amaç değildir; önemli olan vakit bilgisinin cami atmosferini bozmadan, net ve güvenilir biçimde takip edilebilmesidir.",
       },
       {
-        title: "LED ve LCD seçenekler aynı ihtiyaca farklı cevap verir",
-        body:
-          "LED ve LCD dijital cami saati seçenekleri görünüşte benzer bir başlık altında anılsa da kullanım beklentileri farklıdır. LED modeller sade, kontrastı güçlü ve uzak mesafeden okunabilir bir vakit gösterimi sunar. LCD modeller ise daha zengin görsel alan, modern ekran dili ve farklı bilgilendirme yapıları isteyen projelerde değerlendirilir. Bu yüzden dijital cami saati seçerken yalnızca teknoloji adını değil, mekanın gerçek ihtiyacını düşünmek gerekir. Bazı camiler için sade ve güçlü rakam görünürlüğü yeterliyken, bazı projelerde duyuru, görsel düzen veya daha geniş ekran anlatımı tercih edilebilir.",
-      },
-      {
         title: "Ana sayfada model ailesini birlikte görmek daha doğru olur",
         body:
-          "Cami vakit saati arayan kişi bazen LED, bazen LCD, bazen de klasik gövdeli Vakitmatik modelleri arasında karar verir. Bu sayfa dijital cami saati arama niyetini karşılar; asıl karşılaştırma ise ana sayfadaki ürün akışında daha anlaşılır hale gelir. Ana sayfada görseller, mobil uygulama bilgisi ve iletişim alanı aynı akışta bulunduğu için kullanıcı tek bir dijital ürün yerine tüm Vakitmatik çözüm ailesini görebilir. Böylece kullanıcı yalnızca aradığı kelimeye cevap almakla kalmaz; benzer ihtiyaçlara uygun alternatifleri de aynı marka bütünlüğü içinde değerlendirme fırsatı bulur. Bu da reklam veya organik aramadan gelen ziyaretçinin hızlıca doğru ürün ailesine bağlanmasını sağlar.",
+          "Cami vakit saati arayan kişi bazen LED, bazen de klasik gövdeli Vakitmatik modelleri arasında karar verir. Bu sayfa dijital cami saati arama niyetini karşılar; asıl karşılaştırma ise ana sayfadaki ürün akışında daha anlaşılır hale gelir. Ana sayfada görseller, mobil uygulama bilgisi ve iletişim alanı aynı akışta bulunduğu için kullanıcı tek bir dijital ürün yerine tüm Vakitmatik çözüm ailesini görebilir. Böylece kullanıcı yalnızca aradığı kelimeye cevap almakla kalmaz; benzer ihtiyaçlara uygun alternatifleri de aynı marka bütünlüğü içinde değerlendirme fırsatı bulur. Bu da reklam veya organik aramadan gelen ziyaretçinin hızlıca doğru ürün ailesine bağlanmasını sağlar.",
       },
     ],
     faqs: [
-      {
-        question: "LED cami saati ile LCD cami saati arasındaki fark nedir?",
-        answer:
-          "LED cami saati daha sade ve güçlü rakam okunabilirliği sunar. LCD cami saati ise görsel alanı daha geniş, modern ekran mantığına yakın bir çözüm sağlar. Seçim mekan, izleme mesafesi ve içerik beklentisine göre yapılır. Klasik bir vakit bilgisi yeterliyse LED çözüm öne çıkabilir; daha görsel ve kapsamlı bilgilendirme isteniyorsa LCD seçenekler ayrıca incelenmelidir.",
-      },
       {
         question: "Dijital cami saati dış mekanda kullanılabilir mi?",
         answer:
