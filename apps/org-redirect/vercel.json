@@ -82,7 +82,7 @@
       "statusCode": 301
     },
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "https://www.vakitmatik.com.tr/",
       "statusCode": 301
     }

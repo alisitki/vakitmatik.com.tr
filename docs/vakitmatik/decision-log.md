@@ -1,8 +1,8 @@
 # Vakitmatik Karar ve Açık Soru Kaydı
 
-Sürüm: `0.11-draft`
+Sürüm: `0.12-draft`
 
-Son güncelleme: `2026-08-28`
+Son güncelleme: `2026-08-31`
 
 Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış taslak kayıtlar `TASLAK` olarak kalır.
 
@@ -40,6 +40,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | D-028 | P0.6 ve P1'den önce P0.5 Search Console kapanışı yapılacak; `.org` mülk sahipliği doğrulanıp Google'a `.com.tr` adres değişikliği bildirilecek | Sahibi onayladı | 2026-08-25 |
 | D-029 | P0.6-A öncesinde `/cami-saati-fiyatlari/` genel fiyat sorusu kaldırılacak; müşteri model ve varsa ölçü seçerek ürün adı, ölçüsü ve ürün bağlantısı hazır WhatsApp mesajıyla fiyat soracak. Sayısal fiyat yayımlanmayacak. Ürünler bölümü siyah arka planlı olacak, ürün görselleri kırpılmadan tam gösterilecek ve ürün bağlantılarında modele özel paylaşım görseli kullanılacak. Bu paket production için onaylandı; Google Ads değişikliği kapsam dışıdır | Sahibi onayladı | 2026-08-26 |
 | D-030 | LCD modeli mevcut üretim sorunu nedeniyle geçici olarak üretilemediği sürece sitenin hiçbir sayfasında gösterilmeyecek; bu karar kalıcı ürün iptali değildir | Sahibi onayladı | 2026-08-28 |
+| D-031 | `.org`/`.net` yönlendirme projesinde sonu `/` ile biten ve özel haritada bulunmayan yolların 404 vermesi giderilecek; bu yollar kalıcı 301 ile `.com.tr` ana sayfasına yönlendirilecek ve düzeltme production'a yayımlanacak | Sahibi onayladı | 2026-08-31 |
 
 ## Kanıtlanmış mevcut durum
 
@@ -75,6 +76,7 @@ Bu dosya yaşayan karar kaydıdır. Kullanıcı tarafından onaylanmamış tasla
 | E-028 | `.com.tr` sitemap durumu `Başarılı`; 8 sayfa keşfedilmiş ve son okuma tarihi 20 Ağustos 2026'dır | Search Console alan adı mülkü sitemap raporu | 2026-08-25 |
 | E-029 | Temiz `main` commit'i `ecc568a`, Vercel production deployment'ı `dpl_AJfjrYfLK5uWTiuE61MFf68SGKEW` ile canlıya çıktı. `/cami-saati-fiyatlari/` ve 10 ürün route'u `200`; sayfada 10 model kartı, 15 model/ölçü WhatsApp bağlantısı, siyah ürün bölümü ve kırpılmayan görseller doğrulandı. Ürün bağlantıları modele özel Open Graph görseli taşır; tarayıcı konsol hatası yoktur. Önceki production `dpl_CBnGJ9HKGmaEcWf5qBQjZvAWeciU` geri dönüş noktasıdır | Vercel CLI/API, canlı HTTP, metadata ve tarayıcı uçtan uca testi | 2026-08-26 |
 | E-030 | Temiz `main` commit'i `a76392f`, Vercel production deployment'ı `dpl_AQPssbdScLvnvGGASXQSUFTwG4Ew` ile canlıya çıktı. Ana sayfa, cami saati, fiyat, ayet-hadis, dijital cami saati ve sitemap çıktılarında LCD görünmez; ana sayfada 9 ürün kartı vardır ve eski LCD ürün adresi `404` döner. Canlı tarayıcı konsolunda hata yoktur. Önceki production `dpl_AJfjrYfLK5uWTiuE61MFf68SGKEW` geri dönüş noktasıdır | Vercel izole production doğrulaması, canlı HTTP ve tarayıcı testi | 2026-08-28 |
+| E-031 | `.org`/`.net` yönlendirme catch-all kuralı, sonu `/` ile biten yolları da kapsayan regex ile düzeltildi ve `dpl_C1YZaWBA5cgMc7D8ookN7CNrGEht` production deployment'ına alındı. Sorunlu temsilî yollar ve 64 URL'lik eski adres envanterinin tamamı canlıda doğru `.com.tr` hedeflerine ulaştı; sorgu parametreleri korundu. Önceki production `dpl_DkqXkVdBqdZt8XJed5S4cYkJwbAm` geri dönüş noktasıdır | 27 otomatik test, Vercel production-target build, korumalı deployment ve canlı HTTP matrisi | 2026-08-31 |
 
 E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha sonra kurulan conversion action'ları ve WhatsApp ölçüm kodundan önceki durumu anlatır; güncel durum için E-012–E-014 esas alınır.
 
@@ -118,3 +120,4 @@ E-001–E-008 tarihsel Temmuz snapshot'ıdır. Özellikle E-005 ve E-006, daha s
 | 0.8-draft | 2026-08-17 | Eski recursive DNS cache'leri için SH `.htaccess` geçici `301` köprüsü, yedek ve uçtan uca doğrulama kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |
 | 0.9-draft | 2026-08-25 | `.org` Search Console sahipliği, apex/www Change of Address istekleri, hedef mülk bildirimi ve `.com.tr` sitemap doğrulaması kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |
 | 0.11-draft | 2026-08-28 | LCD modelinin geçici üretim sorunu süresince bütün site sayfalarından gizlenmesi kararı ve canlı kabul kanıtı kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |
+| 0.12-draft | 2026-08-31 | `.org`/`.net` catch-all yönlendirmesindeki son `/` kaynaklı 404 açığı, production yayını, canlı kabul ve geri dönüş noktası kaydedildi | Sahibi onayladı; uygulandı ve doğrulandı |

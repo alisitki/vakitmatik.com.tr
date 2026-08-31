@@ -14,6 +14,10 @@ function sourceToRegExp(source) {
     return /^\/$/;
   }
 
+  if (source === "/(.*)") {
+    return /^\/.*$/i;
+  }
+
   const wildcardToken = "__VERCEL_PATH_WILDCARD__";
   const escaped = source
     .replaceAll(":path*", wildcardToken)
@@ -94,6 +98,8 @@ const cases = [
     "https://www.vakitmatik.com.tr/destek/vakitmatik-ayarlama/",
   ],
   ["/bilinmeyen-eski-sayfa.html", "https://www.vakitmatik.com.tr/"],
+  ["/cami-saati/", "https://www.vakitmatik.com.tr/"],
+  ["/urunler/", "https://www.vakitmatik.com.tr/"],
 ];
 
 const liveTargetAllowlist = new Set([
@@ -122,7 +128,7 @@ test("every rule is an explicit permanent 301 to the canonical HTTPS host", () =
 });
 
 test("the catch-all rule remains last", () => {
-  assert.equal(config.redirects.at(-1)?.source, "/:path*");
+  assert.equal(config.redirects.at(-1)?.source, "/(.*)");
 });
 
 test("every legacy source is unique", () => {
